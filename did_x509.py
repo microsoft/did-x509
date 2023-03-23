@@ -271,7 +271,7 @@ def create_did_document(did: str, chain: List[x509.Certificate]):
         "id": did,
         "verificationMethod": [
             {
-                "id": f"{did}#key-1",
+                "id": f"{did}#0",
                 "type": "JsonWebKey2020",
                 "controller": did,
                 "publicKeyJwk": to_jwk(leaf),
@@ -287,9 +287,9 @@ def create_did_document(did: str, chain: List[x509.Certificate]):
     include_assertion_method = key_usage is None or key_usage.digital_signature
     include_key_agreement = key_usage is None or key_usage.key_agreement
     if include_assertion_method:
-        doc["assertionMethod"] = [f"{did}#key-1"]
+        doc["assertionMethod"] = [f"{did}#0"]
     if include_key_agreement:
-        doc["keyAgreement"] = [f"{did}#key-1"]
+        doc["keyAgreement"] = [f"{did}#0"]
     if not include_assertion_method and not include_key_agreement:
         raise ValueError(
             "leaf certificate key usage must include digital signature or key agreement"
