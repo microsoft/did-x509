@@ -267,7 +267,10 @@ def to_jwk(cert: x509.Certificate) -> dict:
 def create_did_document(did: str, chain: List[x509.Certificate]):
     leaf = chain[0]
     doc = {
-        "@context": "https://www.w3.org/ns/did/v1",
+        "@context": [
+            "https://www.w3.org/ns/did/v1",
+            "https://w3id.org/security/suites/jws-2020/v1"
+        ],
         "id": did,
         "verificationMethod": [
             {
