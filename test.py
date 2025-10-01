@@ -2,7 +2,7 @@
 # Licensed under the MIT License.
 
 import pytest
-from did_x509 import load_certificate_chain, resolve_did
+from didx509.didx509 import load_certificate_chain, resolve_did
 
 
 def test_root_ca():
