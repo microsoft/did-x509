@@ -188,7 +188,7 @@ oid             = 1*DIGIT *("." 1*DIGIT)
 
 Example:
 
-`did:x509:0:sha256:WE..jk::subject:C:US:ST:Texas:L:Austin:O:Example`
+`did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::subject:C:US:ST:Texas:L:Austin:O:Example`
 
 Rego policy:
 ```rego
@@ -224,7 +224,7 @@ The pair [`<san_type>`, `<san_value>`] is one of the items in `chain[0].extensio
 
 Example: 
 
-`did:x509:0:sha256:WE..jk::san:email:bob%40example.com`
+`did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::san:email:bob%40example.com`
 
 Rego policy:
 ```rego
@@ -249,7 +249,7 @@ oid          = 1*DIGIT *("." 1*DIGIT)
 
 Example:
 
-`did:x509:0:sha256:WE..jk::eku:1.3.6.1.4.1.311.10.3.13`
+`did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::eku:1.3.6.1.4.1.311.10.3.13`
 
 Rego policy:
 ```rego
@@ -271,11 +271,11 @@ fulcio-issuer = 1*idchar
 
 Example:
 
-`did:x509:0:sha256:WE..jk::fulcio-issuer:accounts.google.com::san:email:bob%40example.com`
+`did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::fulcio-issuer:accounts.google.com::san:email:bob%40example.com`
 
 Example 2:
 
-`did:x509:0:sha256:WE..jk::fulcio-issuer:issuer.example.com::san:uri:https%3A%2F%2Fexample.com%2Focto-org%2Focto-automation%2Fworkflows%2Foidc.yml%40refs%2Fheads%2Fmain`
+`did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::fulcio-issuer:issuer.example.com::san:uri:https%3A%2F%2Fexample.com%2Focto-org%2Focto-automation%2Fworkflows%2Foidc.yml%40refs%2Fheads%2Fmain`
 
 Rego policy:
 ```rego
@@ -307,24 +307,24 @@ This illustrates what a typical [DID Document](https://www.w3.org/TR/did-core/#d
 ```json
 {
   "@context": "https://www.w3.org/ns/did/v1",
-  "id": "did:x509:0:sha256:hH..GE::subject:CN:Example",
+  "id": "did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Example",
   "verificationMethod": [
     {
-      "id": "did:x509:0:sha256:hH..GE::subject:CN:Example#key-1",
+      "id": "did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Example#key-1",
       "type": "JsonWebKey2020",
-      "controller": "did:x509:0:sha256:hH..GE::subject:CN:Example",
+      "controller": "did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Example",
       "publicKeyJwk": {
         "kty": "RSA",
-        "n": "s9..WQ",
+        "n": "s9HduD2rvmO-SGksB4HR-qvSK379St8NnUZBH8xBiQvt2zONOLUHWQibeBW4NLUfHfzMaOM77RhNlqPNiDRKhChlG1aHqEHSAaQBGrmr0ULGIzq-1YvqQufMGYBFfq0sc10UdvWqT0RjwkPQTu4bjg37zSYF9OcGxS9uGnPMdWRM0ThOsYUcDmMoCaJRebsLUBpMmYXkcUYXJrcSGAaUNd0wjhwIpEogOD-AbWW_7TPZOl-JciMj40a78EEXIc2p06lWHfe5hegQ7uGIlSAPG6zDzjhjNkzE63_-GoqJU-6QLazbL5_y27ZDUAEYJokbb305A-dOp930CjTar3BvWQ",
         "e": "AQAB"
       }
     }
   ],
   "assertionMethod": [
-    "did:x509:0:sha256:hH..GE::subject:CN:Example#key-1"
+    "did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Example#key-1"
   ],
   "keyAgreement": [
-    "did:x509:0:sha256:hH..GE::subject:CN:Example#key-1"
+    "did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Example#key-1"
   ]
 }
 ```
