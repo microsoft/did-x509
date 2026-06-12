@@ -46,8 +46,7 @@ Certificate = {
     extensions: {
         ? eku: [+OID],         ; RFC 5280, Section 4.2.1.12
         ? san: [+SAN],         ; RFC 5280, Section 4.2.1.6
-        ? fulcio_issuer: tstr
-        ; http://oid-info.com/get/1.3.6.1.4.1.57264.1.1
+        ? fulcio_issuer: tstr  ; http://oid-info.com/get/1.3.6.1.4.1.57264.1.1
     }
 }
 
