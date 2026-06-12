@@ -312,7 +312,7 @@ This illustrates what a typical [DID Document](https://www.w3.org/TR/did-core/#d
   "id": "did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Example",
   "verificationMethod": [
     {
-      "id": "did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Example#key-1",
+      "id": "did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Example#0",
       "type": "JsonWebKey2020",
       "controller": "did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Example",
       "publicKeyJwk": {
@@ -323,10 +323,10 @@ This illustrates what a typical [DID Document](https://www.w3.org/TR/did-core/#d
     }
   ],
   "assertionMethod": [
-    "did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Example#key-1"
+    "did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Example#0"
   ],
   "keyAgreement": [
-    "did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Example#key-1"
+    "did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Example#0"
   ]
 }
 ```
@@ -381,7 +381,7 @@ The following steps must be used to generate a corresponding DID document:
     ],
     "id": "<DID>",
     "verificationMethod": [{
-        "id": "<DID>#key-1",
+        "id": "<DID>#0",
         "type": "JsonWebKey2020",
         "controller": "<DID>",
         "publicKeyJwk": {
@@ -395,7 +395,7 @@ The following steps must be used to generate a corresponding DID document:
 
 ```json
 {
-    "assertionMethod": ["<DID>#key-1"]
+    "assertionMethod": ["<DID>#0"]
 }
 ```
 
@@ -403,7 +403,7 @@ The following steps must be used to generate a corresponding DID document:
 
 ```json
 {
-    "keyAgreement": ["<DID>#key-1"]
+    "keyAgreement": ["<DID>#0"]
 }
 ```
 
