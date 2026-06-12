@@ -47,6 +47,17 @@ def test_invalid_ca():
         )
 
 
+def test_did_url_path_not_supported():
+    chain = load_certificate_chain("test-data/ms-code-signing.pem")
+
+    with pytest.raises(ValueError, match="DID URL path is not supported"):
+        resolve_did(
+            r"did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Microsoft%20Corporation/credentials",
+            chain,
+            skip_validity_period_check=True,
+        )
+
+
 def test_multiple_policies():
     chain = load_certificate_chain("test-data/ms-code-signing.pem")
 

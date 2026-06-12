@@ -197,6 +197,9 @@ def check_did_x509(did: str, chain: List[x509.Certificate]):
     prefix = "did:x509:0:"
     if not did.startswith(prefix):
         raise ValueError("invalid did prefix")
+    did_without_fragment = did.split("#", 1)[0]
+    if "/" in did_without_fragment:
+        raise ValueError("DID URL path is not supported")
     parts = did[len(prefix) :].split("::")
     [ca_fingerprint_alg, ca_fingerprint] = parts[0].split(":")
     policies = [p.split(":", 1) for p in parts[1:]]
