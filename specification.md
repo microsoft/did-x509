@@ -305,7 +305,10 @@ This illustrates what a typical [DID Document](https://www.w3.org/TR/did-core/#d
 
 ```json
 {
-  "@context": "https://www.w3.org/ns/did/v1",
+  "@context": [
+    "https://www.w3.org/ns/did/v1",
+    "https://w3id.org/security/suites/jws-2020/v1"
+  ],
   "id": "did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Example",
   "verificationMethod": [
     {
