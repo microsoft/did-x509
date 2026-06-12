@@ -8,7 +8,10 @@ Authors:
 
 ## Abstract
 
-The did:x509 method aims to achieve interoperability between existing X.509 solutions and Decentralized Identifiers (DIDs) to support operational models in which a full transition to DIDs is not achievable or desired yet. It supports X.509-only verifiers as well as DID-based verifiers supporting this DID method.
+This draft aims to define an interoperable and flexible issuer identifier format for messages that transport or refer to X.509 certificates, including COSE messages using [RFC 9360](https://www.rfc-editor.org/rfc/rfc9360).
+The did:x509 identifier format implements a direct, resolvable binding between a certificate chain and a compact issuer string.
+It can be conveyed as an issuer value in a COSE Header CWT Claims map as defined in [RFC 9597](https://www.rfc-editor.org/rfc/rfc9597), in JOSE/JWT messages such as the `iss` claim defined in [RFC 7519](https://www.rfc-editor.org/rfc/rfc7519), or through other protocol-specific mechanisms that associate the identifier with the certificate chain.
+This issuer identifier is convenient for references and policy evaluation, for example in the context of transparency ledgers.
 
 ## Introduction
 
@@ -20,9 +23,9 @@ The main difference to other DID methods is that did:x509 requires a certificate
 
 ## Example
 
-`did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::subject:C:US:ST:California:O:My%20Organisation`
+`did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::subject:C:US:ST:California:O:Example%20Organisation`
 
-In this example, the identifier pins to a certificate authority using the SHA-256 certificate hash and uses the `subject` policy to express criteria which a leaf certificate's subject must fulfil. This identifier will match any certificate chains with matching leaf certificate subject fields and a matching intermediate or root CA certificate.
+In this example, the identifier pins to a certificate authority using the SHA-256 certificate hash and uses the `subject` predicate to express criteria which a leaf certificate's subject must fulfil. This identifier will match any certificate chains with matching leaf certificate subject fields and a matching intermediate or root CA certificate.
 
 ## JSON data model for X.509 certificate chains
 
@@ -74,27 +77,31 @@ OID = tstr
 ; X.509 Subject Alternative Name
 ; Strings are converted to UTF-8
 SAN = rfc822Name / DNSName / URI / DirectoryName
-rfc822Name = ["email", tstr] ; Example: ["email", "bill@microsoft.com"]
-DNSName = ["dns", tstr]      ; Example: ["dns", "microsoft.com"]
-URI = ["uri", tstr]          ; Example: ["uri", "https://microsoft.com"]
-DirectoryName = ["dn", Name] ; Example: ["dn", {CN: "Microsoft"}]
+rfc822Name = ["email", tstr] ; Example: ["email", "user@example.com"]
+DNSName = ["dns", tstr]      ; Example: ["dns", "example.com"]
+URI = ["uri", tstr]          ; Example: ["uri", "https://example.com"]
+DirectoryName = ["dn", Name] ; Example: ["dn", {CN: "Example"}]
 ```
 
 In the rest of this document, `chain` refers to the certificate chain mapped to the above JSON data model.
 
 ## Identifier Syntax
 
-The did:x509 ABNF definition can be found below, which uses the syntax in [RFC 5234](https://www.rfc-editor.org/rfc/rfc5234.html) and the corresponding definitions for `ALPHA` and `DIGIT`. The [W3C DID v1.0 specification](https://www.w3.org/TR/2022/REC-did-core-20220719/) contains the definition for `idchar`.
+The did:x509 ABNF definitions below use the syntax in [RFC 5234](https://www.rfc-editor.org/rfc/rfc5234.html) and the corresponding definitions for `ALPHA`, `DIGIT`, and `HEXDIG`. The [W3C DID v1.0 specification](https://www.w3.org/TR/2022/REC-did-core-20220719/) defines `idchar` and `pct-encoded`; those definitions are repeated here for readability.
 
 ```abnf
-did-x509           = "did:" method-name ":" method-specific-id
-method-name        = "x509"
-method-specific-id = version ":" ca-fingerprint-alg ":" ca-fingerprint 1*("::" policy-name ":" policy-value)
+idchar             = ALPHA / DIGIT / "." / "-" / "_" / pct-encoded
+pct-encoded        = "%" HEXDIG HEXDIG
+```
+
+```abnf
+did-x509           = "did:x509:" method-specific-id
+method-specific-id = version ":" ca-fingerprint-alg ":" ca-fingerprint 1*("::" predicate-name ":" predicate-value)
 version            = 1*DIGIT
 ca-fingerprint-alg = "sha256" / "sha384" / "sha512"
 ca-fingerprint     = base64url
-policy-name        = 1*ALPHA
-policy-value       = *(1*idchar ":") 1*idchar
+predicate-name     = 1*ALPHA
+predicate-value    = *(1*idchar ":") 1*idchar
 base64url          = 1*(ALPHA / DIGIT / "-" / "_")
 ```
 
@@ -104,15 +111,17 @@ In this draft, version is `0`.
 
 `ca-fingerprint` is `chain[i].fingerprint[ca-fingerprint-alg]` with i > 0, that is, either an intermediate or root CA certificate.
 
-`policy-name` is a policy name and `policy-value` is a policy-specific value. 
+`predicate-name` is a predicate name and `predicate-value` is a predicate-specific value. 
 
-`::` is used to separate multiple policies from each other.
+`::` is used to separate multiple predicates from each other.
 
-The following sections define the policies and their policy-specific syntax.
+The following sections define the predicates and their predicate-specific syntax.
 
-Validation of policies is formally defined using [Rego policies](https://www.openpolicyagent.org/docs/latest/policy-language/), though there is no expectation that implementations use Rego.
+Validation of predicates is formally defined using policies written in the [Rego language](https://www.openpolicyagent.org/docs/latest/policy-language/), rather than pseudo-code.
+This is to avoid ambiguity and to make it possible for a reader to evaluate the logic automatically, but there is no expectation that implementations use the Rego language.
 
-The input to the Rego engine is the JSON document `{"did": "<DID>", "chain": <CertificateChain>}`.
+The inputs to the resolution process are the DID string itself and the `x509chain` DID resolution option, which carries a comma-separated base64url-encoded X.509 certificate chain.
+To evaluate the reference Rego code shown below, the DID and certificate chain have to be passed to a Rego runtime as a JSON document: `{"did": "<DID>", "chain": <CertificateChain>}`, where `did` is the DID string and `chain` is the parsed representation of the certificate chain derived from the `x509chain` resolution option.
 
 Core Rego policy:
 
@@ -120,39 +129,42 @@ Core Rego policy:
 import future.keywords.if
 import future.keywords.in
 
-parse_did(did) := [ca_fingerprint_alg, ca_fingerprint, policies] if {
+parse_did(did) :=
+  [ca_fingerprint_alg, ca_fingerprint, predicates] if {
     prefix := "did:x509:0:"
     startswith(did, prefix) == true
     rest := trim_prefix(did, prefix)
     parts := split(rest, "::")
     [ca_fingerprint_alg, ca_fingerprint] := split(parts[0], ":")
-    policies_raw := array.slice(parts, 1, count(parts))
-    policies := [y |
+    predicates_raw := array.slice(parts, 1, count(parts))
+    predicates := [y |
         some i
-        s := policies_raw[i]
+        s := predicates_raw[i]
         j := indexof(s, ":")
         y := [substring(s, 0, j), substring(s, j+1, -1)]
     ]
 }
 
 valid if {
-    [ca_fingerprint_alg, ca_fingerprint, policies] := parse_did(input.did)
+    [ca_fingerprint_alg,
+     ca_fingerprint,
+     predicates] := parse_did(input.did)
     ca := [c | some i; i != 0; c := input.chain[i]]
     ca[_].fingerprint[ca_fingerprint_alg] == ca_fingerprint
-    valid_policies := [i |
+    valid_predicates := [i |
         some i
-        [name, value] := policies[i]
-        validate_policy(name, value)
+        [name, value] := predicates[i]
+        validate_predicate(name, value)
     ]
-    count(valid_policies) == count(policies)
+    count(valid_predicates) == count(predicates)
 }
 ```
 
-The overall Rego policy is assembled by concatenating the core Rego policy with the Rego policy fragments in the following sections, each one defining a `validate_policy` function.
+The overall Rego policy is assembled by concatenating the core Rego policy with the Rego policy fragments in the following sections, each one defining a `validate_predicate` function.
 
 ### Percent-encoding
 
-Some of the policies that are defined in subsequent sections require values to be percent-encoded. Percent-encoding is specified in [RFC 3986 Section 2.1](https://www.rfc-editor.org/rfc/rfc3986#section-2.1). All characters that are not in the allowed set defined below must be percent-encoded:
+Some of the predicates that are defined in subsequent sections require values to be percent-encoded. Percent-encoding is specified in [RFC 3986 Section 2.1](https://www.rfc-editor.org/rfc/rfc3986#section-2.1). All characters that are not in the allowed set defined below must be percent-encoded:
 
 ```abnf
 allowed = ALPHA / DIGIT / "-" / "." / "_"
@@ -160,26 +172,26 @@ allowed = ALPHA / DIGIT / "-" / "." / "_"
 
 Note that most libraries implement percent-encoding in the context of URLs and do NOT encode `~` (`%7E`).
 
-### "subject" policy
+### "subject" predicate
 
 ```abnf
-policy-name     = "subject"
-policy-value    = key ":" value *(":" key ":" value)
+predicate-name     = "subject"
+predicate-value    = key ":" value *(":" key ":" value)
 key             = label / oid
 value           = 1*idchar
 label           = "CN" / "L" / "ST" / "O" / "OU" / "C" / "STREET"
 oid             = 1*DIGIT *("." 1*DIGIT)
 ```
 
-`<key>:<value>` are the subject name fields in `chain[0].subject` in any order. Field repetitions are not allowed. Values must be percent-encoded.
+`<key>:<value>` are the subject name fields in `chain[0].subject` in any order. Key repetitions are not allowed. Values must be percent-encoded.
 
 Example:
 
-`did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::subject:C:US:ST:California:L:San%20Francisco:O:GitHub%2C%20Inc.`
+`did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::subject:C:US:ST:Texas:L:Austin:O:Example`
 
 Rego policy:
 ```rego
-validate_policy(name, value) := true if {
+validate_predicate(name, value) := true if {
     name == "subject"
     items := split(value, ":")
     count(items) % 2 == 0
@@ -194,11 +206,11 @@ validate_policy(name, value) := true if {
 }
 ```
 
-### "san" policy
+### "san" predicate
 
 ```abnf
-policy-name     = "san"
-policy-value    = san-type ":" san-value
+predicate-name     = "san"
+predicate-value    = san-type ":" san-value
 san-type        = "email" / "dns" / "uri"
 san-value       = 1*idchar
 ```
@@ -215,7 +227,7 @@ Example:
 
 Rego policy:
 ```rego
-validate_policy(name, value) := true if {
+validate_predicate(name, value) := true if {
     name == "san"
     [san_type, san_value_encoded] := split(value, ":")
     san_value := urlquery.decode(san_value_encoded)
@@ -223,11 +235,11 @@ validate_policy(name, value) := true if {
 }
 ```
 
-### "eku" policy
+### "eku" predicate
 
 ```abnf
-policy-name  = "eku"
-policy-value = eku
+predicate-name  = "eku"
+predicate-value = eku
 eku          = oid
 oid          = 1*DIGIT *("." 1*DIGIT)
 ```
@@ -240,21 +252,21 @@ Example:
 
 Rego policy:
 ```rego
-validate_policy(name, value) := true if {
+validate_predicate(name, value) := true if {
     name == "eku"
     value == input.chain[0].extensions.eku[_]
 }
 ```
 
-### "fulcio-issuer" policy
+### "fulcio-issuer" predicate
 
 ```abnf
-policy-name   = "fulcio-issuer"
-policy-value  = fulcio-issuer
+predicate-name   = "fulcio-issuer"
+predicate-value  = fulcio-issuer
 fulcio-issuer = 1*idchar
 ```
 
-`fulcio-issuer` is `chain[0].extensions.fulcio_issuer` without leading `https://`, percent-encoded. 
+`fulcio-issuer` is `chain[0].extensions.fulcio_issuer`, without leading `https://`, percent-encoded. 
 
 Example:
 
@@ -262,11 +274,11 @@ Example:
 
 Example 2:
 
-`did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::fulcio-issuer:token.actions.githubusercontent.com::san:uri:https%3A%2F%2Fgithub.com%2Focto-org%2Focto-automation%2F.github%2Fworkflows%2Foidc.yml%40refs%2Fheads%2Fmain`
+`did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::fulcio-issuer:issuer.example.com::san:uri:https%3A%2F%2Fexample.com%2Focto-org%2Focto-automation%2Fworkflows%2Foidc.yml%40refs%2Fheads%2Fmain`
 
 Rego policy:
 ```rego
-validate_policy(name, value) := true if {
+validate_predicate(name, value) := true if {
     name == "fulcio-issuer"
     suffix := urlquery.decode(value)
     concat("", ["https://", suffix]) == input.chain[0].extensions.fulcio_issuer
@@ -287,21 +299,50 @@ The value is constructed as follows:
 
 2. Concatenate the resulting strings in order, separated by comma `","`.
 
+## Example DID Document
+
+This illustrates what a typical [DID Document](https://www.w3.org/TR/did-core/#dfn-did-documents), describing the DID subject and the methods it can use to authenticate itself, can look like once resolved:
+
+```json
+{
+  "@context": "https://www.w3.org/ns/did/v1",
+  "id": "did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Example",
+  "verificationMethod": [
+    {
+      "id": "did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Example#key-1",
+      "type": "JsonWebKey2020",
+      "controller": "did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Example",
+      "publicKeyJwk": {
+        "kty": "RSA",
+        "n": "s9HduD2rvmO-SGksB4HR-qvSK379St8NnUZBH8xBiQvt2zONOLUHWQibeBW4NLUfHfzMaOM77RhNlqPNiDRKhChlG1aHqEHSAaQBGrmr0ULGIzq-1YvqQufMGYBFfq0sc10UdvWqT0RjwkPQTu4bjg37zSYF9OcGxS9uGnPMdWRM0ThOsYUcDmMoCaJRebsLUBpMmYXkcUYXJrcSGAaUNd0wjhwIpEogOD-AbWW_7TPZOl-JciMj40a78EEXIc2p06lWHfe5hegQ7uGIlSAPG6zDzjhjNkzE63_-GoqJU-6QLazbL5_y27ZDUAEYJokbb305A-dOp930CjTar3BvWQ",
+        "e": "AQAB"
+      }
+    }
+  ],
+  "assertionMethod": [
+    "did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Example#key-1"
+  ],
+  "keyAgreement": [
+    "did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Example#key-1"
+  ]
+}
+```
+
 ## Operations
 
 ### Create
 
 Creating a did:x509 identifier is a local operation. The DID must be constructed according to the syntax rules in the previous sections. No other actions are required.
 
-When constructing a did:x509, the first step is to determine what constitutes a logical identity within a given certificate authority. Concretely, which certificate fields does an authority use to uniquely represent an identity. After that, one or more matching policies must be chosen that allow to express such an identity as faithfully as possible.
+When constructing a did:x509, the first step is to determine what constitutes a logical identity within a given certificate authority. Concretely, which certificate fields does an authority use to uniquely represent an identity. After that, one or more matching predicates must be chosen that allow to express such an identity as faithfully as possible.
 
-As an example, a certificate authority may exclusively use email addresses as a way to separate identities, and it may use the SAN extension to store the email address. In that case, the did:x509 identifier should be constructed using the `san` policy, for example, `did:x509:0:sha256:<ca-fingerprint>::san:email:bob%40example.com`. The certificate may contain other information about the identity, like full name and address, but the primary field that uniquely identifies the identity in this case is just the email address.
+As an example, a certificate authority may exclusively use email addresses as a way to separate identities, and it may use the SAN extension to store the email address. In that case, the did:x509 identifier should be constructed using the `san` predicate, for example, `did:x509:0:sha256:<ca-fingerprint>::san:email:bob%40example.com`. The certificate may contain other information about the identity, like full name and address, but the primary field that uniquely identifies the identity in this case is just the email address.
 
-In other cases, an authority may not include email addresses at all and instead rely on a specific set of subject fields to separate identities. In that case, the `subject` policy should be used.
+In other cases, an authority may not include email addresses at all and instead rely on a specific set of subject fields to separate identities. In that case, the `subject` predicate should be used.
 
 In yet other cases, authorities may assign unique numbers or other types of stable identifiers to logical identities. Typically, this is done to have a stable reference even if a person changes their name or email address.
 
-In all cases, the goal is to craft a did:x509 that is both stable yet not too loose in its policies. An example of a loose did:x509 may be to use the `subject` policy and only include the `O` field without location fields like country (`C`) or state/locality (`ST`). See also the Security and Privacy Considerations section.
+In all cases, the goal is to craft a did:x509 that is both stable yet not too loose in its predicates. An example of a loose did:x509 may be to use the `subject` predicate and only include the `O` field without location fields like country (`C`) or state/locality (`ST`). See also the Security and Privacy Considerations section.
 
 Finally, whether a did:x509 should pin to an intermediate CA instead of a root CA (via the certificate fingerprint) depends on whether there is value in distinguishing between them. Pinning to an intermediate CA typically means that the lifetime of the did:x509 will be shorter, since intermediate CA certificates typically have a shorter validity period than root CA certificates.
 
@@ -377,11 +418,11 @@ However, the public key included in the DID Document varies depending on the cer
 This DID Method does not support deactivating the DID.
 However, if the certificate authority revokes all certificates for the matching DID (or they expire) and does not issue new certificates matching the same DID, then this can be considered equivalent to deactivation of the DID, though there is no technical guarantee in this case and the certificate authority can revert its decision.
 
-## Security and Privacy Considerations
+## Security Considerations
 
 ### Identifier ambiguity
 
-This DID method maps characteristics of X.509 certificate chains to identifiers. It allows a single identifier to map to multiple certificate chains, giving the identifier stability across the expiry of individual chains. However, if the policies used in the identifier are chosen too loosely, the identifier may match too wide a set of certificate chains. This may have security implications as it may authorize an identity for actions it was not meant to be authorized for.
+This DID method maps characteristics of X.509 certificate chains to identifiers. It allows a single identifier to map to multiple certificate chains, giving the identifier stability across the expiry of individual chains. However, if the predicates used in the identifier are chosen too loosely, the identifier may match too wide a set of certificate chains. This may have security implications as it may authorize an identity for actions it was not meant to be authorized for.
 
 To mitigate this issue, the certificate authority should publish their expected usage of certificate fields and indicate which ones constitute a unique identity, versus any additional fields that may be of an informational nature. This will help users create an appropriate did:x509 as well as consumers of signed content to decide whether it is appropriate to trust a given did:x509.
 
@@ -389,9 +430,15 @@ To mitigate this issue, the certificate authority should publish their expected 
 
 Typically, a verifier trusts an X.509 certificate by applying [chain validation](https://www.rfc-editor.org/rfc/rfc5280#section-6) (RFC 5280) using a set of certificate authority (CA) certificates as trust store, together with additional application-specific policies.
 
-This DID method does not require an X.509 trust store but rather relies on verifiers either trusting an individual DID directly or using third-party endorsements for a given DID, like [W3C Verifiable Credentials](https://www.w3.org/TR/vc-data-model/), to establish trust.
+This DID method does not require an X.509 trust anchor store but rather relies on verifiers either trusting an individual DID directly or using third-party endorsements for a given DID, like [W3C Verifiable Credentials](https://www.w3.org/TR/vc-data-model/), to establish trust.
 
 By layering this DID method on top of X.509, verifiers are free to use traditional chain validation (for example, verifiers unaware of DID), or rely on DID as an ecosystem to establish trust.
+
+### Use of identifier contents
+
+While it is acceptable to use a did:x509 identifier as an opaque handle when it has been endorsed through an external trust mechanism, such as a verifiable credential or a trusted registry, implementers MUST NOT parse or interpret individual components of the identifier string for authorization decisions unless the identifier has been resolved against a verified certificate chain.
+
+Specifically, extracting and relying upon subject names, organizational information, or other embedded values directly from the identifier string, without performing full resolution and chain validation, is insecure. An attacker could craft a syntactically valid did:x509 identifier containing arbitrary values that do not correspond to any legitimate certificate chain. Only after successful resolution, which includes verification of the CA fingerprint against the provided chain and validation of all predicates, can the identifier be considered authentic. Systems that bypass this resolution process and instead parse identifier components directly are vulnerable to impersonation and privilege escalation attacks.
 
 ## References
 
