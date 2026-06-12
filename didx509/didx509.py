@@ -194,6 +194,9 @@ def verify_certificate_chain(
 def check_did_x509(did: str, chain: List[x509.Certificate]):
     decoded = [decode_certificate(cert) for cert in chain]
 
+    if "/" in did:
+        raise ValueError("DID URL path is not supported")
+
     prefix = "did:x509:0:"
     if not did.startswith(prefix):
         raise ValueError("invalid did prefix")
