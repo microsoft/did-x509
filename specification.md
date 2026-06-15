@@ -347,7 +347,7 @@ In other cases, an authority may not include email addresses at all and instead 
 
 In yet other cases, authorities may assign unique numbers or other types of stable identifiers to logical identities. Typically, this is done to have a stable reference even if a person changes their name or email address.
 
-In all cases, the goal is to craft a did:x509 that is both stable yet not too loose in its predicates. An example of a loose did:x509 may be to use the `subject` predicate and only include the `O` field without location fields like country (`C`) or state/locality (`ST`). See also the Security and Privacy Considerations section.
+In all cases, the goal is to craft a did:x509 that is both stable yet not too loose in its predicates. An example of a loose did:x509 may be to use the `subject` predicate and only include the `O` field without location fields like country (`C`) or state/locality (`ST`). See also the Security and Privacy Considerations sections.
 
 Finally, whether a did:x509 should pin to an intermediate CA instead of a root CA (via the certificate fingerprint) depends on whether there is value in distinguishing between them. Pinning to an intermediate CA typically means that the lifetime of the did:x509 will be shorter, since intermediate CA certificates typically have a shorter validity period than root CA certificates.
 
@@ -444,6 +444,12 @@ By layering this DID method on top of X.509, verifiers are free to use tradition
 While it is acceptable to use a did:x509 identifier as an opaque handle when it has been endorsed through an external trust mechanism, such as a verifiable credential or a trusted registry, implementers MUST NOT parse or interpret individual components of the identifier string for authorization decisions unless the identifier has been resolved against a verified certificate chain.
 
 Specifically, extracting and relying upon subject names, organizational information, or other embedded values directly from the identifier string, without performing full resolution and chain validation, is insecure. An attacker could craft a syntactically valid did:x509 identifier containing arbitrary values that do not correspond to any legitimate certificate chain. Only after successful resolution, which includes verification of the CA fingerprint against the provided chain and validation of all predicates, can the identifier be considered authentic. Systems that bypass this resolution process and instead parse identifier components directly are vulnerable to impersonation and privilege escalation attacks.
+
+## Privacy Considerations
+
+did:x509 identifiers can include values derived from certificate subject fields and subject alternative names. If these values include personal data (for example, full names or email addresses), publishing or reusing the same identifier across contexts can increase correlatability and expose more information than intended.
+
+To reduce privacy risks, implementers and certificate authorities should minimize identifier contents to fields strictly required for uniqueness and avoid including unnecessary personal information in predicates.
 
 ## References
 
