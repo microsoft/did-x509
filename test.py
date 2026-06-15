@@ -58,6 +58,17 @@ def test_did_url_path_not_supported():
         )
 
 
+def test_did_url_query_not_supported():
+    chain = load_certificate_chain("test-data/ms-code-signing.pem")
+
+    with pytest.raises(ValueError, match="DID URL query is not supported"):
+        resolve_did(
+            r"did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Microsoft%20Corporation?versionId=1",
+            chain,
+            skip_validity_period_check=True,
+        )
+
+
 def test_did_url_fragment_produces_clean_document():
     chain = load_certificate_chain("test-data/ms-code-signing.pem")
 

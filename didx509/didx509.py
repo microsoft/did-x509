@@ -198,6 +198,8 @@ def check_did_x509(did: str, chain: List[x509.Certificate]):
     did_without_fragment = did.split("#", 1)[0]
     if not did_without_fragment.startswith(prefix):
         raise ValueError("invalid did prefix")
+    if "?" in did_without_fragment:
+        raise ValueError("DID URL query is not supported")
     if "/" in did_without_fragment:
         raise ValueError("DID URL path is not supported")
     parts = did_without_fragment[len(prefix) :].split("::")

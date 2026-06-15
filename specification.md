@@ -115,7 +115,7 @@ In this draft, version is `0`.
 
 `::` is used to separate multiple predicates from each other.
 
-did:x509 does not define any DID URL path semantics. A did:x509 DID URL MUST NOT include a path component. Fragment identifiers remain valid for identifying resources within a resolved DID document, for example `<DID>#0`.
+did:x509 does not define any DID URL path or query semantics. A did:x509 DID URL MUST NOT include a path or query component. Fragment identifiers remain valid for identifying resources within a resolved DID document, for example `<DID>#0`.
 
 The following sections define the predicates and their predicate-specific syntax.
 
