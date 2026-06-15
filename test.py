@@ -58,6 +58,20 @@ def test_did_url_path_not_supported():
         )
 
 
+def test_did_url_fragment_produces_clean_document():
+    chain = load_certificate_chain("test-data/ms-code-signing.pem")
+
+    base_did = r"did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Microsoft%20Corporation"
+    doc = resolve_did(
+        base_did + "#0",
+        chain,
+        skip_validity_period_check=True,
+    )
+    assert doc["id"] == base_did
+    assert doc["verificationMethod"][0]["id"] == f"{base_did}#0"
+    assert doc["verificationMethod"][0]["controller"] == base_did
+
+
 def test_multiple_policies():
     chain = load_certificate_chain("test-data/ms-code-signing.pem")
 

@@ -309,7 +309,8 @@ def resolve_did(
 ) -> dict:
     verify_certificate_chain(chain, skip_validity_period_check)
     check_did_x509(did, chain)
-    doc = create_did_document(did, chain)
+    did_without_fragment = did.split("#", 1)[0]
+    doc = create_did_document(did_without_fragment, chain)
     return doc
 
 
