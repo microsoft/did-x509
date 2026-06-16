@@ -25,7 +25,7 @@ The did:x509 method takes a simple approach that does not introduce additional i
 
 The main difference to other DID methods is that did:x509 requires a certificate chain to be passed using a new [DID resolution option](https://www.w3.org/TR/did-core/#did-resolution-options) `x509chain` while resolving a DID. This certificate chain is typically embedded in the signing envelope, for example within the `x5c` header parameter of JWS/JWT documents.
 
-Embedding certificate chains in configuration or policy is cumbersome and often too coarse to identify the intended certificate holder.
+Embedding certificate chains in configuration or policy is cumbersome. References to individual chain elements can also be too broad, or too unstable when those elements are short-lived.
 
 did:x509 combines authority pinning with certificate predicates in a compact identifier, for example `request.issuer == "did:x509:..."`.
 
