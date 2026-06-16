@@ -50,7 +50,7 @@ method-specific-id = version ":" ca-fingerprint-alg ":" ca-fingerprint 1*("::" p
 version            = 1*DIGIT
 ca-fingerprint-alg = "sha256" / "sha384" / "sha512"
 ca-fingerprint     = base64url
-predicate-name     = 1*ALPHA
+predicate-name     = "subject" / "san" / "eku" / "fulcio-issuer"
 predicate-value    = *(1*idchar ":") 1*idchar
 base64url          = 1*(ALPHA / DIGIT / "-" / "_")
 ```
@@ -283,8 +283,6 @@ Each certificate object can contain:
 | `subject` | X.509 subject name, represented as an object of name attributes. |
 | `extensions.eku` | Extended Key Usage OIDs from RFC 5280 Section 4.2.1.12. |
 | `extensions.san` | Subject Alternative Name entries from RFC 5280 Section 4.2.1.6. |
-| `extensions.key_usage` | Key Usage values used to decide verification relationships. |
-| `extensions.basic_constraints` | Whether the certificate is a CA certificate. |
 | `extensions.fulcio_issuer` | The Fulcio issuer extension value. |
 
 Name objects use the RFC 4514 labels `CN`, `L`, `ST`, `O`, `OU`, `C`, and `STREET` for common attributes. Other attributes use dotted OID strings as keys. Repeated attributes are not supported. Values are converted to UTF-8 strings.
@@ -327,13 +325,6 @@ Example certificate chain model:
           }
         ]
       ],
-      "key_usage": [
-        "digitalSignature",
-        "keyAgreement"
-      ],
-      "basic_constraints": {
-        "ca": false
-      },
       "fulcio_issuer": "https://issuer.example.com"
     }
   },
@@ -349,15 +340,7 @@ Example certificate chain model:
     "subject": {
       "CN": "Example CA"
     },
-    "extensions": {
-      "key_usage": [
-        "keyCertSign",
-        "cRLSign"
-      ],
-      "basic_constraints": {
-        "ca": true
-      }
-    }
+    "extensions": {}
   }
 ]
 ```
