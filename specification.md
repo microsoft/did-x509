@@ -357,7 +357,7 @@ The following steps must be used to generate a corresponding DID document:
 
 1. Decode the `x509chain` resolution option value into individual certificates by splitting the string on `","` and base64url-decoding each resulting string. The result is a list of DER-encoded certificates that can be loaded in standard libraries. Fail if the list contains fewer than two certificates.
 
-2. Check whether the list of certificates form a valid certificate chain using the [RFC 5280 certification path validation](https://www.rfc-editor.org/rfc/rfc5280#section-6) procedures with the last certificate in the chain as trust anchor. If any extension, excluding the basic constraints and key usage extensions, is marked critical but is not part of the JSON data model, fail.
+2. Check whether the list of certificates form a valid certificate chain using the [RFC 5280 certification path validation](https://www.rfc-editor.org/rfc/rfc5280#section-6) procedures with the last certificate in the chain as trust anchor. Implementations MUST perform RFC 5280 certification path validation, except that they MUST treat the `fulcio_issuer` extension as recognized for purposes of critical-extension processing. Additionally, fail if any certificate in the chain contains a critical extension that is neither (a) one of the extensions represented in the JSON data model (`eku`, `san`, `fulcio_issuer`), nor (b) one of the following standard RFC 5280 extensions: `basicConstraints`, `keyUsage`, `nameConstraints`, `policyConstraints`, `policyMappings`, `certificatePolicies`, `inhibitAnyPolicy`.
 
 3. If required by the application, check whether any certificate in the chain is revoked (using CRL, OCSP, or other mechanisms).
 
