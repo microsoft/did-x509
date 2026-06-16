@@ -79,7 +79,7 @@ In this example, the identifier pins to a certificate authority using a SHA-256 
 
 ### Predicate validation model
 
-Predicate validation is defined in [Rego](https://www.openpolicyagent.org/docs/latest/policy-language/) to avoid ambiguous pseudo-code. Implementations do not have to use Rego.
+Predicate validation is defined in [Rego](https://www.openpolicyagent.org/docs/latest/policy-language/) to avoid ambiguous pseudo-code. This has no bearing on implementations, which can be written in any language.
 
 For the reference Rego, pass the DID string and parsed certificate-chain JSON as:
 
