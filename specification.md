@@ -59,7 +59,7 @@ The current version value is `0`.
 
 The `ca-fingerprint-alg` value is one of `sha256`, `sha384`, or `sha512`. The `ca-fingerprint` value is a base64url-encoded digest of a non-leaf certificate in the certificate chain, that is, either an intermediate or root CA certificate.
 
-The `::` separator introduces predicates. Each predicate has a `predicate-name` and a predicate-specific `predicate-value`.
+The `::` separator introduces predicates. Each predicate has a `predicate-name` and a `predicate-value`.
 
 ## Method-specific Identifier
 
