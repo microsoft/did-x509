@@ -81,35 +81,7 @@ In this example, the identifier pins to a certificate authority using a SHA-256 
 
 Predicate validation is defined in [Rego](https://www.openpolicyagent.org/docs/latest/policy-language/) to avoid ambiguous pseudo-code. This has no bearing on implementations, which can be written in any language.
 
-For the reference Rego, pass the DID string and parsed certificate-chain JSON as:
-
-```json
-{
-  "did": "<DID>",
-  "chain": [
-    {
-      "fingerprint": {
-        "sha256": "<leaf-sha256>"
-      },
-      "subject": {
-        "CN": "Example"
-      },
-      "extensions": {}
-    },
-    {
-      "fingerprint": {
-        "sha256": "<ca-sha256>"
-      },
-      "subject": {
-        "CN": "Example CA"
-      },
-      "extensions": {}
-    }
-  ]
-}
-```
-
-Here, `chain` is derived from the `x509chain` resolution option.
+The input to the Rego runtime is a JSON document: `{"did": "<DID>", "chain": <CertificateChain>}`, where `did` is the DID string and `chain` is the parsed representation of the certificate chain derived from the `x509chain` resolution option.
 
 Core Rego policy:
 
@@ -534,17 +506,24 @@ Stable did:x509 identifiers can enable correlation across transactions, transpar
 
 ## Examples and Test Vectors
 
-Example subject-based DID:
+The following synthetic certificate chain is valid from `2026-01-01T00:00:00Z` through `2126-01-01T00:00:00Z`. Its entries are base64url-encoded DER certificates in leaf-first order; join them with commas to build the `x509chain` resolution option.
 
-`did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::subject:C:US:ST:California:O:Example%20Organisation`
+```json
+[
+  "MIIB6jCCAZGgAwIBAgICB9MwCgYIKoZIzj0EAwIwKDEmMCQGA1UEAwwdZGlkOng1MDkgVGVzdCBJbnRlcm1lZGlhdGUgQ0EwIBcNMjYwMTAxMDAwMDAwWhgPMjEyNjAxMDEwMDAwMDBaMCAxHjAcBgNVBAMMFU1pY3Jvc29mdCBDb3Jwb3JhdGlvbjBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABOEX4qCKPxjG9tYoDQ_sgUQX4GHn9RNzO0RQ7feNac7GOMPjEuFcMH_HKXE5-5blSPjeQ3quHOq9t-bM5wQsW1SjgbAwga0wDAYDVR0TAQH_BAIwADAOBgNVHQ8BAf8EBAMCB4AwEwYDVR0lBAwwCgYIKwYBBQUHAwMwOgYDVR0RBDMwMYERYWxpY2VAZXhhbXBsZS5jb22GHGh0dHBzOi8vZXhhbXBsZS5jb20vd29ya2Zsb3cwPAYKKwYBBAGDvzABAQEB_wQraHR0cHM6Ly90b2tlbi5hY3Rpb25zLmdpdGh1YnVzZXJjb250ZW50LmNvbTAKBggqhkjOPQQDAgNHADBEAiAZ19FXG8b-CfMEHMGuW4Irty2PmnK1FRhG7dQHs3gLIgIgXQj3TqnxGHs5JERYd8k-7jtCN8c8hcwMda9qtANsURE",
+  "MIIBYTCCAQagAwIBAgICB9IwCgYIKoZIzj0EAwIwIDEeMBwGA1UEAwwVZGlkOng1MDkgVGVzdCBSb290IENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAoMSYwJAYDVQQDDB1kaWQ6eDUwOSBUZXN0IEludGVybWVkaWF0ZSBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABCGOU6tOhbKML7y0-bGB-B_p5Rgm0wTn93V4NHVDudiUi-sDkmlX-N5tswsZf0Qd459YdnaqhsWYM2UUo2bgWaCjJjAkMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0kAMEYCIQDiLS9MqRBKW-XXpWXBoeUkndfg4nLC70JOibfNz-kgxAIhAMX83RS30hPgJjIuRFXXQyIbcnjFTSv8f27cEwdgcTdS",
+  "MIIBVzCB_qADAgECAgIH0TAKBggqhkjOPQQDAjAgMR4wHAYDVQQDDBVkaWQ6eDUwOSBUZXN0IFJvb3QgQ0EwIBcNMjYwMTAxMDAwMDAwWhgPMjEyNjAxMDEwMDAwMDBaMCAxHjAcBgNVBAMMFWRpZDp4NTA5IFRlc3QgUm9vdCBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABHgjQa6wjzl1UbPw_PkxStxPzJD6i62i8IHLyAiQUTMmadClm4O5nZStDAo62cm1kUrBjLQroB746VVaksVeiDajJjAkMBIGA1UdEwEB_wQIMAYBAf8CAQEwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0gAMEUCIQD2NQq61OLNOSxpfoVSo4vaPfgNg6UFNXeGVEaR4_r6kgIgPLNbkXnthP6oGlr2CFNZeYsN3DDKm_O9MjloCaVEwDs"
+]
+```
 
-Example SAN-based DID:
+The following DIDs resolve using the certificate chain above:
 
-`did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::san:email:bob%40example.com`
-
-Example Fulcio-based DID:
-
-`did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::fulcio-issuer:issuer.example.com::san:uri:https%3A%2F%2Fexample.com%2Focto-org%2Focto-automation%2Fworkflows%2Foidc.yml%40refs%2Fheads%2Fmain`
+| Name | DID |
+|---|---|
+| Root CA fingerprint with subject predicate | `did:x509:0:sha256:X11SlCN2S52b4zYqoqpzSpBlizT-JRUqikvLAhyJ_60::subject:CN:Microsoft%20Corporation` |
+| Intermediate CA fingerprint with subject predicate | `did:x509:0:sha256:FpGAHUDNIQ331WfbeH_qNi5sFl49v802hsc0GTXp5Ys::subject:CN:Microsoft%20Corporation` |
+| EKU predicate | `did:x509:0:sha256:X11SlCN2S52b4zYqoqpzSpBlizT-JRUqikvLAhyJ_60::eku:1.3.6.1.5.5.7.3.3` |
+| Fulcio issuer with URI SAN predicate | `did:x509:0:sha256:X11SlCN2S52b4zYqoqpzSpBlizT-JRUqikvLAhyJ_60::fulcio-issuer:token.actions.githubusercontent.com::san:uri:https%3A%2F%2Fexample.com%2Fworkflow` |
 
 ## References
 
