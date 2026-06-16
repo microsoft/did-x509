@@ -8,10 +8,13 @@ BASE_DID = r"did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subj
 
 
 def assert_resolved_did_document(doc, expected_did):
+    assert doc["@context"] == "https://www.w3.org/ns/cid/v1"
     assert doc["id"] == expected_did
     assert len(doc["verificationMethod"]) == 1
     assert doc["verificationMethod"][0]["id"] == f"{expected_did}#0"
+    assert doc["verificationMethod"][0]["type"] == "JsonWebKey"
     assert doc["verificationMethod"][0]["controller"] == expected_did
+    assert doc["authentication"] == [f"{expected_did}#0"]
     assert doc["assertionMethod"] == [f"{expected_did}#0"]
     assert doc["keyAgreement"] == [f"{expected_did}#0"]
 

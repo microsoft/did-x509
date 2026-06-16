@@ -86,7 +86,26 @@ For the reference Rego, pass the DID string and parsed certificate-chain JSON as
 ```json
 {
   "did": "<DID>",
-  "chain": "<CertificateChain>"
+  "chain": [
+    {
+      "fingerprint": {
+        "sha256": "<leaf-sha256>"
+      },
+      "subject": {
+        "CN": "Example"
+      },
+      "extensions": {}
+    },
+    {
+      "fingerprint": {
+        "sha256": "<ca-sha256>"
+      },
+      "subject": {
+        "CN": "Example CA"
+      },
+      "extensions": {}
+    }
+  ]
 }
 ```
 
@@ -172,6 +191,7 @@ validate_predicate(name, value) := true if {
         v := urlquery.decode(items[i+1])
     }
     count(subject) >= 1
+    count(subject) == count(items) / 2
     object.subset(input.chain[0].subject, subject) == true
 }
 ```
@@ -185,7 +205,7 @@ san-type           = "email" / "dns" / "uri"
 san-value          = 1*idchar
 ```
 
-`san-type` is the SAN type and must be one of `email`, `dns`, or `uri`. Note that `dn` is not supported. The pair [`<san_type>`, `<san_value>`] is one of the items in `chain[0].extensions.san`.
+`san-type` is the SAN type and must be one of `email`, `dns`, or `uri`. Note that `dn` is not supported. `san-value` is percent-encoded. The pair [`<san_type>`, `<san_value>`] is one of the items in `chain[0].extensions.san`.
 
 Example:
 
@@ -353,7 +373,7 @@ Resolving a did:x509 identifier produces a DID Document with a `JsonWebKey` veri
 
 If the leaf certificate has the key usage bit for `digitalSignature`, or is missing the key usage extension, the DID Document includes `authentication` and `assertionMethod`. If the leaf certificate has the key usage bit for `keyAgreement`, or is missing the key usage extension, the DID Document includes `keyAgreement`. If the leaf certificate includes the key usage extension but has neither `digitalSignature` nor `keyAgreement`, resolution fails.
 
-The JSON-LD representation uses the registered `application/did` media type. The media type is selected by the resolution request, not by the DID string.
+Resolvers can use the registered `application/did` media type, and may also support `application/did+ld+json` or `application/did+json` for compatibility with DID Core 1.0 tooling. The media type is selected by the resolution request, not by the DID string.
 
 The JSON-LD `@context` must define every term used. The example below uses the [Controlled Identifiers v1 context](https://www.w3.org/ns/cid/v1).
 

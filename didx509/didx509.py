@@ -276,15 +276,12 @@ def to_jwk(cert: x509.Certificate) -> dict:
 def create_did_document(did: str, chain: List[x509.Certificate]):
     leaf = chain[0]
     doc = {
-        "@context": [
-            "https://www.w3.org/ns/did/v1",
-            "https://w3id.org/security/suites/jws-2020/v1"
-        ],
+        "@context": "https://www.w3.org/ns/cid/v1",
         "id": did,
         "verificationMethod": [
             {
                 "id": f"{did}#0",
-                "type": "JsonWebKey2020",
+                "type": "JsonWebKey",
                 "controller": did,
                 "publicKeyJwk": to_jwk(leaf),
             }
@@ -299,6 +296,7 @@ def create_did_document(did: str, chain: List[x509.Certificate]):
     include_assertion_method = key_usage is None or key_usage.digital_signature
     include_key_agreement = key_usage is None or key_usage.key_agreement
     if include_assertion_method:
+        doc["authentication"] = [f"{did}#0"]
         doc["assertionMethod"] = [f"{did}#0"]
     if include_key_agreement:
         doc["keyAgreement"] = [f"{did}#0"]
