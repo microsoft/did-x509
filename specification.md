@@ -424,7 +424,7 @@ In yet other cases, authorities may assign unique numbers or other types of stab
 
 In all cases, the goal is to craft a did:x509 identifier that is stable yet not too loose in its predicates. An example of a loose did:x509 identifier may be to use the `subject` predicate and only include the `O` field without location fields like country (`C`) or state/locality (`ST`).
 
-Whether a did:x509 identifier should pin to an intermediate CA instead of a root CA depends on whether there is value in distinguishing between them. Pinning to an intermediate CA typically means that the lifetime of the did:x509 identifier will be shorter, since intermediate CA certificates typically have a shorter validity period than root CA certificates.
+Whether a did:x509 identifier should pin to an intermediate CA instead of a root CA depends on whether there is value in distinguishing between them. Pinning to an intermediate CA typically means that the lifetime of the did:x509 identifier will be shorter, since intermediate CA certificates usually have a shorter validity period than root CA certificates.
 
 ### Read / Resolve
 
