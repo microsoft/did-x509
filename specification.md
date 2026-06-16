@@ -156,7 +156,7 @@ oid                = 1*DIGIT *("." 1*DIGIT)
 
 Example:
 
-`did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::subject:C:US:ST:Texas:L:Austin:O:Example`
+`did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::subject:C:US:ST:California:O:Example%20Organisation`
 
 Rego policy:
 
@@ -283,6 +283,8 @@ Each certificate object can contain:
 | `subject` | X.509 subject name, represented as an object of name attributes. |
 | `extensions.eku` | Extended Key Usage OIDs from RFC 5280 Section 4.2.1.12. |
 | `extensions.san` | Subject Alternative Name entries from RFC 5280 Section 4.2.1.6. |
+| `extensions.key_usage` | Key Usage values used to decide verification relationships. |
+| `extensions.basic_constraints` | Whether the certificate is a CA certificate. |
 | `extensions.fulcio_issuer` | The Fulcio issuer extension value. |
 
 Name objects use the RFC 4514 labels `CN`, `L`, `ST`, `O`, `OU`, `C`, and `STREET` for common attributes. Other attributes use dotted OID strings as keys. Repeated attributes are not supported. Values are converted to UTF-8 strings.
@@ -310,15 +312,28 @@ Example certificate chain model:
       "CN": "Example CA"
     },
     "subject": {
-      "CN": "Example",
-      "O": "Example Organisation"
+      "CN": "Example"
     },
     "extensions": {
       "eku": ["1.3.6.1.4.1.311.10.3.13"],
       "san": [
         ["email", "user@example.com"],
-        ["dns", "example.com"]
+        ["dns", "example.com"],
+        ["uri", "https://example.com"],
+        [
+          "dn",
+          {
+            "CN": "Example"
+          }
+        ]
       ],
+      "key_usage": [
+        "digitalSignature",
+        "keyAgreement"
+      ],
+      "basic_constraints": {
+        "ca": false
+      },
       "fulcio_issuer": "https://issuer.example.com"
     }
   },
@@ -334,7 +349,15 @@ Example certificate chain model:
     "subject": {
       "CN": "Example CA"
     },
-    "extensions": {}
+    "extensions": {
+      "key_usage": [
+        "keyCertSign",
+        "cRLSign"
+      ],
+      "basic_constraints": {
+        "ca": true
+      }
+    }
   }
 ]
 ```
@@ -363,9 +386,10 @@ Example DID Document:
       "type": "JsonWebKey",
       "controller": "did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Example",
       "publicKeyJwk": {
-        "kty": "RSA",
-        "n": "s9HduD2rvmO-SGksB4HR-qvSK379St8NnUZBH8xBiQvt2zONOLUHWQibeBW4NLUfHfzMaOM77RhNlqPNiDRKhChlG1aHqEHSAaQBGrmr0ULGIzq-1YvqQufMGYBFfq0sc10UdvWqT0RjwkPQTu4bjg37zSYF9OcGxS9uGnPMdWRM0ThOsYUcDmMoCaJRebsLUBpMmYXkcUYXJrcSGAaUNd0wjhwIpEogOD-AbWW_7TPZOl-JciMj40a78EEXIc2p06lWHfe5hegQ7uGIlSAPG6zDzjhjNkzE63_-GoqJU-6QLazbL5_y27ZDUAEYJokbb305A-dOp930CjTar3BvWQ",
-        "e": "AQAB"
+        "kty": "EC",
+        "crv": "P-256",
+        "x": "usNb0QXAk6R76GPFvKT5a46LC0_qRpxNoLn9WAX8K0I",
+        "y": "dTtI2j8aV0Mdk5fNWP9rCJvFIo6QfLjCm8V5v10J4Xg"
       }
     }
   ],
