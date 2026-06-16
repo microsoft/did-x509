@@ -290,7 +290,7 @@ Trust is established by validating the certificate chain, matching the CA finger
 
 ## Certificate Chain JSON Model
 
-For predicate evaluation, the resolver maps the certificate chain to a small JSON model. This model contains only the fields did:x509 matches on; it does not replace X.509 parsing or RFC 5280 path validation.
+For predicate evaluation, the resolver maps the certificate chain to a limited JSON model. This model contains only the fields did:x509 matches on; it does not replace X.509 parsing or RFC 5280 path validation.
 
 The model is a JSON array with at least two certificate objects. The leaf certificate is first, followed by issuer certificates, with the root or trust anchor last.
 
