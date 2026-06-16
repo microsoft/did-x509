@@ -191,13 +191,20 @@ def verify_certificate_chain(
         verify_certificate_in_chain(chain, i, skip_validity_period_check)
 
 
-def check_did_x509(did: str, chain: List[x509.Certificate]):
+def check_did_x509(did: str, chain: List[x509.Certificate]) -> str:
     decoded = [decode_certificate(cert) for cert in chain]
 
     prefix = "did:x509:0:"
-    if not did.startswith(prefix):
+    did_document_id = did.split("#", 1)[0]
+    if not did_document_id.startswith(prefix):
         raise ValueError("invalid did prefix")
-    parts = did[len(prefix) :].split("::")
+    query_index = did_document_id.find("?")
+    path_index = did_document_id.find("/")
+    if path_index != -1 and (query_index == -1 or path_index < query_index):
+        raise ValueError("DID URL path is not supported")
+    if query_index != -1:
+        raise ValueError("DID URL query is not supported")
+    parts = did_document_id[len(prefix) :].split("::")
     [ca_fingerprint_alg, ca_fingerprint] = parts[0].split(":")
     policies = [p.split(":", 1) for p in parts[1:]]
     if len(policies) == 0:
@@ -259,6 +266,8 @@ def check_did_x509(did: str, chain: List[x509.Certificate]):
         else:
             raise ValueError(f"unknown did:x509 policy: {name}")
 
+    return did_document_id
+
 
 def to_jwk(cert: x509.Certificate) -> dict:
     return jwcrypto.jwk.JWK.from_pyca(cert.public_key()).export_public(as_dict=True)
@@ -305,8 +314,8 @@ def resolve_did(
     did: str, chain: List[x509.Certificate], skip_validity_period_check=False
 ) -> dict:
     verify_certificate_chain(chain, skip_validity_period_check)
-    check_did_x509(did, chain)
-    doc = create_did_document(did, chain)
+    did_document_id = check_did_x509(did, chain)
+    doc = create_did_document(did_document_id, chain)
     return doc
 
 

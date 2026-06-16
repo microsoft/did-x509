@@ -4,6 +4,17 @@
 import pytest
 from didx509.didx509 import load_certificate_chain, resolve_did
 
+BASE_DID = r"did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Microsoft%20Corporation"
+
+
+def assert_resolved_did_document(doc, expected_did):
+    assert doc["id"] == expected_did
+    assert len(doc["verificationMethod"]) == 1
+    assert doc["verificationMethod"][0]["id"] == f"{expected_did}#0"
+    assert doc["verificationMethod"][0]["controller"] == expected_did
+    assert doc["assertionMethod"] == [f"{expected_did}#0"]
+    assert doc["keyAgreement"] == [f"{expected_did}#0"]
+
 
 def test_root_ca():
     chain = load_certificate_chain("test-data/ms-code-signing.pem")
@@ -45,6 +56,64 @@ def test_invalid_ca():
             chain,
             skip_validity_period_check=True,
         )
+
+
+@pytest.mark.parametrize(
+    "suffix",
+    [
+        "/credentials",
+        "/credentials#0",
+        "/credentials?versionId=1#0",
+    ],
+)
+def test_did_url_path_not_supported(suffix):
+    chain = load_certificate_chain("test-data/ms-code-signing.pem")
+
+    with pytest.raises(ValueError, match="DID URL path is not supported"):
+        resolve_did(
+            BASE_DID + suffix,
+            chain,
+            skip_validity_period_check=True,
+        )
+
+
+@pytest.mark.parametrize(
+    "suffix",
+    [
+        "?versionId=1",
+        "?versionId=1#0",
+        "?service=/credentials#0",
+    ],
+)
+def test_did_url_query_not_supported(suffix):
+    chain = load_certificate_chain("test-data/ms-code-signing.pem")
+
+    with pytest.raises(ValueError, match="DID URL query is not supported"):
+        resolve_did(
+            BASE_DID + suffix,
+            chain,
+            skip_validity_period_check=True,
+        )
+
+
+@pytest.mark.parametrize(
+    "suffix",
+    [
+        "#0",
+        "#0/credentials",
+        "#0?versionId=1",
+        "#0/credentials?versionId=1",
+    ],
+)
+def test_did_url_fragment_produces_clean_document(suffix):
+    chain = load_certificate_chain("test-data/ms-code-signing.pem")
+
+    doc = resolve_did(
+        BASE_DID + suffix,
+        chain,
+        skip_validity_period_check=True,
+    )
+    assert_resolved_did_document(doc, BASE_DID)
 
 
 def test_multiple_policies():
