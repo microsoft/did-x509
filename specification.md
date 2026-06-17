@@ -496,7 +496,7 @@ Relying parties make that trust decision by policy, for example through a CA tru
 
 ### Use of identifier contents
 
-While it is acceptable to use a did:x509 identifier as an opaque handle according to relying-party policy, implementers MUST NOT parse or interpret individual components of the identifier string for authorization decisions unless the identifier has been resolved against a verified certificate chain.
+While it is acceptable to use a did:x509 identifier as an opaque handle to implement a relying-party policy, implementers MUST NOT parse or interpret individual components of the identifier string for authorization decisions unless the identifier has been resolved against a verified certificate chain.
 
 Specifically, extracting and relying upon subject names, organizational information, or other embedded values directly from the identifier string, without performing full resolution and chain validation, is insecure. An attacker could craft a syntactically valid did:x509 identifier containing arbitrary values that do not correspond to any legitimate certificate chain. Only after successful resolution, which includes verification of the CA fingerprint against the provided chain and validation of all predicates, can the identifier be considered authentic. Systems that bypass this resolution process and instead parse identifier components directly are vulnerable to impersonation and privilege escalation attacks.
 
