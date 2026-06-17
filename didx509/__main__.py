@@ -3,4 +3,5 @@
 
 from didx509.didx509 import main
 
-main()
+if __name__ == "__main__":
+    main()
