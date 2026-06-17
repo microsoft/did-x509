@@ -21,21 +21,21 @@ pip install -r requirements.txt
 Then, run the resolver with an example DID and matching certificate chain:
 
 ```sh
-python did_x509.py resolve did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Microsoft%20Corporation --chain test-data/ms-code-signing.pem
+python -m didx509.didx509 resolve did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Microsoft%20Corporation --chain test-data/ms-code-signing.pem --skip-validity-period-check
 # Output: { <DID document> }
 ```
 
 To convert a certificate chain to the JSON data model defined in the specification, run:
 
 ```sh
-python did_x509.py convert test-data/ms-code-signing.pem
+python -m didx509.didx509 convert test-data/ms-code-signing.pem
 # Output: [ Certificate chain in JSON ]
 ```
 
 To percent-encode a string for use in policies, run:
 
 ```sh
-python did_x509.py encode "My Org"
+python -m didx509.didx509 encode "My Org"
 # Output: My%20Org
 ```
 
