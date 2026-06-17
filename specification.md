@@ -69,6 +69,8 @@ The method-specific identifier has three parts:
 2. A certificate authority fingerprint algorithm and value.
 3. One or more predicates that match fields in the leaf certificate.
 
+The DID subject is the logical identity selected by the CA fingerprint and sequence of predicates. It is not necessarily the X.509 subject name; `subject` is only one predicate type.
+
 did:x509 does not define any DID URL path or query semantics. A did:x509 DID URL MUST NOT include a path or query component. Fragment identifiers remain valid for identifying resources within a resolved DID document, for example `<DID>#0`.
 
 Example:
@@ -343,9 +345,11 @@ In the rest of this document, `chain` refers to the certificate chain mapped to 
 
 Resolving a did:x509 identifier produces a DID Document with a `JsonWebKey` verification method derived from the leaf certificate public key.
 
+The DID Document is self-controlled: verification methods use the DID itself as `controller`.
+
 If the leaf certificate has the key usage bit for `digitalSignature`, or is missing the key usage extension, the DID Document includes `authentication` and `assertionMethod`. If the leaf certificate has the key usage bit for `keyAgreement`, or is missing the key usage extension, the DID Document includes `keyAgreement`. If the leaf certificate includes the key usage extension but has neither `digitalSignature` nor `keyAgreement`, resolution fails.
 
-Resolvers can use the registered `application/did` media type, and may also support `application/did+ld+json` or `application/did+json` for compatibility with DID Core 1.0 tooling. The media type is selected by the resolution request, not by the DID string.
+The registered media type for a DID Document is `application/did`. Resolvers may also support `application/did+ld+json` or `application/did+json` for compatibility with DID Core 1.0 tooling. The media type is selected by the resolution request, not by the DID string.
 
 The JSON-LD `@context` must define every term used. The example below uses the [Controlled Identifiers v1 context](https://www.w3.org/ns/cid/v1).
 
@@ -384,7 +388,7 @@ Example DID Document:
 
 ### Create
 
-Creating a did:x509 identifier is a local operation. The DID must be constructed according to the syntax rules in this specification. No registration action is required.
+Creating a did:x509 identifier is a local operation. The DID must be constructed according to the syntax rules in this specification. No registration action is required, and no registry authorization is checked.
 
 When constructing a did:x509 identifier, determine what constitutes a logical identity within a given certificate authority. Concretely, determine which certificate fields the authority uses to uniquely represent an identity. After that, choose one or more matching predicates that express such an identity as faithfully as possible.
 
@@ -402,17 +406,17 @@ Whether a did:x509 identifier should pin to an intermediate CA instead of a root
 
 The Read operation is DID resolution. The operation takes as input a DID to resolve, together with the `x509chain` DID resolution option.
 
-The DID resolver uses the DID, the certificate chain, and the process in the DID Resolution section to generate a DID Document.
+The DID resolver uses the DID, the certificate chain, and the process in the DID Resolution section to generate a DID Document. No caller authorization is required; authenticity is checked by certificate chain validation, CA fingerprint matching, and predicate validation.
 
 ### Update
 
-This DID method does not support updating the DID Document, assuming a fixed certificate chain.
+This DID method does not support updating the DID Document, assuming a fixed certificate chain. There is no update authorization operation.
 
 However, the public key included in the DID Document varies depending on the certificate chain that was used as input to the DID resolution process. Typically, multiple chains, in particular leaf certificates, are valid for a given did:x509 identifier.
 
 ### Deactivate
 
-This DID method does not support deactivating the DID.
+This DID method does not support deactivating the DID. There is no deactivation authorization operation.
 
 However, if the certificate authority revokes all certificates for the matching DID, or they expire, and does not issue new certificates matching the same DID, then this can be considered equivalent to deactivation of the DID. There is no technical guarantee in this case and the certificate authority can revert its decision.
 
@@ -423,6 +427,8 @@ The following steps must be used to generate a corresponding DID Document:
 1. Decode the `x509chain` resolution option value into individual certificates by splitting the string on `","` and base64url-decoding each resulting string. The result is a list of DER-encoded certificates that can be loaded in standard libraries. Fail if the list contains fewer than two certificates.
 
 2. Check whether the list of certificates forms a valid certificate chain using [RFC 5280 certification path validation](https://www.rfc-editor.org/rfc/rfc5280#section-6) procedures with the last certificate in the chain as trust anchor. Implementations MUST perform RFC 5280 certification path validation, except that they MUST treat the `fulcio_issuer` extension as recognized for purposes of critical-extension processing. Additionally, fail if any certificate in the chain contains a critical extension that is neither (a) one of the extensions represented in the JSON model (`eku`, `san`, `fulcio_issuer`), nor (b) one of the following standard RFC 5280 extensions: `basicConstraints`, `keyUsage`, `nameConstraints`, `policyConstraints`, `policyMappings`, `certificatePolicies`, `inhibitAnyPolicy`.
+
+Instead of using the current time as specified in [Section 6.3.1 of RFC 5280](https://www.rfc-editor.org/info/rfc5280/#section-6.1.3) when validating the chain, applications may choose a context-relevant point in time. For example, applications handling signed documents may choose to use the signing time instead, which might come from a CWT `iat` claim ([RFC 8392](https://www.rfc-editor.org/rfc/rfc8392)) or JWT `iat` claim ([RFC 7519](https://www.rfc-editor.org/rfc/rfc7519)). Such a claim is not trusted time by itself and needs to be integrity protected and accepted by application policy.
 
 3. If required by the application, check whether any certificate in the chain is revoked using CRL, OCSP, or other mechanisms.
 
@@ -484,15 +490,13 @@ To mitigate this issue, the certificate authority should publish their expected 
 
 ### X.509 trust stores
 
-Typically, a verifier trusts an X.509 certificate by applying [chain validation](https://www.rfc-editor.org/rfc/rfc5280#section-6) using a set of certificate authority certificates as trust store, together with additional application-specific policies.
+Resolution validates the supplied certificate chain with the last certificate in `x509chain` as the path-validation trust anchor. This checks the chain and DID predicates, but does not decide whether the CA or DID is acceptable to a relying party.
 
-This DID method does not require an X.509 trust anchor store but rather relies on verifiers either trusting an individual DID directly or using third-party endorsements for a given DID, like [W3C Verifiable Credentials](https://www.w3.org/TR/vc-data-model/), to establish trust.
-
-By layering this DID method on top of X.509, verifiers are free to use traditional chain validation, for example verifiers unaware of DID, or rely on DID as an ecosystem to establish trust.
+Relying parties make that trust decision by policy, for example through a CA trust store, an allowlist of DIDs or CA fingerprints, or other application-specific rules.
 
 ### Use of identifier contents
 
-While it is acceptable to use a did:x509 identifier as an opaque handle when it has been endorsed through an external trust mechanism, such as a verifiable credential or a trusted registry, implementers MUST NOT parse or interpret individual components of the identifier string for authorization decisions unless the identifier has been resolved against a verified certificate chain.
+While it is acceptable to use a did:x509 identifier as an opaque handle to implement a relying-party policy, implementers MUST NOT parse or interpret individual components of the identifier string for authorization decisions unless the identifier has been resolved against a verified certificate chain.
 
 Specifically, extracting and relying upon subject names, organizational information, or other embedded values directly from the identifier string, without performing full resolution and chain validation, is insecure. An attacker could craft a syntactically valid did:x509 identifier containing arbitrary values that do not correspond to any legitimate certificate chain. Only after successful resolution, which includes verification of the CA fingerprint against the provided chain and validation of all predicates, can the identifier be considered authentic. Systems that bypass this resolution process and instead parse identifier components directly are vulnerable to impersonation and privilege escalation attacks.
 
@@ -550,6 +554,8 @@ The following DIDs resolve using the certificate chain above:
 [RFC 9360 - CBOR Object Signing and Encryption (COSE): Header Parameters for Carrying and Referencing X.509 Certificates](https://www.rfc-editor.org/rfc/rfc9360). J. Schaad. IETF. February 2023. Proposed Standard.
 
 [RFC 9597 - CBOR Web Token (CWT) Claims in COSE Headers](https://www.rfc-editor.org/rfc/rfc9597). M. Jones. IETF. June 2024. Proposed Standard.
+
+[RFC 8392 - CBOR Web Token (CWT)](https://www.rfc-editor.org/rfc/rfc8392). M. Jones, E. Wahlstroem, S. Erdtman, H. Tschofenig. IETF. May 2018. Proposed Standard.
 
 [RFC 7519 - JSON Web Token (JWT)](https://www.rfc-editor.org/rfc/rfc7519). M. Jones, J. Bradley, N. Sakimura. IETF. May 2015. Proposed Standard.
 
