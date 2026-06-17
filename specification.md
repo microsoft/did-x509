@@ -69,7 +69,7 @@ The method-specific identifier has three parts:
 2. A certificate authority fingerprint algorithm and value.
 3. One or more predicates that match fields in the leaf certificate.
 
-The DID subject is the logical identity selected by the CA fingerprint and predicates. It is not necessarily the X.509 subject name; `subject` is only one predicate type.
+The DID subject is the logical identity selected by the CA fingerprint and sequence of predicates. It is not necessarily the X.509 subject name; `subject` is only one predicate type.
 
 did:x509 does not define any DID URL path or query semantics. A did:x509 DID URL MUST NOT include a path or query component. Fragment identifiers remain valid for identifying resources within a resolved DID document, for example `<DID>#0`.
 
