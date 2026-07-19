@@ -21,7 +21,7 @@ This guide walks through the practical business workflows where did:x509 solves 
                                ▼
         ┌──────────────────────────────────────────────┐
         │              did:x509 DID                    │
-        │  did:x509:0:sha256:<CA指纹>::<谓词>          │
+        │  did:x509:0:sha256:<CA fingerprint>::<predicate>  │
         └──────┬───────────┬───────────┬──────────────┘
                │           │           │
                ▼           ▼           ▼
