@@ -1,0 +1,86 @@
+{
+  "name": "@didx509/core",
+  "version": "0.1.0",
+  "description": "TypeScript implementation of the did:x509 DID method - bridges X.509 certificates with Decentralized Identifiers",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint src/ test/",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@peculiar/x509": "^2.0.0",
+    "pkijs": "^3.4.0",
+    "reflect-metadata": "^0.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "@vitest/coverage-v8": "^3.0.0",
+    "did-resolver": "^5.0.0",
+    "eslint": "^9.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  },
+  "peerDependencies": {
+    "did-resolver": ">=4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "did-resolver": {
+      "optional": true
+    }
+  },
+  "keywords": [
+    "did",
+    "x509",
+    "did:x509",
+    "decentralized-identifiers",
+    "pki",
+    "certificate",
+    "verifiable-credentials",
+    "web3",
+    "identity"
+  ],
+  "author": "AyanWorks <engineering@ayanworks.com>",
+  "contributors": [
+    {
+      "name": "AyanWorks",
+      "url": "https://github.com/ayanworks"
+    }
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ayanworks/did-x509",
+    "directory": "reference-implementations/typescript"
+  },
+  "bugs": {
+    "url": "https://github.com/ayanworks/did-x509/issues"
+  },
+  "homepage": "https://github.com/ayanworks/did-x509#readme"
+}

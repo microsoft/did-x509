@@ -1,2 +1,12 @@
+# Python
 venv/
 __pycache__/
+*.pyc
+.pytest_cache/
+
+# TypeScript / Node.js
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+.opencode/
