@@ -4,39 +4,11 @@
 
 ## What is did:x509?
 
-did:x509 is a W3C Decentralized Identifier (DID) method that derives DIDs directly from X.509 certificates. Instead of registering a DID on a blockchain or distributed ledger, the DID is encoded using information from an existing PKI certificate chain — the CA fingerprint, subject attributes, SANs, and extended key usages.
-
-A did:x509 DID looks like:
+did:x509 derives DIDs directly from X.509 certificates. If you already have a cert from a CA — public, enterprise, or Fulcio — you already have a DID. No blockchain, no new key infrastructure.
 
 ```
-did:x509:0:sha256:IybVX...A%3D%3D::subject:CN%3Dexample.com
+CA-issued cert ──► did:x509 DID ──► DID Document (public key + capabilities)
 ```
-
-This encodes:
-- **Method**: `x509`
-- **Version**: `0`
-- **Fingerprint algorithm**: `sha256`
-- **CA fingerprint**: `IybVX...A%3D%3D` (base64url)
-- **Predicate**: `subject:CN%3Dexample.com` (CN = "example.com", percent-encoded)
-
-## How It Bridges X.509 and DID Ecosystems
-
-The did:x509 method bridges two worlds:
-
-- **X.509 / PKI**: The existing global trust infrastructure used by TLS, S/MIME, and code signing. Certificates are issued by Certificate Authorities and carry subject identity, public keys, and policy constraints.
-- **DIDs**: W3C Decentralized Identifiers that enable self-sovereign identity, verifiable credentials, and decentralized authentication without a central authority.
-
-With did:x509, any entity that holds an X.509 certificate — whether from a public CA, an internal enterprise CA, or a tool like Fulcio — automatically has a DID. No additional registration step is needed. The DID can be resolved by presenting the certificate chain, and the DID Document's public key is derived directly from the leaf certificate.
-
-## When to Use did:x509
-
-| Use Case | did:x509 | did:key | did:web |
-|---|---|---|---|
-| Already have X.509 certificates | Best choice | Requires new key | Requires web hosting |
-| Need PKI trust chain | Native support | No chain | No chain |
-| Fulcio/Sigstore signing identities | Best choice | No chain | No chain |
-| Need DID without any infrastructure | Not suitable (need cert) | Best choice | Requires hosting |
-| Enterprise PKI environments | Best choice | Possible | Possible |
 
 ## Installation
 
@@ -44,110 +16,167 @@ With did:x509, any entity that holds an X.509 certificate — whether from a pub
 npm install @didx509/core
 ```
 
-## Basic Usage
+## The One Thing to Know
 
-### Resolving a DID from a PEM Chain
+Your starting point is always a **PEM certificate chain** and a **did:x509 DID string**. Everything flows from there.
 
-The most common operation: given a DID and a PEM certificate chain, produce a W3C DID Document.
+```typescript
+const pemChain = readFileSync('cert-chain.pem', 'utf-8');
+const did = 'did:x509:0:sha256:ABC...::subject:CN%3Dexample.com';
+```
+
+If you don't have the DID string yet, see [Extracting a DID from Your Certificate](#extracting-a-did-from-your-certificate) below.
+
+---
+
+## Step 1: Resolve a DID to a DID Document
+
+Given a cert chain and its DID, get the DID Document (contains the public key):
 
 ```typescript
 import { resolveDidFromPem } from '@didx509/core';
 
-const pemChain = `-----BEGIN CERTIFICATE-----
-MIIBkTCB+wI...
------END CERTIFICATE-----
------BEGIN CERTIFICATE-----
-MIIBmDCCAoCg...
------END CERTIFICATE-----`;
-
-const did = 'did:x509:0:sha256:IybVX...::subject:CN%3Dexample.com';
-
 const doc = await resolveDidFromPem(did, pemChain);
-console.log(doc.id);
-console.log(doc.verificationMethod[0].publicKeyJwk);
+
+console.log(doc.id);                                    // did:x509:...
+console.log(doc.verificationMethod[0].publicKeyJwk);   // JWK public key
+console.log(doc.authentication);                        // ["did:x509:...#0"]
 ```
 
-### Converting a PEM Chain to the JSON Model
+This is the primary operation. It:
+1. Verifies the certificate chain
+2. Checks the DID matches the certificate attributes
+3. Extracts the public key from the leaf cert
+4. Returns a W3C DID Document
 
-Parse a PEM chain into the did:x509 JSON representation for inspection or storage:
+---
 
-```typescript
-import { convertChain } from '@didx509/core';
+## Step 2: Extract a DID from Your Certificate
 
-const pemChain = readFileSync('chain.pem', 'utf-8');
-const decoded = convertChain(pemChain);
-
-for (const cert of decoded) {
-  console.log('Subject:', cert.subject);
-  console.log('Fingerprint (sha256):', cert.fingerprint.sha256);
-  console.log('SANs:', cert.extensions.san);
-  console.log('EKUs:', cert.extensions.eku);
-}
-```
-
-### Resolving with Already-Loaded Certificates
-
-If you already have `X509Certificate` objects (e.g., from `@peculiar/x509`), use `resolveDid` directly:
-
-```typescript
-import { resolveDid, loadPemCertificateChain } from '@didx509/core';
-
-const chain = loadPemCertificateChain(pemChain);
-const doc = await resolveDid(did, chain, {
-  skipValidityPeriodCheck: true,
-});
-```
-
-### Computing Fingerprints
-
-Fingerprints are the foundation of did:x509 DID identifiers:
+If you have a cert but don't have the DID string yet, derive it:
 
 ```typescript
 import {
   loadPemCertificateChain,
+  decodeCertificate,
   computeFingerprintAsync,
+  pctEncode,
 } from '@didx509/core';
 
 const chain = loadPemCertificateChain(pemChain);
-const ca = chain[1]; // CA certificate (second in chain)
+const leaf = chain[0];
+const ca = chain.length > 1 ? chain[1] : chain[0];
 
-// Cross-platform async version
-const sha256 = await computeFingerprintAsync(ca, 'sha256');
-const sha384 = await computeFingerprintAsync(ca, 'sha384');
-const sha512 = await computeFingerprintAsync(ca, 'sha512');
+// Compute the CA fingerprint
+const fingerprint = await computeFingerprintAsync(ca, 'sha256');
+
+// Build the DID using the certificate's Common Name
+const decoded = decodeCertificate(leaf);
+const cn = decoded.subject['2.5.4.3'];
+const did = `did:x509:0:sha256:${fingerprint}::subject:CN%3D${pctEncode(cn)}`;
+
+console.log('Your DID:', did);
 ```
 
-### Parsing a DID String
+### Choosing a Predicate
 
-Deconstruct a did:x509 DID into its components:
+The predicate is the part after `::` that identifies you. Pick based on what your cert contains:
+
+| Your cert has... | Use predicate | Example |
+|---|---|---|
+| Common Name (CN) | `subject:CN=<value>` | `::subject:CN%3Dexample.com` |
+| Organization (O) | `subject:O=<value>` | `::subject:O%3DAcme%20Inc` |
+| Email in SAN | `san:email=<value>` | `::san:email%3Duser@example.com` |
+| DNS name in SAN | `san:dns=<value>` | `::san:dns%3Dexample.com` |
+| IP in SAN | `san:ip=<value>` | `::san:ip%3D192.168.1.1` |
+| EKU OID | `eku:<oid>` | `::eku:1.3.6.1.5.5.7.3.3` |
+
+**Not sure what's in your cert?** Inspect it:
 
 ```typescript
-import { parseDid } from '@didx509/core';
+import { convertChain } from '@didx509/core';
 
-const parsed = parseDid('did:x509:0:sha256:ABC...::subject:CN%3Dexample.com');
-console.log(parsed.caFingerprintAlgorithm); // "sha256"
-console.log(parsed.caFingerprint);          // "ABC..."
-console.log(parsed.predicates);             // [["subject", "CN%3Dexample.com"]]
+const decoded = convertChain(pemChain);
+console.log('Subject:', decoded[0].subject);
+console.log('SANs:', decoded[0].extensions.san);
+console.log('EKUs:', decoded[0].extensions.eku);
 ```
 
-### Encoding Utilities
+---
+
+## Step 3: Verify a Certificate Chain
+
+Before trusting a cert, verify the chain:
 
 ```typescript
-import { pctEncode, b64url, b64urlDecode, parseNameString } from '@didx509/core';
+import { loadPemCertificateChain, verifyCertificateChain } from '@didx509/core';
 
-// Percent-encode values for DID URLs
-pctEncode('CN=example.com');  // "CN%3Dexample.com"
-
-// Base64url encode/decode certificate DER
-const encoded = b64url(derBytes);
-const decoded = b64urlDecode(encoded);
-
-// Parse X.509 name strings
-const name = parseNameString('CN=example.com, O=Acme Inc');
-// { "2.5.4.3": "example.com", "2.5.4.10": "Acme Inc" }
+const chain = loadPemCertificateChain(pemChain);
+await verifyCertificateChain(chain);
+// Throws if chain is invalid (bad order, untrusted CA, expired, etc.)
 ```
 
-## Next Steps
+---
 
-- Read the [API Reference](./api-reference.md) for complete function signatures and all type definitions.
-- See the [did-resolver integration](../README.md#did-resolver-integration) section for connecting with the broader DID ecosystem.
+## Step 4: Export Public Key as JWK
+
+Get the public key in JWK format for use with other libraries:
+
+```typescript
+import { loadPemCertificateChain, extractPublicKeyAsJwk } from '@didx509/core';
+
+const chain = loadPemCertificateChain(pemChain);
+const jwk = extractPublicKeyAsJwk(chain[0]);
+// { kty: "EC", crv: "P-256", x: "...", y: "..." }
+```
+
+---
+
+## Step 5: Check Key Usage
+
+Verify what the certificate's key is authorized for:
+
+```typescript
+import { loadPemCertificateChain, getKeyUsage } from '@didx509/core';
+
+const chain = loadPemCertificateChain(pemChain);
+const usage = getKeyUsage(chain[0]);
+// { digitalSignature: true, keyEncipherment: false, ... }
+```
+
+---
+
+## Step 6: Integrate with did-resolver
+
+Connect to the broader DID ecosystem:
+
+```typescript
+import { Resolver } from 'did-resolver';
+import { getDidX509Resolver } from '@didx509/core';
+
+const resolver = new Resolver(getDidX509Resolver());
+
+const result = await resolver.resolve(did, {
+  x509chain: 'base64url_der1,base64url_der2,...'
+});
+```
+
+---
+
+## Encoding Utilities
+
+```typescript
+import { pctEncode, pctDecode, b64url, b64urlDecode, parseNameString } from '@didx509/core';
+
+pctEncode('CN=example.com');              // "CN%3Dexample.com"
+pctDecode('CN%3Dexample.com');            // "CN=example.com"
+b64url(new Uint8Array([72, 101, 108, 108, 111]));  // "SGVsbG8"
+parseNameString('CN=example.com, O=Acme'); // { '2.5.4.3': 'example.com', '2.5.4.10': 'Acme' }
+```
+
+---
+
+## What's Next
+
+- **[Practical Guide](practical-guide.md)** — Real-world workflows: issuing credentials, verifying presentations, trust registry registration, Fulcio/Sigstore integration
+- **[API Reference](api-reference.md)** — Complete function signatures, all types, and options
