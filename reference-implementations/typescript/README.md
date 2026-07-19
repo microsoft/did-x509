@@ -98,24 +98,24 @@ const credential = {
 
 ## Workflow 3: Verify a Presented Credential
 
-A holder presents a credential. Extract the DID from their certificate and verify:
+A holder presents a credential. You verify the **issuer's signature** — no need to extract a DID from the holder's cert.
 
 ```typescript
-import { resolveDidFromPem, verifyCertificateChain } from '@didx509/core';
+import { resolveDidFromPem } from '@didx509/core';
 
-const holderPemChain = holderCertChain; // from the presentation
-const holderDid = 'did:x509:0:sha256:DEF...::subject:CN%3Dholder.example.com';
+// The issuer DID is embedded in the credential
+const issuerDid = credential.issuer; // e.g. "did:x509:0:sha256:ABC...::subject:CN%3Duniversity.edu"
+const issuerPemChain = readFileSync('issuer-cert-chain.pem', 'utf-8');
 
-// 1. Verify the certificate chain is valid
-const chain = loadPemCertificateChain(holderPemChain);
-await verifyCertificateChain(chain);
+// 1. Resolve the issuer's DID Document (contains their public key)
+const issuerDoc = await resolveDidFromPem(issuerDid, issuerPemChain);
 
-// 2. Resolve the holder's DID Document
-const holderDoc = await resolveDidFromPem(holderDid, holderPemChain);
-
-// 3. Use holderDoc.verificationMethod[0].publicKeyJwk to verify
-//    the credential's proof signature
+// 2. Verify the credential's proof against the issuer's public key
+const publicKeyJwk = issuerDoc.verificationMethod[0].publicKeyJwk;
+const isValid = await verifyCredentialProof(credential, publicKeyJwk);
 ```
+
+> **Authenticating the holder** (optional): If the holder presents a Verifiable Presentation and you need to prove they control the holder's key, verify the holder's cert chain separately. See [Practical Guide: Verify a Credential](docs/practical-guide.md#step-3-verify-a-presented-credential-verifier-role) for both flows.
 
 ## Workflow 4: Register in a Trust Registry
 

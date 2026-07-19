@@ -194,68 +194,89 @@ When someone verifies this credential, they:
 
 A holder presents a credential to you. You need to verify it's legitimate.
 
-### The Flow
+**Key insight:** You do NOT need to extract a DID from the holder's certificate to verify the credential. Credential verification is about checking the **issuer's signature**, not the holder's identity. The holder's cert chain is only needed if you want to authenticate who presented it.
+
+### The Flow: Verify the Credential
 
 ```
-1. You receive: signed credential + holder's cert chain (in presentation)
-2. Extract DID from holder's cert
-3. Verify the cert chain is valid
-4. Resolve the holder's DID Document
-5. Verify the credential's proof against the DID Document's public key
-6. Verify the issuer's DID (optional: check trust registry)
+1. You receive: a signed credential
+2. Look up the issuer DID from the credential
+3. Resolve the issuer's DID Document (requires issuer's cert chain)
+4. Verify the credential's proof signature against the issuer's public key
+5. Optionally check the issuer in a trust registry
 ```
 
-### Code
+### Code: Verify the Credential
+
+```typescript
+import { resolveDidFromPem } from '@didx509/core';
+import { verifyCredentialProof } from './your-verification-library';
+
+async function verifyCredential(
+  credential: any,
+  issuerPemChain: string  // issuer's cert chain, NOT the holder's
+) {
+  // 1. The issuer DID is embedded in the credential
+  const issuerDid = credential.issuer;
+  // e.g. "did:x509:0:sha256:ABC...::subject:CN%3Dmy-university.edu"
+
+  // 2. Resolve the issuer's DID Document (contains the issuer's public key)
+  const issuerDoc = await resolveDidFromPem(issuerDid, issuerPemChain);
+
+  // 3. Verify the credential's proof against the issuer's public key
+  const publicKeyJwk = issuerDoc.verificationMethod[0].publicKeyJwk;
+  const isValid = await verifyCredentialProof(credential, publicKeyJwk);
+
+  return {
+    valid: isValid,
+    issuerDid,
+    publicKey: publicKeyJwk,
+  };
+}
+```
+
+### Optional: Authenticate the Holder
+
+If the holder presents a Verifiable Presentation (VP) and you need to prove **they control the holder's key** (not just that the credential is valid), then you verify the holder's certificate chain. This is separate from credential verification:
 
 ```typescript
 import {
   resolveDidFromPem,
   loadPemCertificateChain,
   verifyCertificateChain,
-  parseDid,
 } from '@didx509/core';
-import { verifyCredentialProof } from './your-verification-library';
+import { verifyPresentationProof } from './your-verification-library';
 
-async function verifyPresentedCredential(
-  credential: any,
-  holderPemChain: string,
-  holderDid: string
+async function verifyPresentation(
+  presentation: any,          // Verifiable Presentation
+  holderPemChain: string      // holder's cert chain (in the VP)
 ) {
-  // 1. Parse and verify the holder's certificate chain
+  // 1. Verify the holder's cert chain
   const chain = loadPemCertificateChain(holderPemChain);
   await verifyCertificateChain(chain);
 
-  // 2. Resolve the holder's DID Document
+  // 2. Resolve the holder's DID from their cert
+  //    (only needed if you want the holder's DID for logging/access control)
+  const holderDid = extractDidFromChain(chain); // your extraction logic
   const holderDoc = await resolveDidFromPem(holderDid, holderPemChain);
 
-  // 3. Verify the credential proof against the DID Document's public key
-  const verificationMethod = credential.proof.verificationMethod;
-  const publicKeyJwk = holderDoc.verificationMethod[0].publicKeyJwk;
+  // 3. Verify the VP's proof against the holder's public key
+  const holderKey = holderDoc.verificationMethod[0].publicKeyJwk;
+  const isValid = await verifyPresentationProof(presentation, holderKey);
 
-  const isValid = await verifyCredentialProof(credential, publicKeyJwk);
-
-  // 4. Optionally verify the issuer
-  const issuerDid = parseDid(credential.issuer);
-  // ... resolve issuer DID and check trust registry
-
-  return {
-    valid: isValid,
-    holderDid: holderDoc.id,
-    issuerDid: credential.issuer,
-    publicKey: publicKeyJwk,
-  };
+  return { valid: isValid, holderDid: holderDoc.id };
 }
 ```
 
 ### Verification Checklist
 
-| Step | What It Ensures |
-|---|---|
-| Cert chain verification | The cert was issued by a trusted CA and is not revoked |
-| DID resolution | The DID matches the cert and produces a valid DID Document |
-| Proof verification | The credential was signed by the holder's private key |
-| Issuer verification | The issuer is who they claim (resolve their DID too) |
-| Trust registry check | The issuer is in an approved trust registry |
+| Step | What It Ensures | Required? |
+|---|---|---|
+| Verify credential proof | Credential was signed by the issuer's private key | Yes |
+| Resolve issuer DID | Issuer identity is valid and has a public key | Yes |
+| Check issuer trust registry | Issuer is approved for this credential type | Recommended |
+| Verify holder cert chain | Holder's cert was issued by a trusted CA | Only for VP authentication |
+| Resolve holder DID | Holder identity for access control/logging | Only for VP authentication |
 
 ---
 
