@@ -230,6 +230,8 @@ fulcio-issuer      = 1*idchar
 
 `fulcio-issuer` is `chain[0].extensions.fulcio_issuer`, without leading `https://`, percent-encoded.
 
+The `fulcio_issuer` extension MUST be present on `chain[0]` when this predicate is used; resolution fails if it is absent. The extension MUST NOT be marked critical.
+
 Example:
 
 `did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::fulcio-issuer:accounts.google.com::san:email:bob%40example.com`
@@ -426,7 +428,9 @@ The following steps must be used to generate a corresponding DID Document:
 
 1. Decode the `x509chain` resolution option value into individual certificates by splitting the string on `","` and base64url-decoding each resulting string. The result is a list of DER-encoded certificates that can be loaded in standard libraries. Fail if the list contains fewer than two certificates.
 
-2. Check whether the list of certificates forms a valid certificate chain using [RFC 5280 certification path validation](https://www.rfc-editor.org/rfc/rfc5280#section-6) procedures with the last certificate in the chain as trust anchor. Implementations MUST perform RFC 5280 certification path validation, except that they MUST treat the `fulcio_issuer` extension as recognized for purposes of critical-extension processing. Additionally, fail if any certificate in the chain contains a critical extension that is neither (a) one of the extensions represented in the JSON model (`eku`, `san`, `fulcio_issuer`), nor (b) one of the following standard RFC 5280 extensions: `basicConstraints`, `keyUsage`, `nameConstraints`, `policyConstraints`, `policyMappings`, `certificatePolicies`, `inhibitAnyPolicy`.
+2. Check whether the list of certificates forms a valid certificate chain using [RFC 5280 certification path validation](https://www.rfc-editor.org/rfc/rfc5280#section-6) procedures with the last certificate in the chain as trust anchor. Implementations MUST perform RFC 5280 certification path validation. Additionally, fail if any certificate in the chain contains a critical extension that is neither (a) one of the extensions represented in the JSON model (`eku`, `san`), nor (b) one of the following standard RFC 5280 extensions: `basicConstraints`, `keyUsage`, `nameConstraints`, `policyConstraints`, `policyMappings`, `certificatePolicies`, `inhibitAnyPolicy`.
+
+The `fulcio_issuer` extension is deliberately not on that list. Fulcio does not mark it critical, and issuers MUST NOT mark it critical: it is an unrecognized extension for the purposes of RFC 5280 certification path validation, so marking it critical may cause the chain to be rejected.
 
 Instead of using the current time as specified in [Section 6.1.3 of RFC 5280](https://www.rfc-editor.org/info/rfc5280/#section-6.1.3) when validating the chain, applications may choose a context-relevant point in time. For example, applications handling signed documents may choose to use the signing time instead, which might come from a CWT `iat` claim ([RFC 8392](https://www.rfc-editor.org/rfc/rfc8392)) or JWT `iat` claim ([RFC 7519](https://www.rfc-editor.org/rfc/rfc7519)). Such a claim is not trusted time by itself and needs to be integrity protected and accepted by application policy.
 
@@ -514,9 +518,9 @@ The following synthetic certificate chain is valid from `2026-01-01T00:00:00Z` t
 
 ```json
 [
-  "MIIB6jCCAZGgAwIBAgICB9MwCgYIKoZIzj0EAwIwKDEmMCQGA1UEAwwdZGlkOng1MDkgVGVzdCBJbnRlcm1lZGlhdGUgQ0EwIBcNMjYwMTAxMDAwMDAwWhgPMjEyNjAxMDEwMDAwMDBaMCAxHjAcBgNVBAMMFU1pY3Jvc29mdCBDb3Jwb3JhdGlvbjBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABOEX4qCKPxjG9tYoDQ_sgUQX4GHn9RNzO0RQ7feNac7GOMPjEuFcMH_HKXE5-5blSPjeQ3quHOq9t-bM5wQsW1SjgbAwga0wDAYDVR0TAQH_BAIwADAOBgNVHQ8BAf8EBAMCB4AwEwYDVR0lBAwwCgYIKwYBBQUHAwMwOgYDVR0RBDMwMYERYWxpY2VAZXhhbXBsZS5jb22GHGh0dHBzOi8vZXhhbXBsZS5jb20vd29ya2Zsb3cwPAYKKwYBBAGDvzABAQEB_wQraHR0cHM6Ly90b2tlbi5hY3Rpb25zLmdpdGh1YnVzZXJjb250ZW50LmNvbTAKBggqhkjOPQQDAgNHADBEAiAZ19FXG8b-CfMEHMGuW4Irty2PmnK1FRhG7dQHs3gLIgIgXQj3TqnxGHs5JERYd8k-7jtCN8c8hcwMda9qtANsURE",
-  "MIIBYTCCAQagAwIBAgICB9IwCgYIKoZIzj0EAwIwIDEeMBwGA1UEAwwVZGlkOng1MDkgVGVzdCBSb290IENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAoMSYwJAYDVQQDDB1kaWQ6eDUwOSBUZXN0IEludGVybWVkaWF0ZSBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABCGOU6tOhbKML7y0-bGB-B_p5Rgm0wTn93V4NHVDudiUi-sDkmlX-N5tswsZf0Qd459YdnaqhsWYM2UUo2bgWaCjJjAkMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0kAMEYCIQDiLS9MqRBKW-XXpWXBoeUkndfg4nLC70JOibfNz-kgxAIhAMX83RS30hPgJjIuRFXXQyIbcnjFTSv8f27cEwdgcTdS",
-  "MIIBVzCB_qADAgECAgIH0TAKBggqhkjOPQQDAjAgMR4wHAYDVQQDDBVkaWQ6eDUwOSBUZXN0IFJvb3QgQ0EwIBcNMjYwMTAxMDAwMDAwWhgPMjEyNjAxMDEwMDAwMDBaMCAxHjAcBgNVBAMMFWRpZDp4NTA5IFRlc3QgUm9vdCBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABHgjQa6wjzl1UbPw_PkxStxPzJD6i62i8IHLyAiQUTMmadClm4O5nZStDAo62cm1kUrBjLQroB746VVaksVeiDajJjAkMBIGA1UdEwEB_wQIMAYBAf8CAQEwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0gAMEUCIQD2NQq61OLNOSxpfoVSo4vaPfgNg6UFNXeGVEaR4_r6kgIgPLNbkXnthP6oGlr2CFNZeYsN3DDKm_O9MjloCaVEwDs"
+  "MIICJzCCAc6gAwIBAgICB9MwCgYIKoZIzj0EAwIwKDEmMCQGA1UEAwwdZGlkOng1MDkgVGVzdCBJbnRlcm1lZGlhdGUgQ0EwIBcNMjYwMTAxMDAwMDAwWhgPMjEyNjAxMDEwMDAwMDBaMCAxHjAcBgNVBAMMFU1pY3Jvc29mdCBDb3Jwb3JhdGlvbjBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABD2J_lUT69q47RbEL3RmgzDw89bJQNGG7ktkezQ7xqHjFQWx9bhWcFhQXB2lG829usJs0zUR7MK-y_t3biltjNejge0wgeowDAYDVR0TAQH_BAIwADAOBgNVHQ8BAf8EBAMCB4AwEwYDVR0lBAwwCgYIKwYBBQUHAwMwOgYDVR0RBDMwMYERYWxpY2VAZXhhbXBsZS5jb22GHGh0dHBzOi8vZXhhbXBsZS5jb20vd29ya2Zsb3cwOQYKKwYBBAGDvzABAQQraHR0cHM6Ly90b2tlbi5hY3Rpb25zLmdpdGh1YnVzZXJjb250ZW50LmNvbTAdBgNVHQ4EFgQUwGLLx59TXgxBkjzMIcbmWNiLQfQwHwYDVR0jBBgwFoAUWbwya755KGJF5ztNyrADsYoQIucwCgYIKoZIzj0EAwIDRwAwRAIge1uAHkPt8snonwz80M030m26KHZxoOG9_o2eeHzHY8QCIEffMAq-SrgqOaka7UE_zxSWCCUjxbmoJq8RUyVCHggZ",
+  "MIIBoDCCAUagAwIBAgICB9IwCgYIKoZIzj0EAwIwIDEeMBwGA1UEAwwVZGlkOng1MDkgVGVzdCBSb290IENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAoMSYwJAYDVQQDDB1kaWQ6eDUwOSBUZXN0IEludGVybWVkaWF0ZSBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABM5oFeAaQm9P6Ll8_8VR_5ALiILOpcBFz2uz4AlziXKvgvzzGRct8C7PnFasWW1zadCEL7XMsi-TZyfqyMh3-NijZjBkMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMB0GA1UdDgQWBBRZvDJrvnkoYkXnO03KsAOxihAi5zAfBgNVHSMEGDAWgBRkhJJHzlGkin5nrO2tJG9mSAgmhDAKBggqhkjOPQQDAgNIADBFAiAXvFoF5ws9YsBTiAAOLiy7bVoSa2jemshWYlPiA_68JgIhAKfeqdnZ1UFSalYcKsCIqYCuJypub9KuQFFFbCBlv7Xq",
+  "MIIBmDCCAT6gAwIBAgICB9EwCgYIKoZIzj0EAwIwIDEeMBwGA1UEAwwVZGlkOng1MDkgVGVzdCBSb290IENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAgMR4wHAYDVQQDDBVkaWQ6eDUwOSBUZXN0IFJvb3QgQ0EwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQFB7zyNdAfRr9jR0kWJMUn3rEifn1sv0rKHLYNRhJbYme9gGczf336c83fmM5ILsrrEA_c5l_i1rlbDEuIbv-Go2YwZDASBgNVHRMBAf8ECDAGAQH_AgEBMA4GA1UdDwEB_wQEAwIBBjAdBgNVHQ4EFgQUZISSR85RpIp-Z6ztrSRvZkgIJoQwHwYDVR0jBBgwFoAUZISSR85RpIp-Z6ztrSRvZkgIJoQwCgYIKoZIzj0EAwIDSAAwRQIhAKBsIWGkW-Vi1r_tEwvt9uhTkCZl8R87WANQ8TzdKetCAiBXUp_gpJRfqA4F27qnmoMNABRbPeRTtK8YTNfSkDruBw"
 ]
 ```
 
@@ -524,10 +528,10 @@ The following DIDs resolve using the certificate chain above:
 
 | Name | DID |
 |---|---|
-| Root CA fingerprint with subject predicate | `did:x509:0:sha256:X11SlCN2S52b4zYqoqpzSpBlizT-JRUqikvLAhyJ_60::subject:CN:Microsoft%20Corporation` |
-| Intermediate CA fingerprint with subject predicate | `did:x509:0:sha256:FpGAHUDNIQ331WfbeH_qNi5sFl49v802hsc0GTXp5Ys::subject:CN:Microsoft%20Corporation` |
-| EKU predicate | `did:x509:0:sha256:X11SlCN2S52b4zYqoqpzSpBlizT-JRUqikvLAhyJ_60::eku:1.3.6.1.5.5.7.3.3` |
-| Fulcio issuer with URI SAN predicate | `did:x509:0:sha256:X11SlCN2S52b4zYqoqpzSpBlizT-JRUqikvLAhyJ_60::fulcio-issuer:token.actions.githubusercontent.com::san:uri:https%3A%2F%2Fexample.com%2Fworkflow` |
+| Root CA fingerprint with subject predicate | `did:x509:0:sha256:jrpIEWcKgVz4oZFhQQ8XA1zdl4bBHTr42HvPhh1TTY8::subject:CN:Microsoft%20Corporation` |
+| Intermediate CA fingerprint with subject predicate | `did:x509:0:sha256:taW5Hxj7Z4wyzY-gLMI0FX93hztXz01dYk_FYQx0HIQ::subject:CN:Microsoft%20Corporation` |
+| EKU predicate | `did:x509:0:sha256:jrpIEWcKgVz4oZFhQQ8XA1zdl4bBHTr42HvPhh1TTY8::eku:1.3.6.1.5.5.7.3.3` |
+| Fulcio issuer with URI SAN predicate | `did:x509:0:sha256:jrpIEWcKgVz4oZFhQQ8XA1zdl4bBHTr42HvPhh1TTY8::fulcio-issuer:token.actions.githubusercontent.com::san:uri:https%3A%2F%2Fexample.com%2Fworkflow` |
 
 ## References
 

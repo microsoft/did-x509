@@ -6,9 +6,12 @@ setup(
     packages=find_packages(),
     install_requires=[
         "cryptography",
+        "pyOpenSSL",
         "jwcrypto",
-        "pytest",
     ],
+    extras_require={
+        "test": ["pytest"],
+    },
     description="DID x509 tools",
     url="https://github.com/microsoft/did-x509",
     license="MIT",

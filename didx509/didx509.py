@@ -4,13 +4,12 @@
 from typing import List
 import argparse
 import json
-import datetime
 from base64 import urlsafe_b64encode
 from urllib.parse import unquote, quote
 
 from cryptography import x509
 from cryptography.hazmat.primitives import hashes
-from cryptography.hazmat.primitives.asymmetric import ec, rsa, padding
+from OpenSSL import crypto
 import jwcrypto.jwk
 
 
@@ -53,17 +52,26 @@ def parse_name(name: x509.Name) -> dict:
     return items
 
 
+FULCIO_ISSUER_OID = "1.3.6.1.4.1.57264.1.1"
+
+# Critical extensions that the specification requires resolution to tolerate,
+# beyond those represented in the JSON model. Path validation enforces them.
+PERMITTED_CRITICAL_EXTENSION_OIDS = {
+    "2.5.29.19",  # basicConstraints
+    "2.5.29.15",  # keyUsage
+    "2.5.29.30",  # nameConstraints
+    "2.5.29.36",  # policyConstraints
+    "2.5.29.33",  # policyMappings
+    "2.5.29.32",  # certificatePolicies
+    "2.5.29.54",  # inhibitAnyPolicy
+}
+
+
 def parse_extensions(exts: x509.Extensions):
     extensions = {}
     for ext in exts:
         value = ext.value
-        if isinstance(value, x509.BasicConstraints):
-            # handled by verify_chain
-            continue
-        elif isinstance(value, x509.KeyUsage):
-            # handled by create_did_document
-            continue
-        elif isinstance(value, x509.ExtendedKeyUsage):
+        if isinstance(value, x509.ExtendedKeyUsage):
             ext_name = "eku"
             ext_value = []
             for eku in value:
@@ -83,10 +91,12 @@ def parse_extensions(exts: x509.Extensions):
                     ext_value.append(["dn", parse_name(san.value)])
                 else:
                     raise RuntimeError(f"unsupported SAN: {san}")
-        elif ext.oid.dotted_string == "1.3.6.1.4.1.57264.1.1":
+        elif ext.oid.dotted_string == FULCIO_ISSUER_OID:
             ext_name = "fulcio_issuer"
             assert isinstance(value, x509.UnrecognizedExtension)
             ext_value = value.value.decode("utf-8")
+        elif ext.oid.dotted_string in PERMITTED_CRITICAL_EXTENSION_OIDS:
+            continue
         elif not ext.critical:
             continue
         else:
@@ -125,70 +135,58 @@ def load_certificate_chain(path) -> List[x509.Certificate]:
     return chain
 
 
-def verify_certificate_is_issued_by(
-    certificate: x509.Certificate, other: x509.Certificate
-):
-    if other.subject != certificate.issuer:
-        raise RuntimeError(
-            "Certificate issuer does not match subject of issuer certificate"
-        )
-    public_key = other.public_key()
-    signature = certificate.signature
-    data = certificate.tbs_certificate_bytes
-    if isinstance(public_key, rsa.RSAPublicKeyWithSerialization):
-        public_key.verify(
-            signature,
-            data,
-            padding=padding.PKCS1v15(),
-            algorithm=certificate.signature_hash_algorithm,
-        )
-    elif isinstance(public_key, ec.EllipticCurvePublicKeyWithSerialization):
-        public_key.verify(
-            signature,
-            data,
-            signature_algorithm=ec.ECDSA(certificate.signature_hash_algorithm),
-        )
-    else:
-        raise NotImplementedError("Unsupported public key type")
-
-
-def verify_certificate_in_chain(
-    chain: List[x509.Certificate], i: int, skip_validity_period_check=False
-):
-    cert = chain[i]
-
-    if i > 0:
-        try:
-            bc_ext = cert.extensions.get_extension_for_class(x509.BasicConstraints)
-        except x509.ExtensionNotFound:
-            pass
-        else:
-            basic_constraints = bc_ext.value
-            if not basic_constraints.ca:
-                raise ValueError(f"Certificate {i} basic constraints: CA bit missing")
-            if (
-                basic_constraints.path_length is not None
-                and basic_constraints.path_length > i
-            ):
-                raise ValueError(
-                    f"Certificate {i} basic constraints: path length constraint violated"
-                )
-
-    if not skip_validity_period_check:
-        now = datetime.datetime.now()
-        if cert.not_valid_before > now or cert.not_valid_after < now:
-            raise ValueError(f"Certificate {i} is not valid now")
+# Not exposed by pyOpenSSL's X509StoreFlags. Defined in OpenSSL's x509_vfy.h.
+X509_V_FLAG_NO_CHECK_TIME = 0x200000
 
 
 def verify_certificate_chain(
     chain: List[x509.Certificate], skip_validity_period_check=False
 ):
+    """Perform RFC 5280 certification path validation on a leaf-first chain.
+
+    The last certificate in the chain is used as the trust anchor, as required
+    by the did:x509 specification. Validation is delegated to OpenSSL so that
+    the full RFC 5280 algorithm applies, including basic constraints, path
+    length constraints, key usage, name constraints, and validity periods.
+
+    skip_validity_period_check suppresses the validity period check at every
+    depth, for testing against expired certificates.
+
+    Deciding whether the trust anchor itself is acceptable is out of scope; the
+    specification leaves that to relying-party policy.
+
+    Critical-extension processing is left to OpenSSL, which rejects any critical
+    extension it does not recognize. The fulcio_issuer extension is unrecognized
+    and must not be marked critical, so this is the behaviour the specification
+    requires. parse_extensions permits the standard critical extensions the
+    specification allows, which OpenSSL recognizes and processes here.
+    """
     if len(chain) < 2:
         raise ValueError("Certificate chain must have at least two certificates")
-    for i in range(len(chain) - 1):
-        verify_certificate_is_issued_by(chain[i], chain[i + 1])
-    for i in range(len(chain)):
-        verify_certificate_in_chain(chain, i, skip_validity_period_check)
+
+    flags = (
+        # Any certificate in the store may act as a trust anchor, so a chain
+        # ending at an intermediate is accepted.
+        crypto.X509StoreFlags.PARTIAL_CHAIN
+        # Verify the trust anchor's own signature when it is self-signed.
+        | crypto.X509StoreFlags.CHECK_SS_SIGNATURE
+    )
+    if skip_validity_period_check:
+        flags |= X509_V_FLAG_NO_CHECK_TIME
+
+    store = crypto.X509Store()
+    store.add_cert(crypto.X509.from_cryptography(chain[-1]))
+    store.set_flags(flags)
+
+    ctx = crypto.X509StoreContext(
+        store,
+        crypto.X509.from_cryptography(chain[0]),
+        chain=[crypto.X509.from_cryptography(cert) for cert in chain[1:-1]],
+    )
+    try:
+        ctx.verify_certificate()
+    except crypto.X509StoreContextError as e:
+        raise ValueError(f"certificate chain verification failed: {e}") from e
 
 
 def check_did_x509(did: str, chain: List[x509.Certificate]) -> str:
@@ -256,6 +254,8 @@ def check_did_x509(did: str, chain: List[x509.Certificate]) -> str:
                 raise ValueError(f"invalid EKU: {eku}, expected one of: {ekus}")
 
         elif name == "fulcio-issuer":
+            if "fulcio_issuer" not in decoded[0]["extensions"]:
+                raise ValueError("no Fulcio issuer extension in certificate")
             fulcio_issuer = "https://" + pctdecode(value)
             expected_fulcio_issuer = decoded[0]["extensions"]["fulcio_issuer"]
             if fulcio_issuer != expected_fulcio_issuer:
