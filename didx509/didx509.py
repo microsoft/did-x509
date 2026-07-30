@@ -89,6 +89,7 @@ def parse_extensions(exts: x509.Extensions):
                     ext_value.append(["uri", san.value])
                 elif isinstance(san, x509.DirectoryName):
                     ext_value.append(["dn", parse_name(san.value)])
+                else:
                     raise ValueError(f"unsupported SAN: {san}")
         elif ext.oid.dotted_string == FULCIO_ISSUER_OID:
             ext_name = "fulcio_issuer"
