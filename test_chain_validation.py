@@ -288,6 +288,26 @@ def test_chain_shorter_than_two_certificates():
         resolve_did(subject_did(chain), chain[:1])
 
 
+def test_unrelated_candidate_cannot_satisfy_ca_fingerprint():
+    chain = build_chain([CA_UNLIMITED, KEY_CERT_SIGN], [CA_UNLIMITED, KEY_CERT_SIGN])
+    unrelated_name = x509.Name(
+        [x509.NameAttribute(NameOID.COMMON_NAME, "Unrelated CA")]
+    )
+    unrelated_key = new_key()
+    unrelated_ca = sign_certificate(
+        unrelated_name,
+        unrelated_key,
+        unrelated_name,
+        unrelated_key,
+        [CA_UNLIMITED, KEY_CERT_SIGN],
+    )
+    fingerprint = b64url(unrelated_ca.fingerprint(hashes.SHA256()))
+    did = f"did:x509:0:sha256:{fingerprint}::subject:CN:Leaf"
+
+    with pytest.raises(ValueError, match="verified certificate chain"):
+        resolve_did(did, [chain[0], unrelated_ca, *chain[1:]])
+
+
 # Critical extension processing (specification step 2). The fulcio_issuer
 # extension is unrecognized for path validation purposes and must not be marked
 # critical; the standard extensions in the specification's allowlist may be.

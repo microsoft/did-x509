@@ -8,7 +8,7 @@ from base64 import urlsafe_b64encode
 from urllib.parse import unquote, quote
 
 from cryptography import x509
-from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives import hashes, serialization
 from OpenSSL import crypto
 import jwcrypto.jwk
 
@@ -141,7 +141,7 @@ X509_V_FLAG_NO_CHECK_TIME = 0x200000
 
 def verify_certificate_chain(
     chain: List[x509.Certificate], skip_validity_period_check=False
-):
+) -> List[x509.Certificate]:
     """Perform RFC 5280 certification path validation on a leaf-first chain.
 
     The last certificate in the chain is used as the trust anchor, as required
@@ -187,6 +187,20 @@ def verify_certificate_chain(
         ctx.verify_certificate()
     except crypto.X509StoreContextError as e:
         raise ValueError(f"certificate chain verification failed: {e}") from e
+
+    verified_chain = [cert.to_cryptography() for cert in ctx.get_verified_chain()]
+    supplied_der = [
+        cert.public_bytes(serialization.Encoding.DER) for cert in chain
+    ]
+    verified_der = [
+        cert.public_bytes(serialization.Encoding.DER) for cert in verified_chain
+    ]
+    if supplied_der != verified_der:
+        raise ValueError(
+            "supplied certificate chain does not match verified certificate chain"
+        )
+
+    return verified_chain
 
 
 def check_did_x509(did: str, chain: List[x509.Certificate]) -> str:
@@ -311,9 +325,9 @@ def create_did_document(did: str, chain: List[x509.Certificate]):
 def resolve_did(
     did: str, chain: List[x509.Certificate], skip_validity_period_check=False
 ) -> dict:
-    verify_certificate_chain(chain, skip_validity_period_check)
-    did_document_id = check_did_x509(did, chain)
-    doc = create_did_document(did_document_id, chain)
+    verified_chain = verify_certificate_chain(chain, skip_validity_period_check)
+    did_document_id = check_did_x509(did, verified_chain)
+    doc = create_did_document(did_document_id, verified_chain)
     return doc
 
 
