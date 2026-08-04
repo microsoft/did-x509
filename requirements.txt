@@ -1,3 +1,4 @@
-cryptography
-jwcrypto
-pytest
+cryptography>=49.0.0,<50
+pyOpenSSL>=26.3.0,<27
+jwcrypto>=1.5.8,<2
+pytest>=9.1.1,<10
