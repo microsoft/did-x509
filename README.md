@@ -19,9 +19,12 @@ pip install -r requirements.txt
 Then, run the resolver with an example DID and matching certificate chain:
 
 ```sh
-python -m didx509 resolve did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Microsoft%20Corporation --chain test-data/ms-code-signing.pem --skip-validity-period-check
+python -m didx509 resolve did:x509:0:sha256:hH32p4SXlD8n_HLrk_mmNzIKArVh0KkbCeh6eAftfGE::subject:CN:Microsoft%20Corporation --chain test-data/ms-code-signing.pem
 # Output: { <DID document> }
 ```
+
+The reference resolver does not check certificate validity periods. Applications
+may validate them at a context-relevant time.
 
 To convert a certificate chain to the JSON data model defined in the specification, run:
 
@@ -40,7 +43,7 @@ python -m didx509 encode "My Org"
 Run tests with:
 
 ```
-pytest -v test.py
+pytest -v
 ```
 
 ## Contributing

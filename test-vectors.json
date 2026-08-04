@@ -1,0 +1,1383 @@
+[
+  {
+    "id": "broken-signature-is-rejected",
+    "input": {
+      "did": "did:x509:0:sha256:N8jLjQjw2D87FmBM9aJDxXgez1EJO7q8dorCNkBOL7o::subject:CN:Leaf",
+      "chain": [
+        "MIIBczCCARmgAwIBAgIUW-XtKjI86Qd8VByJe8cx61gZsHgwCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwIBcNMjAwMTAxMDAwMDAwWhgPMjEyMDAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQzDHiQBdntdJUqzhFZpftvbstinv2rCM5y_b_4pTd7HBv4kXcoYJoDwncn87tzimVT7jnW7Fu63OljjexnACdio1AwTjAdBgNVHQ4EFgQUMKb_jCOUCAcwslkKWRnM_MNpIwwwDAYDVR0TAQH_BAIwADAfBgNVHSMEGDAWgBQJBqdyt75tiKnfgqnVIJai_vukKDAKBggqhkjOPQQDAgNIADBFAiBEJ1eWKg99kmE_sQLg-uHkVhwHufEEfvUiBtZtLT-o6wIhAJ_61baNq7Y_A1Q_dmpqsc4PS1d_UYZOYT50WKrXD3AQ",
+        "MIIBhTCCASygAwIBAgIUI2c4RcVh8tjN5N6boW6j1cX1WCAwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowEDEOMAwGA1UEAwwFSW50ZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQtYSJ6lP8O45uEN5nq4qqUyvyy6kEXj2Qqk1g-YPW2C7iCDdnZsKxPh4vB0qiD4VgTxg4aEqtfhcITfC9OmrcCo2MwYTAdBgNVHQ4EFgQUCQancre-bYip34Kp1SCWov77pCgwHwYDVR0jBBgwFoAUK7hJO4ij5vG-fHBpvs20BroZ_YEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDRwAwRAIgQv4X2BCbEfhaRFNt7HUqKcK7SQF8SvVFksp5cNZMzm0CIDJ2zC-RFMpHCCXiHU2DFsuIjN74Yju_GxT22tgGaK3v",
+        "MIIBhTCCASugAwIBAgIUKyJt0o_k1VE0BGFMrh00NP3HC3kwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwEUm9vdDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABOxPGWbSVXNJV2zHxaERKkHLzNUOBx9rB7qpTkMN7jQvrjggiZ8CxRHdH1DH-N8hlo3n9BzJFNID6imw-EfG2CKjYzBhMB0GA1UdDgQWBBQruEk7iKPm8b58cGm-zbQGuhn9gTAfBgNVHSMEGDAWgBQruEk7iKPm8b58cGm-zbQGuhn9gTAPBgNVHRMBAf8EBTADAQH_MA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNIADBFAiBOSw7bf0h83YKxm0ky1V5A2QPdVq23b9dn0ocbtYhEnQIhAOdF6ykWmgBF9w38nupjlS5TJdoEniA-e3__uFtoMm-e"
+      ]
+    },
+    "output": {
+      "error": "Certificate chain verification failed: certificate signature failure."
+    }
+  },
+  {
+    "id": "certificate-validity-periods-are-not-checked",
+    "input": {
+      "did": "did:x509:0:sha256:AxW_2uMZc-Bn8tjYEWsJOZj8OfgQFdoeQuX7G-evxkg::subject:CN:Leaf",
+      "chain": [
+        "MIIBcTCCARegAwIBAgIUWJ93Qt0VVdYkBPS-bBtmYWb9xGAwCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwHhcNMjAwMTAxMDAwMDAwWhcNMjEwMTAxMDAwMDAwWjAPMQ0wCwYDVQQDDARMZWFmMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAENxFT-DdAJJTgwLzFKzOxdt2BwK7xpRNi2rVrUouFhiPgIOr8VV7qCQ9K06mwcUg4JOK-d_aB_PYUCBZi5nx52KNQME4wHQYDVR0OBBYEFNZtn1eYHfGTnTg2gpOjtAeVRlWlMB8GA1UdIwQYMBaAFHUyLGPkWjWxSkhPKMGy_is9a8QYMAwGA1UdEwEB_wQCMAAwCgYIKoZIzj0EAwIDSAAwRQIhANYODpg3FlGyTBRrmuWe7nnp1yBtD6fykcThFhCwQxo5AiAN9pt0H2xtj32Zuporpll5hm3AvZLwyU82Aga9a8NlLg",
+        "MIIBhDCCASqgAwIBAgIUAtC3tRRjj9hU3IuWhyGYnrAsEhAwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMBAxDjAMBgNVBAMMBUludGVyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEjseWoTSM98bnk3MoQrrlsWK1KJDURxJJ2ZK0WvtoKMiwSwqEDN7GDf66prn76ljFjxFkaDrbb-vY2ZouM61C16NjMGEwHQYDVR0OBBYEFHUyLGPkWjWxSkhPKMGy_is9a8QYMB8GA1UdIwQYMBaAFIegoNbk9dk1YmnFzKQrbaVTPt2TMA8GA1UdEwEB_wQFMAMBAf8wDgYDVR0PAQH_BAQDAgIEMAoGCCqGSM49BAMCA0gAMEUCIGyQks71ewvF9qxMCaHzxe6NC_Zqp1vNfakIyQDj7Y4MAiEAqeHs_qKwPci39V0_yDDga1Lmo6h5P-JDebbaM1GpmVg",
+        "MIIBhDCCASmgAwIBAgIUa-4HVH5Rypi8dGo9AFjE-1pNagswCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBFJvb3QwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATr3116SNyYCMe9s5ex9lVYTBXhzy6F0OsWDYGeH75SVtNrkY3gkBwWp9IwCbP-8WUW5Y45QYFe-fkYJcGkoVyVo2MwYTAdBgNVHQ4EFgQUh6Cg1uT12TViacXMpCttpVM-3ZMwHwYDVR0jBBgwFoAUh6Cg1uT12TViacXMpCttpVM-3ZMwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDSQAwRgIhAIF6koTEyqDWYn0RsaOVm_66EYZ91XwUhXFZ9-etKRL3AiEA4FILFS_2GEk6uTe3oTm8mUAxY68tLMrZnR9nn-wSdoQ"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:AxW_2uMZc-Bn8tjYEWsJOZj8OfgQFdoeQuX7G-evxkg::subject:CN:Leaf",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:AxW_2uMZc-Bn8tjYEWsJOZj8OfgQFdoeQuX7G-evxkg::subject:CN:Leaf#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:AxW_2uMZc-Bn8tjYEWsJOZj8OfgQFdoeQuX7G-evxkg::subject:CN:Leaf",
+            "publicKeyJwk": {
+              "kty": "EC",
+              "crv": "P-256",
+              "x": "NxFT-DdAJJTgwLzFKzOxdt2BwK7xpRNi2rVrUouFhiM",
+              "y": "4CDq_FVe6gkPStOpsHFIOCTivnf2gfz2FAgWYuZ8edg"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:AxW_2uMZc-Bn8tjYEWsJOZj8OfgQFdoeQuX7G-evxkg::subject:CN:Leaf#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:AxW_2uMZc-Bn8tjYEWsJOZj8OfgQFdoeQuX7G-evxkg::subject:CN:Leaf#0"
+        ],
+        "keyAgreement": [
+          "did:x509:0:sha256:AxW_2uMZc-Bn8tjYEWsJOZj8OfgQFdoeQuX7G-evxkg::subject:CN:Leaf#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "chain-shorter-than-two-certificates",
+    "input": {
+      "did": "did:x509:0:sha256:SsYgcgpLxGalbaW0feow04o84RO0qiCSGa4T7cD9pRI::subject:CN:Leaf",
+      "chain": [
+        "MIIBczCCARmgAwIBAgIUPaeOZBrHIRB0VPakTflxWMIbqwEwCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwIBcNMjAwMTAxMDAwMDAwWhgPMjEyMDAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQy91A9r_hUksLqDtaSsbOtzVCEuHaYf8HA-w7t5x9x_dmOwjWKcaGo8d9NHHjbpAC3crBmLaww7uOPRbh-eKnco1AwTjAdBgNVHQ4EFgQU2kRGu6IzgTudnfiGVIvLv8FwnXYwHwYDVR0jBBgwFoAUAg7PIsZKBDRhjJw_4sOdWnj-izYwDAYDVR0TAQH_BAIwADAKBggqhkjOPQQDAgNIADBFAiAYZd_nm7yrXQU6WKDv7sJvI7OHMeMLwLjm89rN8vqpAwIhAKAYMXU1AcdS4xD4_fE3EIXtjo3tNxkFW4BAy5A0kufS"
+      ]
+    },
+    "output": {
+      "error": "Certificate chain must contain at least two certificates."
+    }
+  },
+  {
+    "id": "critical-certificate-policies-extension-is-accepted",
+    "input": {
+      "did": "did:x509:0:sha256:F7M0x7dtDJahNXWtBeqOanjlQ0yQuJJ0V9aHLXQcMaw::subject:CN:Leaf",
+      "chain": [
+        "MIIBjDCCATGgAwIBAgIUc7IBJaz4eTYOMv-GwxN6zPEcuGMwCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwIBcNMjAwMTAxMDAwMDAwWhgPMjEyMDAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASu-j9aP94fuoW69TGcvxJgrMw9fFtfgvyp6uZwKd9QibZmKQmmYMWKT6TWFU7SN-t08AMG58q1PBzMtTGNJGgto2gwZjAdBgNVHQ4EFgQUN7QyAuVT0-H1rkysAMtCLh7V-p0wHwYDVR0jBBgwFoAUWhM1_SJWDdSBKoyNvpn0SmLzNqwwDAYDVR0TAQH_BAIwADAWBgNVHSABAf8EDDAKMAgGBmeBDAECATAKBggqhkjOPQQDAgNJADBGAiEA5qZgzmZtIOaTYq6GPWVS9HsYNxb5LmJbxCuqFpSekwQCIQCFzwpMQByrzFt1-7_CdViRQxzgkMSj4PWs9c7ucI2GQg",
+        "MIIBhjCCASygAwIBAgIULUYHkOyXhOU5AdHKkR33Q2f30sgwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowEDEOMAwGA1UEAwwFSW50ZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASp-uJFyGwkMtxUl3QEgM9I1yH5h7aho_aOAfRMFI1qNJkDsTTnrTEAzCWH6orZ94CcgV6mAonIsabSjSiKs3PWo2MwYTAdBgNVHQ4EFgQUWhM1_SJWDdSBKoyNvpn0SmLzNqwwHwYDVR0jBBgwFoAUag97cS9OLDNdbncdIPySyemuqjYwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDSAAwRQIgYavxzGzEAFPS_p94w_pm-G1a6ynoeow7QCBwLyrKqIwCIQDkIusWXgLDTp55iydXn-N_qIs7bA2MBKZw8WyWqrBV4g",
+        "MIIBhjCCASugAwIBAgIUJGTqLsbenJkVwCzvn81Gjkn_IJ0wCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwEUm9vdDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABBZfV0_CHKSAQSGyHmO9KfLwQx41ixyUda5uojnBbve3htAVfwggaGHdwQ2qM3emW47O0wONjGevqIDZVMNO1lKjYzBhMB0GA1UdDgQWBBRqD3txL04sM11udx0g_JLJ6a6qNjAfBgNVHSMEGDAWgBRqD3txL04sM11udx0g_JLJ6a6qNjAPBgNVHRMBAf8EBTADAQH_MA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNJADBGAiEAlQZaWuU1I9Ja_H2zqWmZyPGYg2zoSf8G4aVQlEWTRsACIQC2QHdnzZ7flnGUYrzpUQh2GJSa1WXw-hkg4uLPwPsrvg"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:F7M0x7dtDJahNXWtBeqOanjlQ0yQuJJ0V9aHLXQcMaw::subject:CN:Leaf",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:F7M0x7dtDJahNXWtBeqOanjlQ0yQuJJ0V9aHLXQcMaw::subject:CN:Leaf#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:F7M0x7dtDJahNXWtBeqOanjlQ0yQuJJ0V9aHLXQcMaw::subject:CN:Leaf",
+            "publicKeyJwk": {
+              "kty": "EC",
+              "crv": "P-256",
+              "x": "rvo_Wj_eH7qFuvUxnL8SYKzMPXxbX4L8qermcCnfUIk",
+              "y": "tmYpCaZgxYpPpNYVTtI363TwAwbnyrU8HMy1MY0kaC0"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:F7M0x7dtDJahNXWtBeqOanjlQ0yQuJJ0V9aHLXQcMaw::subject:CN:Leaf#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:F7M0x7dtDJahNXWtBeqOanjlQ0yQuJJ0V9aHLXQcMaw::subject:CN:Leaf#0"
+        ],
+        "keyAgreement": [
+          "did:x509:0:sha256:F7M0x7dtDJahNXWtBeqOanjlQ0yQuJJ0V9aHLXQcMaw::subject:CN:Leaf#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "critical-fulcio-issuer-extension-is-rejected",
+    "input": {
+      "did": "did:x509:0:sha256:qi7X2eKL1b5cOwwWn12Mp5xAS_TpfD_Dbn4QerrrmRQ::fulcio-issuer:accounts.google.com",
+      "chain": [
+        "MIIBoTCCAUegAwIBAgIUIuFYTZo_BGmkWXGCUMz63fbiJIQwCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwIBcNMjAwMTAxMDAwMDAwWhgPMjEyMDAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARxjBrB4xkYYvOD5Fz1uwtHsoENzK08qIJ8QIH9fz-tshrPVBdUsEgRerHQg2zdZvF4wuF-GgWvZoMlQKN85axlo34wfDAdBgNVHQ4EFgQUndPpojSYBN3fvQkHqKxjR6mlk_swHwYDVR0jBBgwFoAUtet7cS4kLj7gshMFZtqT4RyXCOAwDAYDVR0TAQH_BAIwADAsBgorBgEEAYO_MAEBAQH_BBtodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20wCgYIKoZIzj0EAwIDSAAwRQIgMPZYk9lVADTmmIsk27xf07noLK3pO94-4obazCtogFACIQDIMef0GKvxBRPgUdgVBqBrAyvr__ER-2EGYXrjV30-zQ",
+        "MIIBhTCCASygAwIBAgIURoq2WWOTI8dGvI5hWB2J1kxPaeQwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowEDEOMAwGA1UEAwwFSW50ZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAS5cB6RPzbFy_2n6JBFuAgzvFuG1O5Jwsd37-vvn-fFKKvXrgIsHmkPuZR3pwV92-lHBD3ZHm4fMGI82b-9VcUlo2MwYTAdBgNVHQ4EFgQUtet7cS4kLj7gshMFZtqT4RyXCOAwHwYDVR0jBBgwFoAUJoMndA9hLQvCPa3ezhFWgsrJ5XcwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDRwAwRAIgA-ptMSErW0LyQauWeuXf3WrFgQAXnI2j3YY1WFrPsMECIB4pBJHIJzl0johTL5Y248dulH8iNRf8T9ryTDY6Kk5k",
+        "MIIBhTCCASugAwIBAgIUXFeO_EJRGU3N2eOmkGMEhFiW4vwwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwEUm9vdDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABGC2D9jTDeYgh16V8Y_jhR7DCbOCWNk71929LyXhZjXZ3pzEEO15mbvACfIVqEKisvfQU-xBtZBOH4MrRzasdCKjYzBhMB0GA1UdDgQWBBQmgyd0D2EtC8I9rd7OEVaCysnldzAfBgNVHSMEGDAWgBQmgyd0D2EtC8I9rd7OEVaCysnldzAPBgNVHRMBAf8EBTADAQH_MA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNIADBFAiEAnM-UstYaAVvaF9aSvYUeN3wD0lPhfKrv3vNW22ha-3gCIHXuhe9rJwr4dByRltblsex6QZqS4dIn2rf8WqzcCP-h"
+      ]
+    },
+    "output": {
+      "error": "Certificate chain verification failed: unhandled critical extension."
+    }
+  },
+  {
+    "id": "duplicate-certificate-subject-attribute",
+    "input": {
+      "did": "did:x509:0:sha256:art98HvR-DXJOIrUtXvJRezYSK_qAwY3aLkXpoAij7M::subject:CN:Leaf",
+      "chain": [
+        "MIIBhDCCASmgAwIBAgIUNrCYGz3Dr-OVlE_8Vt8K7pJPgL4wCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwIBcNMjAwMTAxMDAwMDAwWhgPMjEyMDAxMDEwMDAwMDBaMB8xDTALBgNVBAMMBExlYWYxDjAMBgNVBAMMBU90aGVyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEnVcsBGYsh65i6Qo4SlDB9Kowk3W21_WhUVy5uiHXc4pTc2Vac_UN1b65TsXoG_m6Ml2AZM_o0QfWR1-D6kdsIqNQME4wHQYDVR0OBBYEFPjJB_5Qds1cixFvXmWIJKac8V5wMB8GA1UdIwQYMBaAFLo5f7XRBeBa1Yai5rpk-IWF7P3NMAwGA1UdEwEB_wQCMAAwCgYIKoZIzj0EAwIDSQAwRgIhAIvkKWb6ciW0xk4wXKoDuAAmSg5RstbwbrUh0uMtSbEcAiEA3M3uP4yWCMgbu-WYnR0_eMLY93OSy6_3VlxwXQHFfeM",
+        "MIIBhzCCASygAwIBAgIUXKhRtXaswqy3zaCQ-TUg4PKJZ-YwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowEDEOMAwGA1UEAwwFSW50ZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARyv6TKN5CRd3VdLdU-qnaq3okj06IhfRob2Z7WJzYw2oRlFs4d3WpADWCCcqC0UPv2YRZAzSDUjFmCzvtg4nqXo2MwYTAdBgNVHQ4EFgQUujl_tdEF4FrVhqLmumT4hYXs_c0wHwYDVR0jBBgwFoAUzo2qt-IuB6q5TKNVlod82xr7UAcwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDSQAwRgIhAIPP02NNOJnHvMPvru0zoUq0GdC1Lgt5OuzP3IiVvwQsAiEAlMoQyG-TdB7-Qn5yYar7ztqHq7gi4-CZJ_6YT0tD6yo",
+        "MIIBhjCCASugAwIBAgIULl_YnMtdQGNQg28m0Rn4u4Y87WUwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwEUm9vdDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABCu4hio80Jk2vgyuCBKa7_FJVk_b8OBL6akSZL1_e4FZ3kR8XwvkBoVL68gW-ufbqvXEsdQC1FIB1JqK4tSuDhajYzBhMB0GA1UdDgQWBBTOjaq34i4HqrlMo1WWh3zbGvtQBzAfBgNVHSMEGDAWgBTOjaq34i4HqrlMo1WWh3zbGvtQBzAPBgNVHRMBAf8EBTADAQH_MA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNJADBGAiEAjcZgq_pT97452pzAbOVwhJyPgvl4JGVIRLsPVnKrcxMCIQCRz0xb_iTFo6t_kFN0WSoA3CUgcyeXYFGP8MxcHSPSJQ"
+      ]
+    },
+    "output": {
+      "error": "Certificate name contains duplicate attributes."
+    }
+  },
+  {
+    "id": "fulcio-issuer-extension-is-accepted-when-not-critical",
+    "input": {
+      "did": "did:x509:0:sha256:PlQPAxVWk8aA1p5PdiZUuSPTGxDYJoPu49PVrzI96Mw::fulcio-issuer:accounts.google.com",
+      "chain": [
+        "MIIBnjCCAUSgAwIBAgIUJh2uXEvPSPGtqg4bRK9szYKIiLowCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwIBcNMjAwMTAxMDAwMDAwWhgPMjEyMDAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASPcUKuAV8vFd26p_VeNBTl6jT2ojwiZDZv9Qod3LcVwO8DWiT4SXixJKQ2MNAExPR7fmKvnuKT6NbpAFwbEoZro3sweTAdBgNVHQ4EFgQUh3BQ0_6DkqoZS6J1Tz3eGbqMXNMwHwYDVR0jBBgwFoAUzybZWOQAZ2S66kW56ockgyGGk7EwDAYDVR0TAQH_BAIwADApBgorBgEEAYO_MAEBBBtodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20wCgYIKoZIzj0EAwIDSAAwRQIhALcSFA-TjY6pFNr-8NTZFuBR-s0bUlyGMj--aM30zRIuAiAIYVdImMz7bC5zNUZ-njymNt65ghU9p4bua5KI8ypbrA",
+        "MIIBhTCCASygAwIBAgIUTvRzcZ_80MsnidN4CM90rMM5iN4wCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowEDEOMAwGA1UEAwwFSW50ZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQcUmgHGWXCKwNhjD46BI4ZYdCkXe4mkeMyaaBbvU60tSoZEOJvObDfeH13klySm_8o2Lipyn6LkCv1YFiCin0eo2MwYTAdBgNVHQ4EFgQUzybZWOQAZ2S66kW56ockgyGGk7EwHwYDVR0jBBgwFoAUdU25E-QJ7xNLwR_tXXiG64GjAPowDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDRwAwRAIgAcgSOijAb7LQtXxZSkKdGdjk_vmi_xCZikY8URPZE90CIDxN9RweD6sXHBBWyVmlGtvu6nSABf_uQGcAU7lRVf8s",
+        "MIIBhTCCASugAwIBAgIUIcMgK1UKoGHwv6CNVsbz0gFWO28wCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwEUm9vdDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABBnrrOx8X-KZ-tEK0v01-qWpQCaROU7vOaGFiSttJQ5plvBQRmTC2UBOuvPBlGfAhEmERs-P5aPQbYBg-xl3guajYzBhMB0GA1UdDgQWBBR1TbkT5AnvE0vBH-1deIbrgaMA-jAfBgNVHSMEGDAWgBR1TbkT5AnvE0vBH-1deIbrgaMA-jAPBgNVHRMBAf8EBTADAQH_MA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNIADBFAiEApzCDt6UU6j7-VfCAR_-hXb-yK_cEm_wXLW8MwQITDDACIAVLZHxpdsuW89h9jycOAhMBIeEzlABE67yGJvGU5e0S"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:PlQPAxVWk8aA1p5PdiZUuSPTGxDYJoPu49PVrzI96Mw::fulcio-issuer:accounts.google.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:PlQPAxVWk8aA1p5PdiZUuSPTGxDYJoPu49PVrzI96Mw::fulcio-issuer:accounts.google.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:PlQPAxVWk8aA1p5PdiZUuSPTGxDYJoPu49PVrzI96Mw::fulcio-issuer:accounts.google.com",
+            "publicKeyJwk": {
+              "kty": "EC",
+              "crv": "P-256",
+              "x": "j3FCrgFfLxXduqf1XjQU5eo09qI8ImQ2b_UKHdy3FcA",
+              "y": "7wNaJPhJeLEkpDYw0ATE9Ht-Yq-e4pPo1ukAXBsShms"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:PlQPAxVWk8aA1p5PdiZUuSPTGxDYJoPu49PVrzI96Mw::fulcio-issuer:accounts.google.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:PlQPAxVWk8aA1p5PdiZUuSPTGxDYJoPu49PVrzI96Mw::fulcio-issuer:accounts.google.com#0"
+        ],
+        "keyAgreement": [
+          "did:x509:0:sha256:PlQPAxVWk8aA1p5PdiZUuSPTGxDYJoPu49PVrzI96Mw::fulcio-issuer:accounts.google.com#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "fulcio-issuer-predicate-requires-the-extension",
+    "input": {
+      "did": "did:x509:0:sha256:QDC4Tf6w7aYRvS_sSF9274WCzoyurS1ZlZ732BKBaQU::fulcio-issuer:accounts.google.com",
+      "chain": [
+        "MIIBczCCARmgAwIBAgIUZoOMNmK-wJJV3phHXaIUkaqq8nAwCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwIBcNMjAwMTAxMDAwMDAwWhgPMjEyMDAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASxVo8oAWI1D8z4yOuqRNEcW5rXbzuQF4RIR-jvkHIJQPCEeWdRvWNx2KbevE2VrUR5zgI62YcObdL-jRjZE5o7o1AwTjAdBgNVHQ4EFgQUxEqeHACfcME0V-3FIvJSqMtGp5EwHwYDVR0jBBgwFoAU2E4z1peGwo_DO2MN4jcgbGqvT9IwDAYDVR0TAQH_BAIwADAKBggqhkjOPQQDAgNIADBFAiAvPicncxc_yBunkFG-LTXox8ZIkaylRou38azzY7qv7gIhAK-cTp5U6kPY5xWPD70XDU0f2o-c5Ao9R7Qs4kwk7_tf",
+        "MIIBhjCCASygAwIBAgIUcN5Eb1Sqn05FIUCJ3Z1y3x-bTRIwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowEDEOMAwGA1UEAwwFSW50ZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATAEAOvcRDBqUdrJAFwD-YKrXVuNSnvSyumWhIfKYK4hvwh24_KvVn1YxHYrRrXKkCQuQoILfDpqFeKJ6vUj30to2MwYTAdBgNVHQ4EFgQU2E4z1peGwo_DO2MN4jcgbGqvT9IwHwYDVR0jBBgwFoAUrClFwI7qCzrKsH52fDZ29qSEOSAwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDSAAwRQIgCSBUNcdGMy0BdhsSVF2JyV177nEQq8tB72MsUxp7t-sCIQDueRrYA4iZCDb7IxAiqOUjqzxVzSczNSt4ksCLaabWVw",
+        "MIIBhDCCASugAwIBAgIUTAmOJ9uyw3jDZQjEFtZcbiYSf4cwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwEUm9vdDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABI7EmIDn0OQRsNnk94yP-3qz6jxiV_dO9B_6J5w0YYcQvCcsDRWh5Pm4jqS1as6QRN2iFirBqOYfrojjEVAoBHGjYzBhMB0GA1UdDgQWBBSsKUXAjuoLOsqwfnZ8Nnb2pIQ5IDAfBgNVHSMEGDAWgBSsKUXAjuoLOsqwfnZ8Nnb2pIQ5IDAPBgNVHRMBAf8EBTADAQH_MA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNHADBEAiByY4MH-QSeM8JcAsSu4zdyxQVHST4qy83eQMZf5EAojAIgbxvsnjwTzqlrst1PHL4JH8FDN0DkKM1CzSuw9VaM_Rk"
+      ]
+    },
+    "output": {
+      "error": "Certificate does not contain a Fulcio issuer extension."
+    }
+  },
+  {
+    "id": "issuer-with-ca-false-is-rejected",
+    "input": {
+      "did": "did:x509:0:sha256:ndFSQkHFu591y5Apo9sZgu3oyY3Qlmxtk91AktgvnMI::subject:CN:Leaf",
+      "chain": [
+        "MIIBdDCCARmgAwIBAgIUNiyIVtxqz1bAH508tQ9DrSNN3LEwCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwIBcNMjAwMTAxMDAwMDAwWhgPMjEyMDAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARKOhpe03UdIsjbc-RctCptpTOffOQ_yl9mJ9uAHvcPnsWnOQhKgk8ewLSK7PSWiXUQpy_QlzWJ6-I1eyk-R4XCo1AwTjAdBgNVHQ4EFgQUI9TUa4MXbBIVFJKvX4Ip7Fci3d8wHwYDVR0jBBgwFoAUks1kyqE9mL2nbzm1bOIUuDaiPbAwDAYDVR0TAQH_BAIwADAKBggqhkjOPQQDAgNJADBGAiEAkEkMa8CVVTgWYpLn9SWTvQNaNIT-nj-P6-IrXi8MMy8CIQC4z4YpFPz8zSc9DhFyosIAQLz0D6MZcBSBO_7YUd0e6g",
+        "MIIBhDCCASmgAwIBAgIUM7ojTRYHjdcAKqAQG0T6oY2zyRMwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowEDEOMAwGA1UEAwwFSW50ZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARnHqqCTcaUqem6bK82eUmrZgW8duaFp6iphlvFdE0BQyx1EzAbpgtnBvzYFctMbOU0ieZ2bM3o8_ej4nu69lPCo2AwXjAdBgNVHQ4EFgQUks1kyqE9mL2nbzm1bOIUuDaiPbAwHwYDVR0jBBgwFoAU-_w8VncxP6h4HLmbxi_e2BGaJMIwDAYDVR0TAQH_BAIwADAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDSQAwRgIhAPNAxPUn7qYHgnl7QmE0aK8Rp3zJubnkDXRDNREm7wFaAiEA0OhKYygWvI4fusUt5JlJRo0L9n1B0hMABhKWZad8LwE",
+        "MIIBhTCCASugAwIBAgIUNHGnuG7Jd6t5jQwG2A3E0w9mN8UwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwEUm9vdDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABHrXQd-Vtu_D0V5V-z56JAIhogjfQSbjPNg0zPBSykwlZh_hj6SBDWCQiBc8DWLQxHPi67d48rlqXyEsM9O3DeejYzBhMB0GA1UdDgQWBBT7_DxWdzE_qHgcuZvGL97YEZokwjAfBgNVHSMEGDAWgBT7_DxWdzE_qHgcuZvGL97YEZokwjAPBgNVHRMBAf8EBTADAQH_MA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNIADBFAiBpbokl0u7Srq_Lzt6m9wVNqWgGjVCwnpQU-MQp9HEK7wIhAPAIvBRSE0oFESZvI9gux8X_XXYSGruuOMg7E2STZSj_"
+      ]
+    },
+    "output": {
+      "error": "Certificate chain verification failed: invalid CA certificate."
+    }
+  },
+  {
+    "id": "issuer-with-key-cert-sign-is-accepted",
+    "input": {
+      "did": "did:x509:0:sha256:1C1QepjQh9_VQ466NQrOs3BE4A9b2qXYZIo-COZIpgU::subject:CN:Leaf",
+      "chain": [
+        "MIIBcTCCARigAwIBAgITPyp1ejr7iBB5qH4zzRsuBPyR8jAKBggqhkjOPQQDAjAQMQ4wDAYDVQQDDAVJbnRlcjAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwETGVhZjBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABLrcx6TugKS-PsvliztIijNRRTKHywfT8ZhqHT0DgSMQEYesCNLcvzV4kbf6wucqRLyUUzJ8yy7Rj0PVUkJpcbOjUDBOMB0GA1UdDgQWBBRFenp2gp4gJdjrIgCl23RwJKDWozAfBgNVHSMEGDAWgBQaiaIv9eRFFCu_kwzIlAdN2j7oEjAMBgNVHRMBAf8EAjAAMAoGCCqGSM49BAMCA0cAMEQCIG1T-tCGCB95vryYScY2PXhJGVHwL-wPn1MyUB6LpyjyAiBW5xQjyVxnskla0Iw3IuRtxzf1h3WetYzX8bIwIQ6OHg",
+        "MIIBhjCCASygAwIBAgIUc54xtXQv1YqnlGblcASa342WWHwwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowEDEOMAwGA1UEAwwFSW50ZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAR36mBTvQJcsFT3-yVtegUruirTsKkvjDYkcRJNOtSJqLO2QEVGBJL4Y9v5p9dMXt69eSWY0zV2N7Q4St26WVtDo2MwYTAdBgNVHQ4EFgQUGomiL_XkRRQrv5MMyJQHTdo-6BIwHwYDVR0jBBgwFoAUycPWBCaLB_3wyBx44NjcloaiYhQwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDSAAwRQIhAN_ZAZZ7BnOzw6CflnsHpduJ261Zq3j7tWB1tm7IyujwAiBnYIsTNTI7Tl-45tizfV1nUBtFPv7etjMCTeS0YM7U-g",
+        "MIIBhTCCASugAwIBAgIULXWIw7pYsRfvZSgPhB4JzbTkKF8wCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwEUm9vdDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABI5MGoEDgDBMRs42LBTnoHBbYPukpn3Pfj6I6UJeyqXivk2EZYJ44pTwna-eIDotZphxFx-R3rG8WmAduCMRlsCjYzBhMB0GA1UdDgQWBBTJw9YEJosH_fDIHHjg2NyWhqJiFDAfBgNVHSMEGDAWgBTJw9YEJosH_fDIHHjg2NyWhqJiFDAPBgNVHRMBAf8EBTADAQH_MA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNIADBFAiAgiqfRnYL9OX7_a_0Cnw3MBlcRcOfwxtKY2Gn2B3bgjQIhAPOX15SJI7ly8zNo8Yql8rTXf-d-ms-4Q2oObiMyHLW2"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:1C1QepjQh9_VQ466NQrOs3BE4A9b2qXYZIo-COZIpgU::subject:CN:Leaf",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:1C1QepjQh9_VQ466NQrOs3BE4A9b2qXYZIo-COZIpgU::subject:CN:Leaf#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:1C1QepjQh9_VQ466NQrOs3BE4A9b2qXYZIo-COZIpgU::subject:CN:Leaf",
+            "publicKeyJwk": {
+              "kty": "EC",
+              "crv": "P-256",
+              "x": "utzHpO6ApL4-y-WLO0iKM1FFMofLB9PxmGodPQOBIxA",
+              "y": "EYesCNLcvzV4kbf6wucqRLyUUzJ8yy7Rj0PVUkJpcbM"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:1C1QepjQh9_VQ466NQrOs3BE4A9b2qXYZIo-COZIpgU::subject:CN:Leaf#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:1C1QepjQh9_VQ466NQrOs3BE4A9b2qXYZIo-COZIpgU::subject:CN:Leaf#0"
+        ],
+        "keyAgreement": [
+          "did:x509:0:sha256:1C1QepjQh9_VQ466NQrOs3BE4A9b2qXYZIo-COZIpgU::subject:CN:Leaf#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "issuer-without-basic-constraints-is-rejected",
+    "input": {
+      "did": "did:x509:0:sha256:mHGYAFg44z3n4GAQZtTB71zMp7SXXD2pEHQbRd2fUkY::subject:CN:Leaf",
+      "chain": [
+        "MIIBdDCCARmgAwIBAgIUK12vhSGAEfghP_XbGbcqcNxBUpgwCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwIBcNMjAwMTAxMDAwMDAwWhgPMjEyMDAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARCkADpWafEWHPZA3BLUHrKVa6W4KLhQLD13Uld4NPoWKRO8RF1GahqejsXkqZFn95qHBd-6qQkD9yh1UTfrg3Qo1AwTjAdBgNVHQ4EFgQUd0kP0W7PcauQseGG1QwMOEUwqOswHwYDVR0jBBgwFoAUjfQ54V8I1-i2KweOD9wxKDZv7sEwDAYDVR0TAQH_BAIwADAKBggqhkjOPQQDAgNJADBGAiEApai4clSuA2y_NQfmqHlTvq3jfyOgI3tSTX0H9waUtKACIQDgs0JShMu93X6iliEkQgOR1w3SYylMNJg59EKWP0eifA",
+        "MIIBdTCCARugAwIBAgIUQv9XaTTULKCXmy4fvMPJUSpdQJ4wCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowEDEOMAwGA1UEAwwFSW50ZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAT2A7xRHigx-vLllCq75XnyVOdVU54Sn5yVLm77POyBrSxGPNaMS9TrZqqEFXjrHKftGS2VqQca3b_Nz8l6Tyu1o1IwUDAdBgNVHQ4EFgQUjfQ54V8I1-i2KweOD9wxKDZv7sEwHwYDVR0jBBgwFoAUpx7haI6g3Vb_V9srAoi49Wf6FvMwDgYDVR0PAQH_BAQDAgIEMAoGCCqGSM49BAMCA0gAMEUCIEqsV3Gw6ZanJ6-J-t-Yx65gbH4R3htDZC7EDfinhQQIAiEA5dtFIW6RJDOlmXaxfAZsJ6vN_EklAyklEsNSKkJRhis",
+        "MIIBdDCCARqgAwIBAgIUN89xKeMfwZKK86OgKRTz4VjtL4kwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwEUm9vdDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABBJn-dg2S2zHtneHfnsTcxJNqr1oZc0753ihXCXc2_k6byTCS1eB5_5Pzb5vB7kWFJICu_X5mVNF_VexrvvMLgijUjBQMB0GA1UdDgQWBBSnHuFojqDdVv9X2ysCiLj1Z_oW8zAfBgNVHSMEGDAWgBSnHuFojqDdVv9X2ysCiLj1Z_oW8zAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDSAAwRQIgGcf2E0Q_4_GlaVC6pKyitPsEG32NE7tIh37YdFbcLsACIQCoEUT5pvvNao0ZzhzPdP8eB1lofBGZfrFaImJV8TK4sQ"
+      ]
+    },
+    "output": {
+      "error": "Certificate chain verification failed: invalid CA certificate."
+    }
+  },
+  {
+    "id": "issuer-without-key-cert-sign-is-rejected",
+    "input": {
+      "did": "did:x509:0:sha256:yFNszl4VsSoBSionGiH9V3KxKt4jfKKPiCST-_HpuRU::subject:CN:Leaf",
+      "chain": [
+        "MIIBczCCARmgAwIBAgIUbI1N6l2fZv9_53Tj8S1dy-RzieIwCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwIBcNMjAwMTAxMDAwMDAwWhgPMjEyMDAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASYExqWv8zaKF76TdV25iRVlXHQmOj6Frl-hKRXUZg-pW_0-_pTrW8NkJ9-TV4iQw44FL7SaJ4zqbtm0qZeNgh3o1AwTjAdBgNVHQ4EFgQU2UMBIa5rlkXVSZwQW5NY4_eZ4P8wHwYDVR0jBBgwFoAUDXUZPJ8islhNEJTdu9BUGCGr3l0wDAYDVR0TAQH_BAIwADAKBggqhkjOPQQDAgNIADBFAiEA4H0ZXlK1285lE5m4s1jZlxma1bQr9GlZL3h-uxnGqo8CIAr1iJ0l72Dld9Ez24IYWv8dVqRh7l_HpLHHPtheTgct",
+        "MIIBhjCCASygAwIBAgIUT4nb8ieZNBJz87M4-65bO1KkHIQwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowEDEOMAwGA1UEAwwFSW50ZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATRfrParCT4Kf6h-HY6N3f43jat053pYHjRsS50IeSQldJrWqumOd0Bhq81vamMg1e_LbHSnk7FPHd2vEDbXfkWo2MwYTAdBgNVHQ4EFgQUDXUZPJ8islhNEJTdu9BUGCGr3l0wHwYDVR0jBBgwFoAUGH36qTEPYVsEEVlWCbRH3YKGVagwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCB4AwCgYIKoZIzj0EAwIDSAAwRQIgNmXCHJqd6WAqaKPDyDSK9zfE2FAo5fe0FgXN5VT62goCIQCT0XsP9CsRuLSh8EPfonueUNg47mDPyKni-xE7S-bRQQ",
+        "MIIBhTCCASugAwIBAgIUcRMmJQfo_twu0MhA30-1smyDG8owCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwEUm9vdDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABOGdIQWUc4D70Jn5-VlweXwU-gANC9yfpm0gqgyhilJ8JXrA4iL8FxtHRyayJUVeNa2zrPJPog7LsFGWmnU8jImjYzBhMB0GA1UdDgQWBBQYffqpMQ9hWwQRWVYJtEfdgoZVqDAfBgNVHSMEGDAWgBQYffqpMQ9hWwQRWVYJtEfdgoZVqDAPBgNVHRMBAf8EBTADAQH_MA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNIADBFAiEA9vtKvtSleG55GcpdYIyXWJM7mxNeiPDXzxWAd0TwPGcCIAuf-JAmJ-ZIubYbZ6xFAdBTNpb8EXE2CI8vsyOvhHRy"
+      ]
+    },
+    "output": {
+      "error": "Certificate chain verification failed: invalid CA certificate."
+    }
+  },
+  {
+    "id": "key-agreement-only-leaf",
+    "input": {
+      "did": "did:x509:0:sha256:zgr6oJaNqDuA0C06tSi2xcwnhEoYTnI_C5GNm0V7TdA::subject:CN:Leaf",
+      "chain": [
+        "MIIBgzCCASmgAwIBAgIUBDxxBfWxYcCrBL6rT1ygJuU0ai0wCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwIBcNMjAwMTAxMDAwMDAwWhgPMjEyMDAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAS-YczqKsCZ7Lo4L8cQRBGxfEmJy2F4m9YhNulw1fdpfT8qkwXgFxm-MI7GcAJNecUmPV5SWyzxMaitpJEoYOYOo2AwXjAdBgNVHQ4EFgQUqN-TP-zREKjzkWbq91PsBzdI2GgwHwYDVR0jBBgwFoAU37wl30PHGn_em7rvj3yguct64mAwDAYDVR0TAQH_BAIwADAOBgNVHQ8BAf8EBAMCAwgwCgYIKoZIzj0EAwIDSAAwRQIhALPGSfTlc7YcsvUoLmo5vlbcPk2xJWui1BtiiHWiOQRWAiAL4GHK1rZ8qVSPLqTl833d34bs30edIyoUz-vPIMB6Nw",
+        "MIIBhjCCASygAwIBAgIUKBBUS1UyGobpVR8z8J4OOGdFTpwwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowEDEOMAwGA1UEAwwFSW50ZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASHOqNna0uEkDzCEhe2rJ2tsIU3GCfDTDh8tuJc_UUVI96j7fp3lROeSHwjJ0RHOpsZx5SdT7cZxax6BH9tF4v_o2MwYTAdBgNVHQ4EFgQU37wl30PHGn_em7rvj3yguct64mAwHwYDVR0jBBgwFoAUc8yP48DrRXY1i9n0hJvPb_v4ONAwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDSAAwRQIgS-HHUXmMC5dpaZC0WO-_nUfNwPmPa1cdVWbla9IGyZQCIQD1MtSRiMwUS3JwvX8K1MTSne5Bmr2Id8gyP9PxtIuqnw",
+        "MIIBhTCCASugAwIBAgIUWHvBwo7NJjxyU_isxWy1XT195-MwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwEUm9vdDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABGK_OQD98JbSshkboFc1acsxUwHjCWr2xrzjQPDO_CJfFOvE-jQhAUzsvhhfpdjReQe4vLBiSplzdQWU_P0ebZajYzBhMB0GA1UdDgQWBBRzzI_jwOtFdjWL2fSEm89v-_g40DAfBgNVHSMEGDAWgBRzzI_jwOtFdjWL2fSEm89v-_g40DAPBgNVHRMBAf8EBTADAQH_MA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNIADBFAiEAjCG4q6sE9BH2M9xiTREiq7GwDWRScdLIyRufZCiXixkCIFgSXq4wl7BvaZLM9sB_tyU0N0neK6HwRtewRy7aqGQt"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:zgr6oJaNqDuA0C06tSi2xcwnhEoYTnI_C5GNm0V7TdA::subject:CN:Leaf",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:zgr6oJaNqDuA0C06tSi2xcwnhEoYTnI_C5GNm0V7TdA::subject:CN:Leaf#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:zgr6oJaNqDuA0C06tSi2xcwnhEoYTnI_C5GNm0V7TdA::subject:CN:Leaf",
+            "publicKeyJwk": {
+              "kty": "EC",
+              "crv": "P-256",
+              "x": "vmHM6irAmey6OC_HEEQRsXxJictheJvWITbpcNX3aX0",
+              "y": "PyqTBeAXGb4wjsZwAk15xSY9XlJbLPExqK2kkShg5g4"
+            }
+          }
+        ],
+        "keyAgreement": [
+          "did:x509:0:sha256:zgr6oJaNqDuA0C06tSi2xcwnhEoYTnI_C5GNm0V7TdA::subject:CN:Leaf#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "leaf-key-usage-must-support-did-operations",
+    "input": {
+      "did": "did:x509:0:sha256:4kR6ZKhOVVMqmYKPxq4mDCPT0_s0o-ajqe_jCtwQZkM::subject:CN:Leaf",
+      "chain": [
+        "MIIBgjCCASmgAwIBAgIUNLdJ0T_EPWwufzVxKB25k7N95g0wCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwIBcNMjAwMTAxMDAwMDAwWhgPMjEyMDAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAR1dZa80y8AWRrs39K5qKVSEUfzdq7wRLA8EYzyaET9l0WvKRBZi5qtIpFaWxXHL84yMRDQLDreKcUtWDdN0Gt6o2AwXjAdBgNVHQ4EFgQUvKUvw5nqp1-OmAI9MLXPkLgA-9AwHwYDVR0jBBgwFoAUEF017ojS9SXvG0GWSVAapvQaVgEwDAYDVR0TAQH_BAIwADAOBgNVHQ8BAf8EBAMCBSAwCgYIKoZIzj0EAwIDRwAwRAIgG3ChjVcJlqnupdPHUqB8vRtcAaYarnefJUVEVAdkXRUCIGIxfh9gdj6h3rwcgJcuimseB6hEqa8J0Ra0tvJaAGD0",
+        "MIIBhzCCASygAwIBAgIUIZECDnLzN5GEQTS-uwbThpMum_4wCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowEDEOMAwGA1UEAwwFSW50ZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQF84skgEA4lWYYxP_tS9E_CoNiFZwqEasKA5zlKyo7eUXO7N5-vfUs-nzq_01YYpj8cfpMHZ4UsLdKVBKZLLBgo2MwYTAdBgNVHQ4EFgQUEF017ojS9SXvG0GWSVAapvQaVgEwHwYDVR0jBBgwFoAUQoTU2HLiDfkzz_Uxyj6kO3-uPBkwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDSQAwRgIhAKnhbdUac2dFIXZC0XIbkWd16kwWQiWb1CCTdZ-jo-1tAiEAqQFXHcd8HxNAnh4NDFfdlOMuSD9MTq7M1rXRLyDbn1c",
+        "MIIBhTCCASugAwIBAgIUA1qpv9vGLSn4YAuYdlCY8EoMiMkwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwEUm9vdDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABKJ2x9ulJunwgnDS5r0x_pwAmrtA75bR7sReoRGp5vzZhVEKmSdHdbE3FJS7LRHWs_rBiFUwnuJDg0tWXpBwECujYzBhMB0GA1UdDgQWBBRChNTYcuIN-TPP9THKPqQ7f648GTAfBgNVHSMEGDAWgBRChNTYcuIN-TPP9THKPqQ7f648GTAPBgNVHRMBAf8EBTADAQH_MA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNIADBFAiAHuaC4gmYxzzpkgs9QKeQxGKZzDt1ydZkBwBx8MBzJoQIhALZzT4_FNzH_4n9ZiIe2T-pHB3K6C8e_RORSnGa6wua7"
+      ]
+    },
+    "output": {
+      "error": "Leaf certificate key usage does not support DID operations."
+    }
+  },
+  {
+    "id": "path-length-permits-exact-depth",
+    "input": {
+      "did": "did:x509:0:sha256:m7LK7Q2y8IKLwrr7sQ8ZGM0PN8kR7EzQ4G-FDv9xVs8::subject:CN:Leaf",
+      "chain": [
+        "MIIBcjCCARmgAwIBAgIUGc5oJ0TnLkDvxr7qq4WdQub4k30wCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwIBcNMjAwMTAxMDAwMDAwWhgPMjEyMDAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARXDyxNKFSY4eEZo_EDQxPTXyA9Ef993b2acF6YMyqNbDchb-Mn8oZ---wFrdLwtBnZOlDObUPKKrJMdvEdzhVoo1AwTjAdBgNVHQ4EFgQUPgfGAq4_kJFyn0xvr_-nmNUZJzUwHwYDVR0jBBgwFoAUYfA2B9LKgeT4k_AKj6RickFJlIowDAYDVR0TAQH_BAIwADAKBggqhkjOPQQDAgNHADBEAiAD4mmc5VB5bQT5jTglTv44vsb78DalCE09VPECQk9zgQIgFldzLawMM0V4G0O5eMmC-YATaYluVB1YEsMmhH_-6l4",
+        "MIIBiTCCAS-gAwIBAgIUFtpvdIWlgz8J4oMJvpgk_DZNPSQwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowEDEOMAwGA1UEAwwFSW50ZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAS6rIrsD8QZ3JkJiMFY4hmd__9ApkG5TkoF3enuo-HjsOBtIQRGhkrBrLCWjmDRtPCqKmXA2xyglVQzeOLcs2G_o2YwZDAdBgNVHQ4EFgQUYfA2B9LKgeT4k_AKj6RickFJlIowHwYDVR0jBBgwFoAUApccodQ7-OTWPUnsM-NPQXDuHn0wEgYDVR0TAQH_BAgwBgEB_wIBADAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDSAAwRQIhAPinNBuPwM4RRaP4mZ3s2MX0wHrrdhRQWDkLT8WeJkgFAiAwXCQrIeb0r5z7xzAmrpx4vClRroYVTc8txNeivjSoaw",
+        "MIIBiDCCAS6gAwIBAgIUQOQpylEL1fUlu7h-yyrWBBIXHTMwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwEUm9vdDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJfMISCvWYcGNP1Ua9q6ViKktzMFfey0ILQq7QtkMiLTn4xE2gVLGNh8L4MSiHxaLITJnx8yVhnG8t-qULBDNh-jZjBkMB0GA1UdDgQWBBQClxyh1Dv45NY9Sewz409BcO4efTAfBgNVHSMEGDAWgBQClxyh1Dv45NY9Sewz409BcO4efTASBgNVHRMBAf8ECDAGAQH_AgEBMA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNIADBFAiEAtZnTDSDIvq3Yfi-UaFSBw_g1heNOY9f3RT6rGOlGf1QCIBbQcwabJxBrmZlNTRB_f_wcwj_ld_bAOsg_c8FbajKH"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:m7LK7Q2y8IKLwrr7sQ8ZGM0PN8kR7EzQ4G-FDv9xVs8::subject:CN:Leaf",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:m7LK7Q2y8IKLwrr7sQ8ZGM0PN8kR7EzQ4G-FDv9xVs8::subject:CN:Leaf#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:m7LK7Q2y8IKLwrr7sQ8ZGM0PN8kR7EzQ4G-FDv9xVs8::subject:CN:Leaf",
+            "publicKeyJwk": {
+              "kty": "EC",
+              "crv": "P-256",
+              "x": "Vw8sTShUmOHhGaPxA0MT018gPRH_fd29mnBemDMqjWw",
+              "y": "NyFv4yfyhn777AWt0vC0Gdk6UM5tQ8oqskx28R3OFWg"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:m7LK7Q2y8IKLwrr7sQ8ZGM0PN8kR7EzQ4G-FDv9xVs8::subject:CN:Leaf#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:m7LK7Q2y8IKLwrr7sQ8ZGM0PN8kR7EzQ4G-FDv9xVs8::subject:CN:Leaf#0"
+        ],
+        "keyAgreement": [
+          "did:x509:0:sha256:m7LK7Q2y8IKLwrr7sQ8ZGM0PN8kR7EzQ4G-FDv9xVs8::subject:CN:Leaf#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "path-length-permits-excess-headroom",
+    "input": {
+      "did": "did:x509:0:sha256:zA2rI7frZVzM2UatEENW8dK-6vuiBq7Bsr6dxdmNqE0::subject:CN:Leaf",
+      "chain": [
+        "MIIBczCCARmgAwIBAgIUNwMSJE5KlmV4GRJHM0lQ5H_EqWAwCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwIBcNMjAwMTAxMDAwMDAwWhgPMjEyMDAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAR6bJiPb_iBdIZDxde9cCd4eDVjLg34dy5OTEMq1zhvCT-jS3njl51VOKrndp1SWe7NWAp-sW9yxxjgn3vWFCL9o1AwTjAdBgNVHQ4EFgQUWe-8Tfq2UgUZLPZc2iQEpZ4kEC8wHwYDVR0jBBgwFoAUojHC2L6NBAk0whA4B_6pYzqYVRgwDAYDVR0TAQH_BAIwADAKBggqhkjOPQQDAgNIADBFAiEA3ouoxv8WCAyIgemoKFzkUr0m40qWfnAHmIMhx-IkXggCIH6uiVkqxWoyw6hr_ylhz_fwe4KtqzqI2RAD5S2oSdrZ",
+        "MIIBiTCCAS-gAwIBAgIUIKaaz_SOPc95hAEIEMiKXwQZQa0wCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowEDEOMAwGA1UEAwwFSW50ZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATZgdgMHNuxkMaAiNuKJV-WFEpPk79LepWNnYC3yzZn8CJwKgZ8j1hEzlGW4ULwYTzQp3YO4PZdMrLkOhwYIYe_o2YwZDAdBgNVHQ4EFgQUojHC2L6NBAk0whA4B_6pYzqYVRgwHwYDVR0jBBgwFoAUeYagI1A_bnAawhvlixHEH0JY8NIwEgYDVR0TAQH_BAgwBgEB_wIBAzAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDSAAwRQIgXfWKg0cJHqjs_WszqagUpjGyjwKlCOOY6sTRlkG1pDoCIQCUNplz_m-npuadmxeIgPZsu6gTySzRaonrfO5i7of5VA",
+        "MIIBiTCCAS6gAwIBAgIUKh3UfYAbHTkp7e00c4Q-VgM2M_EwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwEUm9vdDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABEBC5iEpimNdSpi5vHBN--7emIs4-k7TKjenHQFVOsW8z-MNOjuNng9V21nRP9P2FDt0vDoB_waPRbnLjTWc2hSjZjBkMB0GA1UdDgQWBBR5hqAjUD9ucBrCG-WLEcQfQljw0jAfBgNVHSMEGDAWgBR5hqAjUD9ucBrCG-WLEcQfQljw0jASBgNVHRMBAf8ECDAGAQH_AgEFMA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNJADBGAiEAq8yhd0LVsq1N13FQk4XS8mjXgyXjOTiV6SoWwVUMT6gCIQCliKXaTSlevN7tLmJlODwL158ec8k4Umv1DzX5TUBW6g"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:zA2rI7frZVzM2UatEENW8dK-6vuiBq7Bsr6dxdmNqE0::subject:CN:Leaf",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:zA2rI7frZVzM2UatEENW8dK-6vuiBq7Bsr6dxdmNqE0::subject:CN:Leaf#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:zA2rI7frZVzM2UatEENW8dK-6vuiBq7Bsr6dxdmNqE0::subject:CN:Leaf",
+            "publicKeyJwk": {
+              "kty": "EC",
+              "crv": "P-256",
+              "x": "emyYj2_4gXSGQ8XXvXAneHg1Yy4N-HcuTkxDKtc4bwk",
+              "y": "P6NLeeOXnVU4qud2nVJZ7s1YCn6xb3LHGOCfe9YUIv0"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:zA2rI7frZVzM2UatEENW8dK-6vuiBq7Bsr6dxdmNqE0::subject:CN:Leaf#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:zA2rI7frZVzM2UatEENW8dK-6vuiBq7Bsr6dxdmNqE0::subject:CN:Leaf#0"
+        ],
+        "keyAgreement": [
+          "did:x509:0:sha256:zA2rI7frZVzM2UatEENW8dK-6vuiBq7Bsr6dxdmNqE0::subject:CN:Leaf#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "path-length-zero-rejects-intermediate",
+    "input": {
+      "did": "did:x509:0:sha256:-T2-TVdW25lLdjhrLc--JhsWIhNWXnmu-k7UnkibtLo::subject:CN:Leaf",
+      "chain": [
+        "MIIBczCCARmgAwIBAgIUF4HyNEVXB3GVAEYZjZ3K17_IxuIwCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwIBcNMjAwMTAxMDAwMDAwWhgPMjEyMDAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAT-6Miy1j6JhVqf-JkHsRaaMkgTD4GsbeDpwr1bEtcpoDMOFUoqQ2KeHN0fM334G0E2dNf8CZrUXbp1FDyYAwUoo1AwTjAdBgNVHQ4EFgQUaS9_2uoMRSMxvaRGdfXZgAq09O0wHwYDVR0jBBgwFoAUAvo2mcgs27b78zhquSsQpMJAcS8wDAYDVR0TAQH_BAIwADAKBggqhkjOPQQDAgNIADBFAiEAwq1FXnQfulSknZ7kP712WFwW_keARLl_utVPkXHZGGACIFiFR2J8ZFB23vyvCZ2LI0sRILZZkOfKO7qPhyXnaXDh",
+        "MIIBijCCAS-gAwIBAgIUQTZegRh1ARIQC2C9PBdvkj-8BNgwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowEDEOMAwGA1UEAwwFSW50ZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASF_JtytSxHMF9uBl4_wFeJ3yD-dJz8GHZmJUT1NbseVhXK8OGqyIyCeRfx6qp4nrt8TrmR4wYLQrXA_01lL0azo2YwZDAdBgNVHQ4EFgQUAvo2mcgs27b78zhquSsQpMJAcS8wHwYDVR0jBBgwFoAUFxRPdLFA_1Qzh-oxCwX-4VUw7JowEgYDVR0TAQH_BAgwBgEB_wIBADAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDSQAwRgIhAI-N2sWGZMieOkCnN4qK5CHt3MEvo4-yr1OfCfALYAa8AiEA1D9dfAD7USwzeQxuxYU3jomhuS1tkouPItAyoo8itAE",
+        "MIIBiDCCAS6gAwIBAgIUF0cDqTpPVu95h2Cjd0uWedt9Zh4wCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwEUm9vdDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABOOF3-wp7Nso0bhqKnleCKNWlV-0O2OjzYO7A5WXuvv5NO3izGXtnmKetBgvqzO5J48DEDAdaUWg1zWhgxUSuqajZjBkMB0GA1UdDgQWBBQXFE90sUD_VDOH6jELBf7hVTDsmjAfBgNVHSMEGDAWgBQXFE90sUD_VDOH6jELBf7hVTDsmjASBgNVHRMBAf8ECDAGAQH_AgEAMA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNIADBFAiEA07py-2PLHkIlGKPsaDUalNdO2JFn0b5yuMf9WrmpHQsCIGU8SNz4Vch6VJHpsm1lEv3Oqq3r0nWBQ9j0UpINkUoq"
+      ]
+    },
+    "output": {
+      "error": "Certificate chain verification failed: path length constraint exceeded."
+    }
+  },
+  {
+    "id": "path-length-zero-rejects-two-intermediates",
+    "input": {
+      "did": "did:x509:0:sha256:4sgNZKRmE5gfkAFt2ICLVsqUeOlPrXSFZuPEWZzMsP8::subject:CN:Leaf",
+      "chain": [
+        "MIIBdTCCARqgAwIBAgIUWW31M90U0y4HaTrWd-VpvCgZQLowCgYIKoZIzj0EAwIwETEPMA0GA1UEAwwGSW50ZXIyMCAXDTIwMDEwMTAwMDAwMFoYDzIxMjAwMTAxMDAwMDAwWjAPMQ0wCwYDVQQDDARMZWFmMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEi-xeRccVTvFEkUC3blP5iPm3G5aA4IPvQKljJRRgKA4hj1WWS3WHns1cy-HuoV9g9vry0QTVua4uvNWOUPM3ZaNQME4wHQYDVR0OBBYEFO9bD8DJnPACa2gHB5ZsTuj1IQtBMB8GA1UdIwQYMBaAFBOUIe9mPWpIIYPpsOdAYMLlpEaGMAwGA1UdEwEB_wQCMAAwCgYIKoZIzj0EAwIDSQAwRgIhAPll_4WMF5xxCVHOstv5TyfOC2sAeuHW0-6GnoAe6eW5AiEAwFEIVTslr3uoUt_cfC9lDJYX1KhT0OCP9GvIEwAiP-o",
+        "MIIBhzCCAS6gAwIBAgIUaEFL5xhGl1cqM_m848ncu18CDmMwCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwIBcNMjAwMTAxMDAwMDAwWhgPMjEyMDAxMDEwMDAwMDBaMBExDzANBgNVBAMMBkludGVyMjBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABHnMk8CwMvBcKF4zVUAG-6F8flyjLLS8bXwXKgPYDteTKdPZwRB9yJjQlFhiCqn2JBOFPyI4FUbjxp7HhwackL-jYzBhMB0GA1UdDgQWBBQTlCHvZj1qSCGD6bDnQGDC5aRGhjAfBgNVHSMEGDAWgBSHDV4x7L35WV4JobLC8wl2B-ECtTAPBgNVHRMBAf8EBTADAQH_MA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNHADBEAiAx_muWvhGjem3IivkAj98RySUAdGd6GRzAqQzb4jfGFwIgVxgS7XiXum26bEeg7HjuZPmXooAy23aG71zIiOlm2BQ",
+        "MIIBhzCCASygAwIBAgIUKGiQcVeDw76zjU5QIkoSE0RDKqowCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowEDEOMAwGA1UEAwwFSW50ZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAS6QCrDkM5WM-YPZgzjLBXAzYn6di2zE5fghOmQQSfkoWQ6i5NXWxx33TNpELXarAk_1bgDbDmDBMGPP4B_lamVo2MwYTAdBgNVHQ4EFgQUhw1eMey9-VleCaGywvMJdgfhArUwHwYDVR0jBBgwFoAUIYZkZyOH2qcZ7VQTfOQCrX3knzEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDSQAwRgIhAInGc8HzXWJtOjFl92iR0XkEz7BaGxo2gGYfSElH8vkiAiEA0JvhOtM54iSAvdGiqh428KgGPpmbhsTwfeRnCHyj2uw",
+        "MIIBiDCCAS6gAwIBAgIUWvaUAJO5YmrYn8Ns-hcFO0VdwjcwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwEUm9vdDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABKH1GTk4rSbykxISTrvn7X9sXdvjaMRwjnVzvYbGZxeFv3P6IOmPLCXGyNJU3sKCeVh02dthTsd-75T1pwF7ksyjZjBkMB0GA1UdDgQWBBQhhmRnI4fapxntVBN85AKtfeSfMTAfBgNVHSMEGDAWgBQhhmRnI4fapxntVBN85AKtfeSfMTASBgNVHRMBAf8ECDAGAQH_AgEAMA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNIADBFAiEApDLr4i2EcJhwRT2qSIPkPGPH4_hTZKZi85xSRVUdFc0CIEfHWpBG8w4UXb23Bs9WN00vuG0OfJiNeN7CI01xnQnq"
+      ]
+    },
+    "output": {
+      "error": "Certificate chain verification failed: path length constraint exceeded."
+    }
+  },
+  {
+    "id": "san-outside-permitted-subtree-is-rejected",
+    "input": {
+      "did": "did:x509:0:sha256:lW356UsHUKR3a1mkeLNcOFNqfVP-LjGSMB88181ZPjA::san:dns:host.example.com",
+      "chain": [
+        "MIIBjzCCATagAwIBAgIURJRXENApac-f4d8taUTXKHrPYNIwCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwIBcNMjAwMTAxMDAwMDAwWhgPMjEyMDAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQmsQkot5FenzxH_8mmBcnaLn8L0n5TD-B62cyBcgUcLBHVfGFV8rNC9uOtdzLznLlSy7fiGaiLFu3MSHEME9I4o20wazAdBgNVHQ4EFgQUANWL2gHVtCbip67hZr4OpGgqofMwHwYDVR0jBBgwFoAUefvura8b4x_JWbwL5wOoADh8LsMwDAYDVR0TAQH_BAIwADAbBgNVHREEFDASghBob3N0LmV4YW1wbGUuY29tMAoGCCqGSM49BAMCA0cAMEQCIAI00NzQtiu2cTL1avaNaPOou9a0E0YKa2myODgymREXAiBR6v4epIjwZlk3OV2UMbJNHISZwx4NgL7z69Sg6nVhhw",
+        "MIIBpTCCAUugAwIBAgIUcn_j6h1NsINHDLkYw9Z_HPugVpEwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowEDEOMAwGA1UEAwwFSW50ZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARf5oI5w7t31PibNwXRy_m1Tnu3j-VObOEEZp8f4Hyh9fJxOdUkkDd747a28273FQxj_WEg_Z4lFZ05LsPcT7SRo4GBMH8wHQYDVR0OBBYEFHn77q2vG-MfyVm8C-cDqAA4fC7DMB8GA1UdIwQYMBaAFNYIFVHyRqbYPNBHlFffvTf3TI5-MA8GA1UdEwEB_wQFMAMBAf8wDgYDVR0PAQH_BAQDAgIEMBwGA1UdHgEB_wQSMBCgDjAMggpvdGhlci50ZXN0MAoGCCqGSM49BAMCA0gAMEUCIQCjuPnpKwievZDU4IAA6tI_bwxGx21fAKZFdDSZM79q4QIgEPcjU7uExa7h3zTEeO6I5W_dE0yKvPZ0KN2_MuKC6Aw",
+        "MIIBhjCCASugAwIBAgIUHn-Imz8LozPd_4Q659ZBQKOHu_AwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwEUm9vdDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABBCaQIaEorZOyX6PBeUVuC1f7Y5kiWZnSYqobOQZEigL8YTc4L-v7talBx4N170aGB8p73IJQFOJwP6ttGHTF7ajYzBhMB0GA1UdDgQWBBTWCBVR8kam2DzQR5RX370390yOfjAfBgNVHSMEGDAWgBTWCBVR8kam2DzQR5RX370390yOfjAPBgNVHRMBAf8EBTADAQH_MA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNJADBGAiEA13yw3sYxhBuHVBtPxQe11VZngBS9MJP-Bqkqi01frgUCIQD-MJxQHBNsTLlmlM30gEkPQHfOhH7kMAgfDHITKnqErg"
+      ]
+    },
+    "output": {
+      "error": "Certificate chain verification failed: permitted subtree violation."
+    }
+  },
+  {
+    "id": "san-within-excluded-subtree-is-rejected",
+    "input": {
+      "did": "did:x509:0:sha256:kBKEx3-kk21etDVd2hPKC68lOZ5P2s49fj10bunhBuI::san:dns:host.example.com",
+      "chain": [
+        "MIIBjzCCATagAwIBAgIULumOBV-83LBlER0JMGvOQCpC4BowCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwIBcNMjAwMTAxMDAwMDAwWhgPMjEyMDAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATJooer17MEV9Na-XJCFFDwlfDp-HWJomzDcZU9k7f2xpIzQF5UM0mI7b1kP2UWhWD1ujc8AWpx4d5s9QLp5xtko20wazAdBgNVHQ4EFgQUZ0fpcAiNbSW-Wp8Zc8CnD9vXbFswHwYDVR0jBBgwFoAUsl1sB9mpRIl9NfaVXJ97LvUY70IwDAYDVR0TAQH_BAIwADAbBgNVHREEFDASghBob3N0LmV4YW1wbGUuY29tMAoGCCqGSM49BAMCA0cAMEQCIFNg8-VYLdotA81eIOfo1fpa0e6l4l3Bl78re4Ya_fXiAiAzlJO4M1Jv4qxowdLr80as6OxbOqH9FBPTgQHH7RtvdA",
+        "MIIBpjCCAU2gAwIBAgIUTj2enqMWu2aLzVSWKtTQ3AGvjqwwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowEDEOMAwGA1UEAwwFSW50ZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARvKfnPUdyC2ens6XJcuIfb_tW0z-NJKDAxmcp8ZzRgtbbKTtB0CLZCG16bnX-o9cFgoPz0_XAGaiW6JBPhnKyRo4GDMIGAMB0GA1UdDgQWBBSyXWwH2alEiX019pVcn3su9RjvQjAfBgNVHSMEGDAWgBTfHXTXGVN1bW9pQTcOH3zWzc0hCjAPBgNVHRMBAf8EBTADAQH_MA4GA1UdDwEB_wQEAwICBDAdBgNVHR4BAf8EEzARoQ8wDYILZXhhbXBsZS5jb20wCgYIKoZIzj0EAwIDRwAwRAIgD4xraO0-npXWDcGK_BIKvtzglz88CkyFUlKkJ4d-jP4CIHcVDspMHA-22ljmQJd05PJXAOI29Ei2bnOnUJQqZA-c",
+        "MIIBhTCCASugAwIBAgIURQXkW-aZZQs1Is2yl1N04Nyu_aYwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwEUm9vdDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJJaF_Ko43NnAWREEVm7qeOEFdFzakBfNc6ufWDs_lJURi8xjLpapOtJzxcr-IA80qYMoL_tZdYbkrsuDEKIthejYzBhMB0GA1UdDgQWBBTfHXTXGVN1bW9pQTcOH3zWzc0hCjAfBgNVHSMEGDAWgBTfHXTXGVN1bW9pQTcOH3zWzc0hCjAPBgNVHRMBAf8EBTADAQH_MA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNIADBFAiAnlji3cJJNK8b37iLlzwEY907WrBunCNapvgyWOykregIhAOwb0Mmx-ZPYfDgvUJrxCtLN_NxKCKue6ie5Rdi4c_PO"
+      ]
+    },
+    "output": {
+      "error": "Certificate chain verification failed: excluded subtree violation."
+    }
+  },
+  {
+    "id": "san-within-permitted-subtree",
+    "input": {
+      "did": "did:x509:0:sha256:EAMbV3Ww__7vHhG3a0ggeQVyXww7cN2d7GuDaOXdKnQ::san:dns:host.example.com",
+      "chain": [
+        "MIIBkDCCATagAwIBAgIUOr3QWA2dOzoSGWOYHd2bHXu9n68wCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwIBcNMjAwMTAxMDAwMDAwWhgPMjEyMDAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATrsJuATeeHsps2MFyAQD_tSstJoKO6HDUCelKPUhoxf3GPapMwIS5lHNWf7X6unNrHhsJFBcmm97utcoKiL78zo20wazAdBgNVHQ4EFgQU1484dswv9K5Zhq2SjUKGzRiIdF0wHwYDVR0jBBgwFoAU_VOxXptanYhTgyoNCIFPGktSGWgwDAYDVR0TAQH_BAIwADAbBgNVHREEFDASghBob3N0LmV4YW1wbGUuY29tMAoGCCqGSM49BAMCA0gAMEUCIAFq_OLk87Q-4K4pUJvlIhlCJxdVH1nmPhQWxjf2GtLJAiEAtdTZierNNlVv4bBIG8urWgkNkryWLEE0jBF_UQprFjQ",
+        "MIIBqDCCAU2gAwIBAgIUN7ScdSg6O6NZiOyAxRcumXwAS5AwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowEDEOMAwGA1UEAwwFSW50ZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQ8xpr4Bc6_RCEeclUhQa99_Yx6kRlydLN0_-nT15I0cpRSOEquNSWsLR0wvxQgj-ddNMI0nuIjz3huEI1lCPLwo4GDMIGAMB0GA1UdDgQWBBT9U7Fem1qdiFODKg0IgU8aS1IZaDAfBgNVHSMEGDAWgBRb08sSwGm8IFR_LYkUwbe1Tn4EZDAPBgNVHRMBAf8EBTADAQH_MA4GA1UdDwEB_wQEAwICBDAdBgNVHR4BAf8EEzARoA8wDYILZXhhbXBsZS5jb20wCgYIKoZIzj0EAwIDSQAwRgIhAPB-nj5Dm_Un11t_eX7TAWnqf7TpuwaCopuDcm67AkUHAiEAyCopRNXywlcuWfdd9l1QBeKiRiKX5OZellhKsRITRrM",
+        "MIIBhTCCASugAwIBAgIULXH8Za4FjU3NEF-dPTHMIfZifmswCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwEUm9vdDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABA56MrGE-YpTBb_ubQwfkpS7JqErBnOeHoPCFYOOIW6Tv3cYC6sRMilG7Li_flC8hNbWJZcUgOp9RkMpMdTsNgGjYzBhMB0GA1UdDgQWBBRb08sSwGm8IFR_LYkUwbe1Tn4EZDAfBgNVHSMEGDAWgBRb08sSwGm8IFR_LYkUwbe1Tn4EZDAPBgNVHRMBAf8EBTADAQH_MA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNIADBFAiEA8yThyILicfIt_Q9mSQAlVSvzWR45_dJoNir6RCVZ1CkCIFhIWQV_1hwGtjzTkZezaJp-h79hw3_fELD28j2Q733K"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:EAMbV3Ww__7vHhG3a0ggeQVyXww7cN2d7GuDaOXdKnQ::san:dns:host.example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:EAMbV3Ww__7vHhG3a0ggeQVyXww7cN2d7GuDaOXdKnQ::san:dns:host.example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:EAMbV3Ww__7vHhG3a0ggeQVyXww7cN2d7GuDaOXdKnQ::san:dns:host.example.com",
+            "publicKeyJwk": {
+              "kty": "EC",
+              "crv": "P-256",
+              "x": "67CbgE3nh7KbNjBcgEA_7UrLSaCjuhw1AnpSj1IaMX8",
+              "y": "cY9qkzAhLmUc1Z_tfq6c2seGwkUFyab3u61ygqIvvzM"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:EAMbV3Ww__7vHhG3a0ggeQVyXww7cN2d7GuDaOXdKnQ::san:dns:host.example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:EAMbV3Ww__7vHhG3a0ggeQVyXww7cN2d7GuDaOXdKnQ::san:dns:host.example.com#0"
+        ],
+        "keyAgreement": [
+          "did:x509:0:sha256:EAMbV3Ww__7vHhG3a0ggeQVyXww7cN2d7GuDaOXdKnQ::san:dns:host.example.com#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "unknown-critical-extension-is-rejected",
+    "input": {
+      "did": "did:x509:0:sha256:u9d3lYIN-S_HKMmCmfVpPQo2ZhdgHvhpSIgIX7CWkdU::subject:CN:Leaf",
+      "chain": [
+        "MIIBgzCCASmgAwIBAgIUHkHHRup5LA8BFv2WOMzs9oD6VngwCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwIBcNMjAwMTAxMDAwMDAwWhgPMjEyMDAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQWFI5RBWt368WgOnhp36CPmEL4HVy5yzlxrouHC6KcSc_RAhTT3GniJax604Cp-6LJKlZLuIBTp-5HKEpLSS0do2AwXjAdBgNVHQ4EFgQUNeB6VdtWu1XW018x33YqiBsC4tcwHwYDVR0jBBgwFoAUtL7D4153xXWkUe7CAl5ieIuRKYIwDAYDVR0TAQH_BAIwADAOBgYqAwQFBgcBAf8EAXgwCgYIKoZIzj0EAwIDSAAwRQIgdePUKaogBez5dwtYOHIrAwaorZ3UQV-eQh4EaVIhhBsCIQCBi-VDcC5iaqJJTeNPEadFMffj2Ufg6kOUVeOooJA55Q",
+        "MIIBhjCCASygAwIBAgIUEfFBYUyHo6Y2iJLeDON5hZ_iUOIwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowEDEOMAwGA1UEAwwFSW50ZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASdGyZbm005ZxzUYF2d0Ov3fnO1nBWbSL_-tplq8m3bGRVmA4TKQzlynJoBXtOGpxvYw-IdqN-mnsp5cp1zkvYlo2MwYTAdBgNVHQ4EFgQUtL7D4153xXWkUe7CAl5ieIuRKYIwHwYDVR0jBBgwFoAUz4GwlgKPF3zXUrxITbfBWwz-V8YwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDSAAwRQIhAK8B3wix0G3k7zGv1TSXUinlBRhj7KxMNmYDrsZHDld_AiAYL6p2-0WzAJcHPA2ZT0wif7CSCvrI3kue-tWBKAOGnw",
+        "MIIBhjCCASugAwIBAgIUMKxmv07cPOkjxmLHRflx7Nu6zdQwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwEUm9vdDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJN_cVNhI1Cpm5g0gSsIkpoPzbAwIhGfDwQzOTaFbBVW3ssVATAEEcpQldM8ITG2TKWOD6DrO3ya3VSqWPTq6K6jYzBhMB0GA1UdDgQWBBTPgbCWAo8XfNdSvEhNt8FbDP5XxjAfBgNVHSMEGDAWgBTPgbCWAo8XfNdSvEhNt8FbDP5XxjAPBgNVHRMBAf8EBTADAQH_MA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNJADBGAiEA_MxVa3uOI1b0JvjOxASP5ROZcnv3XdXGwmFXGGcweKMCIQDHs5xOumhA_preC2nwi88fCjeB3i7s7rS3Dqt6IK_G5Q"
+      ]
+    },
+    "output": {
+      "error": "Certificate chain verification failed: unhandled critical extension."
+    }
+  },
+  {
+    "id": "unknown-non-critical-extension-is-ignored",
+    "input": {
+      "did": "did:x509:0:sha256:rH1HyGA5eDEzk476k7D01Bgke2ZSKJmDvLQFsgJRLac::subject:CN:Leaf",
+      "chain": [
+        "MIIBgDCCASagAwIBAgIUYJNeSWJfLT6mwpB8Gozt4Eclj-IwCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwIBcNMjAwMTAxMDAwMDAwWhgPMjEyMDAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATSbiiGczrVNdvejo7LqqMsDRtlmwN1Ng6CKDE8EsM_0t6GHQmBxdM1aCVlDl4pDAnCDsabgxwC2eY6rbJZIptUo10wWzAdBgNVHQ4EFgQUX0Qw28cj4Ph4UqI_VaAQK2LEP-wwHwYDVR0jBBgwFoAUXaaw-M7ZjLGj6ciN5Uh0Kha6e68wDAYDVR0TAQH_BAIwADALBgYqAwQFBgcEAXgwCgYIKoZIzj0EAwIDSAAwRQIhAIfS_IeipdNy-v1AM2Ry2ORcnBZDu-IFXqNf5u10BYdmAiAItd_74PEerB-5yfMu1hku8PasMgBLoPdinrAdbXJehQ",
+        "MIIBhjCCASygAwIBAgIUOLtkAeJAx_bqDIqgpi6NhEnzNuUwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowEDEOMAwGA1UEAwwFSW50ZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATzZ_s2_WHSF4CtXgT9ogLKc2ZyP5FKXdzabwJCbmLkv_0qM4kAjDVQvtD72dL4HjZRwBzsdZcq0md_ajjSv8lFo2MwYTAdBgNVHQ4EFgQUXaaw-M7ZjLGj6ciN5Uh0Kha6e68wHwYDVR0jBBgwFoAUwCFNvT9Tuh0uJETt8RSAPOhkczUwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDSAAwRQIhAL8iuJNg-uj7cun3-dAAdySsmStrOwMYkXmaP1fRIkNvAiA_NTr1C_VzfZzMkiFr1AL97wXfcy9uX34pCbpWxPeZfQ",
+        "MIIBhTCCASugAwIBAgIUfFFxg_LQPOtMNDAOjvxKdwdn7TowCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwEUm9vdDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABAtHc_5xi3nIs3Vd3R5EXNTEHDu92TfSmoSWI43mkQ1KW-tFpdtDpBBdWpx52-EdvGhskmz99Z0nb_Q20CEEF7GjYzBhMB0GA1UdDgQWBBTAIU29P1O6HS4kRO3xFIA86GRzNTAfBgNVHSMEGDAWgBTAIU29P1O6HS4kRO3xFIA86GRzNTAPBgNVHRMBAf8EBTADAQH_MA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNIADBFAiBPsLGYHsNw8s44D2lEGPshJBkxZi6SHROdTh0AprU1pQIhAIHUDZ6wqtPmc4BvdToT6w-eGJpNGcDOVtxEJroc44HY"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:rH1HyGA5eDEzk476k7D01Bgke2ZSKJmDvLQFsgJRLac::subject:CN:Leaf",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:rH1HyGA5eDEzk476k7D01Bgke2ZSKJmDvLQFsgJRLac::subject:CN:Leaf#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:rH1HyGA5eDEzk476k7D01Bgke2ZSKJmDvLQFsgJRLac::subject:CN:Leaf",
+            "publicKeyJwk": {
+              "kty": "EC",
+              "crv": "P-256",
+              "x": "0m4ohnM61TXb3o6Oy6qjLA0bZZsDdTYOgigxPBLDP9I",
+              "y": "3oYdCYHF0zVoJWUOXikMCcIOxpuDHALZ5jqtslkim1Q"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:rH1HyGA5eDEzk476k7D01Bgke2ZSKJmDvLQFsgJRLac::subject:CN:Leaf#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:rH1HyGA5eDEzk476k7D01Bgke2ZSKJmDvLQFsgJRLac::subject:CN:Leaf#0"
+        ],
+        "keyAgreement": [
+          "did:x509:0:sha256:rH1HyGA5eDEzk476k7D01Bgke2ZSKJmDvLQFsgJRLac::subject:CN:Leaf#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "unrelated-candidate-cannot-satisfy-ca-fingerprint",
+    "input": {
+      "did": "did:x509:0:sha256:vkPFk-BEjqxROoUZwGI-p-xhq-sByWByqHps-KEl-vI::subject:CN:Leaf",
+      "chain": [
+        "MIIBczCCARmgAwIBAgIULVxuGo-kJHMJ-XEZe13Ff4h73xQwCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwIBcNMjAwMTAxMDAwMDAwWhgPMjEyMDAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARvRBWFJIL2uvEUxBfO9RVVbQwQJ-1aKwjx_SydWXjqtwT4v4_PvtMg6eBB-Xps5QpCP-jc19ktyVNRollsDEtlo1AwTjAdBgNVHQ4EFgQUHOimmQR0Y46l00oCEFkQyNQ76lMwHwYDVR0jBBgwFoAUwI8ITi16ZTAG0U2Gdp1BJMqdzb0wDAYDVR0TAQH_BAIwADAKBggqhkjOPQQDAgNIADBFAiEA-3j1iaJti_sK1JqKj-rNeuOza9P3Y4L7zFDIC0Ut-jgCIHcp0vWOmIKyyu57DRfYyBb3IjDAdkx8hbqL5WcrCSjz",
+        "MIIBlTCCATugAwIBAgIUccZioNYWuKUlL87kE6usCopTLbAwCgYIKoZIzj0EAwIwFzEVMBMGA1UEAwwMVW5yZWxhdGVkIENBMCAXDTIwMDEwMTAwMDAwMFoYDzIxMjAwMTAxMDAwMDAwWjAXMRUwEwYDVQQDDAxVbnJlbGF0ZWQgQ0EwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATNh7OAB1BnoIEyx1p9Gv8Ja3MlqgorJQtbK5TlZ6uPc1LxOZGx9LSRmCkYRgh8MioOUL6zW5GN5LkXRHlJpwRto2MwYTAdBgNVHQ4EFgQUv9DeMtSBmoWeURiKrdrQexLdNAYwHwYDVR0jBBgwFoAUv9DeMtSBmoWeURiKrdrQexLdNAYwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDSAAwRQIhAJENFH5AzYLhAQtw0AnCrVWPcxrauMtI3h6yUnIvO4p-AiB1Ki4HFaXBKB61xVONHYlpV4ZEtm7Y_zqdaORtksYCFg",
+        "MIIBhzCCASygAwIBAgIURoM-Ky_oPdz5C9vcj4D_RzlDI_0wCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowEDEOMAwGA1UEAwwFSW50ZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAR8zf6Rpb3MBjAB60oatjMVoUPssSJMP9Y6jdEVjcydJcyHUSA-tY2jBl7nHbEDTxkTfOi2_ChnJeNHHENtWqExo2MwYTAdBgNVHQ4EFgQUwI8ITi16ZTAG0U2Gdp1BJMqdzb0wHwYDVR0jBBgwFoAU4kvegqw9ZU2O-MNWnt3ArT-12X4wDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDSQAwRgIhAOA6b4AYkSlqMxKEtyOVTzr5IJKul4Wk7XhQOJvLtJ6kAiEAvW1MK5A1ENZyWTOpNNUQWxC7sXL9132ZlYpDLUCv0DQ",
+        "MIIBhTCCASugAwIBAgIUP5-aHJ8pdAdvXXcg0DhOwyKsI8wwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwEUm9vdDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJ7plOml27LbWzr1NGi57bs0t6jeM5uohMm_Py9oK3k_SvS3JAc3d3jZpZcjMuGdFzNzq95MeS86nhL-RHb4-dGjYzBhMB0GA1UdDgQWBBTiS96CrD1lTY74w1ae3cCtP7XZfjAfBgNVHSMEGDAWgBTiS96CrD1lTY74w1ae3cCtP7XZfjAPBgNVHRMBAf8EBTADAQH_MA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNIADBFAiBW3T8fIWl7ITDl84N3JRgNEzgiZocslyNMhHHM-sg-oQIhALggmfHEhtcLUJGFZfpjPp0KVCy0G_4ezCzP4x-I4vGh"
+      ]
+    },
+    "output": {
+      "error": "Supplied chain does not match the verified chain."
+    }
+  },
+  {
+    "id": "unrelated-candidate-is-rejected-with-valid-ca-fingerprint",
+    "input": {
+      "did": "did:x509:0:sha256:ZHj5Z9qQtqlDiQf6V2md4Jsdq2r5NfhWb8w0eehNoUQ::subject:CN:Leaf",
+      "chain": [
+        "MIIBczCCARmgAwIBAgIULVxuGo-kJHMJ-XEZe13Ff4h73xQwCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwIBcNMjAwMTAxMDAwMDAwWhgPMjEyMDAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARvRBWFJIL2uvEUxBfO9RVVbQwQJ-1aKwjx_SydWXjqtwT4v4_PvtMg6eBB-Xps5QpCP-jc19ktyVNRollsDEtlo1AwTjAdBgNVHQ4EFgQUHOimmQR0Y46l00oCEFkQyNQ76lMwHwYDVR0jBBgwFoAUwI8ITi16ZTAG0U2Gdp1BJMqdzb0wDAYDVR0TAQH_BAIwADAKBggqhkjOPQQDAgNIADBFAiEA-3j1iaJti_sK1JqKj-rNeuOza9P3Y4L7zFDIC0Ut-jgCIHcp0vWOmIKyyu57DRfYyBb3IjDAdkx8hbqL5WcrCSjz",
+        "MIIBlTCCATugAwIBAgIUccZioNYWuKUlL87kE6usCopTLbAwCgYIKoZIzj0EAwIwFzEVMBMGA1UEAwwMVW5yZWxhdGVkIENBMCAXDTIwMDEwMTAwMDAwMFoYDzIxMjAwMTAxMDAwMDAwWjAXMRUwEwYDVQQDDAxVbnJlbGF0ZWQgQ0EwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATNh7OAB1BnoIEyx1p9Gv8Ja3MlqgorJQtbK5TlZ6uPc1LxOZGx9LSRmCkYRgh8MioOUL6zW5GN5LkXRHlJpwRto2MwYTAdBgNVHQ4EFgQUv9DeMtSBmoWeURiKrdrQexLdNAYwHwYDVR0jBBgwFoAUv9DeMtSBmoWeURiKrdrQexLdNAYwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDSAAwRQIhAJENFH5AzYLhAQtw0AnCrVWPcxrauMtI3h6yUnIvO4p-AiB1Ki4HFaXBKB61xVONHYlpV4ZEtm7Y_zqdaORtksYCFg",
+        "MIIBhzCCASygAwIBAgIURoM-Ky_oPdz5C9vcj4D_RzlDI_0wCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowEDEOMAwGA1UEAwwFSW50ZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAR8zf6Rpb3MBjAB60oatjMVoUPssSJMP9Y6jdEVjcydJcyHUSA-tY2jBl7nHbEDTxkTfOi2_ChnJeNHHENtWqExo2MwYTAdBgNVHQ4EFgQUwI8ITi16ZTAG0U2Gdp1BJMqdzb0wHwYDVR0jBBgwFoAU4kvegqw9ZU2O-MNWnt3ArT-12X4wDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDSQAwRgIhAOA6b4AYkSlqMxKEtyOVTzr5IJKul4Wk7XhQOJvLtJ6kAiEAvW1MK5A1ENZyWTOpNNUQWxC7sXL9132ZlYpDLUCv0DQ",
+        "MIIBhTCCASugAwIBAgIUP5-aHJ8pdAdvXXcg0DhOwyKsI8wwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwEUm9vdDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJ7plOml27LbWzr1NGi57bs0t6jeM5uohMm_Py9oK3k_SvS3JAc3d3jZpZcjMuGdFzNzq95MeS86nhL-RHb4-dGjYzBhMB0GA1UdDgQWBBTiS96CrD1lTY74w1ae3cCtP7XZfjAfBgNVHSMEGDAWgBTiS96CrD1lTY74w1ae3cCtP7XZfjAPBgNVHRMBAf8EBTADAQH_MA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNIADBFAiBW3T8fIWl7ITDl84N3JRgNEzgiZocslyNMhHHM-sg-oQIhALggmfHEhtcLUJGFZfpjPp0KVCy0G_4ezCzP4x-I4vGh"
+      ]
+    },
+    "output": {
+      "error": "Supplied chain does not match the verified chain."
+    }
+  },
+  {
+    "id": "unsupported-certificate-san-type",
+    "input": {
+      "did": "did:x509:0:sha256:x6DPuqchucMZI6IUd4dSGF4DQ7GxnXhyoBMjV6JdJ6U::subject:CN:Leaf",
+      "chain": [
+        "MIIBhDCCASqgAwIBAgIUILpj1-QqluyWbX4QcokZhdWYxfMwCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwIBcNMjAwMTAxMDAwMDAwWhgPMjEyMDAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATSOINvdpcbIaKhebmUDFoTldOFTROGZOPTIcuwx7mw8dw8UmyKU1zfVQl70DXRWLZsn37-Bsl0xLVETCSwEiRgo2EwXzAdBgNVHQ4EFgQU7RS8s8-ofNfF0DB8u92SlWrdCd4wHwYDVR0jBBgwFoAUM4MvmrK664sKXBGhN3xFhyuxtJ8wDAYDVR0TAQH_BAIwADAPBgNVHREECDAGhwR_AAABMAoGCCqGSM49BAMCA0gAMEUCIQCRSxl2jWXfVoezt2OAYCuVe4YM3bNB0xI7hD-pzYgAigIgchWWXY9oAlxTmVfmlpLsHEICrlyp8uY_E0aetBk8r8o",
+        "MIIBhTCCASygAwIBAgIUAb4jfiXNPKg9rN6psA9FycIDv7kwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowEDEOMAwGA1UEAwwFSW50ZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAT_EI-y7_0o2eB1-LhcFGaSpJzo-UNmHQgDrDt3-OHRACgSL7KHNKZ0FaE8HGjC1E4T39U30VaRhsig5ftmluG7o2MwYTAdBgNVHQ4EFgQUM4MvmrK664sKXBGhN3xFhyuxtJ8wHwYDVR0jBBgwFoAU_ZHscuLJL23y0-0d-wIb2QCBQQ4wDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDRwAwRAIgOUdr4NAX8-ljkZ9h0Kl5ZW1oclgfMGqtPEiJEV30WoMCIGOMQsamDiSSt9j-JTZW_rw-Ivg84eWU9o4j4OttYkrp",
+        "MIIBhTCCASugAwIBAgIUEAOQOhmynKEvJmM1JKqtQktJlwIwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwEUm9vdDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABDyv-VYicEqlPJ1_Vecc8cXUhQoj1WQWkvVMI7WZtUlHOCO_JlPLaVd0ucUjwOiJbXuHtswW9fwRo3tC3G4uVj-jYzBhMB0GA1UdDgQWBBT9kexy4skvbfLT7R37AhvZAIFBDjAfBgNVHSMEGDAWgBT9kexy4skvbfLT7R37AhvZAIFBDjAPBgNVHRMBAf8EBTADAQH_MA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNIADBFAiEApp0R9Fqyh3TNU44vBQotWBCkLjsXKUJH2r_MtFqP9CECIGs5yfwiQARHv2YjJQhwWEdU-kkGNSyOMqAGpiMeDuhX"
+      ]
+    },
+    "output": {
+      "error": "Certificate contains an unsupported SAN type."
+    }
+  },
+  {
+    "id": "did-url-fragment-is-removed-from-document-id",
+    "input": {
+      "did": "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::subject:CN:example.com#0/credentials?versionId=1",
+      "chain": [
+        "MIIBrzCCAVWgAwIBAgIUJUzbQpQ9NWw7AtVjxevRNHbPGnAwCgYIKoZIzj0EAwIwJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAWMRQwEgYDVQQDDAtleGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABC9PBCm_LShY0ELxk_xbD27Op0wq55t5jfCeYwObS5vKtuEHnykeDyAvlUzTmV_JpM3fUjG3EieTuTmpNgStgyyjbzBtMB0GA1UdDgQWBBSjXvZPZJWtrrOE9jcJWSOFgIVabzAfBgNVHSMEGDAWgBQRv2BjLbcGrFojG58TRqcr6DQp2DAMBgNVHRMBAf8EAjAAMB0GA1UdJQQWMBQGCCsGAQUFBwMDBggrBgEFBQcDAjAKBggqhkjOPQQDAgNIADBFAiBXxdkE_AwstEY95NDqdU4SnnaJIbNrsoSKSUgJfWcHpwIhAO3xRfB1rQlSWVMpmIVh_Ep7Fm8c1wQXfNntZE-udlZA",
+        "MIIBrzCCAVSgAwIBAgIUJqpba973YPOo3jVNaA-64kn-LBEwCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEJkHKg4UeHBCwSU5gBIgqI-aFhg5tH0yQkHGSQ4r4y7LASwwC09FsIB6XsykEryMjExaYjNtSQov4Se3UOzPGuqNmMGQwHQYDVR0OBBYEFBG_YGMttwasWiMbnxNGpyvoNCnYMB8GA1UdIwQYMBaAFKReafgWvJedM_a2PVJlMbU_93fEMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0kAMEYCIQC07O1ZYdmXY0V4mJXb5hBk8RJzWdB4nEawYzObfm--pQIhAL2zLu_nV9zdoBw2qW95TcjEmrAvu02T-R1fauww3dV1",
+        "MIIBpjCCAUygAwIBAgIUAiEoKdJEkiZ5EAqbl1-DXr3zsv4wCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABPVSbFdYCsnaj-2wNN0M2PmxW-syPqjbUlzvNPvCg7el_9pUg_En-TtO8Igqn_Ixh0q-sZwKVVe_7-RW6BL_QE6jZjBkMB0GA1UdDgQWBBSkXmn4FryXnTP2tj1SZTG1P_d3xDAfBgNVHSMEGDAWgBSkXmn4FryXnTP2tj1SZTG1P_d3xDASBgNVHRMBAf8ECDAGAQH_AgEBMA4GA1UdDwEB_wQEAwIBBjAKBggqhkjOPQQDAgNIADBFAiANEyEieqbtSF5Iw-nIBLtjQybGnWoQ4Ql4-prVBbVVPgIhAN0oV0OnBU4Fpu4h4It9UVUORwRYBJRPaE8Rl6dzJRtP"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::subject:CN:example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::subject:CN:example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::subject:CN:example.com",
+            "publicKeyJwk": {
+              "kty": "EC",
+              "crv": "P-256",
+              "x": "L08EKb8tKFjQQvGT_FsPbs6nTCrnm3mN8J5jA5tLm8o",
+              "y": "tuEHnykeDyAvlUzTmV_JpM3fUjG3EieTuTmpNgStgyw"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::subject:CN:example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::subject:CN:example.com#0"
+        ],
+        "keyAgreement": [
+          "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::subject:CN:example.com#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "did-url-path-not-supported",
+    "input": {
+      "did": "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::subject:CN:example.com/credentials",
+      "chain": [
+        "MIIBrzCCAVWgAwIBAgIUJUzbQpQ9NWw7AtVjxevRNHbPGnAwCgYIKoZIzj0EAwIwJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAWMRQwEgYDVQQDDAtleGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABC9PBCm_LShY0ELxk_xbD27Op0wq55t5jfCeYwObS5vKtuEHnykeDyAvlUzTmV_JpM3fUjG3EieTuTmpNgStgyyjbzBtMB0GA1UdDgQWBBSjXvZPZJWtrrOE9jcJWSOFgIVabzAfBgNVHSMEGDAWgBQRv2BjLbcGrFojG58TRqcr6DQp2DAMBgNVHRMBAf8EAjAAMB0GA1UdJQQWMBQGCCsGAQUFBwMDBggrBgEFBQcDAjAKBggqhkjOPQQDAgNIADBFAiBXxdkE_AwstEY95NDqdU4SnnaJIbNrsoSKSUgJfWcHpwIhAO3xRfB1rQlSWVMpmIVh_Ep7Fm8c1wQXfNntZE-udlZA",
+        "MIIBrzCCAVSgAwIBAgIUJqpba973YPOo3jVNaA-64kn-LBEwCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEJkHKg4UeHBCwSU5gBIgqI-aFhg5tH0yQkHGSQ4r4y7LASwwC09FsIB6XsykEryMjExaYjNtSQov4Se3UOzPGuqNmMGQwHQYDVR0OBBYEFBG_YGMttwasWiMbnxNGpyvoNCnYMB8GA1UdIwQYMBaAFKReafgWvJedM_a2PVJlMbU_93fEMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0kAMEYCIQC07O1ZYdmXY0V4mJXb5hBk8RJzWdB4nEawYzObfm--pQIhAL2zLu_nV9zdoBw2qW95TcjEmrAvu02T-R1fauww3dV1",
+        "MIIBpjCCAUygAwIBAgIUAiEoKdJEkiZ5EAqbl1-DXr3zsv4wCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABPVSbFdYCsnaj-2wNN0M2PmxW-syPqjbUlzvNPvCg7el_9pUg_En-TtO8Igqn_Ixh0q-sZwKVVe_7-RW6BL_QE6jZjBkMB0GA1UdDgQWBBSkXmn4FryXnTP2tj1SZTG1P_d3xDAfBgNVHSMEGDAWgBSkXmn4FryXnTP2tj1SZTG1P_d3xDASBgNVHRMBAf8ECDAGAQH_AgEBMA4GA1UdDwEB_wQEAwIBBjAKBggqhkjOPQQDAgNIADBFAiANEyEieqbtSF5Iw-nIBLtjQybGnWoQ4Ql4-prVBbVVPgIhAN0oV0OnBU4Fpu4h4It9UVUORwRYBJRPaE8Rl6dzJRtP"
+      ]
+    },
+    "output": {
+      "error": "DID URL paths are not supported."
+    }
+  },
+  {
+    "id": "did-url-query-not-supported",
+    "input": {
+      "did": "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::subject:CN:example.com?versionId=1",
+      "chain": [
+        "MIIBrzCCAVWgAwIBAgIUJUzbQpQ9NWw7AtVjxevRNHbPGnAwCgYIKoZIzj0EAwIwJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAWMRQwEgYDVQQDDAtleGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABC9PBCm_LShY0ELxk_xbD27Op0wq55t5jfCeYwObS5vKtuEHnykeDyAvlUzTmV_JpM3fUjG3EieTuTmpNgStgyyjbzBtMB0GA1UdDgQWBBSjXvZPZJWtrrOE9jcJWSOFgIVabzAfBgNVHSMEGDAWgBQRv2BjLbcGrFojG58TRqcr6DQp2DAMBgNVHRMBAf8EAjAAMB0GA1UdJQQWMBQGCCsGAQUFBwMDBggrBgEFBQcDAjAKBggqhkjOPQQDAgNIADBFAiBXxdkE_AwstEY95NDqdU4SnnaJIbNrsoSKSUgJfWcHpwIhAO3xRfB1rQlSWVMpmIVh_Ep7Fm8c1wQXfNntZE-udlZA",
+        "MIIBrzCCAVSgAwIBAgIUJqpba973YPOo3jVNaA-64kn-LBEwCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEJkHKg4UeHBCwSU5gBIgqI-aFhg5tH0yQkHGSQ4r4y7LASwwC09FsIB6XsykEryMjExaYjNtSQov4Se3UOzPGuqNmMGQwHQYDVR0OBBYEFBG_YGMttwasWiMbnxNGpyvoNCnYMB8GA1UdIwQYMBaAFKReafgWvJedM_a2PVJlMbU_93fEMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0kAMEYCIQC07O1ZYdmXY0V4mJXb5hBk8RJzWdB4nEawYzObfm--pQIhAL2zLu_nV9zdoBw2qW95TcjEmrAvu02T-R1fauww3dV1",
+        "MIIBpjCCAUygAwIBAgIUAiEoKdJEkiZ5EAqbl1-DXr3zsv4wCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABPVSbFdYCsnaj-2wNN0M2PmxW-syPqjbUlzvNPvCg7el_9pUg_En-TtO8Igqn_Ixh0q-sZwKVVe_7-RW6BL_QE6jZjBkMB0GA1UdDgQWBBSkXmn4FryXnTP2tj1SZTG1P_d3xDAfBgNVHSMEGDAWgBSkXmn4FryXnTP2tj1SZTG1P_d3xDASBgNVHRMBAf8ECDAGAQH_AgEBMA4GA1UdDwEB_wQEAwIBBjAKBggqhkjOPQQDAgNIADBFAiANEyEieqbtSF5Iw-nIBLtjQybGnWoQ4Ql4-prVBbVVPgIhAN0oV0OnBU4Fpu4h4It9UVUORwRYBJRPaE8Rl6dzJRtP"
+      ]
+    },
+    "output": {
+      "error": "DID URL queries are not supported."
+    }
+  },
+  {
+    "id": "did-without-predicates",
+    "input": {
+      "did": "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA",
+      "chain": [
+        "MIIBrzCCAVWgAwIBAgIUJUzbQpQ9NWw7AtVjxevRNHbPGnAwCgYIKoZIzj0EAwIwJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAWMRQwEgYDVQQDDAtleGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABC9PBCm_LShY0ELxk_xbD27Op0wq55t5jfCeYwObS5vKtuEHnykeDyAvlUzTmV_JpM3fUjG3EieTuTmpNgStgyyjbzBtMB0GA1UdDgQWBBSjXvZPZJWtrrOE9jcJWSOFgIVabzAfBgNVHSMEGDAWgBQRv2BjLbcGrFojG58TRqcr6DQp2DAMBgNVHRMBAf8EAjAAMB0GA1UdJQQWMBQGCCsGAQUFBwMDBggrBgEFBQcDAjAKBggqhkjOPQQDAgNIADBFAiBXxdkE_AwstEY95NDqdU4SnnaJIbNrsoSKSUgJfWcHpwIhAO3xRfB1rQlSWVMpmIVh_Ep7Fm8c1wQXfNntZE-udlZA",
+        "MIIBrzCCAVSgAwIBAgIUJqpba973YPOo3jVNaA-64kn-LBEwCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEJkHKg4UeHBCwSU5gBIgqI-aFhg5tH0yQkHGSQ4r4y7LASwwC09FsIB6XsykEryMjExaYjNtSQov4Se3UOzPGuqNmMGQwHQYDVR0OBBYEFBG_YGMttwasWiMbnxNGpyvoNCnYMB8GA1UdIwQYMBaAFKReafgWvJedM_a2PVJlMbU_93fEMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0kAMEYCIQC07O1ZYdmXY0V4mJXb5hBk8RJzWdB4nEawYzObfm--pQIhAL2zLu_nV9zdoBw2qW95TcjEmrAvu02T-R1fauww3dV1",
+        "MIIBpjCCAUygAwIBAgIUAiEoKdJEkiZ5EAqbl1-DXr3zsv4wCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABPVSbFdYCsnaj-2wNN0M2PmxW-syPqjbUlzvNPvCg7el_9pUg_En-TtO8Igqn_Ixh0q-sZwKVVe_7-RW6BL_QE6jZjBkMB0GA1UdDgQWBBSkXmn4FryXnTP2tj1SZTG1P_d3xDAfBgNVHSMEGDAWgBSkXmn4FryXnTP2tj1SZTG1P_d3xDASBgNVHRMBAf8ECDAGAQH_AgEBMA4GA1UdDwEB_wQEAwIBBjAKBggqhkjOPQQDAgNIADBFAiANEyEieqbtSF5Iw-nIBLtjQybGnWoQ4Ql4-prVBbVVPgIhAN0oV0OnBU4Fpu4h4It9UVUORwRYBJRPaE8Rl6dzJRtP"
+      ]
+    },
+    "output": {
+      "error": "DID must contain at least one predicate."
+    }
+  },
+  {
+    "id": "eku",
+    "input": {
+      "did": "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::eku:1.3.6.1.5.5.7.3.3",
+      "chain": [
+        "MIIBrzCCAVWgAwIBAgIUJUzbQpQ9NWw7AtVjxevRNHbPGnAwCgYIKoZIzj0EAwIwJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAWMRQwEgYDVQQDDAtleGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABC9PBCm_LShY0ELxk_xbD27Op0wq55t5jfCeYwObS5vKtuEHnykeDyAvlUzTmV_JpM3fUjG3EieTuTmpNgStgyyjbzBtMB0GA1UdDgQWBBSjXvZPZJWtrrOE9jcJWSOFgIVabzAfBgNVHSMEGDAWgBQRv2BjLbcGrFojG58TRqcr6DQp2DAMBgNVHRMBAf8EAjAAMB0GA1UdJQQWMBQGCCsGAQUFBwMDBggrBgEFBQcDAjAKBggqhkjOPQQDAgNIADBFAiBXxdkE_AwstEY95NDqdU4SnnaJIbNrsoSKSUgJfWcHpwIhAO3xRfB1rQlSWVMpmIVh_Ep7Fm8c1wQXfNntZE-udlZA",
+        "MIIBrzCCAVSgAwIBAgIUJqpba973YPOo3jVNaA-64kn-LBEwCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEJkHKg4UeHBCwSU5gBIgqI-aFhg5tH0yQkHGSQ4r4y7LASwwC09FsIB6XsykEryMjExaYjNtSQov4Se3UOzPGuqNmMGQwHQYDVR0OBBYEFBG_YGMttwasWiMbnxNGpyvoNCnYMB8GA1UdIwQYMBaAFKReafgWvJedM_a2PVJlMbU_93fEMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0kAMEYCIQC07O1ZYdmXY0V4mJXb5hBk8RJzWdB4nEawYzObfm--pQIhAL2zLu_nV9zdoBw2qW95TcjEmrAvu02T-R1fauww3dV1",
+        "MIIBpjCCAUygAwIBAgIUAiEoKdJEkiZ5EAqbl1-DXr3zsv4wCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABPVSbFdYCsnaj-2wNN0M2PmxW-syPqjbUlzvNPvCg7el_9pUg_En-TtO8Igqn_Ixh0q-sZwKVVe_7-RW6BL_QE6jZjBkMB0GA1UdDgQWBBSkXmn4FryXnTP2tj1SZTG1P_d3xDAfBgNVHSMEGDAWgBSkXmn4FryXnTP2tj1SZTG1P_d3xDASBgNVHRMBAf8ECDAGAQH_AgEBMA4GA1UdDwEB_wQEAwIBBjAKBggqhkjOPQQDAgNIADBFAiANEyEieqbtSF5Iw-nIBLtjQybGnWoQ4Ql4-prVBbVVPgIhAN0oV0OnBU4Fpu4h4It9UVUORwRYBJRPaE8Rl6dzJRtP"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::eku:1.3.6.1.5.5.7.3.3",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::eku:1.3.6.1.5.5.7.3.3#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::eku:1.3.6.1.5.5.7.3.3",
+            "publicKeyJwk": {
+              "kty": "EC",
+              "crv": "P-256",
+              "x": "L08EKb8tKFjQQvGT_FsPbs6nTCrnm3mN8J5jA5tLm8o",
+              "y": "tuEHnykeDyAvlUzTmV_JpM3fUjG3EieTuTmpNgStgyw"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::eku:1.3.6.1.5.5.7.3.3#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::eku:1.3.6.1.5.5.7.3.3#0"
+        ],
+        "keyAgreement": [
+          "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::eku:1.3.6.1.5.5.7.3.3#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "eku-invalid-value",
+    "input": {
+      "did": "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::eku:1.2.3",
+      "chain": [
+        "MIIBrzCCAVWgAwIBAgIUJUzbQpQ9NWw7AtVjxevRNHbPGnAwCgYIKoZIzj0EAwIwJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAWMRQwEgYDVQQDDAtleGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABC9PBCm_LShY0ELxk_xbD27Op0wq55t5jfCeYwObS5vKtuEHnykeDyAvlUzTmV_JpM3fUjG3EieTuTmpNgStgyyjbzBtMB0GA1UdDgQWBBSjXvZPZJWtrrOE9jcJWSOFgIVabzAfBgNVHSMEGDAWgBQRv2BjLbcGrFojG58TRqcr6DQp2DAMBgNVHRMBAf8EAjAAMB0GA1UdJQQWMBQGCCsGAQUFBwMDBggrBgEFBQcDAjAKBggqhkjOPQQDAgNIADBFAiBXxdkE_AwstEY95NDqdU4SnnaJIbNrsoSKSUgJfWcHpwIhAO3xRfB1rQlSWVMpmIVh_Ep7Fm8c1wQXfNntZE-udlZA",
+        "MIIBrzCCAVSgAwIBAgIUJqpba973YPOo3jVNaA-64kn-LBEwCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEJkHKg4UeHBCwSU5gBIgqI-aFhg5tH0yQkHGSQ4r4y7LASwwC09FsIB6XsykEryMjExaYjNtSQov4Se3UOzPGuqNmMGQwHQYDVR0OBBYEFBG_YGMttwasWiMbnxNGpyvoNCnYMB8GA1UdIwQYMBaAFKReafgWvJedM_a2PVJlMbU_93fEMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0kAMEYCIQC07O1ZYdmXY0V4mJXb5hBk8RJzWdB4nEawYzObfm--pQIhAL2zLu_nV9zdoBw2qW95TcjEmrAvu02T-R1fauww3dV1",
+        "MIIBpjCCAUygAwIBAgIUAiEoKdJEkiZ5EAqbl1-DXr3zsv4wCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABPVSbFdYCsnaj-2wNN0M2PmxW-syPqjbUlzvNPvCg7el_9pUg_En-TtO8Igqn_Ixh0q-sZwKVVe_7-RW6BL_QE6jZjBkMB0GA1UdDgQWBBSkXmn4FryXnTP2tj1SZTG1P_d3xDAfBgNVHSMEGDAWgBSkXmn4FryXnTP2tj1SZTG1P_d3xDASBgNVHRMBAf8ECDAGAQH_AgEBMA4GA1UdDwEB_wQEAwIBBjAKBggqhkjOPQQDAgNIADBFAiANEyEieqbtSF5Iw-nIBLtjQybGnWoQ4Ql4-prVBbVVPgIhAN0oV0OnBU4Fpu4h4It9UVUORwRYBJRPaE8Rl6dzJRtP"
+      ]
+    },
+    "output": {
+      "error": "EKU predicate does not match the certificate."
+    }
+  },
+  {
+    "id": "eku-predicate-requires-extension",
+    "input": {
+      "did": "did:x509:0:sha256:-0MQIn0VEaK1JsBZZSOvfBKvYqtOqYdGK2do0ryn6yQ::eku:1.3.6.1.5.5.7.3.3",
+      "chain": [
+        "MIIBcjCCARmgAwIBAgIUJJwWUteWmuSKeGHx187yVSC7m8IwCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwIBcNMjAwMTAxMDAwMDAwWhgPMjEyMDAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAS-8zIYAvSm-W9QHpdYOElgwK1YsK4kC18nxcWQCJlg1L1P0Swh_9p7gBu-lZ1YwP73tF6sgOnzEgO9X0eiMzDXo1AwTjAdBgNVHQ4EFgQUzs-99we3bikEily4oqpUXf_-6lwwHwYDVR0jBBgwFoAUQotnQ6HoMt7kUptEDp-zHd9VrCQwDAYDVR0TAQH_BAIwADAKBggqhkjOPQQDAgNHADBEAiBJS8WE1Nx4u1tBbeWpK4tiiekup0iCSeP8enCO6qZnDAIgQmB7PIGR7nwW_RqB_Ijxk2CU-bp9BgnHX3HumguhfJk",
+        "MIIBhzCCASygAwIBAgIUWgHmqvgwvr-iHqAlgga3pY1cep4wCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowEDEOMAwGA1UEAwwFSW50ZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASn62GQeUqTx0BrU7MvaLzHIZiLreRAR4aWU0dVCdd6QCKKsus9WR5SG86o5TxLsazTB4idBnUGWwIXTwqc8rqdo2MwYTAdBgNVHQ4EFgQUQotnQ6HoMt7kUptEDp-zHd9VrCQwHwYDVR0jBBgwFoAUe8VYzkeq9DRH9DCr2PGYzkhT9VAwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDSQAwRgIhALXvVXi9nJs3wD01E4GdAnBJrM9Jh1H7S9di-D2-NL65AiEAiKGuw1pKoBuQJan0biNwWWHGbBepo8wJ46lU_oadbpg",
+        "MIIBhTCCASugAwIBAgIUaWB9db__QGZQ9Mj5sNxz4xRb0mQwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwEUm9vdDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABLQm2lIYWPz8YOYxEooRVNVz9VcIZiz2B699Hnk-Xl4bSPFDAZVBNBPM9Mi-uBmAShcxM7N0bAYWrtCejqfZDXajYzBhMB0GA1UdDgQWBBR7xVjOR6r0NEf0MKvY8ZjOSFP1UDAfBgNVHSMEGDAWgBR7xVjOR6r0NEf0MKvY8ZjOSFP1UDAPBgNVHRMBAf8EBTADAQH_MA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNIADBFAiEAoQzz6VXO7_oRN9lqwG2DrhdjnAApDfmE0-zvAJfghcwCICzFdtVbNvj_X__TFJp9GCPNom4R8_uAiM0qdOz5mKOZ"
+      ]
+    },
+    "output": {
+      "error": "Certificate does not contain an EKU extension."
+    }
+  },
+  {
+    "id": "fulcio-issuer-value-must-match",
+    "input": {
+      "did": "did:x509:0:sha256:PlQPAxVWk8aA1p5PdiZUuSPTGxDYJoPu49PVrzI96Mw::fulcio-issuer:issuer.example.com",
+      "chain": [
+        "MIIBnjCCAUSgAwIBAgIUJh2uXEvPSPGtqg4bRK9szYKIiLowCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwIBcNMjAwMTAxMDAwMDAwWhgPMjEyMDAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASPcUKuAV8vFd26p_VeNBTl6jT2ojwiZDZv9Qod3LcVwO8DWiT4SXixJKQ2MNAExPR7fmKvnuKT6NbpAFwbEoZro3sweTAdBgNVHQ4EFgQUh3BQ0_6DkqoZS6J1Tz3eGbqMXNMwHwYDVR0jBBgwFoAUzybZWOQAZ2S66kW56ockgyGGk7EwDAYDVR0TAQH_BAIwADApBgorBgEEAYO_MAEBBBtodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20wCgYIKoZIzj0EAwIDSAAwRQIhALcSFA-TjY6pFNr-8NTZFuBR-s0bUlyGMj--aM30zRIuAiAIYVdImMz7bC5zNUZ-njymNt65ghU9p4bua5KI8ypbrA",
+        "MIIBhTCCASygAwIBAgIUTvRzcZ_80MsnidN4CM90rMM5iN4wCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowEDEOMAwGA1UEAwwFSW50ZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQcUmgHGWXCKwNhjD46BI4ZYdCkXe4mkeMyaaBbvU60tSoZEOJvObDfeH13klySm_8o2Lipyn6LkCv1YFiCin0eo2MwYTAdBgNVHQ4EFgQUzybZWOQAZ2S66kW56ockgyGGk7EwHwYDVR0jBBgwFoAUdU25E-QJ7xNLwR_tXXiG64GjAPowDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDRwAwRAIgAcgSOijAb7LQtXxZSkKdGdjk_vmi_xCZikY8URPZE90CIDxN9RweD6sXHBBWyVmlGtvu6nSABf_uQGcAU7lRVf8s",
+        "MIIBhTCCASugAwIBAgIUIcMgK1UKoGHwv6CNVsbz0gFWO28wCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwEUm9vdDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABBnrrOx8X-KZ-tEK0v01-qWpQCaROU7vOaGFiSttJQ5plvBQRmTC2UBOuvPBlGfAhEmERs-P5aPQbYBg-xl3guajYzBhMB0GA1UdDgQWBBR1TbkT5AnvE0vBH-1deIbrgaMA-jAfBgNVHSMEGDAWgBR1TbkT5AnvE0vBH-1deIbrgaMA-jAPBgNVHRMBAf8EBTADAQH_MA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNIADBFAiEApzCDt6UU6j7-VfCAR_-hXb-yK_cEm_wXLW8MwQITDDACIAVLZHxpdsuW89h9jycOAhMBIeEzlABE67yGJvGU5e0S"
+      ]
+    },
+    "output": {
+      "error": "Fulcio issuer predicate does not match the certificate."
+    }
+  },
+  {
+    "id": "fulcio-issuer-with-email-san",
+    "input": {
+      "did": "did:x509:0:sha256:4Wf3Hy45zPgsSGXmjnDNLtSdRVo19eFjirPM3lALnzE::fulcio-issuer:issuer.example.com::san:email:user%40example.com",
+      "chain": [
+        "MIIB2TCCAX6gAwIBAgICC7owCgYIKoZIzj0EAwIwJTEjMCEGA1UEAwwaZXhhbXBsZS5jb20gRnVsY2lvIFJvb3QgQ0EwIBcNMjYwMTAxMDAwMDAwWhgPMjEyNjAxMDEwMDAwMDBaMAAwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARbfC2X_1FD9m16H89xbNtEvwksmvFyd5RTOpwPEL-Gyg5jSo-NROhqtQUOIe2cd3bDCx4cRNe_HPQeVBcqPl9Ko4HAMIG9MB0GA1UdDgQWBBQtWXJrDfINGJMtX3ptM_opbkekXDAfBgNVHSMEGDAWgBSmggyjuvqxzXdju_cCKM2_p_g7GDAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDATBgNVHSUEDDAKBggrBgEFBQcDAzAeBgNVHREBAf8EFDASgRB1c2VyQGV4YW1wbGUuY29tMCgGCisGAQQBg78wAQEEGmh0dHBzOi8vaXNzdWVyLmV4YW1wbGUuY29tMAoGCCqGSM49BAMCA0kAMEYCIQDjK3TN28BplzKml09mN1xI6rKSBmq0Zmd2cOhdtyvkwgIhAJp4QqzWhsRs6XiQd9m0IZvrM2JZ3ZgAlmnk-ofyHmzK",
+        "MIIBoTCCAUigAwIBAgICC7kwCgYIKoZIzj0EAwIwJTEjMCEGA1UEAwwaZXhhbXBsZS5jb20gRnVsY2lvIFJvb3QgQ0EwIBcNMjYwMTAxMDAwMDAwWhgPMjEyNjAxMDEwMDAwMDBaMCUxIzAhBgNVBAMMGmV4YW1wbGUuY29tIEZ1bGNpbyBSb290IENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE7f30wtYzS5biajBxZS96YIibYuLeQaCsTLrFStL22HuWG7H3eKX0Beg4S9J8EGapIG5-EwwRG5UoqGeVFxJby6NmMGQwHQYDVR0OBBYEFKaCDKO6-rHNd2O79wIozb-n-DsYMB8GA1UdIwQYMBaAFKaCDKO6-rHNd2O79wIozb-n-DsYMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0cAMEQCICuSjdvAkvt1NBYx0PBUpczXUrRsoQuWK2LzTKtN2N1GAiAQ_sZg9j5rlDEveyciS3BqqhrEgFGn_3lSUpcqxva2yQ"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:4Wf3Hy45zPgsSGXmjnDNLtSdRVo19eFjirPM3lALnzE::fulcio-issuer:issuer.example.com::san:email:user%40example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:4Wf3Hy45zPgsSGXmjnDNLtSdRVo19eFjirPM3lALnzE::fulcio-issuer:issuer.example.com::san:email:user%40example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:4Wf3Hy45zPgsSGXmjnDNLtSdRVo19eFjirPM3lALnzE::fulcio-issuer:issuer.example.com::san:email:user%40example.com",
+            "publicKeyJwk": {
+              "kty": "EC",
+              "crv": "P-256",
+              "x": "W3wtl_9RQ_Zteh_PcWzbRL8JLJrxcneUUzqcDxC_hso",
+              "y": "DmNKj41E6Gq1BQ4h7Zx3dsMLHhxE178c9B5UFyo-X0o"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:4Wf3Hy45zPgsSGXmjnDNLtSdRVo19eFjirPM3lALnzE::fulcio-issuer:issuer.example.com::san:email:user%40example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:4Wf3Hy45zPgsSGXmjnDNLtSdRVo19eFjirPM3lALnzE::fulcio-issuer:issuer.example.com::san:email:user%40example.com#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "fulcio-issuer-with-uri-san",
+    "input": {
+      "did": "did:x509:0:sha256:4Wf3Hy45zPgsSGXmjnDNLtSdRVo19eFjirPM3lALnzE::fulcio-issuer:issuer.example.com::san:uri:https%3A%2F%2Fexample.com%2Fworkflow",
+      "chain": [
+        "MIIB5DCCAYqgAwIBAgICC7swCgYIKoZIzj0EAwIwJTEjMCEGA1UEAwwaZXhhbXBsZS5jb20gRnVsY2lvIFJvb3QgQ0EwIBcNMjYwMTAxMDAwMDAwWhgPMjEyNjAxMDEwMDAwMDBaMAAwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARotOf3E2BKXuKMaa9XknUQF4ZvGTn3NCj2PIRiww1HSAa2M3OpN0E-afuQvmKxtJFPzZQUxm5V_V_jrZkbGB64o4HMMIHJMB0GA1UdDgQWBBSgviIaHa6ZQvxn9BsZ_QHN_1ovrzAfBgNVHSMEGDAWgBSmggyjuvqxzXdju_cCKM2_p_g7GDAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDATBgNVHSUEDDAKBggrBgEFBQcDAzAqBgNVHREBAf8EIDAehhxodHRwczovL2V4YW1wbGUuY29tL3dvcmtmbG93MCgGCisGAQQBg78wAQEEGmh0dHBzOi8vaXNzdWVyLmV4YW1wbGUuY29tMAoGCCqGSM49BAMCA0gAMEUCIQDGyx3F30pB47plf2Y-2YorymOawK9uhn_GKA7rqBV0tgIgOj_Oaik6gZzVRPrr_y77YGFlJkcK0JsqCHHIp5MqJZA",
+        "MIIBoTCCAUigAwIBAgICC7kwCgYIKoZIzj0EAwIwJTEjMCEGA1UEAwwaZXhhbXBsZS5jb20gRnVsY2lvIFJvb3QgQ0EwIBcNMjYwMTAxMDAwMDAwWhgPMjEyNjAxMDEwMDAwMDBaMCUxIzAhBgNVBAMMGmV4YW1wbGUuY29tIEZ1bGNpbyBSb290IENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE7f30wtYzS5biajBxZS96YIibYuLeQaCsTLrFStL22HuWG7H3eKX0Beg4S9J8EGapIG5-EwwRG5UoqGeVFxJby6NmMGQwHQYDVR0OBBYEFKaCDKO6-rHNd2O79wIozb-n-DsYMB8GA1UdIwQYMBaAFKaCDKO6-rHNd2O79wIozb-n-DsYMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0cAMEQCICuSjdvAkvt1NBYx0PBUpczXUrRsoQuWK2LzTKtN2N1GAiAQ_sZg9j5rlDEveyciS3BqqhrEgFGn_3lSUpcqxva2yQ"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:4Wf3Hy45zPgsSGXmjnDNLtSdRVo19eFjirPM3lALnzE::fulcio-issuer:issuer.example.com::san:uri:https%3A%2F%2Fexample.com%2Fworkflow",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:4Wf3Hy45zPgsSGXmjnDNLtSdRVo19eFjirPM3lALnzE::fulcio-issuer:issuer.example.com::san:uri:https%3A%2F%2Fexample.com%2Fworkflow#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:4Wf3Hy45zPgsSGXmjnDNLtSdRVo19eFjirPM3lALnzE::fulcio-issuer:issuer.example.com::san:uri:https%3A%2F%2Fexample.com%2Fworkflow",
+            "publicKeyJwk": {
+              "kty": "EC",
+              "crv": "P-256",
+              "x": "aLTn9xNgSl7ijGmvV5J1EBeGbxk59zQo9jyEYsMNR0g",
+              "y": "BrYzc6k3QT5p-5C-YrG0kU_NlBTGblX9X-OtmRsYHrg"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:4Wf3Hy45zPgsSGXmjnDNLtSdRVo19eFjirPM3lALnzE::fulcio-issuer:issuer.example.com::san:uri:https%3A%2F%2Fexample.com%2Fworkflow#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:4Wf3Hy45zPgsSGXmjnDNLtSdRVo19eFjirPM3lALnzE::fulcio-issuer:issuer.example.com::san:uri:https%3A%2F%2Fexample.com%2Fworkflow#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "intermediate-ca",
+    "input": {
+      "did": "did:x509:0:sha256:OclQt0d8P5pIN-GHWS7TzUhAPHtVcI5NVijTFUZKq10::subject:CN:example.com",
+      "chain": [
+        "MIIBrzCCAVWgAwIBAgIUJUzbQpQ9NWw7AtVjxevRNHbPGnAwCgYIKoZIzj0EAwIwJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAWMRQwEgYDVQQDDAtleGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABC9PBCm_LShY0ELxk_xbD27Op0wq55t5jfCeYwObS5vKtuEHnykeDyAvlUzTmV_JpM3fUjG3EieTuTmpNgStgyyjbzBtMB0GA1UdDgQWBBSjXvZPZJWtrrOE9jcJWSOFgIVabzAfBgNVHSMEGDAWgBQRv2BjLbcGrFojG58TRqcr6DQp2DAMBgNVHRMBAf8EAjAAMB0GA1UdJQQWMBQGCCsGAQUFBwMDBggrBgEFBQcDAjAKBggqhkjOPQQDAgNIADBFAiBXxdkE_AwstEY95NDqdU4SnnaJIbNrsoSKSUgJfWcHpwIhAO3xRfB1rQlSWVMpmIVh_Ep7Fm8c1wQXfNntZE-udlZA",
+        "MIIBrzCCAVSgAwIBAgIUJqpba973YPOo3jVNaA-64kn-LBEwCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEJkHKg4UeHBCwSU5gBIgqI-aFhg5tH0yQkHGSQ4r4y7LASwwC09FsIB6XsykEryMjExaYjNtSQov4Se3UOzPGuqNmMGQwHQYDVR0OBBYEFBG_YGMttwasWiMbnxNGpyvoNCnYMB8GA1UdIwQYMBaAFKReafgWvJedM_a2PVJlMbU_93fEMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0kAMEYCIQC07O1ZYdmXY0V4mJXb5hBk8RJzWdB4nEawYzObfm--pQIhAL2zLu_nV9zdoBw2qW95TcjEmrAvu02T-R1fauww3dV1",
+        "MIIBpjCCAUygAwIBAgIUAiEoKdJEkiZ5EAqbl1-DXr3zsv4wCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABPVSbFdYCsnaj-2wNN0M2PmxW-syPqjbUlzvNPvCg7el_9pUg_En-TtO8Igqn_Ixh0q-sZwKVVe_7-RW6BL_QE6jZjBkMB0GA1UdDgQWBBSkXmn4FryXnTP2tj1SZTG1P_d3xDAfBgNVHSMEGDAWgBSkXmn4FryXnTP2tj1SZTG1P_d3xDASBgNVHRMBAf8ECDAGAQH_AgEBMA4GA1UdDwEB_wQEAwIBBjAKBggqhkjOPQQDAgNIADBFAiANEyEieqbtSF5Iw-nIBLtjQybGnWoQ4Ql4-prVBbVVPgIhAN0oV0OnBU4Fpu4h4It9UVUORwRYBJRPaE8Rl6dzJRtP"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:OclQt0d8P5pIN-GHWS7TzUhAPHtVcI5NVijTFUZKq10::subject:CN:example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:OclQt0d8P5pIN-GHWS7TzUhAPHtVcI5NVijTFUZKq10::subject:CN:example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:OclQt0d8P5pIN-GHWS7TzUhAPHtVcI5NVijTFUZKq10::subject:CN:example.com",
+            "publicKeyJwk": {
+              "kty": "EC",
+              "crv": "P-256",
+              "x": "L08EKb8tKFjQQvGT_FsPbs6nTCrnm3mN8J5jA5tLm8o",
+              "y": "tuEHnykeDyAvlUzTmV_JpM3fUjG3EieTuTmpNgStgyw"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:OclQt0d8P5pIN-GHWS7TzUhAPHtVcI5NVijTFUZKq10::subject:CN:example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:OclQt0d8P5pIN-GHWS7TzUhAPHtVcI5NVijTFUZKq10::subject:CN:example.com#0"
+        ],
+        "keyAgreement": [
+          "did:x509:0:sha256:OclQt0d8P5pIN-GHWS7TzUhAPHtVcI5NVijTFUZKq10::subject:CN:example.com#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "invalid-did-prefix",
+    "input": {
+      "did": "did:y509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::subject:CN:example.com",
+      "chain": [
+        "MIIBrzCCAVWgAwIBAgIUJUzbQpQ9NWw7AtVjxevRNHbPGnAwCgYIKoZIzj0EAwIwJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAWMRQwEgYDVQQDDAtleGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABC9PBCm_LShY0ELxk_xbD27Op0wq55t5jfCeYwObS5vKtuEHnykeDyAvlUzTmV_JpM3fUjG3EieTuTmpNgStgyyjbzBtMB0GA1UdDgQWBBSjXvZPZJWtrrOE9jcJWSOFgIVabzAfBgNVHSMEGDAWgBQRv2BjLbcGrFojG58TRqcr6DQp2DAMBgNVHRMBAf8EAjAAMB0GA1UdJQQWMBQGCCsGAQUFBwMDBggrBgEFBQcDAjAKBggqhkjOPQQDAgNIADBFAiBXxdkE_AwstEY95NDqdU4SnnaJIbNrsoSKSUgJfWcHpwIhAO3xRfB1rQlSWVMpmIVh_Ep7Fm8c1wQXfNntZE-udlZA",
+        "MIIBrzCCAVSgAwIBAgIUJqpba973YPOo3jVNaA-64kn-LBEwCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEJkHKg4UeHBCwSU5gBIgqI-aFhg5tH0yQkHGSQ4r4y7LASwwC09FsIB6XsykEryMjExaYjNtSQov4Se3UOzPGuqNmMGQwHQYDVR0OBBYEFBG_YGMttwasWiMbnxNGpyvoNCnYMB8GA1UdIwQYMBaAFKReafgWvJedM_a2PVJlMbU_93fEMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0kAMEYCIQC07O1ZYdmXY0V4mJXb5hBk8RJzWdB4nEawYzObfm--pQIhAL2zLu_nV9zdoBw2qW95TcjEmrAvu02T-R1fauww3dV1",
+        "MIIBpjCCAUygAwIBAgIUAiEoKdJEkiZ5EAqbl1-DXr3zsv4wCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABPVSbFdYCsnaj-2wNN0M2PmxW-syPqjbUlzvNPvCg7el_9pUg_En-TtO8Igqn_Ixh0q-sZwKVVe_7-RW6BL_QE6jZjBkMB0GA1UdDgQWBBSkXmn4FryXnTP2tj1SZTG1P_d3xDAfBgNVHSMEGDAWgBSkXmn4FryXnTP2tj1SZTG1P_d3xDASBgNVHRMBAf8ECDAGAQH_AgEBMA4GA1UdDwEB_wQEAwIBBjAKBggqhkjOPQQDAgNIADBFAiANEyEieqbtSF5Iw-nIBLtjQybGnWoQ4Ql4-prVBbVVPgIhAN0oV0OnBU4Fpu4h4It9UVUORwRYBJRPaE8Rl6dzJRtP"
+      ]
+    },
+    "output": {
+      "error": "DID prefix is invalid."
+    }
+  },
+  {
+    "id": "multiple-predicates",
+    "input": {
+      "did": "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::eku:1.3.6.1.5.5.7.3.3::eku:1.3.6.1.5.5.7.3.2",
+      "chain": [
+        "MIIBrzCCAVWgAwIBAgIUJUzbQpQ9NWw7AtVjxevRNHbPGnAwCgYIKoZIzj0EAwIwJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAWMRQwEgYDVQQDDAtleGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABC9PBCm_LShY0ELxk_xbD27Op0wq55t5jfCeYwObS5vKtuEHnykeDyAvlUzTmV_JpM3fUjG3EieTuTmpNgStgyyjbzBtMB0GA1UdDgQWBBSjXvZPZJWtrrOE9jcJWSOFgIVabzAfBgNVHSMEGDAWgBQRv2BjLbcGrFojG58TRqcr6DQp2DAMBgNVHRMBAf8EAjAAMB0GA1UdJQQWMBQGCCsGAQUFBwMDBggrBgEFBQcDAjAKBggqhkjOPQQDAgNIADBFAiBXxdkE_AwstEY95NDqdU4SnnaJIbNrsoSKSUgJfWcHpwIhAO3xRfB1rQlSWVMpmIVh_Ep7Fm8c1wQXfNntZE-udlZA",
+        "MIIBrzCCAVSgAwIBAgIUJqpba973YPOo3jVNaA-64kn-LBEwCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEJkHKg4UeHBCwSU5gBIgqI-aFhg5tH0yQkHGSQ4r4y7LASwwC09FsIB6XsykEryMjExaYjNtSQov4Se3UOzPGuqNmMGQwHQYDVR0OBBYEFBG_YGMttwasWiMbnxNGpyvoNCnYMB8GA1UdIwQYMBaAFKReafgWvJedM_a2PVJlMbU_93fEMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0kAMEYCIQC07O1ZYdmXY0V4mJXb5hBk8RJzWdB4nEawYzObfm--pQIhAL2zLu_nV9zdoBw2qW95TcjEmrAvu02T-R1fauww3dV1",
+        "MIIBpjCCAUygAwIBAgIUAiEoKdJEkiZ5EAqbl1-DXr3zsv4wCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABPVSbFdYCsnaj-2wNN0M2PmxW-syPqjbUlzvNPvCg7el_9pUg_En-TtO8Igqn_Ixh0q-sZwKVVe_7-RW6BL_QE6jZjBkMB0GA1UdDgQWBBSkXmn4FryXnTP2tj1SZTG1P_d3xDAfBgNVHSMEGDAWgBSkXmn4FryXnTP2tj1SZTG1P_d3xDASBgNVHRMBAf8ECDAGAQH_AgEBMA4GA1UdDwEB_wQEAwIBBjAKBggqhkjOPQQDAgNIADBFAiANEyEieqbtSF5Iw-nIBLtjQybGnWoQ4Ql4-prVBbVVPgIhAN0oV0OnBU4Fpu4h4It9UVUORwRYBJRPaE8Rl6dzJRtP"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::eku:1.3.6.1.5.5.7.3.3::eku:1.3.6.1.5.5.7.3.2",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::eku:1.3.6.1.5.5.7.3.3::eku:1.3.6.1.5.5.7.3.2#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::eku:1.3.6.1.5.5.7.3.3::eku:1.3.6.1.5.5.7.3.2",
+            "publicKeyJwk": {
+              "kty": "EC",
+              "crv": "P-256",
+              "x": "L08EKb8tKFjQQvGT_FsPbs6nTCrnm3mN8J5jA5tLm8o",
+              "y": "tuEHnykeDyAvlUzTmV_JpM3fUjG3EieTuTmpNgStgyw"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::eku:1.3.6.1.5.5.7.3.3::eku:1.3.6.1.5.5.7.3.2#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::eku:1.3.6.1.5.5.7.3.3::eku:1.3.6.1.5.5.7.3.2#0"
+        ],
+        "keyAgreement": [
+          "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::eku:1.3.6.1.5.5.7.3.3::eku:1.3.6.1.5.5.7.3.2#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "root-ca",
+    "input": {
+      "did": "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::subject:CN:example.com",
+      "chain": [
+        "MIIBrzCCAVWgAwIBAgIUJUzbQpQ9NWw7AtVjxevRNHbPGnAwCgYIKoZIzj0EAwIwJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAWMRQwEgYDVQQDDAtleGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABC9PBCm_LShY0ELxk_xbD27Op0wq55t5jfCeYwObS5vKtuEHnykeDyAvlUzTmV_JpM3fUjG3EieTuTmpNgStgyyjbzBtMB0GA1UdDgQWBBSjXvZPZJWtrrOE9jcJWSOFgIVabzAfBgNVHSMEGDAWgBQRv2BjLbcGrFojG58TRqcr6DQp2DAMBgNVHRMBAf8EAjAAMB0GA1UdJQQWMBQGCCsGAQUFBwMDBggrBgEFBQcDAjAKBggqhkjOPQQDAgNIADBFAiBXxdkE_AwstEY95NDqdU4SnnaJIbNrsoSKSUgJfWcHpwIhAO3xRfB1rQlSWVMpmIVh_Ep7Fm8c1wQXfNntZE-udlZA",
+        "MIIBrzCCAVSgAwIBAgIUJqpba973YPOo3jVNaA-64kn-LBEwCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEJkHKg4UeHBCwSU5gBIgqI-aFhg5tH0yQkHGSQ4r4y7LASwwC09FsIB6XsykEryMjExaYjNtSQov4Se3UOzPGuqNmMGQwHQYDVR0OBBYEFBG_YGMttwasWiMbnxNGpyvoNCnYMB8GA1UdIwQYMBaAFKReafgWvJedM_a2PVJlMbU_93fEMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0kAMEYCIQC07O1ZYdmXY0V4mJXb5hBk8RJzWdB4nEawYzObfm--pQIhAL2zLu_nV9zdoBw2qW95TcjEmrAvu02T-R1fauww3dV1",
+        "MIIBpjCCAUygAwIBAgIUAiEoKdJEkiZ5EAqbl1-DXr3zsv4wCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABPVSbFdYCsnaj-2wNN0M2PmxW-syPqjbUlzvNPvCg7el_9pUg_En-TtO8Igqn_Ixh0q-sZwKVVe_7-RW6BL_QE6jZjBkMB0GA1UdDgQWBBSkXmn4FryXnTP2tj1SZTG1P_d3xDAfBgNVHSMEGDAWgBSkXmn4FryXnTP2tj1SZTG1P_d3xDASBgNVHRMBAf8ECDAGAQH_AgEBMA4GA1UdDwEB_wQEAwIBBjAKBggqhkjOPQQDAgNIADBFAiANEyEieqbtSF5Iw-nIBLtjQybGnWoQ4Ql4-prVBbVVPgIhAN0oV0OnBU4Fpu4h4It9UVUORwRYBJRPaE8Rl6dzJRtP"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::subject:CN:example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::subject:CN:example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::subject:CN:example.com",
+            "publicKeyJwk": {
+              "kty": "EC",
+              "crv": "P-256",
+              "x": "L08EKb8tKFjQQvGT_FsPbs6nTCrnm3mN8J5jA5tLm8o",
+              "y": "tuEHnykeDyAvlUzTmV_JpM3fUjG3EieTuTmpNgStgyw"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::subject:CN:example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::subject:CN:example.com#0"
+        ],
+        "keyAgreement": [
+          "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::subject:CN:example.com#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "san",
+    "input": {
+      "did": "did:x509:0:sha256:4Wf3Hy45zPgsSGXmjnDNLtSdRVo19eFjirPM3lALnzE::san:email:user%40example.com",
+      "chain": [
+        "MIIB2TCCAX6gAwIBAgICC7owCgYIKoZIzj0EAwIwJTEjMCEGA1UEAwwaZXhhbXBsZS5jb20gRnVsY2lvIFJvb3QgQ0EwIBcNMjYwMTAxMDAwMDAwWhgPMjEyNjAxMDEwMDAwMDBaMAAwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARbfC2X_1FD9m16H89xbNtEvwksmvFyd5RTOpwPEL-Gyg5jSo-NROhqtQUOIe2cd3bDCx4cRNe_HPQeVBcqPl9Ko4HAMIG9MB0GA1UdDgQWBBQtWXJrDfINGJMtX3ptM_opbkekXDAfBgNVHSMEGDAWgBSmggyjuvqxzXdju_cCKM2_p_g7GDAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDATBgNVHSUEDDAKBggrBgEFBQcDAzAeBgNVHREBAf8EFDASgRB1c2VyQGV4YW1wbGUuY29tMCgGCisGAQQBg78wAQEEGmh0dHBzOi8vaXNzdWVyLmV4YW1wbGUuY29tMAoGCCqGSM49BAMCA0kAMEYCIQDjK3TN28BplzKml09mN1xI6rKSBmq0Zmd2cOhdtyvkwgIhAJp4QqzWhsRs6XiQd9m0IZvrM2JZ3ZgAlmnk-ofyHmzK",
+        "MIIBoTCCAUigAwIBAgICC7kwCgYIKoZIzj0EAwIwJTEjMCEGA1UEAwwaZXhhbXBsZS5jb20gRnVsY2lvIFJvb3QgQ0EwIBcNMjYwMTAxMDAwMDAwWhgPMjEyNjAxMDEwMDAwMDBaMCUxIzAhBgNVBAMMGmV4YW1wbGUuY29tIEZ1bGNpbyBSb290IENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE7f30wtYzS5biajBxZS96YIibYuLeQaCsTLrFStL22HuWG7H3eKX0Beg4S9J8EGapIG5-EwwRG5UoqGeVFxJby6NmMGQwHQYDVR0OBBYEFKaCDKO6-rHNd2O79wIozb-n-DsYMB8GA1UdIwQYMBaAFKaCDKO6-rHNd2O79wIozb-n-DsYMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0cAMEQCICuSjdvAkvt1NBYx0PBUpczXUrRsoQuWK2LzTKtN2N1GAiAQ_sZg9j5rlDEveyciS3BqqhrEgFGn_3lSUpcqxva2yQ"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:4Wf3Hy45zPgsSGXmjnDNLtSdRVo19eFjirPM3lALnzE::san:email:user%40example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:4Wf3Hy45zPgsSGXmjnDNLtSdRVo19eFjirPM3lALnzE::san:email:user%40example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:4Wf3Hy45zPgsSGXmjnDNLtSdRVo19eFjirPM3lALnzE::san:email:user%40example.com",
+            "publicKeyJwk": {
+              "kty": "EC",
+              "crv": "P-256",
+              "x": "W3wtl_9RQ_Zteh_PcWzbRL8JLJrxcneUUzqcDxC_hso",
+              "y": "DmNKj41E6Gq1BQ4h7Zx3dsMLHhxE178c9B5UFyo-X0o"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:4Wf3Hy45zPgsSGXmjnDNLtSdRVo19eFjirPM3lALnzE::san:email:user%40example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:4Wf3Hy45zPgsSGXmjnDNLtSdRVo19eFjirPM3lALnzE::san:email:user%40example.com#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "san-type-must-match",
+    "input": {
+      "did": "did:x509:0:sha256:4Wf3Hy45zPgsSGXmjnDNLtSdRVo19eFjirPM3lALnzE::san:uri:user%40example.com",
+      "chain": [
+        "MIIB2TCCAX6gAwIBAgICC7owCgYIKoZIzj0EAwIwJTEjMCEGA1UEAwwaZXhhbXBsZS5jb20gRnVsY2lvIFJvb3QgQ0EwIBcNMjYwMTAxMDAwMDAwWhgPMjEyNjAxMDEwMDAwMDBaMAAwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARbfC2X_1FD9m16H89xbNtEvwksmvFyd5RTOpwPEL-Gyg5jSo-NROhqtQUOIe2cd3bDCx4cRNe_HPQeVBcqPl9Ko4HAMIG9MB0GA1UdDgQWBBQtWXJrDfINGJMtX3ptM_opbkekXDAfBgNVHSMEGDAWgBSmggyjuvqxzXdju_cCKM2_p_g7GDAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDATBgNVHSUEDDAKBggrBgEFBQcDAzAeBgNVHREBAf8EFDASgRB1c2VyQGV4YW1wbGUuY29tMCgGCisGAQQBg78wAQEEGmh0dHBzOi8vaXNzdWVyLmV4YW1wbGUuY29tMAoGCCqGSM49BAMCA0kAMEYCIQDjK3TN28BplzKml09mN1xI6rKSBmq0Zmd2cOhdtyvkwgIhAJp4QqzWhsRs6XiQd9m0IZvrM2JZ3ZgAlmnk-ofyHmzK",
+        "MIIBoTCCAUigAwIBAgICC7kwCgYIKoZIzj0EAwIwJTEjMCEGA1UEAwwaZXhhbXBsZS5jb20gRnVsY2lvIFJvb3QgQ0EwIBcNMjYwMTAxMDAwMDAwWhgPMjEyNjAxMDEwMDAwMDBaMCUxIzAhBgNVBAMMGmV4YW1wbGUuY29tIEZ1bGNpbyBSb290IENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE7f30wtYzS5biajBxZS96YIibYuLeQaCsTLrFStL22HuWG7H3eKX0Beg4S9J8EGapIG5-EwwRG5UoqGeVFxJby6NmMGQwHQYDVR0OBBYEFKaCDKO6-rHNd2O79wIozb-n-DsYMB8GA1UdIwQYMBaAFKaCDKO6-rHNd2O79wIozb-n-DsYMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0cAMEQCICuSjdvAkvt1NBYx0PBUpczXUrRsoQuWK2LzTKtN2N1GAiAQ_sZg9j5rlDEveyciS3BqqhrEgFGn_3lSUpcqxva2yQ"
+      ]
+    },
+    "output": {
+      "error": "SAN predicate does not match the certificate."
+    }
+  },
+  {
+    "id": "san-invalid-value",
+    "input": {
+      "did": "did:x509:0:sha256:4Wf3Hy45zPgsSGXmjnDNLtSdRVo19eFjirPM3lALnzE::san:email:other%40example.com",
+      "chain": [
+        "MIIB2TCCAX6gAwIBAgICC7owCgYIKoZIzj0EAwIwJTEjMCEGA1UEAwwaZXhhbXBsZS5jb20gRnVsY2lvIFJvb3QgQ0EwIBcNMjYwMTAxMDAwMDAwWhgPMjEyNjAxMDEwMDAwMDBaMAAwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARbfC2X_1FD9m16H89xbNtEvwksmvFyd5RTOpwPEL-Gyg5jSo-NROhqtQUOIe2cd3bDCx4cRNe_HPQeVBcqPl9Ko4HAMIG9MB0GA1UdDgQWBBQtWXJrDfINGJMtX3ptM_opbkekXDAfBgNVHSMEGDAWgBSmggyjuvqxzXdju_cCKM2_p_g7GDAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDATBgNVHSUEDDAKBggrBgEFBQcDAzAeBgNVHREBAf8EFDASgRB1c2VyQGV4YW1wbGUuY29tMCgGCisGAQQBg78wAQEEGmh0dHBzOi8vaXNzdWVyLmV4YW1wbGUuY29tMAoGCCqGSM49BAMCA0kAMEYCIQDjK3TN28BplzKml09mN1xI6rKSBmq0Zmd2cOhdtyvkwgIhAJp4QqzWhsRs6XiQd9m0IZvrM2JZ3ZgAlmnk-ofyHmzK",
+        "MIIBoTCCAUigAwIBAgICC7kwCgYIKoZIzj0EAwIwJTEjMCEGA1UEAwwaZXhhbXBsZS5jb20gRnVsY2lvIFJvb3QgQ0EwIBcNMjYwMTAxMDAwMDAwWhgPMjEyNjAxMDEwMDAwMDBaMCUxIzAhBgNVBAMMGmV4YW1wbGUuY29tIEZ1bGNpbyBSb290IENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE7f30wtYzS5biajBxZS96YIibYuLeQaCsTLrFStL22HuWG7H3eKX0Beg4S9J8EGapIG5-EwwRG5UoqGeVFxJby6NmMGQwHQYDVR0OBBYEFKaCDKO6-rHNd2O79wIozb-n-DsYMB8GA1UdIwQYMBaAFKaCDKO6-rHNd2O79wIozb-n-DsYMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0cAMEQCICuSjdvAkvt1NBYx0PBUpczXUrRsoQuWK2LzTKtN2N1GAiAQ_sZg9j5rlDEveyciS3BqqhrEgFGn_3lSUpcqxva2yQ"
+      ]
+    },
+    "output": {
+      "error": "SAN predicate does not match the certificate."
+    }
+  },
+  {
+    "id": "san-predicate-requires-type-and-value",
+    "input": {
+      "did": "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::san:email",
+      "chain": [
+        "MIIBrzCCAVWgAwIBAgIUJUzbQpQ9NWw7AtVjxevRNHbPGnAwCgYIKoZIzj0EAwIwJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAWMRQwEgYDVQQDDAtleGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABC9PBCm_LShY0ELxk_xbD27Op0wq55t5jfCeYwObS5vKtuEHnykeDyAvlUzTmV_JpM3fUjG3EieTuTmpNgStgyyjbzBtMB0GA1UdDgQWBBSjXvZPZJWtrrOE9jcJWSOFgIVabzAfBgNVHSMEGDAWgBQRv2BjLbcGrFojG58TRqcr6DQp2DAMBgNVHRMBAf8EAjAAMB0GA1UdJQQWMBQGCCsGAQUFBwMDBggrBgEFBQcDAjAKBggqhkjOPQQDAgNIADBFAiBXxdkE_AwstEY95NDqdU4SnnaJIbNrsoSKSUgJfWcHpwIhAO3xRfB1rQlSWVMpmIVh_Ep7Fm8c1wQXfNntZE-udlZA",
+        "MIIBrzCCAVSgAwIBAgIUJqpba973YPOo3jVNaA-64kn-LBEwCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEJkHKg4UeHBCwSU5gBIgqI-aFhg5tH0yQkHGSQ4r4y7LASwwC09FsIB6XsykEryMjExaYjNtSQov4Se3UOzPGuqNmMGQwHQYDVR0OBBYEFBG_YGMttwasWiMbnxNGpyvoNCnYMB8GA1UdIwQYMBaAFKReafgWvJedM_a2PVJlMbU_93fEMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0kAMEYCIQC07O1ZYdmXY0V4mJXb5hBk8RJzWdB4nEawYzObfm--pQIhAL2zLu_nV9zdoBw2qW95TcjEmrAvu02T-R1fauww3dV1",
+        "MIIBpjCCAUygAwIBAgIUAiEoKdJEkiZ5EAqbl1-DXr3zsv4wCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABPVSbFdYCsnaj-2wNN0M2PmxW-syPqjbUlzvNPvCg7el_9pUg_En-TtO8Igqn_Ixh0q-sZwKVVe_7-RW6BL_QE6jZjBkMB0GA1UdDgQWBBSkXmn4FryXnTP2tj1SZTG1P_d3xDAfBgNVHSMEGDAWgBSkXmn4FryXnTP2tj1SZTG1P_d3xDASBgNVHRMBAf8ECDAGAQH_AgEBMA4GA1UdDwEB_wQEAwIBBjAKBggqhkjOPQQDAgNIADBFAiANEyEieqbtSF5Iw-nIBLtjQybGnWoQ4Ql4-prVBbVVPgIhAN0oV0OnBU4Fpu4h4It9UVUORwRYBJRPaE8Rl6dzJRtP"
+      ]
+    },
+    "output": {
+      "error": "SAN predicate requires exactly one type and value."
+    }
+  },
+  {
+    "id": "sha384-ca-fingerprint",
+    "input": {
+      "did": "did:x509:0:sha384:xZeG3w_612bVx_YcHnqOGd-3clmV67SYk1SD5ewQqcgypPi9Iz5pyHrCG9ptNTCC::subject:CN:example.com",
+      "chain": [
+        "MIIBrzCCAVWgAwIBAgIUJUzbQpQ9NWw7AtVjxevRNHbPGnAwCgYIKoZIzj0EAwIwJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAWMRQwEgYDVQQDDAtleGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABC9PBCm_LShY0ELxk_xbD27Op0wq55t5jfCeYwObS5vKtuEHnykeDyAvlUzTmV_JpM3fUjG3EieTuTmpNgStgyyjbzBtMB0GA1UdDgQWBBSjXvZPZJWtrrOE9jcJWSOFgIVabzAfBgNVHSMEGDAWgBQRv2BjLbcGrFojG58TRqcr6DQp2DAMBgNVHRMBAf8EAjAAMB0GA1UdJQQWMBQGCCsGAQUFBwMDBggrBgEFBQcDAjAKBggqhkjOPQQDAgNIADBFAiBXxdkE_AwstEY95NDqdU4SnnaJIbNrsoSKSUgJfWcHpwIhAO3xRfB1rQlSWVMpmIVh_Ep7Fm8c1wQXfNntZE-udlZA",
+        "MIIBrzCCAVSgAwIBAgIUJqpba973YPOo3jVNaA-64kn-LBEwCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEJkHKg4UeHBCwSU5gBIgqI-aFhg5tH0yQkHGSQ4r4y7LASwwC09FsIB6XsykEryMjExaYjNtSQov4Se3UOzPGuqNmMGQwHQYDVR0OBBYEFBG_YGMttwasWiMbnxNGpyvoNCnYMB8GA1UdIwQYMBaAFKReafgWvJedM_a2PVJlMbU_93fEMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0kAMEYCIQC07O1ZYdmXY0V4mJXb5hBk8RJzWdB4nEawYzObfm--pQIhAL2zLu_nV9zdoBw2qW95TcjEmrAvu02T-R1fauww3dV1",
+        "MIIBpjCCAUygAwIBAgIUAiEoKdJEkiZ5EAqbl1-DXr3zsv4wCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABPVSbFdYCsnaj-2wNN0M2PmxW-syPqjbUlzvNPvCg7el_9pUg_En-TtO8Igqn_Ixh0q-sZwKVVe_7-RW6BL_QE6jZjBkMB0GA1UdDgQWBBSkXmn4FryXnTP2tj1SZTG1P_d3xDAfBgNVHSMEGDAWgBSkXmn4FryXnTP2tj1SZTG1P_d3xDASBgNVHRMBAf8ECDAGAQH_AgEBMA4GA1UdDwEB_wQEAwIBBjAKBggqhkjOPQQDAgNIADBFAiANEyEieqbtSF5Iw-nIBLtjQybGnWoQ4Ql4-prVBbVVPgIhAN0oV0OnBU4Fpu4h4It9UVUORwRYBJRPaE8Rl6dzJRtP"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha384:xZeG3w_612bVx_YcHnqOGd-3clmV67SYk1SD5ewQqcgypPi9Iz5pyHrCG9ptNTCC::subject:CN:example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha384:xZeG3w_612bVx_YcHnqOGd-3clmV67SYk1SD5ewQqcgypPi9Iz5pyHrCG9ptNTCC::subject:CN:example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha384:xZeG3w_612bVx_YcHnqOGd-3clmV67SYk1SD5ewQqcgypPi9Iz5pyHrCG9ptNTCC::subject:CN:example.com",
+            "publicKeyJwk": {
+              "kty": "EC",
+              "crv": "P-256",
+              "x": "L08EKb8tKFjQQvGT_FsPbs6nTCrnm3mN8J5jA5tLm8o",
+              "y": "tuEHnykeDyAvlUzTmV_JpM3fUjG3EieTuTmpNgStgyw"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha384:xZeG3w_612bVx_YcHnqOGd-3clmV67SYk1SD5ewQqcgypPi9Iz5pyHrCG9ptNTCC::subject:CN:example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha384:xZeG3w_612bVx_YcHnqOGd-3clmV67SYk1SD5ewQqcgypPi9Iz5pyHrCG9ptNTCC::subject:CN:example.com#0"
+        ],
+        "keyAgreement": [
+          "did:x509:0:sha384:xZeG3w_612bVx_YcHnqOGd-3clmV67SYk1SD5ewQqcgypPi9Iz5pyHrCG9ptNTCC::subject:CN:example.com#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "sha512-ca-fingerprint",
+    "input": {
+      "did": "did:x509:0:sha512:A17PGcNfC2LF1NTTqP8RTs52rpHSZN41NVIOMUODTaa1v35F65KlDE1ckyhvMnavspUnCXooakT8EZJi7O2LaA::subject:CN:example.com",
+      "chain": [
+        "MIIBrzCCAVWgAwIBAgIUJUzbQpQ9NWw7AtVjxevRNHbPGnAwCgYIKoZIzj0EAwIwJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAWMRQwEgYDVQQDDAtleGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABC9PBCm_LShY0ELxk_xbD27Op0wq55t5jfCeYwObS5vKtuEHnykeDyAvlUzTmV_JpM3fUjG3EieTuTmpNgStgyyjbzBtMB0GA1UdDgQWBBSjXvZPZJWtrrOE9jcJWSOFgIVabzAfBgNVHSMEGDAWgBQRv2BjLbcGrFojG58TRqcr6DQp2DAMBgNVHRMBAf8EAjAAMB0GA1UdJQQWMBQGCCsGAQUFBwMDBggrBgEFBQcDAjAKBggqhkjOPQQDAgNIADBFAiBXxdkE_AwstEY95NDqdU4SnnaJIbNrsoSKSUgJfWcHpwIhAO3xRfB1rQlSWVMpmIVh_Ep7Fm8c1wQXfNntZE-udlZA",
+        "MIIBrzCCAVSgAwIBAgIUJqpba973YPOo3jVNaA-64kn-LBEwCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEJkHKg4UeHBCwSU5gBIgqI-aFhg5tH0yQkHGSQ4r4y7LASwwC09FsIB6XsykEryMjExaYjNtSQov4Se3UOzPGuqNmMGQwHQYDVR0OBBYEFBG_YGMttwasWiMbnxNGpyvoNCnYMB8GA1UdIwQYMBaAFKReafgWvJedM_a2PVJlMbU_93fEMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0kAMEYCIQC07O1ZYdmXY0V4mJXb5hBk8RJzWdB4nEawYzObfm--pQIhAL2zLu_nV9zdoBw2qW95TcjEmrAvu02T-R1fauww3dV1",
+        "MIIBpjCCAUygAwIBAgIUAiEoKdJEkiZ5EAqbl1-DXr3zsv4wCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABPVSbFdYCsnaj-2wNN0M2PmxW-syPqjbUlzvNPvCg7el_9pUg_En-TtO8Igqn_Ixh0q-sZwKVVe_7-RW6BL_QE6jZjBkMB0GA1UdDgQWBBSkXmn4FryXnTP2tj1SZTG1P_d3xDAfBgNVHSMEGDAWgBSkXmn4FryXnTP2tj1SZTG1P_d3xDASBgNVHRMBAf8ECDAGAQH_AgEBMA4GA1UdDwEB_wQEAwIBBjAKBggqhkjOPQQDAgNIADBFAiANEyEieqbtSF5Iw-nIBLtjQybGnWoQ4Ql4-prVBbVVPgIhAN0oV0OnBU4Fpu4h4It9UVUORwRYBJRPaE8Rl6dzJRtP"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha512:A17PGcNfC2LF1NTTqP8RTs52rpHSZN41NVIOMUODTaa1v35F65KlDE1ckyhvMnavspUnCXooakT8EZJi7O2LaA::subject:CN:example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha512:A17PGcNfC2LF1NTTqP8RTs52rpHSZN41NVIOMUODTaa1v35F65KlDE1ckyhvMnavspUnCXooakT8EZJi7O2LaA::subject:CN:example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha512:A17PGcNfC2LF1NTTqP8RTs52rpHSZN41NVIOMUODTaa1v35F65KlDE1ckyhvMnavspUnCXooakT8EZJi7O2LaA::subject:CN:example.com",
+            "publicKeyJwk": {
+              "kty": "EC",
+              "crv": "P-256",
+              "x": "L08EKb8tKFjQQvGT_FsPbs6nTCrnm3mN8J5jA5tLm8o",
+              "y": "tuEHnykeDyAvlUzTmV_JpM3fUjG3EieTuTmpNgStgyw"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha512:A17PGcNfC2LF1NTTqP8RTs52rpHSZN41NVIOMUODTaa1v35F65KlDE1ckyhvMnavspUnCXooakT8EZJi7O2LaA::subject:CN:example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha512:A17PGcNfC2LF1NTTqP8RTs52rpHSZN41NVIOMUODTaa1v35F65KlDE1ckyhvMnavspUnCXooakT8EZJi7O2LaA::subject:CN:example.com#0"
+        ],
+        "keyAgreement": [
+          "did:x509:0:sha512:A17PGcNfC2LF1NTTqP8RTs52rpHSZN41NVIOMUODTaa1v35F65KlDE1ckyhvMnavspUnCXooakT8EZJi7O2LaA::subject:CN:example.com#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "subject-duplicate-field",
+    "input": {
+      "did": "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::subject:CN:Other:CN:example.com",
+      "chain": [
+        "MIIBrzCCAVWgAwIBAgIUJUzbQpQ9NWw7AtVjxevRNHbPGnAwCgYIKoZIzj0EAwIwJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAWMRQwEgYDVQQDDAtleGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABC9PBCm_LShY0ELxk_xbD27Op0wq55t5jfCeYwObS5vKtuEHnykeDyAvlUzTmV_JpM3fUjG3EieTuTmpNgStgyyjbzBtMB0GA1UdDgQWBBSjXvZPZJWtrrOE9jcJWSOFgIVabzAfBgNVHSMEGDAWgBQRv2BjLbcGrFojG58TRqcr6DQp2DAMBgNVHRMBAf8EAjAAMB0GA1UdJQQWMBQGCCsGAQUFBwMDBggrBgEFBQcDAjAKBggqhkjOPQQDAgNIADBFAiBXxdkE_AwstEY95NDqdU4SnnaJIbNrsoSKSUgJfWcHpwIhAO3xRfB1rQlSWVMpmIVh_Ep7Fm8c1wQXfNntZE-udlZA",
+        "MIIBrzCCAVSgAwIBAgIUJqpba973YPOo3jVNaA-64kn-LBEwCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEJkHKg4UeHBCwSU5gBIgqI-aFhg5tH0yQkHGSQ4r4y7LASwwC09FsIB6XsykEryMjExaYjNtSQov4Se3UOzPGuqNmMGQwHQYDVR0OBBYEFBG_YGMttwasWiMbnxNGpyvoNCnYMB8GA1UdIwQYMBaAFKReafgWvJedM_a2PVJlMbU_93fEMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0kAMEYCIQC07O1ZYdmXY0V4mJXb5hBk8RJzWdB4nEawYzObfm--pQIhAL2zLu_nV9zdoBw2qW95TcjEmrAvu02T-R1fauww3dV1",
+        "MIIBpjCCAUygAwIBAgIUAiEoKdJEkiZ5EAqbl1-DXr3zsv4wCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABPVSbFdYCsnaj-2wNN0M2PmxW-syPqjbUlzvNPvCg7el_9pUg_En-TtO8Igqn_Ixh0q-sZwKVVe_7-RW6BL_QE6jZjBkMB0GA1UdDgQWBBSkXmn4FryXnTP2tj1SZTG1P_d3xDAfBgNVHSMEGDAWgBSkXmn4FryXnTP2tj1SZTG1P_d3xDASBgNVHRMBAf8ECDAGAQH_AgEBMA4GA1UdDwEB_wQEAwIBBjAKBggqhkjOPQQDAgNIADBFAiANEyEieqbtSF5Iw-nIBLtjQybGnWoQ4Ql4-prVBbVVPgIhAN0oV0OnBU4Fpu4h4It9UVUORwRYBJRPaE8Rl6dzJRtP"
+      ]
+    },
+    "output": {
+      "error": "Subject predicate contains duplicate fields."
+    }
+  },
+  {
+    "id": "subject-invalid-name",
+    "input": {
+      "did": "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::subject:CN:example",
+      "chain": [
+        "MIIBrzCCAVWgAwIBAgIUJUzbQpQ9NWw7AtVjxevRNHbPGnAwCgYIKoZIzj0EAwIwJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAWMRQwEgYDVQQDDAtleGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABC9PBCm_LShY0ELxk_xbD27Op0wq55t5jfCeYwObS5vKtuEHnykeDyAvlUzTmV_JpM3fUjG3EieTuTmpNgStgyyjbzBtMB0GA1UdDgQWBBSjXvZPZJWtrrOE9jcJWSOFgIVabzAfBgNVHSMEGDAWgBQRv2BjLbcGrFojG58TRqcr6DQp2DAMBgNVHRMBAf8EAjAAMB0GA1UdJQQWMBQGCCsGAQUFBwMDBggrBgEFBQcDAjAKBggqhkjOPQQDAgNIADBFAiBXxdkE_AwstEY95NDqdU4SnnaJIbNrsoSKSUgJfWcHpwIhAO3xRfB1rQlSWVMpmIVh_Ep7Fm8c1wQXfNntZE-udlZA",
+        "MIIBrzCCAVSgAwIBAgIUJqpba973YPOo3jVNaA-64kn-LBEwCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEJkHKg4UeHBCwSU5gBIgqI-aFhg5tH0yQkHGSQ4r4y7LASwwC09FsIB6XsykEryMjExaYjNtSQov4Se3UOzPGuqNmMGQwHQYDVR0OBBYEFBG_YGMttwasWiMbnxNGpyvoNCnYMB8GA1UdIwQYMBaAFKReafgWvJedM_a2PVJlMbU_93fEMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0kAMEYCIQC07O1ZYdmXY0V4mJXb5hBk8RJzWdB4nEawYzObfm--pQIhAL2zLu_nV9zdoBw2qW95TcjEmrAvu02T-R1fauww3dV1",
+        "MIIBpjCCAUygAwIBAgIUAiEoKdJEkiZ5EAqbl1-DXr3zsv4wCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABPVSbFdYCsnaj-2wNN0M2PmxW-syPqjbUlzvNPvCg7el_9pUg_En-TtO8Igqn_Ixh0q-sZwKVVe_7-RW6BL_QE6jZjBkMB0GA1UdDgQWBBSkXmn4FryXnTP2tj1SZTG1P_d3xDAfBgNVHSMEGDAWgBSkXmn4FryXnTP2tj1SZTG1P_d3xDASBgNVHRMBAf8ECDAGAQH_AgEBMA4GA1UdDwEB_wQEAwIBBjAKBggqhkjOPQQDAgNIADBFAiANEyEieqbtSF5Iw-nIBLtjQybGnWoQ4Ql4-prVBbVVPgIhAN0oV0OnBU4Fpu4h4It9UVUORwRYBJRPaE8Rl6dzJRtP"
+      ]
+    },
+    "output": {
+      "error": "Subject predicate does not match the certificate."
+    }
+  },
+  {
+    "id": "subject-predicate-rejects-unknown-key",
+    "input": {
+      "did": "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::subject:DC:example.com",
+      "chain": [
+        "MIIBrzCCAVWgAwIBAgIUJUzbQpQ9NWw7AtVjxevRNHbPGnAwCgYIKoZIzj0EAwIwJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAWMRQwEgYDVQQDDAtleGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABC9PBCm_LShY0ELxk_xbD27Op0wq55t5jfCeYwObS5vKtuEHnykeDyAvlUzTmV_JpM3fUjG3EieTuTmpNgStgyyjbzBtMB0GA1UdDgQWBBSjXvZPZJWtrrOE9jcJWSOFgIVabzAfBgNVHSMEGDAWgBQRv2BjLbcGrFojG58TRqcr6DQp2DAMBgNVHRMBAf8EAjAAMB0GA1UdJQQWMBQGCCsGAQUFBwMDBggrBgEFBQcDAjAKBggqhkjOPQQDAgNIADBFAiBXxdkE_AwstEY95NDqdU4SnnaJIbNrsoSKSUgJfWcHpwIhAO3xRfB1rQlSWVMpmIVh_Ep7Fm8c1wQXfNntZE-udlZA",
+        "MIIBrzCCAVSgAwIBAgIUJqpba973YPOo3jVNaA-64kn-LBEwCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEJkHKg4UeHBCwSU5gBIgqI-aFhg5tH0yQkHGSQ4r4y7LASwwC09FsIB6XsykEryMjExaYjNtSQov4Se3UOzPGuqNmMGQwHQYDVR0OBBYEFBG_YGMttwasWiMbnxNGpyvoNCnYMB8GA1UdIwQYMBaAFKReafgWvJedM_a2PVJlMbU_93fEMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0kAMEYCIQC07O1ZYdmXY0V4mJXb5hBk8RJzWdB4nEawYzObfm--pQIhAL2zLu_nV9zdoBw2qW95TcjEmrAvu02T-R1fauww3dV1",
+        "MIIBpjCCAUygAwIBAgIUAiEoKdJEkiZ5EAqbl1-DXr3zsv4wCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABPVSbFdYCsnaj-2wNN0M2PmxW-syPqjbUlzvNPvCg7el_9pUg_En-TtO8Igqn_Ixh0q-sZwKVVe_7-RW6BL_QE6jZjBkMB0GA1UdDgQWBBSkXmn4FryXnTP2tj1SZTG1P_d3xDAfBgNVHSMEGDAWgBSkXmn4FryXnTP2tj1SZTG1P_d3xDASBgNVHRMBAf8ECDAGAQH_AgEBMA4GA1UdDwEB_wQEAwIBBjAKBggqhkjOPQQDAgNIADBFAiANEyEieqbtSF5Iw-nIBLtjQybGnWoQ4Ql4-prVBbVVPgIhAN0oV0OnBU4Fpu4h4It9UVUORwRYBJRPaE8Rl6dzJRtP"
+      ]
+    },
+    "output": {
+      "error": "Subject predicate contains an unknown key."
+    }
+  },
+  {
+    "id": "subject-predicate-requires-key-value-pairs",
+    "input": {
+      "did": "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::subject:CN",
+      "chain": [
+        "MIIBrzCCAVWgAwIBAgIUJUzbQpQ9NWw7AtVjxevRNHbPGnAwCgYIKoZIzj0EAwIwJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAWMRQwEgYDVQQDDAtleGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABC9PBCm_LShY0ELxk_xbD27Op0wq55t5jfCeYwObS5vKtuEHnykeDyAvlUzTmV_JpM3fUjG3EieTuTmpNgStgyyjbzBtMB0GA1UdDgQWBBSjXvZPZJWtrrOE9jcJWSOFgIVabzAfBgNVHSMEGDAWgBQRv2BjLbcGrFojG58TRqcr6DQp2DAMBgNVHRMBAf8EAjAAMB0GA1UdJQQWMBQGCCsGAQUFBwMDBggrBgEFBQcDAjAKBggqhkjOPQQDAgNIADBFAiBXxdkE_AwstEY95NDqdU4SnnaJIbNrsoSKSUgJfWcHpwIhAO3xRfB1rQlSWVMpmIVh_Ep7Fm8c1wQXfNntZE-udlZA",
+        "MIIBrzCCAVSgAwIBAgIUJqpba973YPOo3jVNaA-64kn-LBEwCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEJkHKg4UeHBCwSU5gBIgqI-aFhg5tH0yQkHGSQ4r4y7LASwwC09FsIB6XsykEryMjExaYjNtSQov4Se3UOzPGuqNmMGQwHQYDVR0OBBYEFBG_YGMttwasWiMbnxNGpyvoNCnYMB8GA1UdIwQYMBaAFKReafgWvJedM_a2PVJlMbU_93fEMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0kAMEYCIQC07O1ZYdmXY0V4mJXb5hBk8RJzWdB4nEawYzObfm--pQIhAL2zLu_nV9zdoBw2qW95TcjEmrAvu02T-R1fauww3dV1",
+        "MIIBpjCCAUygAwIBAgIUAiEoKdJEkiZ5EAqbl1-DXr3zsv4wCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABPVSbFdYCsnaj-2wNN0M2PmxW-syPqjbUlzvNPvCg7el_9pUg_En-TtO8Igqn_Ixh0q-sZwKVVe_7-RW6BL_QE6jZjBkMB0GA1UdDgQWBBSkXmn4FryXnTP2tj1SZTG1P_d3xDAfBgNVHSMEGDAWgBSkXmn4FryXnTP2tj1SZTG1P_d3xDASBgNVHRMBAf8ECDAGAQH_AgEBMA4GA1UdDwEB_wQEAwIBBjAKBggqhkjOPQQDAgNIADBFAiANEyEieqbtSF5Iw-nIBLtjQybGnWoQ4Ql4-prVBbVVPgIhAN0oV0OnBU4Fpu4h4It9UVUORwRYBJRPaE8Rl6dzJRtP"
+      ]
+    },
+    "output": {
+      "error": "Subject predicate requires key-value pairs."
+    }
+  },
+  {
+    "id": "subject-predicate-supports-dotted-oid",
+    "input": {
+      "did": "did:x509:0:sha256:q8luFglUPIwAjp1iJMj3bvNMqOz_zuLDNCozLlV2Iwc::subject:1.2.840.113549.1.9.1:test%40example.com",
+      "chain": [
+        "MIIBkzCCATqgAwIBAgIUDOYExPXjvuHBhJlkU2QFmKAbOHQwCgYIKoZIzj0EAwIwEDEOMAwGA1UEAwwFSW50ZXIwIBcNMjAwMTAxMDAwMDAwWhgPMjEyMDAxMDEwMDAwMDBaMDAxDTALBgNVBAMMBExlYWYxHzAdBgkqhkiG9w0BCQEWEHRlc3RAZXhhbXBsZS5jb20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARH5Gt1UzQQhvrmj6ASfH2EnsEEZBs2pN1mdFY15TdnIhwHj1E4e5wbpAKcQWICaqbxUR2a01X8Y3wUo8TUmwaSo1AwTjAdBgNVHQ4EFgQUuOnSEtTGnGo09LmysdrOgg_5Qp8wHwYDVR0jBBgwFoAUAojPRwdz0jGUqICdb-wpTjFT2lQwDAYDVR0TAQH_BAIwADAKBggqhkjOPQQDAgNHADBEAiAN410DsidTKd_cksKrIsCh-nf2vQO4mcfVc-W1SHLKMAIgeePwB9a4eEdIFgJQpSlgVVvQ94Ygj9lx1GcS2P58Ohw",
+        "MIIBhjCCASygAwIBAgIUYMpANit-VGgJUiTBu6lwCtuvZrMwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowEDEOMAwGA1UEAwwFSW50ZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQElEVoREUkZug-eacagr9eo-pYi4KVyrL_2qFt-VUn7iY5GHDkcoHMpUh_OibS0SCUqz0BaWxx4l-nL5ZgCA_co2MwYTAdBgNVHQ4EFgQUAojPRwdz0jGUqICdb-wpTjFT2lQwHwYDVR0jBBgwFoAUuVJR0XD4brsiVXeOUv-MTmKy6yswDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDSAAwRQIgXgNrjzvb7mAzHoQY4mLEsxPAwil-MwKztj0xiAhtdEICIQCc_kBb6okC7gA82h7vHxPqelHDl7lXTl7t5eG84KzHOA",
+        "MIIBhDCCASugAwIBAgIUSUxiHaC4iljkKpi78ZeiPxd1Z2AwCgYIKoZIzj0EAwIwDzENMAsGA1UEAwwEUm9vdDAgFw0yMDAxMDEwMDAwMDBaGA8yMTIwMDEwMTAwMDAwMFowDzENMAsGA1UEAwwEUm9vdDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABEyOb8lfnptJkQBl42HfVy_KMOXmmOdFQvZ_lv-KMVG5dXBAse564VYLqpikctymmsemfNqkgvlm4pZxXgjorLqjYzBhMB0GA1UdDgQWBBS5UlHRcPhuuyJVd45S_4xOYrLrKzAfBgNVHSMEGDAWgBS5UlHRcPhuuyJVd45S_4xOYrLrKzAPBgNVHRMBAf8EBTADAQH_MA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNHADBEAiAtq_e52Zuc9h4f0BUApDXM0iHz30mEevm22XzgXz9oqQIgCN85PFdH4Y82uxG7JswAnLWl2GeHMn0Wf_GmOEJRARs"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:q8luFglUPIwAjp1iJMj3bvNMqOz_zuLDNCozLlV2Iwc::subject:1.2.840.113549.1.9.1:test%40example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:q8luFglUPIwAjp1iJMj3bvNMqOz_zuLDNCozLlV2Iwc::subject:1.2.840.113549.1.9.1:test%40example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:q8luFglUPIwAjp1iJMj3bvNMqOz_zuLDNCozLlV2Iwc::subject:1.2.840.113549.1.9.1:test%40example.com",
+            "publicKeyJwk": {
+              "kty": "EC",
+              "crv": "P-256",
+              "x": "R-RrdVM0EIb65o-gEnx9hJ7BBGQbNqTdZnRWNeU3ZyI",
+              "y": "HAePUTh7nBukApxBYgJqpvFRHZrTVfxjfBSjxNSbBpI"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:q8luFglUPIwAjp1iJMj3bvNMqOz_zuLDNCozLlV2Iwc::subject:1.2.840.113549.1.9.1:test%40example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:q8luFglUPIwAjp1iJMj3bvNMqOz_zuLDNCozLlV2Iwc::subject:1.2.840.113549.1.9.1:test%40example.com#0"
+        ],
+        "keyAgreement": [
+          "did:x509:0:sha256:q8luFglUPIwAjp1iJMj3bvNMqOz_zuLDNCozLlV2Iwc::subject:1.2.840.113549.1.9.1:test%40example.com#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "unknown-predicate-is-rejected",
+    "input": {
+      "did": "did:x509:0:sha256:wB-YrYI1eo_9-9izSw6aviwkdLz4O7-kgrK_VzU4_OA::email:user%40example.com",
+      "chain": [
+        "MIIBrzCCAVWgAwIBAgIUJUzbQpQ9NWw7AtVjxevRNHbPGnAwCgYIKoZIzj0EAwIwJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAWMRQwEgYDVQQDDAtleGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABC9PBCm_LShY0ELxk_xbD27Op0wq55t5jfCeYwObS5vKtuEHnykeDyAvlUzTmV_JpM3fUjG3EieTuTmpNgStgyyjbzBtMB0GA1UdDgQWBBSjXvZPZJWtrrOE9jcJWSOFgIVabzAfBgNVHSMEGDAWgBQRv2BjLbcGrFojG58TRqcr6DQp2DAMBgNVHRMBAf8EAjAAMB0GA1UdJQQWMBQGCCsGAQUFBwMDBggrBgEFBQcDAjAKBggqhkjOPQQDAgNIADBFAiBXxdkE_AwstEY95NDqdU4SnnaJIbNrsoSKSUgJfWcHpwIhAO3xRfB1rQlSWVMpmIVh_Ep7Fm8c1wQXfNntZE-udlZA",
+        "MIIBrzCCAVSgAwIBAgIUJqpba973YPOo3jVNaA-64kn-LBEwCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEJkHKg4UeHBCwSU5gBIgqI-aFhg5tH0yQkHGSQ4r4y7LASwwC09FsIB6XsykEryMjExaYjNtSQov4Se3UOzPGuqNmMGQwHQYDVR0OBBYEFBG_YGMttwasWiMbnxNGpyvoNCnYMB8GA1UdIwQYMBaAFKReafgWvJedM_a2PVJlMbU_93fEMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0kAMEYCIQC07O1ZYdmXY0V4mJXb5hBk8RJzWdB4nEawYzObfm--pQIhAL2zLu_nV9zdoBw2qW95TcjEmrAvu02T-R1fauww3dV1",
+        "MIIBpjCCAUygAwIBAgIUAiEoKdJEkiZ5EAqbl1-DXr3zsv4wCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABPVSbFdYCsnaj-2wNN0M2PmxW-syPqjbUlzvNPvCg7el_9pUg_En-TtO8Igqn_Ixh0q-sZwKVVe_7-RW6BL_QE6jZjBkMB0GA1UdDgQWBBSkXmn4FryXnTP2tj1SZTG1P_d3xDAfBgNVHSMEGDAWgBSkXmn4FryXnTP2tj1SZTG1P_d3xDASBgNVHRMBAf8ECDAGAQH_AgEBMA4GA1UdDwEB_wQEAwIBBjAKBggqhkjOPQQDAgNIADBFAiANEyEieqbtSF5Iw-nIBLtjQybGnWoQ4Ql4-prVBbVVPgIhAN0oV0OnBU4Fpu4h4It9UVUORwRYBJRPaE8Rl6dzJRtP"
+      ]
+    },
+    "output": {
+      "error": "DID contains an unknown predicate."
+    }
+  },
+  {
+    "id": "unsupported-fingerprint-algorithm",
+    "input": {
+      "did": "did:x509:0:sha1:HFAx6WegyY98jzMqLUpTdIdtnvk::subject:CN:example.com",
+      "chain": [
+        "MIIBrzCCAVWgAwIBAgIUJUzbQpQ9NWw7AtVjxevRNHbPGnAwCgYIKoZIzj0EAwIwJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAWMRQwEgYDVQQDDAtleGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABC9PBCm_LShY0ELxk_xbD27Op0wq55t5jfCeYwObS5vKtuEHnykeDyAvlUzTmV_JpM3fUjG3EieTuTmpNgStgyyjbzBtMB0GA1UdDgQWBBSjXvZPZJWtrrOE9jcJWSOFgIVabzAfBgNVHSMEGDAWgBQRv2BjLbcGrFojG58TRqcr6DQp2DAMBgNVHRMBAf8EAjAAMB0GA1UdJQQWMBQGCCsGAQUFBwMDBggrBgEFBQcDAjAKBggqhkjOPQQDAgNIADBFAiBXxdkE_AwstEY95NDqdU4SnnaJIbNrsoSKSUgJfWcHpwIhAO3xRfB1rQlSWVMpmIVh_Ep7Fm8c1wQXfNntZE-udlZA",
+        "MIIBrzCCAVSgAwIBAgIUJqpba973YPOo3jVNaA-64kn-LBEwCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowJjEkMCIGA1UEAwwbZXhhbXBsZS5jb20gSW50ZXJtZWRpYXRlIENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEJkHKg4UeHBCwSU5gBIgqI-aFhg5tH0yQkHGSQ4r4y7LASwwC09FsIB6XsykEryMjExaYjNtSQov4Se3UOzPGuqNmMGQwHQYDVR0OBBYEFBG_YGMttwasWiMbnxNGpyvoNCnYMB8GA1UdIwQYMBaAFKReafgWvJedM_a2PVJlMbU_93fEMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMAoGCCqGSM49BAMCA0kAMEYCIQC07O1ZYdmXY0V4mJXb5hBk8RJzWdB4nEawYzObfm--pQIhAL2zLu_nV9zdoBw2qW95TcjEmrAvu02T-R1fauww3dV1",
+        "MIIBpjCCAUygAwIBAgIUAiEoKdJEkiZ5EAqbl1-DXr3zsv4wCgYIKoZIzj0EAwIwHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTAgFw0yNjAxMDEwMDAwMDBaGA8yMTI2MDEwMTAwMDAwMFowHjEcMBoGA1UEAwwTZXhhbXBsZS5jb20gUm9vdCBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABPVSbFdYCsnaj-2wNN0M2PmxW-syPqjbUlzvNPvCg7el_9pUg_En-TtO8Igqn_Ixh0q-sZwKVVe_7-RW6BL_QE6jZjBkMB0GA1UdDgQWBBSkXmn4FryXnTP2tj1SZTG1P_d3xDAfBgNVHSMEGDAWgBSkXmn4FryXnTP2tj1SZTG1P_d3xDASBgNVHRMBAf8ECDAGAQH_AgEBMA4GA1UdDwEB_wQEAwIBBjAKBggqhkjOPQQDAgNIADBFAiANEyEieqbtSF5Iw-nIBLtjQybGnWoQ4Ql4-prVBbVVPgIhAN0oV0OnBU4Fpu4h4It9UVUORwRYBJRPaE8Rl6dzJRtP"
+      ]
+    },
+    "output": {
+      "error": "Fingerprint algorithm is not supported."
+    }
+  },
+  {
+    "id": "specification-chain-rejects-leaf-fingerprint",
+    "input": {
+      "did": "did:x509:0:sha256:_FZDbBZoZsqzTzpL77eWC3qiP7BWnucLZyffMSvFzvc::subject:CN:example.com",
+      "chain": [
+        "MIICEDCCAbWgAwIBAgICB9MwCgYIKoZIzj0EAwIwKzEpMCcGA1UEAwwgZXhhbXBsZS5jb20gVGVzdCBJbnRlcm1lZGlhdGUgQ0EwIBcNMjYwMTAxMDAwMDAwWhgPMjEyNjAxMDEwMDAwMDBaMBYxFDASBgNVBAMMC2V4YW1wbGUuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE7EE9ByLhqWzm2VuMPL-3GgT-Jq2CbxxT8HXElMTu_xnfZx5FXO8ikPXNx6SUUY-Th4oqjT3rka38czpD6kb-jaOB2zCB2DAdBgNVHQ4EFgQUFgSlupsjYekOI-gEtFCEqZPsE2AwHwYDVR0jBBgwFoAUiJOHqbFRttHUZscU2POvvTNgpKIwDAYDVR0TAQH_BAIwADAOBgNVHQ8BAf8EBAMCB4AwEwYDVR0lBAwwCgYIKwYBBQUHAwMwOQYDVR0RBDIwMIEQdXNlckBleGFtcGxlLmNvbYYcaHR0cHM6Ly9leGFtcGxlLmNvbS93b3JrZmxvdzAoBgorBgEEAYO_MAEBBBpodHRwczovL2lzc3Vlci5leGFtcGxlLmNvbTAKBggqhkjOPQQDAgNJADBGAiEA82nG5tNq91nAfAJFUvVZdDgdCSUYpIuetLrSlqljUysCIQCLfgH2r_IJNGolX8P8QBtNog1zziTqNnBMpijIiU2Etg",
+        "MIIBpTCCAUygAwIBAgICB9IwCgYIKoZIzj0EAwIwIzEhMB8GA1UEAwwYZXhhbXBsZS5jb20gVGVzdCBSb290IENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjArMSkwJwYDVQQDDCBleGFtcGxlLmNvbSBUZXN0IEludGVybWVkaWF0ZSBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABDr97L-MJfz-LhwWaxWzKDCFbMdHBR8i1-czs7WXj6qVMawP3eYXpTW080MU68zZ_Hkaovr0DMQQg3Q17T45B82jZjBkMB0GA1UdDgQWBBSIk4epsVG20dRmxxTY86-9M2CkojAfBgNVHSMEGDAWgBRgF1sBtSaj1yqIKtPo5nGlJ4sLVDASBgNVHRMBAf8ECDAGAQH_AgEAMA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNHADBEAiAmXqSscEj-kkW7lCpTLNSJt3l8Ad1c7WFxKoE3cDe3LgIgO901FGgMaDy7OaJMuuDrSf4bHVBSUc3adFSJSeFG47k",
+        "MIIBnTCCAUSgAwIBAgICB9EwCgYIKoZIzj0EAwIwIzEhMB8GA1UEAwwYZXhhbXBsZS5jb20gVGVzdCBSb290IENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAjMSEwHwYDVQQDDBhleGFtcGxlLmNvbSBUZXN0IFJvb3QgQ0EwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQ79xj3LFVqUexknLorXaxlXAu6GF5CYBVBRH9lqRhff9tw2s8WrF6PFIuKFWqqgpN5pTreoUGUFTme1yjyIZlzo2YwZDAdBgNVHQ4EFgQUYBdbAbUmo9cqiCrT6OZxpSeLC1QwHwYDVR0jBBgwFoAUYBdbAbUmo9cqiCrT6OZxpSeLC1QwEgYDVR0TAQH_BAgwBgEB_wIBATAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDRwAwRAIgWIc0XXfDO9Mr8IcOiKNN06WRv7w_oJlpBIjLnD4UosoCIEK8wydhr5YBupr2kemDEQfUo37wxza_KAIE0qfgpqNS"
+      ]
+    },
+    "output": {
+      "error": "CA fingerprint does not match the certificate chain."
+    }
+  },
+  {
+    "id": "specification-eku-predicate",
+    "input": {
+      "did": "did:x509:0:sha256:5yLC-kQAQOZMJhONsDwC7b5ABuQCnvf9qDfiXFXoMuE::eku:1.3.6.1.5.5.7.3.3",
+      "chain": [
+        "MIICEDCCAbWgAwIBAgICB9MwCgYIKoZIzj0EAwIwKzEpMCcGA1UEAwwgZXhhbXBsZS5jb20gVGVzdCBJbnRlcm1lZGlhdGUgQ0EwIBcNMjYwMTAxMDAwMDAwWhgPMjEyNjAxMDEwMDAwMDBaMBYxFDASBgNVBAMMC2V4YW1wbGUuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE7EE9ByLhqWzm2VuMPL-3GgT-Jq2CbxxT8HXElMTu_xnfZx5FXO8ikPXNx6SUUY-Th4oqjT3rka38czpD6kb-jaOB2zCB2DAdBgNVHQ4EFgQUFgSlupsjYekOI-gEtFCEqZPsE2AwHwYDVR0jBBgwFoAUiJOHqbFRttHUZscU2POvvTNgpKIwDAYDVR0TAQH_BAIwADAOBgNVHQ8BAf8EBAMCB4AwEwYDVR0lBAwwCgYIKwYBBQUHAwMwOQYDVR0RBDIwMIEQdXNlckBleGFtcGxlLmNvbYYcaHR0cHM6Ly9leGFtcGxlLmNvbS93b3JrZmxvdzAoBgorBgEEAYO_MAEBBBpodHRwczovL2lzc3Vlci5leGFtcGxlLmNvbTAKBggqhkjOPQQDAgNJADBGAiEA82nG5tNq91nAfAJFUvVZdDgdCSUYpIuetLrSlqljUysCIQCLfgH2r_IJNGolX8P8QBtNog1zziTqNnBMpijIiU2Etg",
+        "MIIBpTCCAUygAwIBAgICB9IwCgYIKoZIzj0EAwIwIzEhMB8GA1UEAwwYZXhhbXBsZS5jb20gVGVzdCBSb290IENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjArMSkwJwYDVQQDDCBleGFtcGxlLmNvbSBUZXN0IEludGVybWVkaWF0ZSBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABDr97L-MJfz-LhwWaxWzKDCFbMdHBR8i1-czs7WXj6qVMawP3eYXpTW080MU68zZ_Hkaovr0DMQQg3Q17T45B82jZjBkMB0GA1UdDgQWBBSIk4epsVG20dRmxxTY86-9M2CkojAfBgNVHSMEGDAWgBRgF1sBtSaj1yqIKtPo5nGlJ4sLVDASBgNVHRMBAf8ECDAGAQH_AgEAMA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNHADBEAiAmXqSscEj-kkW7lCpTLNSJt3l8Ad1c7WFxKoE3cDe3LgIgO901FGgMaDy7OaJMuuDrSf4bHVBSUc3adFSJSeFG47k",
+        "MIIBnTCCAUSgAwIBAgICB9EwCgYIKoZIzj0EAwIwIzEhMB8GA1UEAwwYZXhhbXBsZS5jb20gVGVzdCBSb290IENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAjMSEwHwYDVQQDDBhleGFtcGxlLmNvbSBUZXN0IFJvb3QgQ0EwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQ79xj3LFVqUexknLorXaxlXAu6GF5CYBVBRH9lqRhff9tw2s8WrF6PFIuKFWqqgpN5pTreoUGUFTme1yjyIZlzo2YwZDAdBgNVHQ4EFgQUYBdbAbUmo9cqiCrT6OZxpSeLC1QwHwYDVR0jBBgwFoAUYBdbAbUmo9cqiCrT6OZxpSeLC1QwEgYDVR0TAQH_BAgwBgEB_wIBATAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDRwAwRAIgWIc0XXfDO9Mr8IcOiKNN06WRv7w_oJlpBIjLnD4UosoCIEK8wydhr5YBupr2kemDEQfUo37wxza_KAIE0qfgpqNS"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:5yLC-kQAQOZMJhONsDwC7b5ABuQCnvf9qDfiXFXoMuE::eku:1.3.6.1.5.5.7.3.3",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:5yLC-kQAQOZMJhONsDwC7b5ABuQCnvf9qDfiXFXoMuE::eku:1.3.6.1.5.5.7.3.3#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:5yLC-kQAQOZMJhONsDwC7b5ABuQCnvf9qDfiXFXoMuE::eku:1.3.6.1.5.5.7.3.3",
+            "publicKeyJwk": {
+              "kty": "EC",
+              "crv": "P-256",
+              "x": "7EE9ByLhqWzm2VuMPL-3GgT-Jq2CbxxT8HXElMTu_xk",
+              "y": "32ceRVzvIpD1zceklFGPk4eKKo0965Gt_HM6Q-pG_o0"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:5yLC-kQAQOZMJhONsDwC7b5ABuQCnvf9qDfiXFXoMuE::eku:1.3.6.1.5.5.7.3.3#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:5yLC-kQAQOZMJhONsDwC7b5ABuQCnvf9qDfiXFXoMuE::eku:1.3.6.1.5.5.7.3.3#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "specification-fulcio-issuer-and-san",
+    "input": {
+      "did": "did:x509:0:sha256:5yLC-kQAQOZMJhONsDwC7b5ABuQCnvf9qDfiXFXoMuE::fulcio-issuer:issuer.example.com::san:uri:https%3A%2F%2Fexample.com%2Fworkflow",
+      "chain": [
+        "MIICEDCCAbWgAwIBAgICB9MwCgYIKoZIzj0EAwIwKzEpMCcGA1UEAwwgZXhhbXBsZS5jb20gVGVzdCBJbnRlcm1lZGlhdGUgQ0EwIBcNMjYwMTAxMDAwMDAwWhgPMjEyNjAxMDEwMDAwMDBaMBYxFDASBgNVBAMMC2V4YW1wbGUuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE7EE9ByLhqWzm2VuMPL-3GgT-Jq2CbxxT8HXElMTu_xnfZx5FXO8ikPXNx6SUUY-Th4oqjT3rka38czpD6kb-jaOB2zCB2DAdBgNVHQ4EFgQUFgSlupsjYekOI-gEtFCEqZPsE2AwHwYDVR0jBBgwFoAUiJOHqbFRttHUZscU2POvvTNgpKIwDAYDVR0TAQH_BAIwADAOBgNVHQ8BAf8EBAMCB4AwEwYDVR0lBAwwCgYIKwYBBQUHAwMwOQYDVR0RBDIwMIEQdXNlckBleGFtcGxlLmNvbYYcaHR0cHM6Ly9leGFtcGxlLmNvbS93b3JrZmxvdzAoBgorBgEEAYO_MAEBBBpodHRwczovL2lzc3Vlci5leGFtcGxlLmNvbTAKBggqhkjOPQQDAgNJADBGAiEA82nG5tNq91nAfAJFUvVZdDgdCSUYpIuetLrSlqljUysCIQCLfgH2r_IJNGolX8P8QBtNog1zziTqNnBMpijIiU2Etg",
+        "MIIBpTCCAUygAwIBAgICB9IwCgYIKoZIzj0EAwIwIzEhMB8GA1UEAwwYZXhhbXBsZS5jb20gVGVzdCBSb290IENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjArMSkwJwYDVQQDDCBleGFtcGxlLmNvbSBUZXN0IEludGVybWVkaWF0ZSBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABDr97L-MJfz-LhwWaxWzKDCFbMdHBR8i1-czs7WXj6qVMawP3eYXpTW080MU68zZ_Hkaovr0DMQQg3Q17T45B82jZjBkMB0GA1UdDgQWBBSIk4epsVG20dRmxxTY86-9M2CkojAfBgNVHSMEGDAWgBRgF1sBtSaj1yqIKtPo5nGlJ4sLVDASBgNVHRMBAf8ECDAGAQH_AgEAMA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNHADBEAiAmXqSscEj-kkW7lCpTLNSJt3l8Ad1c7WFxKoE3cDe3LgIgO901FGgMaDy7OaJMuuDrSf4bHVBSUc3adFSJSeFG47k",
+        "MIIBnTCCAUSgAwIBAgICB9EwCgYIKoZIzj0EAwIwIzEhMB8GA1UEAwwYZXhhbXBsZS5jb20gVGVzdCBSb290IENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAjMSEwHwYDVQQDDBhleGFtcGxlLmNvbSBUZXN0IFJvb3QgQ0EwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQ79xj3LFVqUexknLorXaxlXAu6GF5CYBVBRH9lqRhff9tw2s8WrF6PFIuKFWqqgpN5pTreoUGUFTme1yjyIZlzo2YwZDAdBgNVHQ4EFgQUYBdbAbUmo9cqiCrT6OZxpSeLC1QwHwYDVR0jBBgwFoAUYBdbAbUmo9cqiCrT6OZxpSeLC1QwEgYDVR0TAQH_BAgwBgEB_wIBATAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDRwAwRAIgWIc0XXfDO9Mr8IcOiKNN06WRv7w_oJlpBIjLnD4UosoCIEK8wydhr5YBupr2kemDEQfUo37wxza_KAIE0qfgpqNS"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:5yLC-kQAQOZMJhONsDwC7b5ABuQCnvf9qDfiXFXoMuE::fulcio-issuer:issuer.example.com::san:uri:https%3A%2F%2Fexample.com%2Fworkflow",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:5yLC-kQAQOZMJhONsDwC7b5ABuQCnvf9qDfiXFXoMuE::fulcio-issuer:issuer.example.com::san:uri:https%3A%2F%2Fexample.com%2Fworkflow#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:5yLC-kQAQOZMJhONsDwC7b5ABuQCnvf9qDfiXFXoMuE::fulcio-issuer:issuer.example.com::san:uri:https%3A%2F%2Fexample.com%2Fworkflow",
+            "publicKeyJwk": {
+              "kty": "EC",
+              "crv": "P-256",
+              "x": "7EE9ByLhqWzm2VuMPL-3GgT-Jq2CbxxT8HXElMTu_xk",
+              "y": "32ceRVzvIpD1zceklFGPk4eKKo0965Gt_HM6Q-pG_o0"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:5yLC-kQAQOZMJhONsDwC7b5ABuQCnvf9qDfiXFXoMuE::fulcio-issuer:issuer.example.com::san:uri:https%3A%2F%2Fexample.com%2Fworkflow#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:5yLC-kQAQOZMJhONsDwC7b5ABuQCnvf9qDfiXFXoMuE::fulcio-issuer:issuer.example.com::san:uri:https%3A%2F%2Fexample.com%2Fworkflow#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "specification-intermediate-ca-fingerprint",
+    "input": {
+      "did": "did:x509:0:sha256:ZJyn3bDwqQhh6q1mTer2-VaN6KjT2wpaHmnpkz9uYW8::subject:CN:example.com",
+      "chain": [
+        "MIICEDCCAbWgAwIBAgICB9MwCgYIKoZIzj0EAwIwKzEpMCcGA1UEAwwgZXhhbXBsZS5jb20gVGVzdCBJbnRlcm1lZGlhdGUgQ0EwIBcNMjYwMTAxMDAwMDAwWhgPMjEyNjAxMDEwMDAwMDBaMBYxFDASBgNVBAMMC2V4YW1wbGUuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE7EE9ByLhqWzm2VuMPL-3GgT-Jq2CbxxT8HXElMTu_xnfZx5FXO8ikPXNx6SUUY-Th4oqjT3rka38czpD6kb-jaOB2zCB2DAdBgNVHQ4EFgQUFgSlupsjYekOI-gEtFCEqZPsE2AwHwYDVR0jBBgwFoAUiJOHqbFRttHUZscU2POvvTNgpKIwDAYDVR0TAQH_BAIwADAOBgNVHQ8BAf8EBAMCB4AwEwYDVR0lBAwwCgYIKwYBBQUHAwMwOQYDVR0RBDIwMIEQdXNlckBleGFtcGxlLmNvbYYcaHR0cHM6Ly9leGFtcGxlLmNvbS93b3JrZmxvdzAoBgorBgEEAYO_MAEBBBpodHRwczovL2lzc3Vlci5leGFtcGxlLmNvbTAKBggqhkjOPQQDAgNJADBGAiEA82nG5tNq91nAfAJFUvVZdDgdCSUYpIuetLrSlqljUysCIQCLfgH2r_IJNGolX8P8QBtNog1zziTqNnBMpijIiU2Etg",
+        "MIIBpTCCAUygAwIBAgICB9IwCgYIKoZIzj0EAwIwIzEhMB8GA1UEAwwYZXhhbXBsZS5jb20gVGVzdCBSb290IENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjArMSkwJwYDVQQDDCBleGFtcGxlLmNvbSBUZXN0IEludGVybWVkaWF0ZSBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABDr97L-MJfz-LhwWaxWzKDCFbMdHBR8i1-czs7WXj6qVMawP3eYXpTW080MU68zZ_Hkaovr0DMQQg3Q17T45B82jZjBkMB0GA1UdDgQWBBSIk4epsVG20dRmxxTY86-9M2CkojAfBgNVHSMEGDAWgBRgF1sBtSaj1yqIKtPo5nGlJ4sLVDASBgNVHRMBAf8ECDAGAQH_AgEAMA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNHADBEAiAmXqSscEj-kkW7lCpTLNSJt3l8Ad1c7WFxKoE3cDe3LgIgO901FGgMaDy7OaJMuuDrSf4bHVBSUc3adFSJSeFG47k",
+        "MIIBnTCCAUSgAwIBAgICB9EwCgYIKoZIzj0EAwIwIzEhMB8GA1UEAwwYZXhhbXBsZS5jb20gVGVzdCBSb290IENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAjMSEwHwYDVQQDDBhleGFtcGxlLmNvbSBUZXN0IFJvb3QgQ0EwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQ79xj3LFVqUexknLorXaxlXAu6GF5CYBVBRH9lqRhff9tw2s8WrF6PFIuKFWqqgpN5pTreoUGUFTme1yjyIZlzo2YwZDAdBgNVHQ4EFgQUYBdbAbUmo9cqiCrT6OZxpSeLC1QwHwYDVR0jBBgwFoAUYBdbAbUmo9cqiCrT6OZxpSeLC1QwEgYDVR0TAQH_BAgwBgEB_wIBATAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDRwAwRAIgWIc0XXfDO9Mr8IcOiKNN06WRv7w_oJlpBIjLnD4UosoCIEK8wydhr5YBupr2kemDEQfUo37wxza_KAIE0qfgpqNS"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:ZJyn3bDwqQhh6q1mTer2-VaN6KjT2wpaHmnpkz9uYW8::subject:CN:example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:ZJyn3bDwqQhh6q1mTer2-VaN6KjT2wpaHmnpkz9uYW8::subject:CN:example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:ZJyn3bDwqQhh6q1mTer2-VaN6KjT2wpaHmnpkz9uYW8::subject:CN:example.com",
+            "publicKeyJwk": {
+              "kty": "EC",
+              "crv": "P-256",
+              "x": "7EE9ByLhqWzm2VuMPL-3GgT-Jq2CbxxT8HXElMTu_xk",
+              "y": "32ceRVzvIpD1zceklFGPk4eKKo0965Gt_HM6Q-pG_o0"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:ZJyn3bDwqQhh6q1mTer2-VaN6KjT2wpaHmnpkz9uYW8::subject:CN:example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:ZJyn3bDwqQhh6q1mTer2-VaN6KjT2wpaHmnpkz9uYW8::subject:CN:example.com#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "specification-root-ca-fingerprint",
+    "input": {
+      "did": "did:x509:0:sha256:5yLC-kQAQOZMJhONsDwC7b5ABuQCnvf9qDfiXFXoMuE::subject:CN:example.com",
+      "chain": [
+        "MIICEDCCAbWgAwIBAgICB9MwCgYIKoZIzj0EAwIwKzEpMCcGA1UEAwwgZXhhbXBsZS5jb20gVGVzdCBJbnRlcm1lZGlhdGUgQ0EwIBcNMjYwMTAxMDAwMDAwWhgPMjEyNjAxMDEwMDAwMDBaMBYxFDASBgNVBAMMC2V4YW1wbGUuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE7EE9ByLhqWzm2VuMPL-3GgT-Jq2CbxxT8HXElMTu_xnfZx5FXO8ikPXNx6SUUY-Th4oqjT3rka38czpD6kb-jaOB2zCB2DAdBgNVHQ4EFgQUFgSlupsjYekOI-gEtFCEqZPsE2AwHwYDVR0jBBgwFoAUiJOHqbFRttHUZscU2POvvTNgpKIwDAYDVR0TAQH_BAIwADAOBgNVHQ8BAf8EBAMCB4AwEwYDVR0lBAwwCgYIKwYBBQUHAwMwOQYDVR0RBDIwMIEQdXNlckBleGFtcGxlLmNvbYYcaHR0cHM6Ly9leGFtcGxlLmNvbS93b3JrZmxvdzAoBgorBgEEAYO_MAEBBBpodHRwczovL2lzc3Vlci5leGFtcGxlLmNvbTAKBggqhkjOPQQDAgNJADBGAiEA82nG5tNq91nAfAJFUvVZdDgdCSUYpIuetLrSlqljUysCIQCLfgH2r_IJNGolX8P8QBtNog1zziTqNnBMpijIiU2Etg",
+        "MIIBpTCCAUygAwIBAgICB9IwCgYIKoZIzj0EAwIwIzEhMB8GA1UEAwwYZXhhbXBsZS5jb20gVGVzdCBSb290IENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjArMSkwJwYDVQQDDCBleGFtcGxlLmNvbSBUZXN0IEludGVybWVkaWF0ZSBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABDr97L-MJfz-LhwWaxWzKDCFbMdHBR8i1-czs7WXj6qVMawP3eYXpTW080MU68zZ_Hkaovr0DMQQg3Q17T45B82jZjBkMB0GA1UdDgQWBBSIk4epsVG20dRmxxTY86-9M2CkojAfBgNVHSMEGDAWgBRgF1sBtSaj1yqIKtPo5nGlJ4sLVDASBgNVHRMBAf8ECDAGAQH_AgEAMA4GA1UdDwEB_wQEAwICBDAKBggqhkjOPQQDAgNHADBEAiAmXqSscEj-kkW7lCpTLNSJt3l8Ad1c7WFxKoE3cDe3LgIgO901FGgMaDy7OaJMuuDrSf4bHVBSUc3adFSJSeFG47k",
+        "MIIBnTCCAUSgAwIBAgICB9EwCgYIKoZIzj0EAwIwIzEhMB8GA1UEAwwYZXhhbXBsZS5jb20gVGVzdCBSb290IENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAjMSEwHwYDVQQDDBhleGFtcGxlLmNvbSBUZXN0IFJvb3QgQ0EwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQ79xj3LFVqUexknLorXaxlXAu6GF5CYBVBRH9lqRhff9tw2s8WrF6PFIuKFWqqgpN5pTreoUGUFTme1yjyIZlzo2YwZDAdBgNVHQ4EFgQUYBdbAbUmo9cqiCrT6OZxpSeLC1QwHwYDVR0jBBgwFoAUYBdbAbUmo9cqiCrT6OZxpSeLC1QwEgYDVR0TAQH_BAgwBgEB_wIBATAOBgNVHQ8BAf8EBAMCAgQwCgYIKoZIzj0EAwIDRwAwRAIgWIc0XXfDO9Mr8IcOiKNN06WRv7w_oJlpBIjLnD4UosoCIEK8wydhr5YBupr2kemDEQfUo37wxza_KAIE0qfgpqNS"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:5yLC-kQAQOZMJhONsDwC7b5ABuQCnvf9qDfiXFXoMuE::subject:CN:example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:5yLC-kQAQOZMJhONsDwC7b5ABuQCnvf9qDfiXFXoMuE::subject:CN:example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:5yLC-kQAQOZMJhONsDwC7b5ABuQCnvf9qDfiXFXoMuE::subject:CN:example.com",
+            "publicKeyJwk": {
+              "kty": "EC",
+              "crv": "P-256",
+              "x": "7EE9ByLhqWzm2VuMPL-3GgT-Jq2CbxxT8HXElMTu_xk",
+              "y": "32ceRVzvIpD1zceklFGPk4eKKo0965Gt_HM6Q-pG_o0"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:5yLC-kQAQOZMJhONsDwC7b5ABuQCnvf9qDfiXFXoMuE::subject:CN:example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:5yLC-kQAQOZMJhONsDwC7b5ABuQCnvf9qDfiXFXoMuE::subject:CN:example.com#0"
+        ]
+      }
+    }
+  }
+]
