@@ -40,7 +40,7 @@ def pctdecode(data: str) -> str:
 def parse_name(name: x509.Name) -> dict:
     oids = [item.oid for item in name]
     if len(oids) != len(set(oids)):
-        raise ValueError("duplicates not allowed")
+        raise ValueError("Certificate name contains duplicate attributes.")
 
     items = {}
     for attribute in name:
@@ -90,7 +90,7 @@ def parse_extensions(exts: x509.Extensions):
                 elif isinstance(san, x509.DirectoryName):
                     ext_value.append(["dn", parse_name(san.value)])
                 else:
-                    raise ValueError(f"unsupported SAN: {san}")
+                    raise ValueError("Certificate contains an unsupported SAN type.")
         elif ext.oid.dotted_string == FULCIO_ISSUER_OID:
             ext_name = "fulcio_issuer"
             assert isinstance(value, x509.UnrecognizedExtension)
@@ -100,7 +100,9 @@ def parse_extensions(exts: x509.Extensions):
         elif not ext.critical:
             continue
         else:
-            raise RuntimeError(f"unsupported critical extension: {ext}")
+            raise RuntimeError(
+                "Certificate contains an unsupported critical extension."
+            )
         extensions[ext_name] = ext_value
     return extensions
 
@@ -139,18 +141,14 @@ def load_certificate_chain(path) -> List[x509.Certificate]:
 X509_V_FLAG_NO_CHECK_TIME = 0x200000
 
 
-def verify_certificate_chain(
-    chain: List[x509.Certificate], skip_validity_period_check=False
-) -> List[x509.Certificate]:
+def verify_certificate_chain(chain: List[x509.Certificate]) -> List[x509.Certificate]:
     """Perform RFC 5280 certification path validation on a leaf-first chain.
 
     The last certificate in the chain is used as the trust anchor, as required
     by the did:x509 specification. Validation is delegated to OpenSSL so that
-    the full RFC 5280 algorithm applies, including basic constraints, path
-    length constraints, key usage, name constraints, and validity periods.
-
-    skip_validity_period_check suppresses the validity period check at every
-    depth, for testing against expired certificates.
+    RFC 5280 processing applies, including basic constraints, path length
+    constraints, key usage, and name constraints. Certificate validity periods
+    are not checked; applications may validate them at a context-relevant time.
 
     Deciding whether the trust anchor itself is acceptable is out of scope; the
     specification leaves that to relying-party policy.
@@ -162,7 +160,7 @@ def verify_certificate_chain(
     specification allows, which OpenSSL recognizes and processes here.
     """
     if len(chain) < 2:
-        raise ValueError("Certificate chain must have at least two certificates")
+        raise ValueError("Certificate chain must contain at least two certificates.")
 
     flags = (
         # Any certificate in the store may act as a trust anchor, so a chain
@@ -170,9 +168,11 @@ def verify_certificate_chain(
         crypto.X509StoreFlags.PARTIAL_CHAIN
         # Verify the trust anchor's own signature when it is self-signed.
         | crypto.X509StoreFlags.CHECK_SS_SIGNATURE
+        # Disable OpenSSL compatibility workarounds for non-conforming certs.
+        | crypto.X509StoreFlags.X509_STRICT
+        # Applications may evaluate validity at a context-relevant time.
+        | X509_V_FLAG_NO_CHECK_TIME
     )
-    if skip_validity_period_check:
-        flags |= X509_V_FLAG_NO_CHECK_TIME
 
     store = crypto.X509Store()
     store.add_cert(crypto.X509.from_cryptography(chain[-1]))
@@ -186,7 +186,7 @@ def verify_certificate_chain(
     try:
         ctx.verify_certificate()
     except crypto.X509StoreContextError as e:
-        raise ValueError(f"certificate chain verification failed: {e}") from e
+        raise ValueError(f"Certificate chain verification failed: {e}.") from e
 
     verified_chain = [cert.to_cryptography() for cert in ctx.get_verified_chain()]
     supplied_der = [
@@ -196,9 +196,7 @@ def verify_certificate_chain(
         cert.public_bytes(serialization.Encoding.DER) for cert in verified_chain
     ]
     if supplied_der != verified_der:
-        raise ValueError(
-            "supplied certificate chain does not match verified certificate chain"
-        )
+        raise ValueError("Supplied chain does not match the verified chain.")
 
     return verified_chain
 
@@ -209,76 +207,81 @@ def check_did_x509(did: str, chain: List[x509.Certificate]) -> str:
     prefix = "did:x509:0:"
     did_document_id = did.split("#", 1)[0]
     if not did_document_id.startswith(prefix):
-        raise ValueError("invalid did prefix")
+        raise ValueError("DID prefix is invalid.")
     query_index = did_document_id.find("?")
     path_index = did_document_id.find("/")
     if path_index != -1 and (query_index == -1 or path_index < query_index):
-        raise ValueError("DID URL path is not supported")
+        raise ValueError("DID URL paths are not supported.")
     if query_index != -1:
-        raise ValueError("DID URL query is not supported")
+        raise ValueError("DID URL queries are not supported.")
     parts = did_document_id[len(prefix) :].split("::")
     [ca_fingerprint_alg, ca_fingerprint] = parts[0].split(":")
+    if ca_fingerprint_alg not in ("sha256", "sha384", "sha512"):
+        raise ValueError("Fingerprint algorithm is not supported.")
     policies = [p.split(":", 1) for p in parts[1:]]
     if len(policies) == 0:
-        raise ValueError("no policies specified")
+        raise ValueError("DID must contain at least one predicate.")
 
     expected_ca_fingerprints = [
         c["fingerprint"][ca_fingerprint_alg] for c in decoded[1:]
     ]
     if ca_fingerprint not in expected_ca_fingerprints:
-        raise ValueError(
-            f"invalid CA fingerprint, expected one of: {expected_ca_fingerprints}"
-        )
+        raise ValueError("CA fingerprint does not match the certificate chain.")
 
     for [name, value] in policies:
         if name == "subject":
             parts = value.split(":")
             if not parts or len(parts) % 2 != 0:
-                raise ValueError("key-value pairs required")
+                raise ValueError("Subject predicate requires key-value pairs.")
             fields = list(zip(parts[::2], parts[1::2]))
-            if len(fields) != len(set(fields)):
-                raise ValueError("duplicate subject fields")
+            keys = [key for key, _ in fields]
+            if len(keys) != len(set(keys)):
+                raise ValueError("Subject predicate contains duplicate fields.")
             for key, value in fields:
                 if key not in decoded[0]["subject"]:
-                    raise ValueError(f"invalid subject key: {key}")
+                    raise ValueError("Subject predicate contains an unknown key.")
                 value = pctdecode(value)
                 expected_value = decoded[0]["subject"][key]
                 if value != expected_value:
                     raise ValueError(
-                        f"invalid subject value: {key} = {pctencode(value)}, expected: {pctencode(expected_value)}"
+                        "Subject predicate does not match the certificate."
                     )
 
         elif name == "san":
             parts = value.split(":")
             if len(parts) != 2:
-                raise ValueError("exactly one SAN type and value required")
+                raise ValueError(
+                    "SAN predicate requires exactly one type and value."
+                )
             san_type = parts[0]
             san_value = pctdecode(parts[1])
             san = [san_type, san_value]
             sans = decoded[0]["extensions"]["san"]
             if san not in sans:
-                raise ValueError(f"invalid SAN: {san}, expected one of: {sans}")
+                raise ValueError("SAN predicate does not match the certificate.")
 
         elif name == "eku":
             if "eku" not in decoded[0]["extensions"]:
-                raise ValueError("no EKU extension in certificate")
+                raise ValueError("Certificate does not contain an EKU extension.")
             eku = value
             ekus = decoded[0]["extensions"]["eku"]
             if eku not in ekus:
-                raise ValueError(f"invalid EKU: {eku}, expected one of: {ekus}")
+                raise ValueError("EKU predicate does not match the certificate.")
 
         elif name == "fulcio-issuer":
             if "fulcio_issuer" not in decoded[0]["extensions"]:
-                raise ValueError("no Fulcio issuer extension in certificate")
+                raise ValueError(
+                    "Certificate does not contain a Fulcio issuer extension."
+                )
             fulcio_issuer = "https://" + pctdecode(value)
             expected_fulcio_issuer = decoded[0]["extensions"]["fulcio_issuer"]
             if fulcio_issuer != expected_fulcio_issuer:
                 raise ValueError(
-                    f"invalid Fulcio issuer: {pctencode(fulcio_issuer)}, expected: {pctencode(expected_fulcio_issuer)}"
+                    "Fulcio issuer predicate does not match the certificate."
                 )
 
         else:
-            raise ValueError(f"unknown did:x509 policy: {name}")
+            raise ValueError("DID contains an unknown predicate.")
 
     return did_document_id
 
@@ -316,24 +319,22 @@ def create_did_document(did: str, chain: List[x509.Certificate]):
         doc["keyAgreement"] = [f"{did}#0"]
     if not include_assertion_method and not include_key_agreement:
         raise ValueError(
-            "leaf certificate key usage must include digital signature or key agreement"
+            "Leaf certificate key usage does not support DID operations."
         )
 
     return doc
 
 
-def resolve_did(
-    did: str, chain: List[x509.Certificate], skip_validity_period_check=False
-) -> dict:
-    verified_chain = verify_certificate_chain(chain, skip_validity_period_check)
+def resolve_did(did: str, chain: List[x509.Certificate]) -> dict:
+    verified_chain = verify_certificate_chain(chain)
     did_document_id = check_did_x509(did, verified_chain)
     doc = create_did_document(did_document_id, verified_chain)
     return doc
 
 
-def cli_resolve(did: str, chain_path: str, skip_validity_period_check: bool):
+def cli_resolve(did: str, chain_path: str):
     chain = load_certificate_chain(chain_path)
-    doc = resolve_did(did, chain, skip_validity_period_check)
+    doc = resolve_did(did, chain)
     print(json.dumps(doc, indent=2))
 
 
@@ -356,14 +357,7 @@ def main():
     p.add_argument(
         "--chain", required=True, help="Path to the certificate chain in PEM format"
     )
-    p.add_argument(
-        "--skip-validity-period-check", action="store_true", help="Testing only."
-    )
-    p.set_defaults(
-        func=lambda args: cli_resolve(
-            args.did, args.chain, args.skip_validity_period_check
-        )
-    )
+    p.set_defaults(func=lambda args: cli_resolve(args.did, args.chain))
 
     p = subparsers.add_parser("convert")
     p.add_argument("chain", help="Path to the certificate chain in PEM format")

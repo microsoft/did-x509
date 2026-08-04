@@ -512,26 +512,9 @@ The `x509chain` resolution option carries the certificate chain used as resoluti
 
 Stable did:x509 identifiers can enable correlation across transactions, transparency logs, ledgers, and verifiable credentials. If unlinkability is required, relying parties should avoid reusing the same did:x509 identifier across contexts, and issuers should prefer predicates based on role- or service-specific identifiers rather than human-identifying certificate fields.
 
-## Examples and Test Vectors
+## Test Vectors
 
-The following synthetic certificate chain is valid from `2026-01-01T00:00:00Z` through `2126-01-01T00:00:00Z`. Its entries are base64url-encoded DER certificates in leaf-first order; join them with commas to build the `x509chain` resolution option.
-
-```json
-[
-  "MIICJzCCAc6gAwIBAgICB9MwCgYIKoZIzj0EAwIwKDEmMCQGA1UEAwwdZGlkOng1MDkgVGVzdCBJbnRlcm1lZGlhdGUgQ0EwIBcNMjYwMTAxMDAwMDAwWhgPMjEyNjAxMDEwMDAwMDBaMCAxHjAcBgNVBAMMFU1pY3Jvc29mdCBDb3Jwb3JhdGlvbjBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABD2J_lUT69q47RbEL3RmgzDw89bJQNGG7ktkezQ7xqHjFQWx9bhWcFhQXB2lG829usJs0zUR7MK-y_t3biltjNejge0wgeowDAYDVR0TAQH_BAIwADAOBgNVHQ8BAf8EBAMCB4AwEwYDVR0lBAwwCgYIKwYBBQUHAwMwOgYDVR0RBDMwMYERYWxpY2VAZXhhbXBsZS5jb22GHGh0dHBzOi8vZXhhbXBsZS5jb20vd29ya2Zsb3cwOQYKKwYBBAGDvzABAQQraHR0cHM6Ly90b2tlbi5hY3Rpb25zLmdpdGh1YnVzZXJjb250ZW50LmNvbTAdBgNVHQ4EFgQUwGLLx59TXgxBkjzMIcbmWNiLQfQwHwYDVR0jBBgwFoAUWbwya755KGJF5ztNyrADsYoQIucwCgYIKoZIzj0EAwIDRwAwRAIge1uAHkPt8snonwz80M030m26KHZxoOG9_o2eeHzHY8QCIEffMAq-SrgqOaka7UE_zxSWCCUjxbmoJq8RUyVCHggZ",
-  "MIIBoDCCAUagAwIBAgICB9IwCgYIKoZIzj0EAwIwIDEeMBwGA1UEAwwVZGlkOng1MDkgVGVzdCBSb290IENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAoMSYwJAYDVQQDDB1kaWQ6eDUwOSBUZXN0IEludGVybWVkaWF0ZSBDQTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABM5oFeAaQm9P6Ll8_8VR_5ALiILOpcBFz2uz4AlziXKvgvzzGRct8C7PnFasWW1zadCEL7XMsi-TZyfqyMh3-NijZjBkMBIGA1UdEwEB_wQIMAYBAf8CAQAwDgYDVR0PAQH_BAQDAgEGMB0GA1UdDgQWBBRZvDJrvnkoYkXnO03KsAOxihAi5zAfBgNVHSMEGDAWgBRkhJJHzlGkin5nrO2tJG9mSAgmhDAKBggqhkjOPQQDAgNIADBFAiAXvFoF5ws9YsBTiAAOLiy7bVoSa2jemshWYlPiA_68JgIhAKfeqdnZ1UFSalYcKsCIqYCuJypub9KuQFFFbCBlv7Xq",
-  "MIIBmDCCAT6gAwIBAgICB9EwCgYIKoZIzj0EAwIwIDEeMBwGA1UEAwwVZGlkOng1MDkgVGVzdCBSb290IENBMCAXDTI2MDEwMTAwMDAwMFoYDzIxMjYwMTAxMDAwMDAwWjAgMR4wHAYDVQQDDBVkaWQ6eDUwOSBUZXN0IFJvb3QgQ0EwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQFB7zyNdAfRr9jR0kWJMUn3rEifn1sv0rKHLYNRhJbYme9gGczf336c83fmM5ILsrrEA_c5l_i1rlbDEuIbv-Go2YwZDASBgNVHRMBAf8ECDAGAQH_AgEBMA4GA1UdDwEB_wQEAwIBBjAdBgNVHQ4EFgQUZISSR85RpIp-Z6ztrSRvZkgIJoQwHwYDVR0jBBgwFoAUZISSR85RpIp-Z6ztrSRvZkgIJoQwCgYIKoZIzj0EAwIDSAAwRQIhAKBsIWGkW-Vi1r_tEwvt9uhTkCZl8R87WANQ8TzdKetCAiBXUp_gpJRfqA4F27qnmoMNABRbPeRTtK8YTNfSkDruBw"
-]
-```
-
-The following DIDs resolve using the certificate chain above:
-
-| Name | DID |
-|---|---|
-| Root CA fingerprint with subject predicate | `did:x509:0:sha256:jrpIEWcKgVz4oZFhQQ8XA1zdl4bBHTr42HvPhh1TTY8::subject:CN:Microsoft%20Corporation` |
-| Intermediate CA fingerprint with subject predicate | `did:x509:0:sha256:taW5Hxj7Z4wyzY-gLMI0FX93hztXz01dYk_FYQx0HIQ::subject:CN:Microsoft%20Corporation` |
-| EKU predicate | `did:x509:0:sha256:jrpIEWcKgVz4oZFhQQ8XA1zdl4bBHTr42HvPhh1TTY8::eku:1.3.6.1.5.5.7.3.3` |
-| Fulcio issuer with URI SAN predicate | `did:x509:0:sha256:jrpIEWcKgVz4oZFhQQ8XA1zdl4bBHTr42HvPhh1TTY8::fulcio-issuer:token.actions.githubusercontent.com::san:uri:https%3A%2F%2Fexample.com%2Fworkflow` |
+The machine-readable certificate chains, DIDs, expected resolution outcomes, and expected DID Documents are maintained in [`test-vectors.json`](test-vectors.json). The file is an array of independent input/output test cases. Each input embeds its certificate chain as an array of unpadded base64url-encoded DER certificates in leaf-first order. Each output contains either the expected DID Document or an expected error pattern. Certificate validity periods are not checked by these vectors.
 
 ## References
 
