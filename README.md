@@ -46,6 +46,8 @@ Run tests with:
 pytest -v
 ```
 
+The Rego policy in the specification is also checked against the test vectors when [OPA](https://www.openpolicyagent.org/) is installed; those tests are skipped otherwise.
+
 ## Contributing
 
 This project welcomes contributions and suggestions. Please see the [Contribution guidelines](CONTRIBUTING.md).

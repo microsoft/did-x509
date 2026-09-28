@@ -5,11 +5,15 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - '**.md'
+    paths:
+      - '**'
+      - '!**.md'
+      - 'specification.md'
   pull_request:
-    paths-ignore:
-      - '**.md'
+    paths:
+      - '**'
+      - '!**.md'
+      - 'specification.md'
   workflow_dispatch:
 
 jobs:
@@ -24,5 +28,9 @@ jobs:
         python-version: '3.10' 
 
     - run: pip install -r requirements.txt
+
+    - uses: open-policy-agent/setup-opa@b2b258e089860efaadaaf71bf6e3aecb4a3eeff1 # v2.4.0
+      with:
+        version: 1.21.0
 
     - run: pytest
