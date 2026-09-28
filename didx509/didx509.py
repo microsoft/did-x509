@@ -4,6 +4,7 @@
 from typing import List
 import argparse
 import json
+import re
 from base64 import urlsafe_b64encode
 from urllib.parse import unquote, quote
 
@@ -201,6 +202,10 @@ def verify_certificate_chain(chain: List[x509.Certificate]) -> List[x509.Certifi
     return verified_chain
 
 
+IDCHARS = r"(?:[A-Za-z0-9._-]|%[0-9A-Fa-f]{2})+"
+PREDICATE_VALUE_PATTERN = re.compile(rf"{IDCHARS}(?::{IDCHARS})*")
+
+
 def check_did_x509(did: str, chain: List[x509.Certificate]) -> str:
     decoded = [decode_certificate(cert) for cert in chain]
 
@@ -221,6 +226,9 @@ def check_did_x509(did: str, chain: List[x509.Certificate]) -> str:
     policies = [p.split(":", 1) for p in parts[1:]]
     if len(policies) == 0:
         raise ValueError("DID must contain at least one predicate.")
+    for policy in policies:
+        if len(policy) != 2 or not PREDICATE_VALUE_PATTERN.fullmatch(policy[1]):
+            raise ValueError("DID contains an invalid predicate value.")
 
     expected_ca_fingerprints = [
         c["fingerprint"][ca_fingerprint_alg] for c in decoded[1:]
