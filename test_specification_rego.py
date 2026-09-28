@@ -48,6 +48,7 @@ def test_policy_compiles(policy_file):
         ["opa", "check", "--strict", str(policy_file)],
         capture_output=True,
         text=True,
+        timeout=30,
     )
     assert result.returncode == 0, result.stderr
 
@@ -86,6 +87,7 @@ def test_policy_matches_implementation(policy_file, policy_package, vector):
         input=json.dumps({"did": did.split("#", 1)[0], "chain": model}),
         capture_output=True,
         text=True,
+        timeout=30,
     )
     # opa eval reports evaluation errors on stdout when using --format json.
     assert result.returncode == 0, result.stdout + result.stderr

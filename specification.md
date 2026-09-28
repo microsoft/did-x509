@@ -81,7 +81,7 @@ In this example, the identifier pins to a certificate authority using a SHA-256 
 
 ### Predicate validation model
 
-Predicate validation is defined in [Rego](https://www.openpolicyagent.org/docs/latest/policy-language/) to avoid ambiguous pseudo-code. This has no bearing on implementations, which can be written in any language.
+DID syntax validation and predicate validation are defined in [Rego](https://www.openpolicyagent.org/docs/latest/policy-language/) to avoid ambiguous pseudo-code. This has no bearing on implementations, which can be written in any language.
 
 The input to the Rego runtime is a JSON document: `{"did": "<DID>", "chain": <CertificateChain>}`, where `did` is the DID string and `chain` is the parsed representation of the certificate chain derived from the `x509chain` resolution option.
 
@@ -135,13 +135,15 @@ The overall Rego policy is assembled by concatenating the core Rego policy with 
 
 ### Percent-encoding
 
-Some predicates require values to be percent-encoded. Percent-encoding is specified in [RFC 3986 Section 2.1](https://www.rfc-editor.org/rfc/rfc3986#section-2.1). All characters that are not in the allowed set below must be percent-encoded:
+Some predicates require values to be percent-encoded. Percent-encoding is specified in [RFC 3986 Section 2.1](https://www.rfc-editor.org/rfc/rfc3986#section-2.1). Characters are encoded as UTF-8 before percent-encoding. All characters that are not in the allowed set below must be percent-encoded:
 
 ```abnf
 allowed = ALPHA / DIGIT / "-" / "." / "_"
 ```
 
 Note that most libraries implement percent-encoding in the context of URLs and do not encode `~` (`%7E`).
+
+Resolution fails if a percent-decoded value is not valid UTF-8.
 
 ### `subject` predicate
 
