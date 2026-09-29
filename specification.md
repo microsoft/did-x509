@@ -37,7 +37,7 @@ A did:x509 DID starts with `did:x509:` and binds a CA fingerprint to one or more
 
 ## DID Syntax
 
-The did:x509 ABNF definitions use [RFC 5234](https://www.rfc-editor.org/rfc/rfc5234.html). The DID Core `idchar` and `pct-encoded` definitions are repeated for readability.
+The did:x509 ABNF definitions use [RFC 5234](https://www.rfc-editor.org/rfc/rfc5234.html), with case-sensitive string literals written as `%s"..."` per [RFC 7405](https://www.rfc-editor.org/rfc/rfc7405). The DID Core `idchar` and `pct-encoded` definitions are repeated for readability.
 
 ```abnf
 idchar             = ALPHA / DIGIT / "." / "-" / "_" / pct-encoded
@@ -45,12 +45,12 @@ pct-encoded        = "%" HEXDIG HEXDIG
 ```
 
 ```abnf
-did-x509           = "did:x509:" method-specific-id
+did-x509           = %s"did:x509:" method-specific-id
 method-specific-id = version ":" ca-fingerprint-alg ":" ca-fingerprint 1*("::" predicate-name ":" predicate-value)
 version            = 1*DIGIT
-ca-fingerprint-alg = "sha256" / "sha384" / "sha512"
+ca-fingerprint-alg = %s"sha256" / %s"sha384" / %s"sha512"
 ca-fingerprint     = base64url
-predicate-name     = "subject" / "san" / "eku" / "fulcio-issuer"
+predicate-name     = %s"subject" / %s"san" / %s"eku" / %s"fulcio-issuer"
 predicate-value    = *(1*idchar ":") 1*idchar
 base64url          = 1*(ALPHA / DIGIT / "-" / "_")
 ```
@@ -88,13 +88,21 @@ The input to the Rego runtime is a JSON document: `{"did": "<DID>", "chain": <Ce
 Core Rego policy:
 
 ```rego
+package did_x509
+
 import future.keywords.if
 import future.keywords.in
+
+idchars := `([A-Za-z0-9._-]|%[0-9A-Fa-f]{2})+`
+
+predicate_pattern := sprintf(`::(subject|san|eku|fulcio-issuer):%s(:%s)*`, [idchars, idchars])
+
+did_pattern := sprintf(`^did:x509:0:(sha256|sha384|sha512):[A-Za-z0-9_-]+(%s)+$`, [predicate_pattern])
 
 parse_did(did) :=
   [ca_fingerprint_alg, ca_fingerprint, predicates] if {
     prefix := "did:x509:0:"
-    startswith(did, prefix) == true
+    regex.match(did_pattern, did)
     rest := trim_prefix(did, prefix)
     parts := split(rest, "::")
     [ca_fingerprint_alg, ca_fingerprint] := split(parts[0], ":")
@@ -111,6 +119,7 @@ valid if {
     [ca_fingerprint_alg,
      ca_fingerprint,
      predicates] := parse_did(input.did)
+    count(predicates) > 0
     ca := [c | some i; i != 0; c := input.chain[i]]
     ca[_].fingerprint[ca_fingerprint_alg] == ca_fingerprint
     valid_predicates := [i |
@@ -137,11 +146,11 @@ Note that most libraries implement percent-encoding in the context of URLs and d
 ### `subject` predicate
 
 ```abnf
-predicate-name     = "subject"
+predicate-name     = %s"subject"
 predicate-value    = key ":" value *(":" key ":" value)
 key                = label / oid
 value              = 1*idchar
-label              = "CN" / "L" / "ST" / "O" / "OU" / "C" / "STREET"
+label              = %s"CN" / %s"L" / %s"ST" / %s"O" / %s"OU" / %s"C" / %s"STREET"
 oid                = 1*DIGIT *("." 1*DIGIT)
 ```
 
@@ -158,6 +167,8 @@ validate_predicate(name, value) := true if {
     name == "subject"
     items := split(value, ":")
     count(items) % 2 == 0
+    keys := {k | some i; i % 2 == 0; k := items[i]}
+    count(keys) == count(items) / 2
     subject := {k: v |
         some i
         i % 2 == 0
@@ -165,7 +176,6 @@ validate_predicate(name, value) := true if {
         v := urlquery.decode(items[i+1])
     }
     count(subject) >= 1
-    count(subject) == count(items) / 2
     object.subset(input.chain[0].subject, subject) == true
 }
 ```
@@ -173,9 +183,9 @@ validate_predicate(name, value) := true if {
 ### `san` predicate
 
 ```abnf
-predicate-name     = "san"
+predicate-name     = %s"san"
 predicate-value    = san-type ":" san-value
-san-type           = "email" / "dns" / "uri"
+san-type           = %s"email" / %s"dns" / %s"uri"
 san-value          = 1*idchar
 ```
 
@@ -199,7 +209,7 @@ validate_predicate(name, value) := true if {
 ### `eku` predicate
 
 ```abnf
-predicate-name     = "eku"
+predicate-name     = %s"eku"
 predicate-value    = eku
 eku                = oid
 oid                = 1*DIGIT *("." 1*DIGIT)
@@ -223,7 +233,7 @@ validate_predicate(name, value) := true if {
 ### `fulcio-issuer` predicate
 
 ```abnf
-predicate-name     = "fulcio-issuer"
+predicate-name     = %s"fulcio-issuer"
 predicate-value    = fulcio-issuer
 fulcio-issuer      = 1*idchar
 ```
@@ -424,6 +434,8 @@ However, if the certificate authority revokes all certificates for the matching 
 
 ## DID Resolution
 
+If the DID to resolve is given as a DID URL, its fragment, if any, is removed first, and `<DID>` below refers to the result. Resolution fails if the DID URL has a path or query component.
+
 The following steps must be used to generate a corresponding DID Document:
 
 1. Decode the `x509chain` resolution option value into individual certificates by splitting the string on `","` and base64url-decoding each resulting string. The result is a list of DER-encoded certificates that can be loaded in standard libraries. Fail if the list contains fewer than two certificates.
@@ -529,6 +541,8 @@ The machine-readable certificate chains, DIDs, expected resolution outcomes, and
 [RFC 4648 - The Base16, Base32, and Base64 Data Encodings](https://www.rfc-editor.org/rfc/rfc4648). S. Josefsson. IETF. October 2006. Proposed Standard.
 
 [RFC 5234 - Augmented BNF for Syntax Specifications: ABNF](https://www.rfc-editor.org/rfc/rfc5234.html). D. Crocker, P. Overell. IETF. January 2008. Internet Standard.
+
+[RFC 7405 - Case-Sensitive String Support in ABNF](https://www.rfc-editor.org/rfc/rfc7405). P. Kyzivat. IETF. December 2014. Proposed Standard.
 
 [RFC 3986 - Uniform Resource Identifier (URI): Generic Syntax](https://www.rfc-editor.org/rfc/rfc3986). T. Berners-Lee, R. Fielding, L. Masinter. IETF. January 2005. Internet Standard.
 
