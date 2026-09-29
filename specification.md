@@ -119,6 +119,7 @@ valid if {
     [ca_fingerprint_alg,
      ca_fingerprint,
      predicates] := parse_did(input.did)
+    count(predicates) > 0
     ca := [c | some i; i != 0; c := input.chain[i]]
     ca[_].fingerprint[ca_fingerprint_alg] == ca_fingerprint
     valid_predicates := [i |
