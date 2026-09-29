@@ -35,7 +35,10 @@ def pctencode(data: str) -> str:
 
 
 def pctdecode(data: str) -> str:
-    return unquote(data)
+    try:
+        return unquote(data, errors="strict")
+    except UnicodeDecodeError as e:
+        raise ValueError("Percent-encoded value is not valid UTF-8.") from e
 
 
 def parse_name(name: x509.Name) -> dict:
@@ -261,6 +264,8 @@ def check_did_x509(did: str, chain: List[x509.Certificate]) -> str:
                 raise ValueError(
                     "SAN predicate requires exactly one type and value."
                 )
+            if "san" not in decoded[0]["extensions"]:
+                raise ValueError("Certificate does not contain a SAN extension.")
             san_type = parts[0]
             san_value = pctdecode(parts[1])
             san = [san_type, san_value]
