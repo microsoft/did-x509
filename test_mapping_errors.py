@@ -93,7 +93,7 @@ class EDIPartyName:
 
 
 @asn1.sequence
-class SubjectAltNameWithUnsupportedName:
+class GeneralNamesWithUnsupportedName:
     """GeneralNames holding a dNSName and an unsupported name. A two-field
     SEQUENCE encodes identically to the SEQUENCE OF, which the declarative API
     cannot emit bare."""
@@ -166,23 +166,35 @@ def test_duplicate_extensions_fail_mapping_with_value_error(root_key, suffix, va
     ),
     pytest.param(EDIPartyName(party_name="party"), id="ediPartyName"),
 ])
+@pytest.mark.parametrize("extension_oid", [
+    pytest.param(x509.ExtensionOID.SUBJECT_ALTERNATIVE_NAME, id="subjectAltName"),
+    pytest.param(x509.ExtensionOID.ISSUER_ALTERNATIVE_NAME, id="issuerAltName"),
+])
 @pytest.mark.parametrize("critical", [False, True])
-def test_unsupported_general_name_types_fail_mapping_with_value_error(general_name, critical):
-    names = SubjectAltNameWithUnsupportedName(
+def test_unsupported_general_name_types_fail_mapping_with_value_error(
+    general_name, extension_oid, critical
+):
+    # cryptography rejects these names while parsing any GeneralName-bearing
+    # extension, so the error must not single out the SAN.
+    names = GeneralNamesWithUnsupportedName(
         dns_name=asn1.IA5String("example.com"), unsupported=general_name
     )
-    san = x509.UnrecognizedExtension(
-        x509.ExtensionOID.SUBJECT_ALTERNATIVE_NAME, asn1.encode_der(names)
-    )
-    chain = make_chain(extra_extensions=[(san, critical)])
-    message = "Certificate contains an unsupported SAN type."
+    extension = x509.UnrecognizedExtension(extension_oid, asn1.encode_der(names))
+    chain = make_chain(extra_extensions=[(extension, critical)])
+    message = "Certificate contains an unsupported general name type."
     with pytest.raises(ValueError) as error:
         decode_certificate(chain[0])
     assert str(error.value) == message
+    # OpenSSL rejects a critical issuerAltName before the chain is mapped.
+    resolution_message = (
+        "Certificate chain verification failed: unhandled critical extension."
+        if critical and extension_oid == x509.ExtensionOID.ISSUER_ALTERNATIVE_NAME
+        else message
+    )
     for predicate in ["subject:CN:Leaf", "san:dns:example.com"]:
         with pytest.raises(ValueError) as error:
             resolve_did(did_for(chain, predicate), chain)
-        assert str(error.value) == message
+        assert str(error.value) == resolution_message
 
 
 def test_critical_extensions_outside_the_permitted_list_fail_with_value_error():

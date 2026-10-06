@@ -154,7 +154,8 @@ def parse_extensions(exts: x509.Extensions):
 def decode_certificate(c: x509.Certificate) -> dict:
     # Mapping failures are reported as ValueError. Accessing the parsed
     # extensions can raise cryptography-specific exceptions for duplicate
-    # extensions and for x400Address/ediPartyName general names.
+    # extensions and for x400Address/ediPartyName general names, which may
+    # appear in any GeneralName-bearing extension, not only the SAN.
     try:
         exts = parse_extensions(c.extensions)
     except x509.DuplicateExtension as e:
@@ -162,7 +163,9 @@ def decode_certificate(c: x509.Certificate) -> dict:
             f"Certificate contains a duplicate {e.oid.dotted_string} extension."
         ) from e
     except x509.UnsupportedGeneralNameType as e:
-        raise ValueError("Certificate contains an unsupported SAN type.") from e
+        raise ValueError(
+            "Certificate contains an unsupported general name type."
+        ) from e
     return {
         "fingerprint": {
             "sha256": b64url(c.fingerprint(hashes.SHA256())),
