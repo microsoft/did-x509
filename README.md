@@ -48,6 +48,21 @@ pytest -v
 
 The Rego policy in the specification is also checked against the test vectors when [OPA](https://www.openpolicyagent.org/) is installed; those tests are skipped otherwise.
 
+The `san` predicate also supports
+`::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com`.
+The closed OtherName registry currently contains only this Fulcio username type,
+encoded as a strict DER UTF8String inside the SAN extension. `convert` preserves
+its OID and full identity as
+`["othername", "1.3.6.1.4.1.57264.1.7", "alice!example.com"]`; it does not infer
+the identity from standalone Fulcio extensions. Critical SANs still undergo
+normal RFC 5280 path validation.
+
+Valid registered OtherName SANs are now accepted even when an existing predicate
+is selected. Unregistered or malformed OtherNames and other unsupported SAN
+forms still fail. Existing SAN pairs and DID Documents are unchanged; older
+method-0 resolvers reject the new selector. The synthetic OtherName test vectors
+are signed independently of the real certificate fixtures.
+
 Real Fulcio certificate chains and expected extension values are kept separately
 in [test-data/fulcio-issuer-v2](test-data/fulcio-issuer-v2).
 

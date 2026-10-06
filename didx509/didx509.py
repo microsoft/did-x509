@@ -13,6 +13,8 @@ from cryptography.hazmat.primitives import hashes, serialization
 from OpenSSL import crypto
 import jwcrypto.jwk
 
+from didx509.der import decode_der_utf8_string
+
 
 NAME_OID_STRINGS = {
     # https://datatracker.ietf.org/doc/html/rfc4514.html
@@ -58,6 +60,10 @@ def parse_name(name: x509.Name) -> dict:
 
 FULCIO_ISSUER_OID = "1.3.6.1.4.1.57264.1.1"
 
+SAN_OTHERNAME_DECODERS = {
+    "1.3.6.1.4.1.57264.1.7": decode_der_utf8_string,
+}
+
 # Critical extensions that the specification requires resolution to tolerate,
 # beyond those represented in the JSON model. Path validation enforces them.
 PERMITTED_CRITICAL_EXTENSION_OIDS = {
@@ -93,6 +99,14 @@ def parse_extensions(exts: x509.Extensions):
                     ext_value.append(["uri", san.value])
                 elif isinstance(san, x509.DirectoryName):
                     ext_value.append(["dn", parse_name(san.value)])
+                elif isinstance(san, x509.OtherName):
+                    oid = san.type_id.dotted_string
+                    if oid not in SAN_OTHERNAME_DECODERS:
+                        raise ValueError(
+                            "Certificate contains an unsupported SAN type."
+                        )
+                    scalar = SAN_OTHERNAME_DECODERS[oid](san.value)
+                    ext_value.append(["othername", oid, scalar])
                 else:
                     raise ValueError("Certificate contains an unsupported SAN type.")
         elif ext.oid.dotted_string == FULCIO_ISSUER_OID:
@@ -260,15 +274,27 @@ def check_did_x509(did: str, chain: List[x509.Certificate]) -> str:
 
         elif name == "san":
             parts = value.split(":")
-            if len(parts) != 2:
+            san_type = parts[0]
+            if san_type == "othername":
+                if len(parts) != 3:
+                    raise ValueError(
+                        "OtherName SAN predicate requires exactly one type, OID and value."
+                    )
+            elif len(parts) != 2:
                 raise ValueError(
                     "SAN predicate requires exactly one type and value."
                 )
             if "san" not in decoded[0]["extensions"]:
                 raise ValueError("Certificate does not contain a SAN extension.")
-            san_type = parts[0]
-            san_value = pctdecode(parts[1])
-            san = [san_type, san_value]
+            if san_type == "othername":
+                oid = parts[1]
+                if oid not in SAN_OTHERNAME_DECODERS:
+                    raise ValueError(
+                        "OtherName SAN predicate contains an unsupported type OID."
+                    )
+                san = [san_type, oid, pctdecode(parts[2])]
+            else:
+                san = [san_type, pctdecode(parts[1])]
             sans = decoded[0]["extensions"]["san"]
             if san not in sans:
                 raise ValueError("SAN predicate does not match the certificate.")
