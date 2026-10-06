@@ -1,0 +1,146 @@
+{
+  "fulcio_oids": {
+    "issuer": "1.3.6.1.4.1.57264.1.8",
+    "build-signer-uri": "1.3.6.1.4.1.57264.1.9",
+    "build-signer-digest": "1.3.6.1.4.1.57264.1.10",
+    "runner-environment": "1.3.6.1.4.1.57264.1.11",
+    "source-repository-uri": "1.3.6.1.4.1.57264.1.12",
+    "source-repository-digest": "1.3.6.1.4.1.57264.1.13",
+    "source-repository-ref": "1.3.6.1.4.1.57264.1.14",
+    "source-repository-identifier": "1.3.6.1.4.1.57264.1.15",
+    "source-repository-owner-uri": "1.3.6.1.4.1.57264.1.16",
+    "source-repository-owner-identifier": "1.3.6.1.4.1.57264.1.17",
+    "build-config-uri": "1.3.6.1.4.1.57264.1.18",
+    "build-config-digest": "1.3.6.1.4.1.57264.1.19",
+    "build-trigger": "1.3.6.1.4.1.57264.1.20",
+    "run-invocation-uri": "1.3.6.1.4.1.57264.1.21",
+    "source-repository-visibility-at-signing": "1.3.6.1.4.1.57264.1.22",
+    "deployment-environment": "1.3.6.1.4.1.57264.1.23",
+    "token-subject": "1.3.6.1.4.1.57264.1.24"
+  },
+  "samples": [
+    {
+      "id": "pydantic-ai-2.54.0",
+      "chain": "pydantic-ai-2.54.0.pem",
+      "environment": "production",
+      "sources": {
+        "leaf": {
+          "url": "https://pypi.org/integrity/pydantic-ai/2.54.0/pydantic_ai-2.54.0.tar.gz/provenance",
+          "json_pointer": "/attestation_bundles/0/attestations/0/verification_material/certificate"
+        },
+        "issuers": {
+          "url": "https://raw.githubusercontent.com/sigstore/sigstore-go/a061819fe7f864aa13c79377dbd01488b572b442/pkg/testing/data/trusted-roots/public-good.json",
+          "json_pointer": "/certificateAuthorities/1/certChain/certificates"
+        }
+      },
+      "certificate_sha256": [
+        "218b33a4c2b8200d544ea4124f314bd2396e479ad7eaafa4ae285243d3d32299",
+        "15d795348226b4649f750f5802592c393bee7cc53c3b86982175b7ad087efe47",
+        "3ba7b6cc4e95469d4d334b49cb257ad8537076fa84b0ca87ff4ecfe6a54680c1"
+      ],
+      "not_before": "2026-10-03T03:38:10+00:00",
+      "not_after": "2026-10-03T03:48:10+00:00",
+      "san": [
+        "uri",
+        "https://github.com/pydantic/pydantic-ai/.github/workflows/ci.yml@refs/tags/v2.54.0"
+      ],
+      "fulcio_issuer": "https://token.actions.githubusercontent.com",
+      "fulcio": {
+        "issuer": "https://token.actions.githubusercontent.com",
+        "build-signer-uri": "https://github.com/pydantic/pydantic-ai/.github/workflows/ci.yml@refs/tags/v2.54.0",
+        "build-signer-digest": "66951321b89587235f432281eba909a30a585ffd",
+        "runner-environment": "github-hosted",
+        "source-repository-uri": "https://github.com/pydantic/pydantic-ai",
+        "source-repository-digest": "66951321b89587235f432281eba909a30a585ffd",
+        "source-repository-ref": "refs/tags/v2.54.0",
+        "source-repository-identifier": "818331198",
+        "source-repository-owner-uri": "https://github.com/pydantic",
+        "source-repository-owner-identifier": "110818415",
+        "build-config-uri": "https://github.com/pydantic/pydantic-ai/.github/workflows/ci.yml@refs/tags/v2.54.0",
+        "build-config-digest": "66951321b89587235f432281eba909a30a585ffd",
+        "build-trigger": "push",
+        "run-invocation-uri": "https://github.com/pydantic/pydantic-ai/actions/runs/37092926449/attempts/1",
+        "source-repository-visibility-at-signing": "public",
+        "deployment-environment": "release",
+        "token-subject": "repo:pydantic/pydantic-ai:environment:release"
+      }
+    },
+    {
+      "id": "sigstore-js-2026-08-04",
+      "chain": "sigstore-js-2026-08-04.pem",
+      "environment": "production",
+      "sources": {
+        "leaf": {
+          "url": "https://rekor.sigstore.dev/api/v1/log/entries/108e9186e8c5677aa3266a9ba0b5c27d307da5a5c128a45c3d89f624b3e7bd32df3af81bb1ad604a",
+          "json_pointer": "/108e9186e8c5677aa3266a9ba0b5c27d307da5a5c128a45c3d89f624b3e7bd32df3af81bb1ad604a/body",
+          "body_encoding": "base64-json",
+          "body_json_pointer": "/spec/signatures/0/verifier",
+          "certificate_encoding": "base64-pem"
+        },
+        "issuers": {
+          "url": "https://raw.githubusercontent.com/sigstore/sigstore-go/a061819fe7f864aa13c79377dbd01488b572b442/pkg/testing/data/trusted-roots/public-good.json",
+          "json_pointer": "/certificateAuthorities/1/certChain/certificates"
+        }
+      },
+      "certificate_sha256": [
+        "bf2ce7c8939bda0ba002be10cd44fcc2f7d363be741a154387dbeaae2361abb9",
+        "15d795348226b4649f750f5802592c393bee7cc53c3b86982175b7ad087efe47",
+        "3ba7b6cc4e95469d4d334b49cb257ad8537076fa84b0ca87ff4ecfe6a54680c1"
+      ],
+      "not_before": "2026-08-04T21:31:35+00:00",
+      "not_after": "2026-08-04T21:41:35+00:00",
+      "san": [
+        "uri",
+        "https://github.com/sigstore/sigstore-js/.github/workflows/release.yml@refs/heads/main"
+      ],
+      "fulcio_issuer": "https://token.actions.githubusercontent.com",
+      "fulcio": {
+        "issuer": "https://token.actions.githubusercontent.com",
+        "build-signer-uri": "https://github.com/sigstore/sigstore-js/.github/workflows/release.yml@refs/heads/main",
+        "build-signer-digest": "769a53d8713248a8bf49edfc2a5d1955b0dcc24d",
+        "runner-environment": "github-hosted",
+        "source-repository-uri": "https://github.com/sigstore/sigstore-js",
+        "source-repository-digest": "769a53d8713248a8bf49edfc2a5d1955b0dcc24d",
+        "source-repository-ref": "refs/heads/main",
+        "source-repository-identifier": "495574555",
+        "source-repository-owner-uri": "https://github.com/sigstore",
+        "source-repository-owner-identifier": "71096353",
+        "build-config-uri": "https://github.com/sigstore/sigstore-js/.github/workflows/release.yml@refs/heads/main",
+        "build-config-digest": "769a53d8713248a8bf49edfc2a5d1955b0dcc24d",
+        "build-trigger": "push",
+        "run-invocation-uri": "https://github.com/sigstore/sigstore-js/actions/runs/30952660040/attempts/1",
+        "source-repository-visibility-at-signing": "public",
+        "token-subject": "repo:sigstore/sigstore-js:ref:refs/heads/main"
+      }
+    },
+    {
+      "id": "legacy-staging",
+      "chain": "legacy-staging.pem",
+      "environment": "staging",
+      "sources": {
+        "leaf": {
+          "url": "https://raw.githubusercontent.com/sigstore/sigstore-python/dbe933f28eb6433d0271ab96e0f1349dc0912c8f/test/assets/a.txt.crt"
+        },
+        "intermediate": {
+          "url": "https://raw.githubusercontent.com/sigstore/sigstore-python/dbe933f28eb6433d0271ab96e0f1349dc0912c8f/test/assets/staging-tuf/targets/782868913fe13c385105ddf33e827191386f58da40a931f2075a7e27b1b6ac7b.fulcio_intermediate.crt.pem"
+        },
+        "root": {
+          "url": "https://raw.githubusercontent.com/sigstore/sigstore-python/dbe933f28eb6433d0271ab96e0f1349dc0912c8f/test/assets/staging-tuf/targets/0e6b0442485ad552bea5f62f11c29e2acfda35307d7538430b4cc1dbef49bff1.fulcio.crt.pem"
+        }
+      },
+      "certificate_sha256": [
+        "8bd86c100cc7ea2939f9d1f610ab999f8499a2071e2edff97ba62928013c48e4",
+        "66e08b3881fc311194779aeaad11b70677c316985bf847b6ca2c83d8c5700565",
+        "bca21d3cc62c9d6a52be9989e6a705f99e91a39d9114890990789ef75d382b39"
+      ],
+      "not_before": "2022-07-28T17:04:21+00:00",
+      "not_after": "2022-07-28T17:14:21+00:00",
+      "san": [
+        "email",
+        "william@yossarian.net"
+      ],
+      "fulcio_issuer": "https://github.com/login/oauth",
+      "fulcio": {}
+    }
+  ]
+}

@@ -48,6 +48,9 @@ pytest -v
 
 The Rego policy in the specification is also checked against the test vectors when [OPA](https://www.openpolicyagent.org/) is installed; those tests are skipped otherwise.
 
+Real Fulcio certificate chains and expected extension values are kept separately
+in [test-data/fulcio-issuer-v2](test-data/fulcio-issuer-v2).
+
 ## Contributing
 
 This project welcomes contributions and suggestions. Please see the [Contribution guidelines](CONTRIBUTING.md).
