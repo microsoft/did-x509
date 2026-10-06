@@ -21,19 +21,17 @@ each certificate's original DER bytes, SAN identities, validity periods, and
 expected Fulcio string values. GitHub sources are pinned to commits; the PyPI
 source is pinned to a specific distribution version and certificate hash.
 Only PEM wrapping was applied: certificate DER bytes and signatures are
-unchanged. The source URLs are provenance, not runtime test dependencies.
+unchanged. The source URLs document provenance; the vendored files do not
+require network access.
 
 Each .8-.24 extension contains a DER UTF8String. The legacy .1 extension
 contains raw UTF-8. The manifest keeps these values separate, without
 normalizing, aliasing, or synthesizing any fields.
 
-The leaf certificates have expired. Offline fixture checks use the reference
-resolver's existing no-validity-period-check policy, while still checking the
-complete certificate chain. Tests that enforce certificate validity must use
-a fixed context-relevant historical time, not the current wall clock.
+The leaf certificates have expired. The reference resolver checks complete chains
+but does not check validity periods. To check these fixtures' validity, use a
+fixed context-relevant historical time, not the current wall clock.
 
-test_fulcio_issuer_v2_samples.py checks hashes, extension encodings and absence,
-and existing SAN/fulcio-issuer resolution using only these vendored files.
 These are preparation fixtures, not an implementation of the new fulcio
 predicate. V2-only, conflicting-issuer, and malformed-encoding cases still
 need separately signed synthetic certificates. OtherName SAN (.7) support
