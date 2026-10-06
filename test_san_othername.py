@@ -433,7 +433,7 @@ def test_duplicate_san_extensions_are_invalid_not_duplicate_entries():
     )
     chain = load_vector_chain(vector)
     chain[1].public_key().verify(chain[0].signature, chain[0].tbs_certificate_bytes)
-    with pytest.raises(x509.DuplicateExtension):
+    with pytest.raises(ValueError, match="duplicate 2.5.29.17 extension"):
         decode_certificate(chain[0])
     with pytest.raises(ValueError, match="Certificate chain verification failed"):
         resolve_did(vector["input"]["did"], chain)
