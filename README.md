@@ -79,7 +79,10 @@ Malformed registered values and critical standalone Fulcio extensions fail even
 when not selected. Missing fields fail; no fields are inferred or required
 unless selected. Values are exact opaque strings, with no URI, digest, numeric,
 or provider-specific normalization. Encode a colon as `%3A` and a literal percent
-as `%25`; an existing URI escape `%2F` therefore becomes `%252F`.
+as `%25`; an existing URI escape `%2F` therefore becomes `%252F`. Fields other
+than `issuer` are only unique relative to the OIDC provider that asserted them,
+so pair them with `fulcio:issuer` as above; the legacy `fulcio-issuer` selects
+`.1`, which is independent of `.8`, and does not scope them.
 
 Issuer migration changes the DID explicitly. `::fulcio-issuer:issuer.example.com`
 still selects only raw UTF-8 `.1` in `extensions.fulcio_issuer`, using the existing

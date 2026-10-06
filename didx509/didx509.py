@@ -104,10 +104,7 @@ def parse_extensions(exts: x509.Extensions):
         value = ext.value
         if isinstance(value, x509.ExtendedKeyUsage):
             ext_name = "eku"
-            ext_value = []
-            for eku in value:
-                oid = eku.dotted_string
-                ext_value.append(oid)
+            ext_value = [eku.dotted_string for eku in value]
         elif isinstance(value, x509.SubjectAlternativeName):
             ext_name = "san"
             ext_value = []
@@ -121,13 +118,13 @@ def parse_extensions(exts: x509.Extensions):
                 elif isinstance(san, x509.DirectoryName):
                     ext_value.append(["dn", parse_name(san.value)])
                 elif isinstance(san, x509.OtherName):
-                    oid = san.type_id.dotted_string
-                    if oid not in SAN_OTHERNAME_DECODERS:
+                    type_oid = san.type_id.dotted_string
+                    if type_oid not in SAN_OTHERNAME_DECODERS:
                         raise ValueError(
                             "Certificate contains an unsupported SAN type."
                         )
-                    scalar = SAN_OTHERNAME_DECODERS[oid](san.value)
-                    ext_value.append(["othername", oid, scalar])
+                    scalar = SAN_OTHERNAME_DECODERS[type_oid](san.value)
+                    ext_value.append(["othername", type_oid, scalar])
                 else:
                     raise ValueError("Certificate contains an unsupported SAN type.")
         elif oid == FULCIO_ISSUER_OID or oid in FULCIO_EXTENSION_FIELDS:
@@ -149,15 +146,26 @@ def parse_extensions(exts: x509.Extensions):
         elif not ext.critical:
             continue
         else:
-            raise RuntimeError(
-                "Certificate contains an unsupported critical extension."
-            )
+            raise ValueError("Certificate contains an unsupported critical extension.")
         extensions[ext_name] = ext_value
     return extensions
 
 
 def decode_certificate(c: x509.Certificate) -> dict:
-    exts = parse_extensions(c.extensions)
+    # Mapping failures are reported as ValueError. Accessing the parsed
+    # extensions can raise cryptography-specific exceptions for duplicate
+    # extensions and for x400Address/ediPartyName general names, which may
+    # appear in any GeneralName-bearing extension, not only the SAN.
+    try:
+        exts = parse_extensions(c.extensions)
+    except x509.DuplicateExtension as e:
+        raise ValueError(
+            f"Certificate contains a duplicate {e.oid.dotted_string} extension."
+        ) from e
+    except x509.UnsupportedGeneralNameType as e:
+        raise ValueError(
+            "Certificate contains an unsupported general name type."
+        ) from e
     return {
         "fingerprint": {
             "sha256": b64url(c.fingerprint(hashes.SHA256())),
