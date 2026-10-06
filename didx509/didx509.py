@@ -60,6 +60,26 @@ def parse_name(name: x509.Name) -> dict:
 
 FULCIO_ISSUER_OID = "1.3.6.1.4.1.57264.1.1"
 
+FULCIO_EXTENSION_FIELDS = {
+    "1.3.6.1.4.1.57264.1.8": "issuer",
+    "1.3.6.1.4.1.57264.1.9": "build-signer-uri",
+    "1.3.6.1.4.1.57264.1.10": "build-signer-digest",
+    "1.3.6.1.4.1.57264.1.11": "runner-environment",
+    "1.3.6.1.4.1.57264.1.12": "source-repository-uri",
+    "1.3.6.1.4.1.57264.1.13": "source-repository-digest",
+    "1.3.6.1.4.1.57264.1.14": "source-repository-ref",
+    "1.3.6.1.4.1.57264.1.15": "source-repository-identifier",
+    "1.3.6.1.4.1.57264.1.16": "source-repository-owner-uri",
+    "1.3.6.1.4.1.57264.1.17": "source-repository-owner-identifier",
+    "1.3.6.1.4.1.57264.1.18": "build-config-uri",
+    "1.3.6.1.4.1.57264.1.19": "build-config-digest",
+    "1.3.6.1.4.1.57264.1.20": "build-trigger",
+    "1.3.6.1.4.1.57264.1.21": "run-invocation-uri",
+    "1.3.6.1.4.1.57264.1.22": "source-repository-visibility-at-signing",
+    "1.3.6.1.4.1.57264.1.23": "deployment-environment",
+    "1.3.6.1.4.1.57264.1.24": "token-subject",
+}
+
 SAN_OTHERNAME_DECODERS = {
     "1.3.6.1.4.1.57264.1.7": decode_der_utf8_string,
 }
@@ -80,6 +100,7 @@ PERMITTED_CRITICAL_EXTENSION_OIDS = {
 def parse_extensions(exts: x509.Extensions):
     extensions = {}
     for ext in exts:
+        oid = ext.oid.dotted_string
         value = ext.value
         if isinstance(value, x509.ExtendedKeyUsage):
             ext_name = "eku"
@@ -109,11 +130,21 @@ def parse_extensions(exts: x509.Extensions):
                     ext_value.append(["othername", oid, scalar])
                 else:
                     raise ValueError("Certificate contains an unsupported SAN type.")
-        elif ext.oid.dotted_string == FULCIO_ISSUER_OID:
-            ext_name = "fulcio_issuer"
-            assert isinstance(value, x509.UnrecognizedExtension)
-            ext_value = value.value.decode("utf-8")
-        elif ext.oid.dotted_string in PERMITTED_CRITICAL_EXTENSION_OIDS:
+        elif oid == FULCIO_ISSUER_OID or oid in FULCIO_EXTENSION_FIELDS:
+            if ext.critical:
+                raise ValueError("Certificate contains a critical Fulcio extension.")
+            if not isinstance(value, x509.UnrecognizedExtension):
+                raise ValueError("Certificate contains an invalid Fulcio extension.")
+            if oid == FULCIO_ISSUER_OID:
+                ext_name = "fulcio_issuer"
+                ext_value = value.value.decode("utf-8")
+            else:
+                field = FULCIO_EXTENSION_FIELDS[oid]
+                extensions.setdefault("fulcio", {})[field] = decode_der_utf8_string(
+                    value.value
+                )
+                continue
+        elif oid in PERMITTED_CRITICAL_EXTENSION_OIDS:
             continue
         elif not ext.critical:
             continue
@@ -172,10 +203,10 @@ def verify_certificate_chain(chain: List[x509.Certificate]) -> List[x509.Certifi
     specification leaves that to relying-party policy.
 
     Critical-extension processing is left to OpenSSL, which rejects any critical
-    extension it does not recognize. The fulcio_issuer extension is unrecognized
-    and must not be marked critical, so this is the behaviour the specification
-    requires. parse_extensions permits the standard critical extensions the
-    specification allows, which OpenSSL recognizes and processes here.
+    extension it does not recognize. Standalone Fulcio extensions are unrecognized
+    and must not be marked critical. parse_extensions also rejects their critical
+    forms and permits the standard critical extensions the specification allows,
+    which OpenSSL recognizes and processes here.
     """
     if len(chain) < 2:
         raise ValueError("Certificate chain must contain at least two certificates.")
@@ -318,6 +349,24 @@ def check_did_x509(did: str, chain: List[x509.Certificate]) -> str:
                 raise ValueError(
                     "Fulcio issuer predicate does not match the certificate."
                 )
+
+        elif name == "fulcio":
+            parts = value.split(":")
+            if len(parts) != 2:
+                raise ValueError(
+                    "Fulcio predicate requires exactly one field and value."
+                )
+            field, encoded = parts
+            if field not in FULCIO_EXTENSION_FIELDS.values():
+                raise ValueError("Fulcio predicate contains an unknown field.")
+            scalar = pctdecode(encoded)
+            extensions = decoded[0]["extensions"]
+            if "fulcio" not in extensions or field not in extensions["fulcio"]:
+                raise ValueError(
+                    "Certificate does not contain the requested Fulcio extension."
+                )
+            if scalar != extensions["fulcio"][field]:
+                raise ValueError("Fulcio predicate does not match the certificate.")
 
         else:
             raise ValueError("DID contains an unknown predicate.")

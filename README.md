@@ -64,7 +64,35 @@ method-0 resolvers reject the new selector. The synthetic OtherName test vectors
 are signed independently of the real certificate fixtures.
 
 Real Fulcio certificate chains and expected extension values are kept separately
-in [test-data/fulcio-issuer-v2](test-data/fulcio-issuer-v2).
+in [test-data/fulcio-issuer-v2/manifest.json](test-data/fulcio-issuer-v2/manifest.json).
+The `fulcio` predicate supports all 17 registered standalone fields `.8`-`.24`,
+for example:
+
+```sh
+python -m didx509 resolve did:x509:0:sha256:O6e2zE6VRp1NM0tJyyV62FNwdvqEsMqH_07P5qVGgME::fulcio:issuer:https%3A%2F%2Ftoken.actions.githubusercontent.com::fulcio:deployment-environment:pypi::fulcio:token-subject:repo%3Apypa%2Fpackaging%3Aenvironment%3Apypi --chain test-data/fulcio-issuer-v2/packaging-26.3.pem
+```
+
+Each predicate requires one literal registered field and one nonempty
+percent-encoded scalar; multiple predicates are ANDed. `convert` maps present
+fields to `extensions.fulcio`, decoding strict DER UTF8Strings eagerly.
+Malformed registered values and critical standalone Fulcio extensions fail even
+when not selected. Missing fields fail; no fields are inferred or required
+unless selected. Values are exact opaque strings, with no URI, digest, numeric,
+or provider-specific normalization. Encode a colon as `%3A` and a literal percent
+as `%25`; an existing URI escape `%2F` therefore becomes `%252F`.
+
+Issuer migration changes the DID explicitly. `::fulcio-issuer:issuer.example.com`
+still selects only raw UTF-8 `.1` in `extensions.fulcio_issuer`, using the existing
+HTTPS-suffix comparison. `::fulcio:issuer:https%3A%2F%2Fissuer.example.com` selects
+only Issuer V2 (`.8`) in `extensions.fulcio.issuer`, comparing the full string.
+There is no fallback, alias, agreement check, or rewrite between them. Older
+method-0 resolvers reject the new predicate. The [C++ tracking issue,
+microsoft/didx509cpp#74](https://github.com/microsoft/didx509cpp/issues/74), is
+separate from this Python implementation.
+
+Offline implementation tests exercise every selector against the unchanged
+production packaging chain and use independently signed synthetic certificates
+for V2-only, differing dual issuers, strict encoding and path-validation cases.
 
 ## Contributing
 

@@ -50,7 +50,7 @@ method-specific-id = version ":" ca-fingerprint-alg ":" ca-fingerprint 1*("::" p
 version            = 1*DIGIT
 ca-fingerprint-alg = %s"sha256" / %s"sha384" / %s"sha512"
 ca-fingerprint     = base64url
-predicate-name     = %s"subject" / %s"san" / %s"eku" / %s"fulcio-issuer"
+predicate-name     = %s"subject" / %s"san" / %s"eku" / %s"fulcio-issuer" / %s"fulcio"
 predicate-value    = *(1*idchar ":") 1*idchar
 base64url          = 1*(ALPHA / DIGIT / "-" / "_")
 ```
@@ -95,9 +95,14 @@ import future.keywords.in
 
 idchars := `([A-Za-z0-9._-]|%[0-9A-Fa-f]{2})+`
 
-predicate_pattern := sprintf(`::(subject|san|eku|fulcio-issuer):%s(:%s)*`, [idchars, idchars])
+predicate_pattern := sprintf(`::(subject|san|eku|fulcio-issuer|fulcio):%s(:%s)*`, [idchars, idchars])
 
 did_pattern := sprintf(`^did:x509:0:(sha256|sha384|sha512):[A-Za-z0-9_-]+(%s)+$`, [predicate_pattern])
+
+decode_scalar(encoded) := decoded if {
+    decoded := urlquery.decode(encoded)
+    json.unmarshal(json.marshal(decoded)) == decoded
+}
 
 parse_did(did) :=
   [ca_fingerprint_alg, ca_fingerprint, predicates] if {
@@ -145,6 +150,11 @@ Note that most libraries implement percent-encoding in the context of URLs and d
 
 Resolution fails if a percent-decoded value is not valid UTF-8.
 
+The Rego `decode_scalar` helper decodes once and checks that a JSON string round
+trip preserves the decoded bytes. OPA's `urlquery.decode` alone does not validate
+UTF-8; JSON serialization would replace invalid byte sequences, so those values
+fail the check. A correctly encoded U+FFFD remains a valid scalar.
+
 ### `subject` predicate
 
 ```abnf
@@ -175,9 +185,10 @@ validate_predicate(name, value) := true if {
         some i
         i % 2 == 0
         k := items[i]
-        v := urlquery.decode(items[i+1])
+        v := decode_scalar(items[i+1])
     }
     count(subject) >= 1
+    count(subject) == count(keys)
     object.subset(input.chain[0].subject, subject) == true
 }
 ```
@@ -230,7 +241,7 @@ validate_predicate(name, value) := true if {
     name == "san"
     [san_type, san_value_encoded] := split(value, ":")
     san_type in {"email", "dns", "uri"}
-    san_value := urlquery.decode(san_value_encoded)
+    san_value := decode_scalar(san_value_encoded)
     [san_type, san_value] == input.chain[0].extensions.san[_]
 }
 
@@ -239,7 +250,7 @@ validate_predicate(name, value) := true if {
     [san_type, type_oid, san_value_encoded] := split(value, ":")
     san_type == "othername"
     type_oid in othername_type_oids
-    san_value := urlquery.decode(san_value_encoded)
+    san_value := decode_scalar(san_value_encoded)
     ["othername", type_oid, san_value] == input.chain[0].extensions.san[_]
 }
 ```
@@ -278,7 +289,11 @@ predicate-value    = fulcio-issuer
 fulcio-issuer      = 1*idchar
 ```
 
-`fulcio-issuer` is `chain[0].extensions.fulcio_issuer`, without leading `https://`, percent-encoded.
+`fulcio-issuer` selects only the legacy standalone extension
+`1.3.6.1.4.1.57264.1.1`, whose payload is raw UTF-8, mapped to
+`chain[0].extensions.fulcio_issuer`. Its predicate value is the issuer without
+leading `https://`, percent-encoded. Matching decodes the value once, prepends
+`https://`, and compares exactly. Issuer V2 (`.8`) never supplies this value.
 
 The `fulcio_issuer` extension MUST be present on `chain[0]` when this predicate is used; resolution fails if it is absent. The extension MUST NOT be marked critical.
 
@@ -295,10 +310,151 @@ Rego policy:
 ```rego
 validate_predicate(name, value) := true if {
     name == "fulcio-issuer"
-    suffix := urlquery.decode(value)
+    suffix := decode_scalar(value)
     concat("", ["https://", suffix]) == input.chain[0].extensions.fulcio_issuer
 }
 ```
+
+### `fulcio` predicate
+
+```abnf
+predicate-name     = %s"fulcio"
+predicate-value    = fulcio-field ":" fulcio-value
+fulcio-value       = 1*idchar
+fulcio-field       = %s"issuer"
+                  / %s"build-signer-uri"
+                  / %s"build-signer-digest"
+                  / %s"runner-environment"
+                  / %s"source-repository-uri"
+                  / %s"source-repository-digest"
+                  / %s"source-repository-ref"
+                  / %s"source-repository-identifier"
+                  / %s"source-repository-owner-uri"
+                  / %s"source-repository-owner-identifier"
+                  / %s"build-config-uri"
+                  / %s"build-config-digest"
+                  / %s"build-trigger"
+                  / %s"run-invocation-uri"
+                  / %s"source-repository-visibility-at-signing"
+                  / %s"deployment-environment"
+                  / %s"token-subject"
+```
+
+Each occurrence is exactly
+`::fulcio:<literal-field>:<percent-encoded-value>`, with one registered literal
+field and one nonempty encoded scalar. Unknown fields, encoded field names,
+missing or empty values, extra structural components, malformed percent escapes,
+and percent-decoded values that are not valid UTF-8 cause resolution to fail.
+Multiple predicates, including repeated `fulcio` predicates, are ANDed.
+
+#### Standalone Fulcio extension registry
+
+These OIDs are standalone extensions, separate from the SAN OtherName registry.
+Each `.8`-`.24` `extnValue` payload contains exactly one complete primitive
+universal DER UTF8String (tag `0x0C`). Every field uses the same certificate
+encoding, scalar DID encoding, and exact comparison:
+
+| OID | Literal field / JSON key in `extensions.fulcio` |
+|---|---|
+| `1.3.6.1.4.1.57264.1.8` | `issuer` (Issuer V2) |
+| `1.3.6.1.4.1.57264.1.9` | `build-signer-uri` |
+| `1.3.6.1.4.1.57264.1.10` | `build-signer-digest` |
+| `1.3.6.1.4.1.57264.1.11` | `runner-environment` |
+| `1.3.6.1.4.1.57264.1.12` | `source-repository-uri` |
+| `1.3.6.1.4.1.57264.1.13` | `source-repository-digest` |
+| `1.3.6.1.4.1.57264.1.14` | `source-repository-ref` |
+| `1.3.6.1.4.1.57264.1.15` | `source-repository-identifier` |
+| `1.3.6.1.4.1.57264.1.16` | `source-repository-owner-uri` |
+| `1.3.6.1.4.1.57264.1.17` | `source-repository-owner-identifier` |
+| `1.3.6.1.4.1.57264.1.18` | `build-config-uri` |
+| `1.3.6.1.4.1.57264.1.19` | `build-config-digest` |
+| `1.3.6.1.4.1.57264.1.20` | `build-trigger` |
+| `1.3.6.1.4.1.57264.1.21` | `run-invocation-uri` |
+| `1.3.6.1.4.1.57264.1.22` | `source-repository-visibility-at-signing` |
+| `1.3.6.1.4.1.57264.1.23` | `deployment-environment` |
+| `1.3.6.1.4.1.57264.1.24` | `token-subject` |
+
+Use the same strict DER UTF8String decoder as for the registered `.7` OtherName
+inner value, without sharing or expanding its OID registry. Decode every
+registered standalone extension eagerly when present on any certificate in the
+chain, even when it is not selected. Wrong tags or classes, constructed strings,
+raw UTF-8 instead of DER, indefinite or nonminimal lengths, truncated values,
+trailing bytes, and invalid UTF-8 cause mapping and resolution to fail. Do not
+replace invalid characters or accept historical malformed `.8` encodings.
+Standalone Fulcio extensions MUST NOT be critical; both JSON conversion and
+resolution reject their critical forms, without bypassing path validation.
+
+Map present values to the corresponding keys in `extensions.fulcio`; do not
+require any other registry field to be present. Missing requested fields fail.
+An empty DER UTF8String is retained as an empty JSON string but cannot match a
+nonempty predicate, and neither empty nor absent values are wildcards. Do not
+synthesize values from other claims or alias deprecated `.2`-`.6` extensions.
+The `.7` type inside SAN is not part of this standalone registry.
+
+Split structural separators before decoding only the scalar, exactly once.
+Percent-encode the decoded UTF-8 string, not its DER wrapper, leaving only ASCII
+letters, digits, `-`, `.`, and `_` unescaped. Comparison is opaque and exact:
+no URL normalization, Unicode normalization, case folding, trimming, numeric
+conversion, digest re-encoding, enum restrictions, or provider-specific format
+assumptions. A colon is `%3A`, and a percent sign is `%25`. For example,
+`sha1:abc123` is `sha1%3Aabc123`; a URI containing literal `%2F` must use `%252F`
+so that one decode preserves the existing escape.
+
+Example using Issuer V2 and a token subject:
+
+`did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::fulcio:issuer:https%3A%2F%2Ftoken.actions.githubusercontent.com::fulcio:token-subject:repo%3Apypa%2Fpackaging%3Aenvironment%3Apypi`
+
+Rego policy:
+
+```rego
+fulcio_fields := {
+    "issuer",
+    "build-signer-uri",
+    "build-signer-digest",
+    "runner-environment",
+    "source-repository-uri",
+    "source-repository-digest",
+    "source-repository-ref",
+    "source-repository-identifier",
+    "source-repository-owner-uri",
+    "source-repository-owner-identifier",
+    "build-config-uri",
+    "build-config-digest",
+    "build-trigger",
+    "run-invocation-uri",
+    "source-repository-visibility-at-signing",
+    "deployment-environment",
+    "token-subject",
+}
+
+validate_predicate(name, value) := true if {
+    name == "fulcio"
+    [field, encoded] := split(value, ":")
+    field in fulcio_fields
+    regex.match(sprintf(`^%s$`, [idchars]), encoded)
+    scalar := decode_scalar(encoded)
+    scalar == input.chain[0].extensions.fulcio[field]
+}
+```
+
+#### Explicit issuer migration
+
+`fulcio:issuer` selects only `.8` and compares its full decoded issuer string,
+including any scheme. It maps to `extensions.fulcio.issuer`, independently of
+the raw UTF-8 `.1` value in `extensions.fulcio_issuer`. There are no aliases,
+fallbacks, precedence rules, agreement checks, or resolver rewrites between them.
+A `.8`-only certificate fails `fulcio-issuer`, and a `.1`-only certificate fails
+`fulcio:issuer`. Both valid extensions can hold different values and remain
+independently selectable, regardless of their order in the certificate.
+
+Migration explicitly changes the DID: replace
+`::fulcio-issuer:issuer.example.com` with
+`::fulcio:issuer:https%3A%2F%2Fissuer.example.com` only when choosing the `.8`
+identity. The DID Document uses the selected DID unchanged; it is not a
+canonicalized alias of the legacy DID. This is an additive method-version-`0`
+predicate; older resolvers MUST reject unsupported new predicates. Existing
+predicate meanings are unchanged, but previously ignored malformed registered
+standalone extensions now fail eagerly, even for an existing predicate.
 
 ## Verifiable Data Registry and Trust Model
 
@@ -329,7 +485,8 @@ Each certificate object can contain:
 | `subject` | X.509 subject name, represented as an object of name attributes. |
 | `extensions.eku` | Extended Key Usage OIDs from RFC 5280 Section 4.2.1.12. |
 | `extensions.san` | Subject Alternative Name entries from RFC 5280 Section 4.2.1.6. |
-| `extensions.fulcio_issuer` | The Fulcio issuer extension value. |
+| `extensions.fulcio_issuer` | The legacy `.1` standalone issuer, decoded as raw UTF-8. |
+| `extensions.fulcio` | Present `.8`-`.24` standalone fields keyed by the registered literal names, decoded from strict DER UTF8Strings. |
 
 Name objects use the RFC 4514 labels `CN`, `L`, `ST`, `O`, `OU`, `C`, and `STREET` for common attributes. Other attributes use dotted OID strings as keys. Repeated attributes are not supported. Values are converted to UTF-8 strings.
 
@@ -344,6 +501,11 @@ SAN entries are variable-arity arrays. The first item identifies the SAN type. E
 | Registered OtherName | `["othername", "1.3.6.1.4.1.57264.1.7", "alice!example.com"]` |
 
 Preserve every well-formed entry in order, including identical duplicates and different values for the same OtherName OID. An unregistered OtherName OID, a malformed registered value, or any other unsupported SAN form causes mapping to fail, even in a noncritical SAN and even when another entry or an unrelated predicate would match. Duplicate SAN extensions remain invalid X.509; allowing repeated entries does not allow repeated extensions.
+
+The `extensions.fulcio` group is additive. Keep `extensions.fulcio_issuer`
+separate and omit groups and fields that are absent; do not fill in default
+values. All registered Fulcio fields are decoded eagerly as specified above.
+Duplicate standalone extensions remain invalid X.509.
 
 Example certificate chain model:
 
@@ -375,7 +537,12 @@ Example certificate chain model:
           }
         ]
       ],
-      "fulcio_issuer": "https://issuer.example.com"
+      "fulcio_issuer": "https://issuer.example.com",
+      "fulcio": {
+        "issuer": "https://issuer-v2.example.com",
+        "deployment-environment": "pypi",
+        "token-subject": "repo:pypa/packaging:environment:pypi"
+      }
     }
   },
   {
@@ -488,7 +655,13 @@ The following steps must be used to generate a corresponding DID Document:
 
 The enclosing SAN extension may be critical; individual SAN entries have no critical flag. RFC 5280 requires a critical SAN when the leaf subject is empty, as used by Fulcio username identities. Registered OtherName support does not bypass normal path validation, critical-extension processing, or name constraints. Unknown critical extensions and unsupported critical name constraints still cause resolution to fail.
 
-The `fulcio_issuer` extension is deliberately not on that list. Fulcio does not mark it critical; for example, a [dump of a Fulcio-issued certificate shows its `critical` field as `BOOL ABSENT`](https://github.com/sigstore/gitsign/blob/44f5e17fac6944fdde71c94d2e77ab075c9dca9f/docs/timestamp.md#L102-L107). Issuers MUST NOT mark it critical: it is an unrecognized extension for the purposes of RFC 5280 certification path validation, so marking it critical may cause the chain to be rejected.
+The standalone Fulcio `.1` and `.8`-`.24` extensions are deliberately not on that
+list, even though they are represented in the JSON model. Fulcio does not mark
+them critical; for example, a [dump of a Fulcio-issued certificate shows the
+legacy issuer's `critical` field as `BOOL ABSENT`](https://github.com/sigstore/gitsign/blob/44f5e17fac6944fdde71c94d2e77ab075c9dca9f/docs/timestamp.md#L102-L107).
+Issuers MUST NOT mark them critical: they are unrecognized extensions for RFC
+5280 path validation. JSON mapping also rejects critical standalone Fulcio
+extensions, even when their fields are not selected.
 
 Instead of using the current time as specified in [Section 6.1.3 of RFC 5280](https://www.rfc-editor.org/info/rfc5280/#section-6.1.3) when validating the chain, applications may choose a context-relevant point in time. For example, applications handling signed documents may choose to use the signing time instead, which might come from a CWT `iat` claim ([RFC 8392](https://www.rfc-editor.org/rfc/rfc8392)) or JWT `iat` claim ([RFC 7519](https://www.rfc-editor.org/rfc/rfc7519)). Such a claim is not trusted time by itself and needs to be integrity protected and accepted by application policy.
 
@@ -564,7 +737,7 @@ Specifically, extracting and relying upon subject names, organizational informat
 
 ## Privacy Considerations
 
-The did:x509 identifier can contain certificate subject names, subject alternative names, extended key usage values, Fulcio issuer values, and a certificate authority fingerprint. These values can reveal personal names, email addresses, domain names, organizational affiliations, credential issuers, or other identifying information. DID creators should choose predicates that are specific enough for relying-party policy but disclose no more certificate attributes than necessary.
+The did:x509 identifier can contain certificate subject names, subject alternative names, extended key usage values, Fulcio issuer and build/source/token metadata, and a certificate authority fingerprint. These values can reveal personal names, email addresses, domain names, organizational affiliations, credential issuers, repository identities, deployment environments, token subjects, or other identifying information. DID creators should choose predicates that are specific enough for relying-party policy but disclose no more certificate attributes than necessary.
 
 The `x509chain` resolution option carries the certificate chain used as resolution evidence. Certificates can contain additional metadata beyond the predicates encoded in the DID, including subject attributes, SAN entries, validity periods, certificate policies, and extension values. Resolvers and verifiers should treat certificate chains as potentially identifying data, avoid unnecessary logging or redistribution, and apply data minimization when retaining resolution inputs or outputs.
 

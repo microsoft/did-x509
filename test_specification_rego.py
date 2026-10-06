@@ -15,6 +15,13 @@ from didx509.didx509 import check_did_x509, decode_certificate
 from test_vectors import TEST_VECTORS, load_vector_chain
 
 
+PERCENT_UTF8_CASES = [
+    ("%FF", False), ("%FE", False), ("%80", False), ("%C3", False),
+    ("%C0%AF", False), ("%ED%A0%80", False), ("%F4%90%80%80", False),
+    ("%F0%9F", False), ("%EF%BF", False), ("%FF%EF%BF%BD", False),
+    ("%EF%BF%BD", True), ("%ef%bf%bd", True),
+]
+
 # In CI, a missing OPA must fail the run rather than skip these tests.
 pytestmark = pytest.mark.skipif(
     shutil.which("opa") is None and "CI" not in os.environ,
@@ -102,12 +109,7 @@ def test_policy_matches_implementation(policy_file, policy_package, vector):
     assert evaluate_policy(policy_file, policy_package, did, model) == expected
 
 
-@pytest.mark.parametrize("encoded,expected", [
-    ("%FF", False), ("%FE", False), ("%80", False), ("%C3", False),
-    ("%C0%AF", False), ("%ED%A0%80", False), ("%F4%90%80%80", False),
-    ("%F0%9F", False), ("%EF%BF", False), ("%FF%EF%BF%BD", False),
-    ("%EF%BF%BD", True), ("%ef%bf%bd", True),
-])
+@pytest.mark.parametrize("encoded,expected", PERCENT_UTF8_CASES)
 def test_othername_query_unescape_cannot_match_invalid_utf8(
     policy_file, policy_package, encoded, expected
 ):
@@ -120,3 +122,47 @@ def test_othername_query_unescape_cannot_match_invalid_utf8(
     ]
     did = f"did:x509:0:sha256:root::san:othername:{oid}:{encoded}"
     assert evaluate_policy(policy_file, policy_package, did, model) == expected
+
+
+@pytest.mark.parametrize("encoded,valid_utf8", PERCENT_UTF8_CASES)
+@pytest.mark.parametrize("field,replacements", [
+    ("issuer", 1), ("token-subject", 2),
+    ("source-repository-uri", 3), ("build-signer-digest", 4),
+])
+def test_fulcio_query_unescape_cannot_match_invalid_utf8(
+    policy_file, policy_package, encoded, valid_utf8, field, replacements
+):
+    model = [
+        {"extensions": {"fulcio": {field: "\ufffd" * replacements}}},
+        {"fingerprint": {"sha256": "root"}},
+    ]
+    did = f"did:x509:0:sha256:root::fulcio:{field}:{encoded}"
+    expected = valid_utf8 and replacements == 1
+    assert evaluate_policy(policy_file, policy_package, did, model) == expected
+
+
+@pytest.mark.parametrize("encoded,expected", PERCENT_UTF8_CASES)
+def test_invalid_utf8_subject_values_cannot_be_dropped_from_a_predicate(
+    policy_file, policy_package, encoded, expected
+):
+    model = [
+        {"subject": {"CN": "Leaf", "O": "\ufffd"}},
+        {"fingerprint": {"sha256": "root"}},
+    ]
+    did = f"did:x509:0:sha256:root::subject:CN:Leaf:O:{encoded}"
+    assert evaluate_policy(policy_file, policy_package, did, model) == expected
+
+
+@pytest.mark.parametrize("field", [
+    "username", "Issuer", "%69ssuer", "source_repository_uri",
+    "1.3.6.1.4.1.57264.1.8", "8", "othername",
+])
+def test_unknown_fulcio_fields_fail_even_if_supplied_in_the_json_model(
+    policy_file, policy_package, field
+):
+    model = [
+        {"extensions": {"fulcio": {field: "opaque"}}},
+        {"fingerprint": {"sha256": "root"}},
+    ]
+    did = f"did:x509:0:sha256:root::fulcio:{field}:opaque"
+    assert not evaluate_policy(policy_file, policy_package, did, model)
