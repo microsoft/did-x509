@@ -405,9 +405,11 @@ identity provider that asserted them. Different issuers can vouch for the same
 `token-subject`, `source-repository-uri`, or `build-config-uri` value for
 unrelated identities, so a DID that selects such a field without also selecting
 the issuer matches any provider trusted by the CA. Identifiers selecting
-`fulcio:*` fields SHOULD therefore also select the issuer, with `fulcio:issuer`
-or the legacy `fulcio-issuer` predicate, as in the example below. See
-[Identifier ambiguity](#identifier-ambiguity).
+`fulcio:*` fields SHOULD therefore also select `fulcio:issuer`, as in the
+example below. The legacy `fulcio-issuer` predicate is not a substitute: it
+selects `.1`, which is independent of `.8` and so does not scope these fields
+(see [Explicit issuer migration](#explicit-issuer-migration) and
+[Identifier ambiguity](#identifier-ambiguity)).
 
 Example using Issuer V2 and a token subject:
 
@@ -732,7 +734,7 @@ This DID method maps characteristics of X.509 certificate chains to identifiers.
 
 To mitigate this issue, the certificate authority should publish their expected usage of certificate fields and indicate which ones constitute a unique identity, versus any additional fields that may be of an informational nature. This will help users create an appropriate did:x509 identifier as well as consumers of signed content to decide whether it is appropriate to trust a given did:x509 identifier.
 
-For example, Fulcio certificates carry claims asserted by one of several OIDC identity providers, so a `fulcio` field such as `token-subject` only identifies a unique identity together with the issuer that asserted it. The [`fulcio` predicate](#fulcio-predicate) section recommends selecting the issuer alongside any other field.
+For example, Fulcio certificates carry claims asserted by one of several OIDC identity providers, so a `fulcio` field such as `token-subject` only identifies a unique identity together with the issuer that asserted it. The [`fulcio` predicate](#fulcio-predicate) section recommends selecting `fulcio:issuer` alongside any other field.
 
 ### X.509 trust stores
 
