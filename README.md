@@ -69,7 +69,7 @@ The `fulcio` predicate supports all 17 registered standalone fields `.8`-`.24`,
 for example:
 
 ```sh
-python -m didx509 resolve did:x509:0:sha256:O6e2zE6VRp1NM0tJyyV62FNwdvqEsMqH_07P5qVGgME::fulcio:issuer:https%3A%2F%2Ftoken.actions.githubusercontent.com::fulcio:deployment-environment:pypi::fulcio:token-subject:repo%3Apypa%2Fpackaging%3Aenvironment%3Apypi --chain test-data/fulcio-issuer-v2/packaging-26.3.pem
+python -m didx509 resolve did:x509:0:sha256:O6e2zE6VRp1NM0tJyyV62FNwdvqEsMqH_07P5qVGgME::fulcio:issuer:https%3A%2F%2Ftoken.actions.githubusercontent.com::fulcio:deployment-environment:release::fulcio:token-subject:repo%3Apydantic%2Fpydantic-ai%3Aenvironment%3Arelease --chain test-data/fulcio-issuer-v2/pydantic-ai-2.54.0.pem
 ```
 
 Each predicate requires one literal registered field and one nonempty
@@ -91,8 +91,10 @@ microsoft/didx509cpp#74](https://github.com/microsoft/didx509cpp/issues/74), is
 separate from this Python implementation.
 
 Offline implementation tests exercise every selector against the unchanged
-production packaging chain and use independently signed synthetic certificates
-for V2-only, differing dual issuers, strict encoding and path-validation cases.
+production pydantic-ai chain. The sigstore-js-2026-08-04 chain supplies a token
+subject but no deployment environment; token-subject absence is covered by
+independently signed synthetic chains, alongside V2-only, differing dual issuers,
+strict encoding and path-validation cases.
 
 ## Contributing
 

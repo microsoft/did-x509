@@ -402,7 +402,7 @@ so that one decode preserves the existing escape.
 
 Example using Issuer V2 and a token subject:
 
-`did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::fulcio:issuer:https%3A%2F%2Ftoken.actions.githubusercontent.com::fulcio:token-subject:repo%3Apypa%2Fpackaging%3Aenvironment%3Apypi`
+`did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::fulcio:issuer:https%3A%2F%2Ftoken.actions.githubusercontent.com::fulcio:token-subject:repo%3Apydantic%2Fpydantic-ai%3Aenvironment%3Arelease`
 
 Rego policy:
 
@@ -540,8 +540,8 @@ Example certificate chain model:
       "fulcio_issuer": "https://issuer.example.com",
       "fulcio": {
         "issuer": "https://issuer-v2.example.com",
-        "deployment-environment": "pypi",
-        "token-subject": "repo:pypa/packaging:environment:pypi"
+        "deployment-environment": "release",
+        "token-subject": "repo:pydantic/pydantic-ai:environment:release"
       }
     }
   },

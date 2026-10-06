@@ -37,6 +37,8 @@ FIXTURE_DIR = Path(__file__).parent / "test-data" / "fulcio-issuer-v2"
 MANIFEST = json.loads((FIXTURE_DIR / "manifest.json").read_text(encoding="utf-8"))
 FIELD_OIDS = MANIFEST["fulcio_oids"]
 SAMPLES = {sample["id"]: sample for sample in MANIFEST["samples"]}
+FULL_SAMPLE_ID = "pydantic-ai-2.54.0"
+SIGSTORE_SAMPLE_ID = "sigstore-js-2026-08-04"
 LEGACY_ISSUER = "https://legacy.example.com"
 V2_ISSUER = "https://v2.example.com"
 INVALID_PERCENT_UTF8 = [
@@ -64,8 +66,13 @@ def selector(field, value):
 
 
 @pytest.fixture(scope="module")
-def packaging_chain():
-    return load_certificate_chain(FIXTURE_DIR / SAMPLES["packaging-26.3"]["chain"])
+def full_fields_chain():
+    return load_certificate_chain(FIXTURE_DIR / SAMPLES[FULL_SAMPLE_ID]["chain"])
+
+
+@pytest.fixture(scope="module")
+def sigstore_chain():
+    return load_certificate_chain(FIXTURE_DIR / SAMPLES[SIGSTORE_SAMPLE_ID]["chain"])
 
 
 @pytest.fixture(
@@ -86,12 +93,19 @@ def test_standalone_registry_is_closed_and_separate_from_othername():
     assert FULCIO_ISSUER_OID not in FULCIO_EXTENSION_FIELDS
 
 
-def test_shared_vectors_cover_every_registered_field_on_the_real_chain():
+@pytest.mark.parametrize("sample_id,vector_prefix", [
+    (FULL_SAMPLE_ID, "fulcio-selector-real-pydantic-ai"),
+    (SIGSTORE_SAMPLE_ID, "fulcio-selector-real-sigstore-js"),
+])
+def test_shared_vectors_cover_every_present_field_on_the_real_chains(
+    sample_id, vector_prefix
+):
     vectors = {vector["id"]: vector for vector in TEST_VECTORS}
-    sample = SAMPLES["packaging-26.3"]
-    for field in FIELD_OIDS:
-        vector = vectors[f"fulcio-selector-real-packaging-{field}"]
+    sample = SAMPLES[sample_id]
+    for field, value in sample["fulcio"].items():
+        vector = vectors[f"{vector_prefix}-{field}"]
         assert "document" in vector["output"]
+        assert vector["input"]["did"].endswith(f"::{selector(field, value)}")
         assert [
             cert.fingerprint(hashes.SHA256()).hex() for cert in load_vector_chain(vector)
         ] == sample["certificate_sha256"]
@@ -139,10 +153,10 @@ def test_real_mapping_matches_manifest_without_changing_certificate_bytes(real_s
 
 
 @pytest.mark.parametrize("field", FIELD_OIDS)
-def test_every_selector_resolves_against_unchanged_production_chain(packaging_chain, field):
-    value = SAMPLES["packaging-26.3"]["fulcio"][field]
-    did = did_for(packaging_chain, selector(field, value))
-    document = resolve_did(did, packaging_chain)
+def test_every_selector_resolves_against_unchanged_production_chain(full_fields_chain, field):
+    value = SAMPLES[FULL_SAMPLE_ID]["fulcio"][field]
+    did = did_for(full_fields_chain, selector(field, value))
+    document = resolve_did(did, full_fields_chain)
     assert set(document) == {
         "@context", "id", "verificationMethod", "authentication", "assertionMethod",
     }
@@ -156,26 +170,57 @@ def test_every_selector_resolves_against_unchanged_production_chain(packaging_ch
     assert document["authentication"] == document["assertionMethod"] == [f"{did}#0"]
 
 
-def test_all_seventeen_real_selectors_and_existing_predicates_are_anded(packaging_chain):
-    sample = SAMPLES["packaging-26.3"]
+def test_all_seventeen_real_selectors_and_existing_predicates_are_anded(full_fields_chain):
+    sample = SAMPLES[FULL_SAMPLE_ID]
     predicates = [selector(field, value) for field, value in sample["fulcio"].items()]
     predicates += [
         "fulcio-issuer:token.actions.githubusercontent.com",
         f"san:uri:{pctencode(sample['san'][1])}",
-        selector("deployment-environment", "pypi"),
+        selector("deployment-environment", sample["fulcio"]["deployment-environment"]),
     ]
-    did = did_for(packaging_chain, "::".join(predicates))
-    assert resolve_did(did, packaging_chain)["id"] == did
+    did = did_for(full_fields_chain, "::".join(predicates))
+    assert resolve_did(did, full_fields_chain)["id"] == did
     with pytest.raises(ValueError, match="Fulcio predicate does not match"):
-        resolve_did(f"{did}::fulcio:deployment-environment:wrong", packaging_chain)
+        resolve_did(f"{did}::fulcio:deployment-environment:wrong", full_fields_chain)
 
 
-@pytest.mark.parametrize("field", ["deployment-environment", "token-subject"])
-def test_missing_optional_fields_fail_on_real_chain(field):
-    chain = load_certificate_chain(FIXTURE_DIR / SAMPLES["sigstore-js-2.0.0"]["chain"])
-    value = SAMPLES["packaging-26.3"]["fulcio"][field]
+@pytest.mark.parametrize("field", [
+    field for field in FIELD_OIDS if field != "deployment-environment"
+])
+def test_every_present_sigstore_js_field_resolves_including_token_subject(sigstore_chain, field):
+    value = SAMPLES[SIGSTORE_SAMPLE_ID]["fulcio"][field]
+    did = did_for(sigstore_chain, selector(field, value))
+    assert resolve_did(did, sigstore_chain)["id"] == did
+
+
+def test_refreshed_fixture_profiles_have_the_requested_optional_fields(
+    full_fields_chain, sigstore_chain
+):
+    full_fields = decode_certificate(full_fields_chain[0])["extensions"]["fulcio"]
+    assert set(full_fields) == set(FIELD_OIDS)
+    assert full_fields["deployment-environment"] == "release"
+    assert full_fields["token-subject"] == "repo:pydantic/pydantic-ai:environment:release"
+    sigstore_fields = decode_certificate(sigstore_chain[0])["extensions"]["fulcio"]
+    assert set(sigstore_fields) == set(FIELD_OIDS) - {"deployment-environment"}
+    assert sigstore_fields["token-subject"] == "repo:sigstore/sigstore-js:ref:refs/heads/main"
+
+
+def test_missing_deployment_environment_fails_on_real_sigstore_js_chain(sigstore_chain):
+    field = "deployment-environment"
+    value = SAMPLES[FULL_SAMPLE_ID]["fulcio"][field]
     with pytest.raises(ValueError, match="does not contain the requested Fulcio extension"):
-        resolve_did(did_for(chain, selector(field, value)), chain)
+        resolve_did(did_for(sigstore_chain, selector(field, value)), sigstore_chain)
+
+
+def test_missing_token_subject_fails_on_signed_synthetic_chain():
+    chain = make_chain(extra_extensions=[
+        fulcio_extension("issuer", V2_ISSUER),
+        fulcio_extension("deployment-environment", "release"),
+    ])
+    predicate = selector("issuer", V2_ISSUER) + "::fulcio:deployment-environment:release"
+    assert resolve_did(did_for(chain, predicate), chain)
+    with pytest.raises(ValueError, match="does not contain the requested Fulcio extension"):
+        resolve_did(did_for(chain, predicate + "::fulcio:token-subject:alice"), chain)
 
 
 @pytest.mark.parametrize("field", FIELD_OIDS)
@@ -185,12 +230,12 @@ def test_legacy_only_real_chain_does_not_supply_new_fields(field):
         resolve_did(did_for(chain, selector(field, "opaque")), chain)
 
 
-def test_production_and_staging_anchors_remain_distinct(packaging_chain):
+def test_production_and_staging_anchors_remain_distinct(full_fields_chain):
     staging = load_certificate_chain(FIXTURE_DIR / SAMPLES["legacy-staging"]["chain"])
-    assert packaging_chain[-1].fingerprint(hashes.SHA256()) != staging[-1].fingerprint(
+    assert full_fields_chain[-1].fingerprint(hashes.SHA256()) != staging[-1].fingerprint(
         hashes.SHA256()
     )
-    for expected, supplied in [(packaging_chain, staging), (staging, packaging_chain)]:
+    for expected, supplied in [(full_fields_chain, staging), (staging, full_fields_chain)]:
         did = did_for(expected, "fulcio-issuer:token.actions.githubusercontent.com")
         with pytest.raises(ValueError, match="CA fingerprint does not match"):
             check_did_x509(did, supplied)
@@ -517,15 +562,15 @@ def test_fulcio_does_not_bypass_name_constraints():
         resolve_did(did_for(chain, selector("issuer", V2_ISSUER)), chain)
 
 
-def test_cli_convert_and_resolve_use_the_additive_model(packaging_chain, capsys):
-    sample = SAMPLES["packaging-26.3"]
+def test_cli_convert_and_resolve_use_the_additive_model(full_fields_chain, capsys):
+    sample = SAMPLES[FULL_SAMPLE_ID]
     path = str(FIXTURE_DIR / sample["chain"])
     cli_convert(path)
     model = json.loads(capsys.readouterr().out)
-    assert model == [decode_certificate(cert) for cert in packaging_chain]
+    assert model == [decode_certificate(cert) for cert in full_fields_chain]
     assert model[0]["extensions"]["fulcio"] == sample["fulcio"]
     assert model[0]["extensions"]["fulcio_issuer"] == sample["fulcio_issuer"]
-    did = did_for(packaging_chain, selector("token-subject", sample["fulcio"]["token-subject"]))
+    did = did_for(full_fields_chain, selector("token-subject", sample["fulcio"]["token-subject"]))
     cli_resolve(did, path)
     assert json.loads(capsys.readouterr().out)["id"] == did
 
