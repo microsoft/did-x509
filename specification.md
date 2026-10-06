@@ -187,26 +187,64 @@ validate_predicate(name, value) := true if {
 ```abnf
 predicate-name     = %s"san"
 predicate-value    = san-type ":" san-value
+                   / %s"othername" ":" othername-type-oid ":" san-value
 san-type           = %s"email" / %s"dns" / %s"uri"
+othername-type-oid  = oid
 san-value          = 1*idchar
 ```
 
-`san-type` is the SAN type and must be one of `email`, `dns`, or `uri`. Note that `dn` is not supported. `san-value` is percent-encoded. The pair [`<san_type>`, `<san_value>`] is one of the items in `chain[0].extensions.san`.
+The `email`, `dns`, and `uri` forms require exactly a type and a nonempty percent-encoded value. The pair `["<san-type>", "<decoded-san-value>"]` must be one of the items in `chain[0].extensions.san`. Note that `dn` is not supported as a predicate; directory names remain part of the JSON model.
+
+The `othername` form requires exactly a type, a literal dotted type OID, and a nonempty percent-encoded value: `::san:othername:<literal-type-oid>:<percent-encoded-value>`. The triple `["othername", "<literal-type-oid>", "<decoded-san-value>"]` must be one of the items in `chain[0].extensions.san`. The OID MUST be an exact literal from the closed registry below; it is not percent-decoded or normalized. Keeping both the OID and the scalar prevents collisions between OtherName namespaces.
+
+#### OtherName type registry
+
+RFC 5280 defines `OtherName` as a type OID plus a `[0] EXPLICIT ANY DEFINED BY type-id` value. OtherName values can be structured or binary; a string-like ASN.1 tag alone does not establish their schema. Only the following type is registered:
+
+| Type OID | Schema and comparison |
+|---|---|
+| `1.3.6.1.4.1.57264.1.7` | Fulcio username identity: exactly one complete primitive universal DER UTF8String, compared as the full decoded string, exactly. |
+
+X.509 parsing validates the GeneralName and the explicit wrapper. The exposed inner value MUST have tag `0x0C`, canonical minimal definite-length encoding, complete content, no trailing bytes, and strictly valid UTF-8. Wrong tags or classes, constructed strings, raw UTF-8 in place of DER, indefinite or nonminimal lengths, truncated encodings, trailing bytes, and invalid UTF-8 cause resolution to fail. Decoders MUST NOT substitute replacement characters. Future registry entries must define their own schema and comparison rules rather than inheriting this string interpretation.
+
+This `.7` OID is a type identifier inside the Subject Alternative Name extension (`2.5.29.17`), not a standalone extension. A standalone `.7` extension or the standalone Fulcio Token Subject extension (`1.3.6.1.4.1.57264.1.24`) cannot supply a SAN match. `.7` predates Issuer V2 and does not require either the legacy issuer extension (`.1`) or Issuer V2 (`.8`). Issuer V2 names the `.8` issuer extension, not a certificate format.
+
+Split the DID's structural `::` and `:` separators before decoding the scalar exactly once. Comparison performs no case folding, Unicode normalization, trimming, wildcard expansion, username/domain reconstruction, or URI rewriting. In particular, `%2521` decodes to the literal string `%21`, not `!`. Each repeated predicate must have a match; one matching entry is sufficient, and matching entries need not be unique or consumed.
 
 Example:
 
 `did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::san:email:bob%40example.com`
 
+OtherName example:
+
+`did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com`
+
+The corresponding JSON entry is `["othername", "1.3.6.1.4.1.57264.1.7", "alice!example.com"]`. Fulcio's [username identity mapping](https://github.com/sigstore/fulcio/blob/e9c49671828cf7bf21ae92fa2927e3add18b3055/pkg/identity/username/principal.go) combines `<sub>!<configured SubjectDomain>`. The SAN value can therefore be `alice!example.com` while the raw Token Subject is `alice`; this predicate matches the whole SAN string, not inferred token claims.
+
 Rego policy:
 
 ```rego
+othername_type_oids := {"1.3.6.1.4.1.57264.1.7"}
+
 validate_predicate(name, value) := true if {
     name == "san"
     [san_type, san_value_encoded] := split(value, ":")
+    san_type in {"email", "dns", "uri"}
     san_value := urlquery.decode(san_value_encoded)
     [san_type, san_value] == input.chain[0].extensions.san[_]
 }
+
+validate_predicate(name, value) := true if {
+    name == "san"
+    [san_type, type_oid, san_value_encoded] := split(value, ":")
+    san_type == "othername"
+    type_oid in othername_type_oids
+    san_value := urlquery.decode(san_value_encoded)
+    ["othername", type_oid, san_value] == input.chain[0].extensions.san[_]
+}
 ```
+
+This is an additive expansion of method version `0`: well-formed registered `.7` SANs that previously failed as unsupported now map successfully, including when only an existing predicate is selected. Previously accepted DIDs and chains, existing SAN pairs, and DID Document shapes are unchanged. Older method-0 resolvers reject the new selector; no automatic migration is defined.
 
 ### `eku` predicate
 
@@ -295,7 +333,7 @@ Each certificate object can contain:
 
 Name objects use the RFC 4514 labels `CN`, `L`, `ST`, `O`, `OU`, `C`, and `STREET` for common attributes. Other attributes use dotted OID strings as keys. Repeated attributes are not supported. Values are converted to UTF-8 strings.
 
-SAN entries are arrays. The first item identifies the SAN type, and the second item is the value:
+SAN entries are variable-arity arrays. The first item identifies the SAN type. Existing types use pairs; registered OtherNames use triples retaining both their type OID and their decoded scalar:
 
 | SAN type | JSON shape |
 |---|---|
@@ -303,6 +341,9 @@ SAN entries are arrays. The first item identifies the SAN type, and the second i
 | DNS name | `["dns", "example.com"]` |
 | URI | `["uri", "https://example.com"]` |
 | Directory name | `["dn", {"CN": "Example"}]` |
+| Registered OtherName | `["othername", "1.3.6.1.4.1.57264.1.7", "alice!example.com"]` |
+
+Preserve every well-formed entry in order, including identical duplicates and different values for the same OtherName OID. An unregistered OtherName OID, a malformed registered value, or any other unsupported SAN form causes mapping to fail, even in a noncritical SAN and even when another entry or an unrelated predicate would match. Duplicate SAN extensions remain invalid X.509; allowing repeated entries does not allow repeated extensions.
 
 Example certificate chain model:
 
@@ -326,6 +367,7 @@ Example certificate chain model:
         ["email", "user@example.com"],
         ["dns", "example.com"],
         ["uri", "https://example.com"],
+        ["othername", "1.3.6.1.4.1.57264.1.7", "alice!example.com"],
         [
           "dn",
           {
@@ -443,6 +485,8 @@ The following steps must be used to generate a corresponding DID Document:
 1. Decode the `x509chain` resolution option value into individual certificates by splitting the string on `","` and base64url-decoding each resulting string. The result is a list of DER-encoded certificates that can be loaded in standard libraries. Fail if the list contains fewer than two certificates.
 
 2. Check whether the list of certificates forms a valid certificate chain using [RFC 5280 certification path validation](https://www.rfc-editor.org/rfc/rfc5280#section-6) procedures with the last certificate in the chain as trust anchor. Implementations MUST perform RFC 5280 certification path validation. Additionally, fail if any certificate in the chain contains a critical extension that is neither (a) one of the extensions represented in the JSON model (`eku`, `san`), nor (b) one of the following standard RFC 5280 extensions: `basicConstraints`, `keyUsage`, `nameConstraints`, `policyConstraints`, `policyMappings`, `certificatePolicies`, `inhibitAnyPolicy`.
+
+The enclosing SAN extension may be critical; individual SAN entries have no critical flag. RFC 5280 requires a critical SAN when the leaf subject is empty, as used by Fulcio username identities. Registered OtherName support does not bypass normal path validation, critical-extension processing, or name constraints. Unknown critical extensions and unsupported critical name constraints still cause resolution to fail.
 
 The `fulcio_issuer` extension is deliberately not on that list. Fulcio does not mark it critical; for example, a [dump of a Fulcio-issued certificate shows its `critical` field as `BOOL ABSENT`](https://github.com/sigstore/gitsign/blob/44f5e17fac6944fdde71c94d2e77ab075c9dca9f/docs/timestamp.md#L102-L107). Issuers MUST NOT mark it critical: it is an unrecognized extension for the purposes of RFC 5280 certification path validation, so marking it critical may cause the chain to be rejected.
 

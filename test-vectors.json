@@ -1474,5 +1474,866 @@
         ]
       }
     }
+  },
+  {
+    "id": "san-othername-noncritical-without-fulcio-extensions",
+    "input": {
+      "did": "did:x509:0:sha256:-_g1ybW6KB_P_8Kde4hN3J0B8b9tXjjjCmtXVmfpLF4::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+      "chain": [
+        "MIIBbDCCAR6gAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQAD30XbNHTjMZ3m2JMafmeCPdhUDkO6zMIkzYuHverJdKOBjzCBjDAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQULwgUpQa7dqa-Ny09FNk0vt3B9M8wHwYDVR0jBBgwFoAUBXSMkaCgDXG48-9NutaSELINC4MwLAYDVR0RBCUwI6AhBgorBgEEAYO_MAEHoBMMEWFsaWNlIWV4YW1wbGUuY29tMAUGAytlcANBAAlZqEQj7f9GCd34ABwwiLzW0UUs6JPL_yxe_9MOrO6VZmQ8Vz825VyhMuwBCPiZ4FHKoqyJZiZ2oyK1gv5tuQI",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQCl2l7CQ7F-jMneNXufYcwNGsFyTD8P5kuFymNGDIrdiaNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFAV0jJGgoA1xuPPvTbrWkhCyDQuDMB8GA1UdIwQYMBaAFAV0jJGgoA1xuPPvTbrWkhCyDQuDMAUGAytlcANBALMjvLg3N30pa4QFI7Ch5X54I5hBTjrMDb73wC_GHUY1OLNT3KqJqxjEIjKrHGMiTHpWb0e-sHNp0Fljvh61zwc"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:-_g1ybW6KB_P_8Kde4hN3J0B8b9tXjjjCmtXVmfpLF4::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:-_g1ybW6KB_P_8Kde4hN3J0B8b9tXjjjCmtXVmfpLF4::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:-_g1ybW6KB_P_8Kde4hN3J0B8b9tXjjjCmtXVmfpLF4::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "A99F2zR04zGd5tiTGn5ngj3YVA5DuszCJM2Lh73qyXQ"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:-_g1ybW6KB_P_8Kde4hN3J0B8b9tXjjjCmtXVmfpLF4::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:-_g1ybW6KB_P_8Kde4hN3J0B8b9tXjjjCmtXVmfpLF4::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "san-othername-critical-without-fulcio-extensions",
+    "input": {
+      "did": "did:x509:0:sha256:UdI-K3YuATxcGIoSZgCdbTQFqUpQZTEfC2t50p-yVkE::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+      "chain": [
+        "MIIBbzCCASGgAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQCFszD2wJ1koLiJw7woF9ClaDzuUH7Ap42kll6jWWISdaOBkjCBjzAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQUydS4vE6AbcOgOFawca3KwLff6ngwHwYDVR0jBBgwFoAUfUApzd2kH02STrr7G6_RkzCwcgEwLwYDVR0RAQH_BCUwI6AhBgorBgEEAYO_MAEHoBMMEWFsaWNlIWV4YW1wbGUuY29tMAUGAytlcANBAH4Sp_QDkOpo6qm8Uekw08TArm_cl0vemrd3d_34uV9vD8Z3qF5rjkQtQtoLcWIlh4zKLocJTCYF8cguetCEhQY",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQBB9Q67irh-DxSqn9pBtn_Qe6XpRJVdxOawc1BbG_M_IaNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFH1AKc3dpB9Nkk66-xuv0ZMwsHIBMB8GA1UdIwQYMBaAFH1AKc3dpB9Nkk66-xuv0ZMwsHIBMAUGAytlcANBAM-odMbvQbX6Xmaz8MiDloRVpStY5gF41NxYrLWil_x6Jx7oU98r9MlCM8rVCXukTPcngNJS8zBoEQBxLhb41wY"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:UdI-K3YuATxcGIoSZgCdbTQFqUpQZTEfC2t50p-yVkE::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:UdI-K3YuATxcGIoSZgCdbTQFqUpQZTEfC2t50p-yVkE::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:UdI-K3YuATxcGIoSZgCdbTQFqUpQZTEfC2t50p-yVkE::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "hbMw9sCdZKC4icO8KBfQpWg87lB-wKeNpJZeo1liEnU"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:UdI-K3YuATxcGIoSZgCdbTQFqUpQZTEfC2t50p-yVkE::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:UdI-K3YuATxcGIoSZgCdbTQFqUpQZTEfC2t50p-yVkE::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "san-othername-critical-empty-subject",
+    "input": {
+      "did": "did:x509:0:sha256:If8wXs6HZgI-U5DoZTBrti9-CcRZ0yxEPhpU2XN77vs::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+      "chain": [
+        "MIIBYDCCARKgAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMAAwKjAFBgMrZXADIQAKvmw1Vl9TO9rr5SOp933phmyOdJg50u4fIGoY_QQV5KOBkjCBjzAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQUPjq6WnrFXhi7kkN6NYM6N1dEteswHwYDVR0jBBgwFoAUULjM9_I6GvrtpIngCgWyhRHRjKQwLwYDVR0RAQH_BCUwI6AhBgorBgEEAYO_MAEHoBMMEWFsaWNlIWV4YW1wbGUuY29tMAUGAytlcANBAEf1j12obQni7xILebzfXW6HU3mL5MBq91gvSekCMVe9gTM17ihi0KmfKJ5P2X8CvdzhlbK97nxH_nqz0Z7nSQo",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQBRzTdixd_VA7lxs0DVGT3eU3xMnkIRr4ShMaAz18PYA6NjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFFC4zPfyOhr67aSJ4AoFsoUR0YykMB8GA1UdIwQYMBaAFFC4zPfyOhr67aSJ4AoFsoUR0YykMAUGAytlcANBACjo65vUzOsWOunCq0n_EAiYQbIiFyFXTjW6WNdnrYhajlNji9oa_1k40uHUbTr8FDzSXcArd_riHepy58jf1AM"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:If8wXs6HZgI-U5DoZTBrti9-CcRZ0yxEPhpU2XN77vs::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:If8wXs6HZgI-U5DoZTBrti9-CcRZ0yxEPhpU2XN77vs::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:If8wXs6HZgI-U5DoZTBrti9-CcRZ0yxEPhpU2XN77vs::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "Cr5sNVZfUzva6-Ujqfd96YZsjnSYOdLuHyBqGP0EFeQ"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:If8wXs6HZgI-U5DoZTBrti9-CcRZ0yxEPhpU2XN77vs::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:If8wXs6HZgI-U5DoZTBrti9-CcRZ0yxEPhpU2XN77vs::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "san-othername-with-legacy-issuer",
+    "input": {
+      "did": "did:x509:0:sha256:03mOqixnHySht1_bFwpH5DmrS6nQ-4_5kBPKFwE84Us::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com::fulcio-issuer:issuer.example.com",
+      "chain": [
+        "MIIBmTCCAUugAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQBSBPrWAA49QdeS4rUFtmNR7TWyQ27D4UXs_jsgeSaSmKOBvDCBuTAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQUQGgEt3pK6tcuPH0cN4-yIjJ7hbwwHwYDVR0jBBgwFoAUFGUHhxUzL5uBxOYOm6oLwnq9jCAwLwYDVR0RAQH_BCUwI6AhBgorBgEEAYO_MAEHoBMMEWFsaWNlIWV4YW1wbGUuY29tMCgGCisGAQQBg78wAQEEGmh0dHBzOi8vaXNzdWVyLmV4YW1wbGUuY29tMAUGAytlcANBAHICNFeuUUMNg4nHyzuC5ijy8uyGLiSEH672d_1YOCQ4lu_iCxZnBk2UT7Au5LM0PyPxhxAI0PiOnbn-RT34Aw0",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQAbFx7WzXyZCJjpMLIf6XVAg1toXhuc-zR4uba0Vgy5oaNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFBRlB4cVMy-bgcTmDpuqC8J6vYwgMB8GA1UdIwQYMBaAFBRlB4cVMy-bgcTmDpuqC8J6vYwgMAUGAytlcANBAIFCVRD6LqnI4BUgB1gx5j6-K0p3bdTM4-xtN-Xs-tClVxXwErRyZYv4M7HTd6bilVS-KSQM07LNGenVa-N3rQo"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:03mOqixnHySht1_bFwpH5DmrS6nQ-4_5kBPKFwE84Us::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com::fulcio-issuer:issuer.example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:03mOqixnHySht1_bFwpH5DmrS6nQ-4_5kBPKFwE84Us::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com::fulcio-issuer:issuer.example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:03mOqixnHySht1_bFwpH5DmrS6nQ-4_5kBPKFwE84Us::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com::fulcio-issuer:issuer.example.com",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "UgT61gAOPUHXkuK1BbZjUe01skNuw-FF7P47IHkmkpg"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:03mOqixnHySht1_bFwpH5DmrS6nQ-4_5kBPKFwE84Us::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com::fulcio-issuer:issuer.example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:03mOqixnHySht1_bFwpH5DmrS6nQ-4_5kBPKFwE84Us::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com::fulcio-issuer:issuer.example.com#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "san-othername-with-issuer-v2-and-token-subject-without-legacy-issuer",
+    "input": {
+      "did": "did:x509:0:sha256:I2ZzZpcgVjukKvIhUI7ES5tiNMPHtUo_108BrcxdWH4::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+      "chain": [
+        "MIIBsjCCAWSgAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQDvPPAZQlGHiYzklCuaMBEt8rNGm3aFXBLqOhi_LP7yZaOB1TCB0jAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQUpDDlViwzoS14NrUGEvoTesPDXcIwHwYDVR0jBBgwFoAUBYkRjVDSd1vNvj_wRF2CPuHcV2QwLwYDVR0RAQH_BCUwI6AhBgorBgEEAYO_MAEHoBMMEWFsaWNlIWV4YW1wbGUuY29tMCoGCisGAQQBg78wAQgEHAwaaHR0cHM6Ly9pc3N1ZXIuZXhhbXBsZS5jb20wFQYKKwYBBAGDvzABGAQHDAVhbGljZTAFBgMrZXADQQAWPg8HI611-x_AsdmBAUzxL7zccwQzUK9TzzXzQu4aiLIw7UFn7-fdJMOo5v-NQDD4uEIpwe8QkG2KoRZl83kD",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQA5LwlpKYeYQT9rbDdSag-J6RIA24APXJS3PqSCqrrpy6NjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFAWJEY1Q0ndbzb4_8ERdgj7h3FdkMB8GA1UdIwQYMBaAFAWJEY1Q0ndbzb4_8ERdgj7h3FdkMAUGAytlcANBAJjWPJJ65E8tPfvp0IvqrTcgtrOOcuW65oAqT9y6bEd284qFajVcNdta7tpUlQfnzQ0eWhXShfM_LY7WWI6XCgo"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:I2ZzZpcgVjukKvIhUI7ES5tiNMPHtUo_108BrcxdWH4::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:I2ZzZpcgVjukKvIhUI7ES5tiNMPHtUo_108BrcxdWH4::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:I2ZzZpcgVjukKvIhUI7ES5tiNMPHtUo_108BrcxdWH4::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "7zzwGUJRh4mM5JQrmjARLfKzRpt2hVwS6joYvyz-8mU"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:I2ZzZpcgVjukKvIhUI7ES5tiNMPHtUo_108BrcxdWH4::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:I2ZzZpcgVjukKvIhUI7ES5tiNMPHtUo_108BrcxdWH4::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "san-othername-token-subject-is-not-the-san-identity",
+    "input": {
+      "did": "did:x509:0:sha256:I2ZzZpcgVjukKvIhUI7ES5tiNMPHtUo_108BrcxdWH4::san:othername:1.3.6.1.4.1.57264.1.7:alice",
+      "chain": [
+        "MIIBsjCCAWSgAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQDvPPAZQlGHiYzklCuaMBEt8rNGm3aFXBLqOhi_LP7yZaOB1TCB0jAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQUpDDlViwzoS14NrUGEvoTesPDXcIwHwYDVR0jBBgwFoAUBYkRjVDSd1vNvj_wRF2CPuHcV2QwLwYDVR0RAQH_BCUwI6AhBgorBgEEAYO_MAEHoBMMEWFsaWNlIWV4YW1wbGUuY29tMCoGCisGAQQBg78wAQgEHAwaaHR0cHM6Ly9pc3N1ZXIuZXhhbXBsZS5jb20wFQYKKwYBBAGDvzABGAQHDAVhbGljZTAFBgMrZXADQQAWPg8HI611-x_AsdmBAUzxL7zccwQzUK9TzzXzQu4aiLIw7UFn7-fdJMOo5v-NQDD4uEIpwe8QkG2KoRZl83kD",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQA5LwlpKYeYQT9rbDdSag-J6RIA24APXJS3PqSCqrrpy6NjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFAWJEY1Q0ndbzb4_8ERdgj7h3FdkMB8GA1UdIwQYMBaAFAWJEY1Q0ndbzb4_8ERdgj7h3FdkMAUGAytlcANBAJjWPJJ65E8tPfvp0IvqrTcgtrOOcuW65oAqT9y6bEd284qFajVcNdta7tpUlQfnzQ0eWhXShfM_LY7WWI6XCgo"
+      ]
+    },
+    "output": {
+      "error": "SAN predicate does not match the certificate."
+    }
+  },
+  {
+    "id": "san-othername-mixed-san-existing-predicates",
+    "input": {
+      "did": "did:x509:0:sha256:ijwxsljwMa1WPW7D1FE9eUDd9vJb163UZ5fngT1D_Io::subject:CN:Leaf::san:email:alice%40example.com::san:dns:example.com::san:uri:https%3A%2F%2Fexample.com%2Falice::eku:1.3.6.1.5.5.7.3.3",
+      "chain": [
+        "MIIB4DCCAZKgAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQCCfCqY2F8OShP4-JaM1P_Tlkp95WRFBvjvh1tt6OTYoaOCAQIwgf8wDAYDVR0TAQH_BAIwADAOBgNVHQ8BAf8EBAMCB4AwHQYDVR0OBBYEFNvIFh8QJfXZ5CkfyKxR0wNELE2NMB8GA1UdIwQYMBaAFMkaS38awN2arC2hwtJ9IEmnJ2g7MIGJBgNVHREEgYEwf4ERYWxpY2VAZXhhbXBsZS5jb22CC2V4YW1wbGUuY29thhlodHRwczovL2V4YW1wbGUuY29tL2FsaWNlpB8wHTEbMBkGA1UEAwwSRGlyZWN0b3J5IGlkZW50aXR5oCEGCisGAQQBg78wAQegEwwRYWxpY2UhZXhhbXBsZS5jb20wEwYDVR0lBAwwCgYIKwYBBQUHAwMwBQYDK2VwA0EAtIegqYqnELNVqkU2-HC-XIVBfH4a9Jnt9agq38RVj0TdQOmBkdYPlDCssMiz7H0JYR6hMONhoRED_zYmX0QqCw",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQAwX7iQBZ8bs5ffp9qcRMy7g24lZmF03XgQLIaKpIKVHqNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFMkaS38awN2arC2hwtJ9IEmnJ2g7MB8GA1UdIwQYMBaAFMkaS38awN2arC2hwtJ9IEmnJ2g7MAUGAytlcANBAF4f2iZaXXbhfpHHZAkJOeRVVQE8voNep5Pqv9UR_LAj6NPyTbR3qxjrqpntOEY7ybz-aRR4ng7qa9LMKkLjAAo"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:ijwxsljwMa1WPW7D1FE9eUDd9vJb163UZ5fngT1D_Io::subject:CN:Leaf::san:email:alice%40example.com::san:dns:example.com::san:uri:https%3A%2F%2Fexample.com%2Falice::eku:1.3.6.1.5.5.7.3.3",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:ijwxsljwMa1WPW7D1FE9eUDd9vJb163UZ5fngT1D_Io::subject:CN:Leaf::san:email:alice%40example.com::san:dns:example.com::san:uri:https%3A%2F%2Fexample.com%2Falice::eku:1.3.6.1.5.5.7.3.3#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:ijwxsljwMa1WPW7D1FE9eUDd9vJb163UZ5fngT1D_Io::subject:CN:Leaf::san:email:alice%40example.com::san:dns:example.com::san:uri:https%3A%2F%2Fexample.com%2Falice::eku:1.3.6.1.5.5.7.3.3",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "gnwqmNhfDkoT-PiWjNT_05ZKfeVkRQb474dbbejk2KE"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:ijwxsljwMa1WPW7D1FE9eUDd9vJb163UZ5fngT1D_Io::subject:CN:Leaf::san:email:alice%40example.com::san:dns:example.com::san:uri:https%3A%2F%2Fexample.com%2Falice::eku:1.3.6.1.5.5.7.3.3#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:ijwxsljwMa1WPW7D1FE9eUDd9vJb163UZ5fngT1D_Io::subject:CN:Leaf::san:email:alice%40example.com::san:dns:example.com::san:uri:https%3A%2F%2Fexample.com%2Falice::eku:1.3.6.1.5.5.7.3.3#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "san-othername-mixed-san-othername-predicate",
+    "input": {
+      "did": "did:x509:0:sha256:ijwxsljwMa1WPW7D1FE9eUDd9vJb163UZ5fngT1D_Io::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+      "chain": [
+        "MIIB4DCCAZKgAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQCCfCqY2F8OShP4-JaM1P_Tlkp95WRFBvjvh1tt6OTYoaOCAQIwgf8wDAYDVR0TAQH_BAIwADAOBgNVHQ8BAf8EBAMCB4AwHQYDVR0OBBYEFNvIFh8QJfXZ5CkfyKxR0wNELE2NMB8GA1UdIwQYMBaAFMkaS38awN2arC2hwtJ9IEmnJ2g7MIGJBgNVHREEgYEwf4ERYWxpY2VAZXhhbXBsZS5jb22CC2V4YW1wbGUuY29thhlodHRwczovL2V4YW1wbGUuY29tL2FsaWNlpB8wHTEbMBkGA1UEAwwSRGlyZWN0b3J5IGlkZW50aXR5oCEGCisGAQQBg78wAQegEwwRYWxpY2UhZXhhbXBsZS5jb20wEwYDVR0lBAwwCgYIKwYBBQUHAwMwBQYDK2VwA0EAtIegqYqnELNVqkU2-HC-XIVBfH4a9Jnt9agq38RVj0TdQOmBkdYPlDCssMiz7H0JYR6hMONhoRED_zYmX0QqCw",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQAwX7iQBZ8bs5ffp9qcRMy7g24lZmF03XgQLIaKpIKVHqNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFMkaS38awN2arC2hwtJ9IEmnJ2g7MB8GA1UdIwQYMBaAFMkaS38awN2arC2hwtJ9IEmnJ2g7MAUGAytlcANBAF4f2iZaXXbhfpHHZAkJOeRVVQE8voNep5Pqv9UR_LAj6NPyTbR3qxjrqpntOEY7ybz-aRR4ng7qa9LMKkLjAAo"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:ijwxsljwMa1WPW7D1FE9eUDd9vJb163UZ5fngT1D_Io::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:ijwxsljwMa1WPW7D1FE9eUDd9vJb163UZ5fngT1D_Io::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:ijwxsljwMa1WPW7D1FE9eUDd9vJb163UZ5fngT1D_Io::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "gnwqmNhfDkoT-PiWjNT_05ZKfeVkRQb474dbbejk2KE"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:ijwxsljwMa1WPW7D1FE9eUDd9vJb163UZ5fngT1D_Io::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:ijwxsljwMa1WPW7D1FE9eUDd9vJb163UZ5fngT1D_Io::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "san-othername-multiple-entries-match-nonfirst-value",
+    "input": {
+      "did": "did:x509:0:sha256:Yv2Z2SJXKkJeYombIw-n-phQBd7WFWa7ID5hN1zKX1E::san:othername:1.3.6.1.4.1.57264.1.7:bob%21example.com",
+      "chain": [
+        "MIIBsDCCAWKgAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQC6WY7efg9LdX3aE4ry4WOTLKslZqk-nfZwiAqAZwrnmKOB0zCB0DAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQUPzrrcHIQydH60msDUnCDQuDdkkgwHwYDVR0jBBgwFoAU-Nh2o9JbBuyuvcj_930uypTMgxIwcAYDVR0RBGkwZ6AhBgorBgEEAYO_MAEHoBMMEWFsaWNlIWV4YW1wbGUuY29toB8GCisGAQQBg78wAQegEQwPYm9iIWV4YW1wbGUuY29toCEGCisGAQQBg78wAQegEwwRYWxpY2UhZXhhbXBsZS5jb20wBQYDK2VwA0EASmr9y8vysERuwa1e3dLw6X0MavfcoopsjvLGNRb1Q2p9uITvsWgaBqes-ia5GBLPCyve0jBinAJB-NjTODR_BQ",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQDL8kzLoGT0I_kJKaclnLIm4QfrR2lt__fVC5-oUnAPnqNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFPjYdqPSWwbsrr3I__d9LsqUzIMSMB8GA1UdIwQYMBaAFPjYdqPSWwbsrr3I__d9LsqUzIMSMAUGAytlcANBALbtVZcd4sDRy_ZRZOqdTAGs54WLqmU5N173vHwLnfhrPbZRJwIBi4tMjSlGwQ7xvWnzsZey2V1QGZWo4g3CiQc"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:Yv2Z2SJXKkJeYombIw-n-phQBd7WFWa7ID5hN1zKX1E::san:othername:1.3.6.1.4.1.57264.1.7:bob%21example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:Yv2Z2SJXKkJeYombIw-n-phQBd7WFWa7ID5hN1zKX1E::san:othername:1.3.6.1.4.1.57264.1.7:bob%21example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:Yv2Z2SJXKkJeYombIw-n-phQBd7WFWa7ID5hN1zKX1E::san:othername:1.3.6.1.4.1.57264.1.7:bob%21example.com",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "ulmO3n4PS3V92hOK8uFjkyyrJWapPp32cIgKgGcK55g"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:Yv2Z2SJXKkJeYombIw-n-phQBd7WFWa7ID5hN1zKX1E::san:othername:1.3.6.1.4.1.57264.1.7:bob%21example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:Yv2Z2SJXKkJeYombIw-n-phQBd7WFWa7ID5hN1zKX1E::san:othername:1.3.6.1.4.1.57264.1.7:bob%21example.com#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "san-othername-duplicates-and-repeated-predicates",
+    "input": {
+      "did": "did:x509:0:sha256:Yv2Z2SJXKkJeYombIw-n-phQBd7WFWa7ID5hN1zKX1E::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com::san:othername:1.3.6.1.4.1.57264.1.7:bob%21example.com::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+      "chain": [
+        "MIIBsDCCAWKgAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQC6WY7efg9LdX3aE4ry4WOTLKslZqk-nfZwiAqAZwrnmKOB0zCB0DAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQUPzrrcHIQydH60msDUnCDQuDdkkgwHwYDVR0jBBgwFoAU-Nh2o9JbBuyuvcj_930uypTMgxIwcAYDVR0RBGkwZ6AhBgorBgEEAYO_MAEHoBMMEWFsaWNlIWV4YW1wbGUuY29toB8GCisGAQQBg78wAQegEQwPYm9iIWV4YW1wbGUuY29toCEGCisGAQQBg78wAQegEwwRYWxpY2UhZXhhbXBsZS5jb20wBQYDK2VwA0EASmr9y8vysERuwa1e3dLw6X0MavfcoopsjvLGNRb1Q2p9uITvsWgaBqes-ia5GBLPCyve0jBinAJB-NjTODR_BQ",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQDL8kzLoGT0I_kJKaclnLIm4QfrR2lt__fVC5-oUnAPnqNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFPjYdqPSWwbsrr3I__d9LsqUzIMSMB8GA1UdIwQYMBaAFPjYdqPSWwbsrr3I__d9LsqUzIMSMAUGAytlcANBALbtVZcd4sDRy_ZRZOqdTAGs54WLqmU5N173vHwLnfhrPbZRJwIBi4tMjSlGwQ7xvWnzsZey2V1QGZWo4g3CiQc"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:Yv2Z2SJXKkJeYombIw-n-phQBd7WFWa7ID5hN1zKX1E::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com::san:othername:1.3.6.1.4.1.57264.1.7:bob%21example.com::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:Yv2Z2SJXKkJeYombIw-n-phQBd7WFWa7ID5hN1zKX1E::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com::san:othername:1.3.6.1.4.1.57264.1.7:bob%21example.com::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:Yv2Z2SJXKkJeYombIw-n-phQBd7WFWa7ID5hN1zKX1E::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com::san:othername:1.3.6.1.4.1.57264.1.7:bob%21example.com::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "ulmO3n4PS3V92hOK8uFjkyyrJWapPp32cIgKgGcK55g"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:Yv2Z2SJXKkJeYombIw-n-phQBd7WFWa7ID5hN1zKX1E::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com::san:othername:1.3.6.1.4.1.57264.1.7:bob%21example.com::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:Yv2Z2SJXKkJeYombIw-n-phQBd7WFWa7ID5hN1zKX1E::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com::san:othername:1.3.6.1.4.1.57264.1.7:bob%21example.com::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "san-othername-every-repeated-predicate-needs-a-match",
+    "input": {
+      "did": "did:x509:0:sha256:Yv2Z2SJXKkJeYombIw-n-phQBd7WFWa7ID5hN1zKX1E::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com::san:othername:1.3.6.1.4.1.57264.1.7:carol%21example.com",
+      "chain": [
+        "MIIBsDCCAWKgAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQC6WY7efg9LdX3aE4ry4WOTLKslZqk-nfZwiAqAZwrnmKOB0zCB0DAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQUPzrrcHIQydH60msDUnCDQuDdkkgwHwYDVR0jBBgwFoAU-Nh2o9JbBuyuvcj_930uypTMgxIwcAYDVR0RBGkwZ6AhBgorBgEEAYO_MAEHoBMMEWFsaWNlIWV4YW1wbGUuY29toB8GCisGAQQBg78wAQegEQwPYm9iIWV4YW1wbGUuY29toCEGCisGAQQBg78wAQegEwwRYWxpY2UhZXhhbXBsZS5jb20wBQYDK2VwA0EASmr9y8vysERuwa1e3dLw6X0MavfcoopsjvLGNRb1Q2p9uITvsWgaBqes-ia5GBLPCyve0jBinAJB-NjTODR_BQ",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQDL8kzLoGT0I_kJKaclnLIm4QfrR2lt__fVC5-oUnAPnqNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFPjYdqPSWwbsrr3I__d9LsqUzIMSMB8GA1UdIwQYMBaAFPjYdqPSWwbsrr3I__d9LsqUzIMSMAUGAytlcANBALbtVZcd4sDRy_ZRZOqdTAGs54WLqmU5N173vHwLnfhrPbZRJwIBi4tMjSlGwQ7xvWnzsZey2V1QGZWo4g3CiQc"
+      ]
+    },
+    "output": {
+      "error": "SAN predicate does not match the certificate."
+    }
+  },
+  {
+    "id": "san-othername-encoded-reserved-characters",
+    "input": {
+      "did": "did:x509:0:sha256:eyhHeLA6Ks0jStAIrzUMUAnmnK3WfcD9u2GvHTSjH2M::san:othername:1.3.6.1.4.1.57264.1.7:a%3Ab%3A%3Ac%25%2B%7E%21d",
+      "chain": [
+        "MIIBZjCCARigAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQAo_XEcE81aVcB0ZUSAuYE28eSjpMD8FzYafaP4bZ4LNqOBiTCBhjAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQUAJQeLLOs1KPQicea7mADWWMVY-UwHwYDVR0jBBgwFoAUeYwQpx8U0b-PFSC4PPLSQgVB90MwJgYDVR0RBB8wHaAbBgorBgEEAYO_MAEHoA0MC2E6Yjo6YyUrfiFkMAUGAytlcANBAKBdR8Uy5Yn_MEktrZWSRLWlA1_-a2cCk66bFFEtH9W3WpFy-BugTOLynjtKkcKfF9K9cGguSqJcyTiSAtSR4gw",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQDmu0IolVVONNHiBGjCoucdx_AE0-_JgugiTFLHCXGvnKNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFHmMEKcfFNG_jxUguDzy0kIFQfdDMB8GA1UdIwQYMBaAFHmMEKcfFNG_jxUguDzy0kIFQfdDMAUGAytlcANBAL4gauaX6SrC9NXyzBADIubHfcbW77DAkqq0DHFWhqoj8JMP_x5-QuqAaVFMnzqAbwFfmqV5_PaiemmANNvtBww"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:eyhHeLA6Ks0jStAIrzUMUAnmnK3WfcD9u2GvHTSjH2M::san:othername:1.3.6.1.4.1.57264.1.7:a%3Ab%3A%3Ac%25%2B%7E%21d",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:eyhHeLA6Ks0jStAIrzUMUAnmnK3WfcD9u2GvHTSjH2M::san:othername:1.3.6.1.4.1.57264.1.7:a%3Ab%3A%3Ac%25%2B%7E%21d#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:eyhHeLA6Ks0jStAIrzUMUAnmnK3WfcD9u2GvHTSjH2M::san:othername:1.3.6.1.4.1.57264.1.7:a%3Ab%3A%3Ac%25%2B%7E%21d",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "KP1xHBPNWlXAdGVEgLmBNvHko6TA_Bc2Gn2j-G2eCzY"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:eyhHeLA6Ks0jStAIrzUMUAnmnK3WfcD9u2GvHTSjH2M::san:othername:1.3.6.1.4.1.57264.1.7:a%3Ab%3A%3Ac%25%2B%7E%21d#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:eyhHeLA6Ks0jStAIrzUMUAnmnK3WfcD9u2GvHTSjH2M::san:othername:1.3.6.1.4.1.57264.1.7:a%3Ab%3A%3Ac%25%2B%7E%21d#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "san-othername-lowercase-percent-escapes",
+    "input": {
+      "did": "did:x509:0:sha256:eyhHeLA6Ks0jStAIrzUMUAnmnK3WfcD9u2GvHTSjH2M::san:othername:1.3.6.1.4.1.57264.1.7:a%3ab%3a%3ac%25%2b%7e%21d",
+      "chain": [
+        "MIIBZjCCARigAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQAo_XEcE81aVcB0ZUSAuYE28eSjpMD8FzYafaP4bZ4LNqOBiTCBhjAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQUAJQeLLOs1KPQicea7mADWWMVY-UwHwYDVR0jBBgwFoAUeYwQpx8U0b-PFSC4PPLSQgVB90MwJgYDVR0RBB8wHaAbBgorBgEEAYO_MAEHoA0MC2E6Yjo6YyUrfiFkMAUGAytlcANBAKBdR8Uy5Yn_MEktrZWSRLWlA1_-a2cCk66bFFEtH9W3WpFy-BugTOLynjtKkcKfF9K9cGguSqJcyTiSAtSR4gw",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQDmu0IolVVONNHiBGjCoucdx_AE0-_JgugiTFLHCXGvnKNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFHmMEKcfFNG_jxUguDzy0kIFQfdDMB8GA1UdIwQYMBaAFHmMEKcfFNG_jxUguDzy0kIFQfdDMAUGAytlcANBAL4gauaX6SrC9NXyzBADIubHfcbW77DAkqq0DHFWhqoj8JMP_x5-QuqAaVFMnzqAbwFfmqV5_PaiemmANNvtBww"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:eyhHeLA6Ks0jStAIrzUMUAnmnK3WfcD9u2GvHTSjH2M::san:othername:1.3.6.1.4.1.57264.1.7:a%3ab%3a%3ac%25%2b%7e%21d",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:eyhHeLA6Ks0jStAIrzUMUAnmnK3WfcD9u2GvHTSjH2M::san:othername:1.3.6.1.4.1.57264.1.7:a%3ab%3a%3ac%25%2b%7e%21d#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:eyhHeLA6Ks0jStAIrzUMUAnmnK3WfcD9u2GvHTSjH2M::san:othername:1.3.6.1.4.1.57264.1.7:a%3ab%3a%3ac%25%2b%7e%21d",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "KP1xHBPNWlXAdGVEgLmBNvHko6TA_Bc2Gn2j-G2eCzY"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:eyhHeLA6Ks0jStAIrzUMUAnmnK3WfcD9u2GvHTSjH2M::san:othername:1.3.6.1.4.1.57264.1.7:a%3ab%3a%3ac%25%2b%7e%21d#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:eyhHeLA6Ks0jStAIrzUMUAnmnK3WfcD9u2GvHTSjH2M::san:othername:1.3.6.1.4.1.57264.1.7:a%3ab%3a%3ac%25%2b%7e%21d#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "san-othername-multibyte-utf8",
+    "input": {
+      "did": "did:x509:0:sha256:YGZ13HDfa2V-s5enrlsifQ68bKNHbe9fP8OUDvcRVnw::san:othername:1.3.6.1.4.1.57264.1.7:%C3%A9%21%E4%BE%8B.example",
+      "chain": [
+        "MIIBaTCCARugAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQCcPOlVzrvDRLr6BtsJeYGClmnvdSsH7knsgLZG-NPikKOBjDCBiTAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQUIqZjijZ7lYcOQhz2fRsPaDJtae4wHwYDVR0jBBgwFoAUkyJN739uu8WrcT1a-ikfbikEWqswKQYDVR0RBCIwIKAeBgorBgEEAYO_MAEHoBAMDsOpIeS-iy5leGFtcGxlMAUGAytlcANBAG08Jr_ZYVPa2iZVNu8imfrlyKlyDD2P7Y2fe8KvfNmC0rmBia0_5GpSoUbySs7zcRcr1fpH58bC4sOiIjHCoAw",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQAGbkbCb8g_JlyevUb6oNCZaucRmvP1LW5DwfQVQmWJRqNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFJMiTe9_brvFq3E9WvopH24pBFqrMB8GA1UdIwQYMBaAFJMiTe9_brvFq3E9WvopH24pBFqrMAUGAytlcANBAP1hOKfWfjq5bOjUVU23_5_Bws6P1SP24CBCQjb1qxOGovCp6WYfiYD8D-HXcnTzQrSQwB_Ut3R4zYPDFk38Uws"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:YGZ13HDfa2V-s5enrlsifQ68bKNHbe9fP8OUDvcRVnw::san:othername:1.3.6.1.4.1.57264.1.7:%C3%A9%21%E4%BE%8B.example",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:YGZ13HDfa2V-s5enrlsifQ68bKNHbe9fP8OUDvcRVnw::san:othername:1.3.6.1.4.1.57264.1.7:%C3%A9%21%E4%BE%8B.example#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:YGZ13HDfa2V-s5enrlsifQ68bKNHbe9fP8OUDvcRVnw::san:othername:1.3.6.1.4.1.57264.1.7:%C3%A9%21%E4%BE%8B.example",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "nDzpVc67w0S6-gbbCXmBgpZp73UrB-5J7IC2RvjT4pA"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:YGZ13HDfa2V-s5enrlsifQ68bKNHbe9fP8OUDvcRVnw::san:othername:1.3.6.1.4.1.57264.1.7:%C3%A9%21%E4%BE%8B.example#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:YGZ13HDfa2V-s5enrlsifQ68bKNHbe9fP8OUDvcRVnw::san:othername:1.3.6.1.4.1.57264.1.7:%C3%A9%21%E4%BE%8B.example#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "san-othername-single-decode-matches-literal-percent",
+    "input": {
+      "did": "did:x509:0:sha256:klYScFPQY6nYYOSFKi8jYYIb2PmjfbpLvvVnatONpss::san:othername:1.3.6.1.4.1.57264.1.7:alice%2521example.com",
+      "chain": [
+        "MIIBbjCCASCgAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQAflS1oxOmg3dAPFgT-i1KWM_XaJaUKDt70BEX6E4rQj6OBkTCBjjAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQUfjKKWTUOg-bLw-SDIbDu_yZoRtQwHwYDVR0jBBgwFoAUz2M7uRgc-BSkv8StRYaS5NtEt58wLgYDVR0RBCcwJaAjBgorBgEEAYO_MAEHoBUME2FsaWNlJTIxZXhhbXBsZS5jb20wBQYDK2VwA0EAoqfqu5HGDxFpdJ6mbXL_Ycrj-Fw83zB7o8T-Z3m0SjHtf91NWecD3Sr5MivRTKA5ktdUN7VbP1FPOfgJZQ6JBA",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQAG6mpczC_L44K0UaHpb4JQHiTHz4ZOrnaDGjxZIAQeN6NjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFM9jO7kYHPgUpL_ErUWGkuTbRLefMB8GA1UdIwQYMBaAFM9jO7kYHPgUpL_ErUWGkuTbRLefMAUGAytlcANBAKfc_49fEcuDPlT_ZO0O5H7BYJSQbf3IlTB0-L62YElXZPhzGvfklgUbdj_u_jGuO0QUeSckckJBYpE51V6sHww"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:klYScFPQY6nYYOSFKi8jYYIb2PmjfbpLvvVnatONpss::san:othername:1.3.6.1.4.1.57264.1.7:alice%2521example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:klYScFPQY6nYYOSFKi8jYYIb2PmjfbpLvvVnatONpss::san:othername:1.3.6.1.4.1.57264.1.7:alice%2521example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:klYScFPQY6nYYOSFKi8jYYIb2PmjfbpLvvVnatONpss::san:othername:1.3.6.1.4.1.57264.1.7:alice%2521example.com",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "H5UtaMTpoN3QDxYE_otSljP12iWlCg7e9ARF-hOK0I8"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:klYScFPQY6nYYOSFKi8jYYIb2PmjfbpLvvVnatONpss::san:othername:1.3.6.1.4.1.57264.1.7:alice%2521example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:klYScFPQY6nYYOSFKi8jYYIb2PmjfbpLvvVnatONpss::san:othername:1.3.6.1.4.1.57264.1.7:alice%2521example.com#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "san-othername-single-decode-does-not-match-exclamation",
+    "input": {
+      "did": "did:x509:0:sha256:-_g1ybW6KB_P_8Kde4hN3J0B8b9tXjjjCmtXVmfpLF4::san:othername:1.3.6.1.4.1.57264.1.7:alice%2521example.com",
+      "chain": [
+        "MIIBbDCCAR6gAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQAD30XbNHTjMZ3m2JMafmeCPdhUDkO6zMIkzYuHverJdKOBjzCBjDAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQULwgUpQa7dqa-Ny09FNk0vt3B9M8wHwYDVR0jBBgwFoAUBXSMkaCgDXG48-9NutaSELINC4MwLAYDVR0RBCUwI6AhBgorBgEEAYO_MAEHoBMMEWFsaWNlIWV4YW1wbGUuY29tMAUGAytlcANBAAlZqEQj7f9GCd34ABwwiLzW0UUs6JPL_yxe_9MOrO6VZmQ8Vz825VyhMuwBCPiZ4FHKoqyJZiZ2oyK1gv5tuQI",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQCl2l7CQ7F-jMneNXufYcwNGsFyTD8P5kuFymNGDIrdiaNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFAV0jJGgoA1xuPPvTbrWkhCyDQuDMB8GA1UdIwQYMBaAFAV0jJGgoA1xuPPvTbrWkhCyDQuDMAUGAytlcANBALMjvLg3N30pa4QFI7Ch5X54I5hBTjrMDb73wC_GHUY1OLNT3KqJqxjEIjKrHGMiTHpWb0e-sHNp0Fljvh61zwc"
+      ]
+    },
+    "output": {
+      "error": "SAN predicate does not match the certificate."
+    }
+  },
+  {
+    "id": "san-othername-valid-replacement-character",
+    "input": {
+      "did": "did:x509:0:sha256:CVUt7MV4UFwSwGviXtZqB9UfErdkoaKi_ul3royDaFk::san:othername:1.3.6.1.4.1.57264.1.7:%EF%BF%BD",
+      "chain": [
+        "MIIBXTCCAQ-gAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQAuVIOrjiWoBn6vH5Wws9UP-umZ4LidG3nrDfU38AuwCqOBgDB-MAwGA1UdEwEB_wQCMAAwDgYDVR0PAQH_BAQDAgeAMB0GA1UdDgQWBBR6l8OZknQ64xdNRku-v8g3_yFQBjAfBgNVHSMEGDAWgBSCfys7pdfQ73096kmqBL22bi9KATAeBgNVHREEFzAVoBMGCisGAQQBg78wAQegBQwD77-9MAUGAytlcANBABZ0tZ5z0Hx6LJhqDm7sDf4z9WzfUla6dLdkVGp-VSTrCY2_fq1oba_xFGYtkjQ9pRwlKdpQr-mSf6rBoaWRjwk",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQBTtsDw3p7hlpZ7iGCvG9fWehDbnzvGJjQLxKtuuSuU_KNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFIJ_Kzul19DvfT3qSaoEvbZuL0oBMB8GA1UdIwQYMBaAFIJ_Kzul19DvfT3qSaoEvbZuL0oBMAUGAytlcANBALlCbG6a7PIdOA1ntQahpojEpCSA21flch3PoXhsKCJrfO6li__cMIE0Rp2fMH3b3l3Wb9CZD-O8-OXZaXKwiwc"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:CVUt7MV4UFwSwGviXtZqB9UfErdkoaKi_ul3royDaFk::san:othername:1.3.6.1.4.1.57264.1.7:%EF%BF%BD",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:CVUt7MV4UFwSwGviXtZqB9UfErdkoaKi_ul3royDaFk::san:othername:1.3.6.1.4.1.57264.1.7:%EF%BF%BD#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:CVUt7MV4UFwSwGviXtZqB9UfErdkoaKi_ul3royDaFk::san:othername:1.3.6.1.4.1.57264.1.7:%EF%BF%BD",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "LlSDq44lqAZ-rx-VsLPVD_rpmeC4nRt56w31N_ALsAo"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:CVUt7MV4UFwSwGviXtZqB9UfErdkoaKi_ul3royDaFk::san:othername:1.3.6.1.4.1.57264.1.7:%EF%BF%BD#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:CVUt7MV4UFwSwGviXtZqB9UfErdkoaKi_ul3royDaFk::san:othername:1.3.6.1.4.1.57264.1.7:%EF%BF%BD#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "san-othername-invalid-percent-utf8-cannot-match-replacement",
+    "input": {
+      "did": "did:x509:0:sha256:CVUt7MV4UFwSwGviXtZqB9UfErdkoaKi_ul3royDaFk::san:othername:1.3.6.1.4.1.57264.1.7:%FF",
+      "chain": [
+        "MIIBXTCCAQ-gAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQAuVIOrjiWoBn6vH5Wws9UP-umZ4LidG3nrDfU38AuwCqOBgDB-MAwGA1UdEwEB_wQCMAAwDgYDVR0PAQH_BAQDAgeAMB0GA1UdDgQWBBR6l8OZknQ64xdNRku-v8g3_yFQBjAfBgNVHSMEGDAWgBSCfys7pdfQ73096kmqBL22bi9KATAeBgNVHREEFzAVoBMGCisGAQQBg78wAQegBQwD77-9MAUGAytlcANBABZ0tZ5z0Hx6LJhqDm7sDf4z9WzfUla6dLdkVGp-VSTrCY2_fq1oba_xFGYtkjQ9pRwlKdpQr-mSf6rBoaWRjwk",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQBTtsDw3p7hlpZ7iGCvG9fWehDbnzvGJjQLxKtuuSuU_KNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFIJ_Kzul19DvfT3qSaoEvbZuL0oBMB8GA1UdIwQYMBaAFIJ_Kzul19DvfT3qSaoEvbZuL0oBMAUGAytlcANBALlCbG6a7PIdOA1ntQahpojEpCSA21flch3PoXhsKCJrfO6li__cMIE0Rp2fMH3b3l3Wb9CZD-O8-OXZaXKwiwc"
+      ]
+    },
+    "output": {
+      "error": "Percent-encoded value is not valid UTF-8."
+    }
+  },
+  {
+    "id": "san-othername-truncated-percent-utf8-cannot-match-replacement",
+    "input": {
+      "did": "did:x509:0:sha256:CVUt7MV4UFwSwGviXtZqB9UfErdkoaKi_ul3royDaFk::san:othername:1.3.6.1.4.1.57264.1.7:%EF%BF",
+      "chain": [
+        "MIIBXTCCAQ-gAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQAuVIOrjiWoBn6vH5Wws9UP-umZ4LidG3nrDfU38AuwCqOBgDB-MAwGA1UdEwEB_wQCMAAwDgYDVR0PAQH_BAQDAgeAMB0GA1UdDgQWBBR6l8OZknQ64xdNRku-v8g3_yFQBjAfBgNVHSMEGDAWgBSCfys7pdfQ73096kmqBL22bi9KATAeBgNVHREEFzAVoBMGCisGAQQBg78wAQegBQwD77-9MAUGAytlcANBABZ0tZ5z0Hx6LJhqDm7sDf4z9WzfUla6dLdkVGp-VSTrCY2_fq1oba_xFGYtkjQ9pRwlKdpQr-mSf6rBoaWRjwk",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQBTtsDw3p7hlpZ7iGCvG9fWehDbnzvGJjQLxKtuuSuU_KNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFIJ_Kzul19DvfT3qSaoEvbZuL0oBMB8GA1UdIwQYMBaAFIJ_Kzul19DvfT3qSaoEvbZuL0oBMAUGAytlcANBALlCbG6a7PIdOA1ntQahpojEpCSA21flch3PoXhsKCJrfO6li__cMIE0Rp2fMH3b3l3Wb9CZD-O8-OXZaXKwiwc"
+      ]
+    },
+    "output": {
+      "error": "Percent-encoded value is not valid UTF-8."
+    }
+  },
+  {
+    "id": "san-othername-long-form-der-length",
+    "input": {
+      "did": "did:x509:0:sha256:QVFqUhUOWAttDXMLMlcCAB48MTbGna8OYpQdwcnBGTg::san:othername:1.3.6.1.4.1.57264.1.7:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "chain": [
+        "MIIB4zCCAZWgAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQAsuZ1dwDP6jvjFD5_RTYI5xGM8-d-UkeEIBAqMeL7xEKOCAQUwggEBMAwGA1UdEwEB_wQCMAAwDgYDVR0PAQH_BAQDAgeAMB0GA1UdDgQWBBQVwP-2xQn6OlhdRMDT-Pk4o1j4TzAfBgNVHSMEGDAWgBSmxcNsmhJ8KiwKzbQBTiVy9Cq3HjCBoAYDVR0RBIGYMIGVoIGSBgorBgEEAYO_MAEHoIGDDIGAYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWEwBQYDK2VwA0EAv0e80fNV8h-etaaOhHF-pE-vjsYtA4psuRRSeF3tX8g5x5i3vGgBpzlkXTRMz-IR1QupijDPJJeNmFtCshwSBw",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQCDN8x77n4QhCGsOebXE8Srk0eyAwHrIVoqrTYbq6TY2KNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFKbFw2yaEnwqLArNtAFOJXL0KrceMB8GA1UdIwQYMBaAFKbFw2yaEnwqLArNtAFOJXL0KrceMAUGAytlcANBAMi85xmrVK68TbMF8nBIiOeBzkvz7HnuWVzJtxuctxBV9lBFdQNHSpf5d1BE3qZ_xqoadpdvsJMM3aTMDssulws"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:QVFqUhUOWAttDXMLMlcCAB48MTbGna8OYpQdwcnBGTg::san:othername:1.3.6.1.4.1.57264.1.7:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:QVFqUhUOWAttDXMLMlcCAB48MTbGna8OYpQdwcnBGTg::san:othername:1.3.6.1.4.1.57264.1.7:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:QVFqUhUOWAttDXMLMlcCAB48MTbGna8OYpQdwcnBGTg::san:othername:1.3.6.1.4.1.57264.1.7:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "LLmdXcAz-o74xQ-f0U2COcRjPPnflJHhCAQKjHi-8RA"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:QVFqUhUOWAttDXMLMlcCAB48MTbGna8OYpQdwcnBGTg::san:othername:1.3.6.1.4.1.57264.1.7:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:QVFqUhUOWAttDXMLMlcCAB48MTbGna8OYpQdwcnBGTg::san:othername:1.3.6.1.4.1.57264.1.7:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "san-othername-case-sensitive-value",
+    "input": {
+      "did": "did:x509:0:sha256:-_g1ybW6KB_P_8Kde4hN3J0B8b9tXjjjCmtXVmfpLF4::san:othername:1.3.6.1.4.1.57264.1.7:ALICE%21example.com",
+      "chain": [
+        "MIIBbDCCAR6gAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQAD30XbNHTjMZ3m2JMafmeCPdhUDkO6zMIkzYuHverJdKOBjzCBjDAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQULwgUpQa7dqa-Ny09FNk0vt3B9M8wHwYDVR0jBBgwFoAUBXSMkaCgDXG48-9NutaSELINC4MwLAYDVR0RBCUwI6AhBgorBgEEAYO_MAEHoBMMEWFsaWNlIWV4YW1wbGUuY29tMAUGAytlcANBAAlZqEQj7f9GCd34ABwwiLzW0UUs6JPL_yxe_9MOrO6VZmQ8Vz825VyhMuwBCPiZ4FHKoqyJZiZ2oyK1gv5tuQI",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQCl2l7CQ7F-jMneNXufYcwNGsFyTD8P5kuFymNGDIrdiaNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFAV0jJGgoA1xuPPvTbrWkhCyDQuDMB8GA1UdIwQYMBaAFAV0jJGgoA1xuPPvTbrWkhCyDQuDMAUGAytlcANBALMjvLg3N30pa4QFI7Ch5X54I5hBTjrMDb73wC_GHUY1OLNT3KqJqxjEIjKrHGMiTHpWb0e-sHNp0Fljvh61zwc"
+      ]
+    },
+    "output": {
+      "error": "SAN predicate does not match the certificate."
+    }
+  },
+  {
+    "id": "san-othername-nfc-and-nfd-are-distinct",
+    "input": {
+      "did": "did:x509:0:sha256:nVVM-IC2kj6eIJc83XAlCgeJ1FI_2-88HHwsYD2nA1U::san:othername:1.3.6.1.4.1.57264.1.7:e%CC%81",
+      "chain": [
+        "MIIBWzCCAQ2gAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQCNB5GD_8BJBeU4s2wM6eudufMylj9vrU_xTr9nr_1w66N_MH0wDAYDVR0TAQH_BAIwADAOBgNVHQ8BAf8EBAMCB4AwHQYDVR0OBBYEFIQPsEn3fbjah0BxLAD7B8k3tG1JMB8GA1UdIwQYMBaAFNF4dTVp4Y8FN0LtmLqUEIHQYZg4MB0GA1UdEQQWMBSgEgYKKwYBBAGDvzABB6AEDALDqTAFBgMrZXADQQAmfBG7G3PeooBEJHQmnOtRzdbudQtr68Dp_e5jT8VQJ9X_ThhRnFHOqIyLA4_UFvFPLfknbkY4RekYu6aNAPYC",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQB_NUsHjGs7sPJpH-XlC6IjNQ_cjYlhoh941XOPj1q8GqNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFNF4dTVp4Y8FN0LtmLqUEIHQYZg4MB8GA1UdIwQYMBaAFNF4dTVp4Y8FN0LtmLqUEIHQYZg4MAUGAytlcANBAM1q3B47Eq91JP4kLqCsvq2DgtQogn1tEnmvnsjvh_6kOodAz89gBn5VULMnPqA_Ry6OTC7u9wGW9Rd3KHPiiA0"
+      ]
+    },
+    "output": {
+      "error": "SAN predicate does not match the certificate."
+    }
+  },
+  {
+    "id": "san-othername-requires-san-extension",
+    "input": {
+      "did": "did:x509:0:sha256:ulI6yuaR2cv2NmEzVgJbBfZB6n7YBeCIgTU1hEqT8MM::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+      "chain": [
+        "MIIBOzCB7qADAgECAgECMAUGAytlcDAeMRwwGgYDVQQDDBNPdGhlck5hbWUgVGVzdCBSb290MB4XDTIwMDEwMTAwMDAwMFoXDTIxMDEwMTAwMDAwMFowDzENMAsGA1UEAwwETGVhZjAqMAUGAytlcAMhAN9ztFg5EycZSwNg_EPuGhAcLdFoA085vAdTGdymTMISo2AwXjAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQUWevUIzcKBePWOhD6EpO-_z7VOFEwHwYDVR0jBBgwFoAU08o07MoVb3XW7BTzn_Dg1Ykv3xMwBQYDK2VwA0EAf0WoCsK1DJ9XEvGDpEbyT-mu-2CyAz19A5GZZ2PLZnT58bQtlNt1fivtvQ6-ef5USo3VYL5zIub3SQmWPGrwBQ",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQCJao-qTwDeQIfXN44h_dXEOlZjzN0g030TKqJh33vFuaNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFNPKNOzKFW911uwU85_w4NWJL98TMB8GA1UdIwQYMBaAFNPKNOzKFW911uwU85_w4NWJL98TMAUGAytlcANBAEIETsycbCXY3uO2IdUK4PihoEC3fElUrL6xhA6edIq7vkCSYUesCZZPesz_UJn_j74BSqG6MCCn4hy-jnozKwU"
+      ]
+    },
+    "output": {
+      "error": "Certificate does not contain a SAN extension."
+    }
+  },
+  {
+    "id": "san-othername-requires-an-othername-entry",
+    "input": {
+      "did": "did:x509:0:sha256:FcUfO5gRrhYwXLRnNPxqc9h5Wsje3pdFuLnQrJJG9cQ::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+      "chain": [
+        "MIIBVDCCAQagAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQC1EI1Ol244QC0h1go8H7YYYU0NcGFtwRkxVCn1l3_toaN4MHYwDAYDVR0TAQH_BAIwADAOBgNVHQ8BAf8EBAMCB4AwHQYDVR0OBBYEFA4gFy1dLB_imm4Dsvtd5U50EaeIMB8GA1UdIwQYMBaAFNol4HOaZb-0qT1OZ-jBqVLsNX8HMBYGA1UdEQQPMA2CC2V4YW1wbGUuY29tMAUGAytlcANBACyPYiazK354mCA5jM7iG4t1-RTjieRXWEZrI8qlS0lQB1UkaYgK6BIEKSkVpcfnyBBQjfc2iUcXUr08x-RPwgE",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQDa5aTJyK0xZc7k9OLpDBAfTqoiVYoBJ4WFt3FIRtkMu6NjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFNol4HOaZb-0qT1OZ-jBqVLsNX8HMB8GA1UdIwQYMBaAFNol4HOaZb-0qT1OZ-jBqVLsNX8HMAUGAytlcANBABL4aO9cylnnisjNewKWF4fXA2PeZf_2fpQt5RSoy6w9eNx-7NMTdgJtCtlxlqMyKurqbkTSDUxU24oEBTYY3QA"
+      ]
+    },
+    "output": {
+      "error": "SAN predicate does not match the certificate."
+    }
+  },
+  {
+    "id": "san-othername-standalone-7-does-not-supply-san",
+    "input": {
+      "did": "did:x509:0:sha256:IP-dImBZeTucWJ1dhrfEEu3iO8ZftY-xVPlNRH_PUrI::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+      "chain": [
+        "MIIBYTCCAROgAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQBASeBTzUUmCXA5iPZ9lh_8tOUi5NzU-Cm5Z6a64mEq-qOBhDCBgTAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQU-N3ar3zOcEmbe6IyhmuSpQBjmJswHwYDVR0jBBgwFoAUlAgAa1btRtoC3IHsKPyO8z2s7XEwIQYKKwYBBAGDvzABBwQTDBFhbGljZSFleGFtcGxlLmNvbTAFBgMrZXADQQBDnyXhGH7ydnohxxp_unyRGma6wmwnC2-SJNCuU79oDOq43dJFkXfXcZXt7i5_5Ko-laj8ZkXSfgKll63sHn0H",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQBUYGUYFoWvVNfgxPq1lFauvP9yoJWUimRYMwMJFOGc86NjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFJQIAGtW7UbaAtyB7Cj8jvM9rO1xMB8GA1UdIwQYMBaAFJQIAGtW7UbaAtyB7Cj8jvM9rO1xMAUGAytlcANBACUQZXyuTBK3JETAVFMixJfo2B6VYoH-YDGoW2g_1nKUfLyR-JOYJspoEdrJz8mVtvgxhI1e8qedXXZADMSYugU"
+      ]
+    },
+    "output": {
+      "error": "Certificate does not contain a SAN extension."
+    }
+  },
+  {
+    "id": "san-othername-standalone-token-subject-does-not-supply-san",
+    "input": {
+      "did": "did:x509:0:sha256:kmPCXArfgNOMhmzd31MX71npPjslIDdbIh5vZcUfM58::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+      "chain": [
+        "MIIBeTCCASugAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQDOwtX6bM0QZkfvAAy6LUU-OEbFNeq_W6eW8ncilVMAGqOBnDCBmTAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQUqv3iqDlMsEKprT2U48PGuVOS6dAwHwYDVR0jBBgwFoAUV3lct3LfuLthyj_fl-63RuL2LAowFgYDVR0RBA8wDYILZXhhbXBsZS5jb20wIQYKKwYBBAGDvzABGAQTDBFhbGljZSFleGFtcGxlLmNvbTAFBgMrZXADQQDnc6jnncW7N1Bn5HiH0j3RrTNryZq55Q7rxu8WvPohUN0Hy1dPQ3v5TrP_xdosRBjGJ1K9EhUzQJOKLIcRvBEJ",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQA4gzB8yBmNDTQtlJLneqTjxRNFdR4nJkZiKZoGHQQ1faNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFFd5XLdy37i7Yco_35fut0bi9iwKMB8GA1UdIwQYMBaAFFd5XLdy37i7Yco_35fut0bi9iwKMAUGAytlcANBACInRJw22fdrUUS4Cb2AhHVQbUm72_zL2K-DdszS6e5Kptq6BXjz7AORiI6FcWQ9BWrzXG08lKUccATVMhHeew4"
+      ]
+    },
+    "output": {
+      "error": "SAN predicate does not match the certificate."
+    }
+  },
+  {
+    "id": "san-othername-selector-rejects-unregistered-oid",
+    "input": {
+      "did": "did:x509:0:sha256:-_g1ybW6KB_P_8Kde4hN3J0B8b9tXjjjCmtXVmfpLF4::san:othername:1.2.3.4:alice%21example.com",
+      "chain": [
+        "MIIBbDCCAR6gAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQAD30XbNHTjMZ3m2JMafmeCPdhUDkO6zMIkzYuHverJdKOBjzCBjDAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQULwgUpQa7dqa-Ny09FNk0vt3B9M8wHwYDVR0jBBgwFoAUBXSMkaCgDXG48-9NutaSELINC4MwLAYDVR0RBCUwI6AhBgorBgEEAYO_MAEHoBMMEWFsaWNlIWV4YW1wbGUuY29tMAUGAytlcANBAAlZqEQj7f9GCd34ABwwiLzW0UUs6JPL_yxe_9MOrO6VZmQ8Vz825VyhMuwBCPiZ4FHKoqyJZiZ2oyK1gv5tuQI",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQCl2l7CQ7F-jMneNXufYcwNGsFyTD8P5kuFymNGDIrdiaNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFAV0jJGgoA1xuPPvTbrWkhCyDQuDMB8GA1UdIwQYMBaAFAV0jJGgoA1xuPPvTbrWkhCyDQuDMAUGAytlcANBALMjvLg3N30pa4QFI7Ch5X54I5hBTjrMDb73wC_GHUY1OLNT3KqJqxjEIjKrHGMiTHpWb0e-sHNp0Fljvh61zwc"
+      ]
+    },
+    "output": {
+      "error": "OtherName SAN predicate contains an unsupported type OID."
+    }
+  },
+  {
+    "id": "san-othername-selector-does-not-percent-decode-oid",
+    "input": {
+      "did": "did:x509:0:sha256:-_g1ybW6KB_P_8Kde4hN3J0B8b9tXjjjCmtXVmfpLF4::san:othername:1.3.6.1.4.1.57264.1.%37:alice%21example.com",
+      "chain": [
+        "MIIBbDCCAR6gAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQAD30XbNHTjMZ3m2JMafmeCPdhUDkO6zMIkzYuHverJdKOBjzCBjDAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQULwgUpQa7dqa-Ny09FNk0vt3B9M8wHwYDVR0jBBgwFoAUBXSMkaCgDXG48-9NutaSELINC4MwLAYDVR0RBCUwI6AhBgorBgEEAYO_MAEHoBMMEWFsaWNlIWV4YW1wbGUuY29tMAUGAytlcANBAAlZqEQj7f9GCd34ABwwiLzW0UUs6JPL_yxe_9MOrO6VZmQ8Vz825VyhMuwBCPiZ4FHKoqyJZiZ2oyK1gv5tuQI",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQCl2l7CQ7F-jMneNXufYcwNGsFyTD8P5kuFymNGDIrdiaNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFAV0jJGgoA1xuPPvTbrWkhCyDQuDMB8GA1UdIwQYMBaAFAV0jJGgoA1xuPPvTbrWkhCyDQuDMAUGAytlcANBALMjvLg3N30pa4QFI7Ch5X54I5hBTjrMDb73wC_GHUY1OLNT3KqJqxjEIjKrHGMiTHpWb0e-sHNp0Fljvh61zwc"
+      ]
+    },
+    "output": {
+      "error": "OtherName SAN predicate contains an unsupported type OID."
+    }
+  },
+  {
+    "id": "san-othername-selector-does-not-normalize-oid",
+    "input": {
+      "did": "did:x509:0:sha256:-_g1ybW6KB_P_8Kde4hN3J0B8b9tXjjjCmtXVmfpLF4::san:othername:1.3.6.1.4.1.57264.1.07:alice%21example.com",
+      "chain": [
+        "MIIBbDCCAR6gAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQAD30XbNHTjMZ3m2JMafmeCPdhUDkO6zMIkzYuHverJdKOBjzCBjDAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQULwgUpQa7dqa-Ny09FNk0vt3B9M8wHwYDVR0jBBgwFoAUBXSMkaCgDXG48-9NutaSELINC4MwLAYDVR0RBCUwI6AhBgorBgEEAYO_MAEHoBMMEWFsaWNlIWV4YW1wbGUuY29tMAUGAytlcANBAAlZqEQj7f9GCd34ABwwiLzW0UUs6JPL_yxe_9MOrO6VZmQ8Vz825VyhMuwBCPiZ4FHKoqyJZiZ2oyK1gv5tuQI",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQCl2l7CQ7F-jMneNXufYcwNGsFyTD8P5kuFymNGDIrdiaNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFAV0jJGgoA1xuPPvTbrWkhCyDQuDMB8GA1UdIwQYMBaAFAV0jJGgoA1xuPPvTbrWkhCyDQuDMAUGAytlcANBALMjvLg3N30pa4QFI7Ch5X54I5hBTjrMDb73wC_GHUY1OLNT3KqJqxjEIjKrHGMiTHpWb0e-sHNp0Fljvh61zwc"
+      ]
+    },
+    "output": {
+      "error": "OtherName SAN predicate contains an unsupported type OID."
+    }
+  },
+  {
+    "id": "san-othername-selector-requires-type-oid-and-value",
+    "input": {
+      "did": "did:x509:0:sha256:-_g1ybW6KB_P_8Kde4hN3J0B8b9tXjjjCmtXVmfpLF4::san:othername:1.3.6.1.4.1.57264.1.7",
+      "chain": [
+        "MIIBbDCCAR6gAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQAD30XbNHTjMZ3m2JMafmeCPdhUDkO6zMIkzYuHverJdKOBjzCBjDAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQULwgUpQa7dqa-Ny09FNk0vt3B9M8wHwYDVR0jBBgwFoAUBXSMkaCgDXG48-9NutaSELINC4MwLAYDVR0RBCUwI6AhBgorBgEEAYO_MAEHoBMMEWFsaWNlIWV4YW1wbGUuY29tMAUGAytlcANBAAlZqEQj7f9GCd34ABwwiLzW0UUs6JPL_yxe_9MOrO6VZmQ8Vz825VyhMuwBCPiZ4FHKoqyJZiZ2oyK1gv5tuQI",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQCl2l7CQ7F-jMneNXufYcwNGsFyTD8P5kuFymNGDIrdiaNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFAV0jJGgoA1xuPPvTbrWkhCyDQuDMB8GA1UdIwQYMBaAFAV0jJGgoA1xuPPvTbrWkhCyDQuDMAUGAytlcANBALMjvLg3N30pa4QFI7Ch5X54I5hBTjrMDb73wC_GHUY1OLNT3KqJqxjEIjKrHGMiTHpWb0e-sHNp0Fljvh61zwc"
+      ]
+    },
+    "output": {
+      "error": "OtherName SAN predicate requires exactly one type, OID and value."
+    }
+  },
+  {
+    "id": "san-othername-selector-rejects-extra-component",
+    "input": {
+      "did": "did:x509:0:sha256:-_g1ybW6KB_P_8Kde4hN3J0B8b9tXjjjCmtXVmfpLF4::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com:extra",
+      "chain": [
+        "MIIBbDCCAR6gAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQAD30XbNHTjMZ3m2JMafmeCPdhUDkO6zMIkzYuHverJdKOBjzCBjDAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQULwgUpQa7dqa-Ny09FNk0vt3B9M8wHwYDVR0jBBgwFoAUBXSMkaCgDXG48-9NutaSELINC4MwLAYDVR0RBCUwI6AhBgorBgEEAYO_MAEHoBMMEWFsaWNlIWV4YW1wbGUuY29tMAUGAytlcANBAAlZqEQj7f9GCd34ABwwiLzW0UUs6JPL_yxe_9MOrO6VZmQ8Vz825VyhMuwBCPiZ4FHKoqyJZiZ2oyK1gv5tuQI",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQCl2l7CQ7F-jMneNXufYcwNGsFyTD8P5kuFymNGDIrdiaNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFAV0jJGgoA1xuPPvTbrWkhCyDQuDMB8GA1UdIwQYMBaAFAV0jJGgoA1xuPPvTbrWkhCyDQuDMAUGAytlcANBALMjvLg3N30pa4QFI7Ch5X54I5hBTjrMDb73wC_GHUY1OLNT3KqJqxjEIjKrHGMiTHpWb0e-sHNp0Fljvh61zwc"
+      ]
+    },
+    "output": {
+      "error": "OtherName SAN predicate requires exactly one type, OID and value."
+    }
+  },
+  {
+    "id": "san-othername-selector-rejects-empty-value",
+    "input": {
+      "did": "did:x509:0:sha256:-_g1ybW6KB_P_8Kde4hN3J0B8b9tXjjjCmtXVmfpLF4::san:othername:1.3.6.1.4.1.57264.1.7:",
+      "chain": [
+        "MIIBbDCCAR6gAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQAD30XbNHTjMZ3m2JMafmeCPdhUDkO6zMIkzYuHverJdKOBjzCBjDAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQULwgUpQa7dqa-Ny09FNk0vt3B9M8wHwYDVR0jBBgwFoAUBXSMkaCgDXG48-9NutaSELINC4MwLAYDVR0RBCUwI6AhBgorBgEEAYO_MAEHoBMMEWFsaWNlIWV4YW1wbGUuY29tMAUGAytlcANBAAlZqEQj7f9GCd34ABwwiLzW0UUs6JPL_yxe_9MOrO6VZmQ8Vz825VyhMuwBCPiZ4FHKoqyJZiZ2oyK1gv5tuQI",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQCl2l7CQ7F-jMneNXufYcwNGsFyTD8P5kuFymNGDIrdiaNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFAV0jJGgoA1xuPPvTbrWkhCyDQuDMB8GA1UdIwQYMBaAFAV0jJGgoA1xuPPvTbrWkhCyDQuDMAUGAytlcANBALMjvLg3N30pa4QFI7Ch5X54I5hBTjrMDb73wC_GHUY1OLNT3KqJqxjEIjKrHGMiTHpWb0e-sHNp0Fljvh61zwc"
+      ]
+    },
+    "output": {
+      "error": "DID contains an invalid predicate value."
+    }
+  },
+  {
+    "id": "san-othername-selector-rejects-raw-reserved-character",
+    "input": {
+      "did": "did:x509:0:sha256:-_g1ybW6KB_P_8Kde4hN3J0B8b9tXjjjCmtXVmfpLF4::san:othername:1.3.6.1.4.1.57264.1.7:alice!example.com",
+      "chain": [
+        "MIIBbDCCAR6gAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQAD30XbNHTjMZ3m2JMafmeCPdhUDkO6zMIkzYuHverJdKOBjzCBjDAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQULwgUpQa7dqa-Ny09FNk0vt3B9M8wHwYDVR0jBBgwFoAUBXSMkaCgDXG48-9NutaSELINC4MwLAYDVR0RBCUwI6AhBgorBgEEAYO_MAEHoBMMEWFsaWNlIWV4YW1wbGUuY29tMAUGAytlcANBAAlZqEQj7f9GCd34ABwwiLzW0UUs6JPL_yxe_9MOrO6VZmQ8Vz825VyhMuwBCPiZ4FHKoqyJZiZ2oyK1gv5tuQI",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQCl2l7CQ7F-jMneNXufYcwNGsFyTD8P5kuFymNGDIrdiaNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFAV0jJGgoA1xuPPvTbrWkhCyDQuDMB8GA1UdIwQYMBaAFAV0jJGgoA1xuPPvTbrWkhCyDQuDMAUGAytlcANBALMjvLg3N30pa4QFI7Ch5X54I5hBTjrMDb73wC_GHUY1OLNT3KqJqxjEIjKrHGMiTHpWb0e-sHNp0Fljvh61zwc"
+      ]
+    },
+    "output": {
+      "error": "DID contains an invalid predicate value."
+    }
+  },
+  {
+    "id": "san-othername-unregistered-entry-fails-unselected-noncritical-san",
+    "input": {
+      "did": "did:x509:0:sha256:w2Ev9wW2es_Ahm7HPljtbt3q0CeRXdYY73fPqz8JQZ0::san:dns:example.com",
+      "chain": [
+        "MIIBnDCCAU6gAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQBy_p4nXk2RmTFHROsL4M2V1UdNhULByazCIZEVinogCqOBvzCBvDAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQUMiF7kfOfBormodVVheJSg0bOzY8wHwYDVR0jBBgwFoAUffMBFPV4_eogRpU-scG8UXxclV8wXAYDVR0RBFUwU6AhBgorBgEEAYO_MAEHoBMMEWFsaWNlIWV4YW1wbGUuY29toCEGCisGAQQBg78wAQigEwwRYWxpY2UhZXhhbXBsZS5jb22CC2V4YW1wbGUuY29tMAUGAytlcANBAGQBXJ2b6qXrLr9tCrWEf5FF2HI5qS9A9mrv36-nuPjsD_XX_-XpBerDU7CK9OnM8eUIOtHL_k_RhxwlYGOFag4",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQD9aDquSHVgvP5N1wpDoYelzxkeVVLaD2jTZQHoNyare6NjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFH3zART1eP3qIEaVPrHBvFF8XJVfMB8GA1UdIwQYMBaAFH3zART1eP3qIEaVPrHBvFF8XJVfMAUGAytlcANBAMzn199a_9rq1fWTRvRo6kL5nsteUW3mtKUbyjUHXNCs1qYMWGeo7BeOaJY_GIv5EBNFTf68jeAZY27mynZL4gQ"
+      ]
+    },
+    "output": {
+      "error": "Certificate contains an unsupported SAN type."
+    }
+  },
+  {
+    "id": "san-othername-malformed-entry-fails-alongside-matching-entry",
+    "input": {
+      "did": "did:x509:0:sha256:c0rwm6dZgEltw86hCR8xvxw5SICP_fYVkvkzH6deaZU::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+      "chain": [
+        "MIIBjzCCAUGgAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQA2qzJ0Nhr_YPPH2SZUbol8e7bBAyceZYFsg4QALrN6wKOBsjCBrzAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQUEGnPFkvW5L6TswfWstKfwM_P7K0wHwYDVR0jBBgwFoAUFA2J6j-uySX34wOtyFP84EaKuZkwTwYDVR0RBEgwRqAhBgorBgEEAYO_MAEHoBMMEWFsaWNlIWV4YW1wbGUuY29toCEGCisGAQQBg78wAQegExYRYWxpY2UhZXhhbXBsZS5jb20wBQYDK2VwA0EAIEZL041qgKIw0foeaLyd3UVQI_mkRjSIN80LNew2wM9tkrBBwhaOiH9l62AbJdytZ5XHdwJyXKcri3gRb7L2DA",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQDaLkg8YlF7FpkbwxiwPgJcRH7GivSwXF3XKUtwAiddpKNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFBQNieo_rskl9-MDrchT_OBGirmZMB8GA1UdIwQYMBaAFBQNieo_rskl9-MDrchT_OBGirmZMAUGAytlcANBAMQNnOBGaDZP-cRqBvv44d-NpHLtY8_Z-VK6Dl3jJttMDacgVKlYnfDrr79IRSYze3fq7x-_rHnvPlQq-8XbdQc"
+      ]
+    },
+    "output": {
+      "error": "Value is not a primitive DER UTF8String."
+    }
+  },
+  {
+    "id": "san-othername-malformed-entry-fails-when-unselected",
+    "input": {
+      "did": "did:x509:0:sha256:c0rwm6dZgEltw86hCR8xvxw5SICP_fYVkvkzH6deaZU::subject:CN:Leaf",
+      "chain": [
+        "MIIBjzCCAUGgAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQA2qzJ0Nhr_YPPH2SZUbol8e7bBAyceZYFsg4QALrN6wKOBsjCBrzAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQUEGnPFkvW5L6TswfWstKfwM_P7K0wHwYDVR0jBBgwFoAUFA2J6j-uySX34wOtyFP84EaKuZkwTwYDVR0RBEgwRqAhBgorBgEEAYO_MAEHoBMMEWFsaWNlIWV4YW1wbGUuY29toCEGCisGAQQBg78wAQegExYRYWxpY2UhZXhhbXBsZS5jb20wBQYDK2VwA0EAIEZL041qgKIw0foeaLyd3UVQI_mkRjSIN80LNew2wM9tkrBBwhaOiH9l62AbJdytZ5XHdwJyXKcri3gRb7L2DA",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQDaLkg8YlF7FpkbwxiwPgJcRH7GivSwXF3XKUtwAiddpKNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFBQNieo_rskl9-MDrchT_OBGirmZMB8GA1UdIwQYMBaAFBQNieo_rskl9-MDrchT_OBGirmZMAUGAytlcANBAMQNnOBGaDZP-cRqBvv44d-NpHLtY8_Z-VK6Dl3jJttMDacgVKlYnfDrr79IRSYze3fq7x-_rHnvPlQq-8XbdQc"
+      ]
+    },
+    "output": {
+      "error": "Value is not a primitive DER UTF8String."
+    }
+  },
+  {
+    "id": "san-othername-inner-utf8-is-strict",
+    "input": {
+      "did": "did:x509:0:sha256:eAU4_-jFoI1dfQEejooS3ykNkxkrKtGdcNXN6RK1f-I::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+      "chain": [
+        "MIIBWjCCAQygAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQBPyhhlatbClTkwqtX3j4HslS49WBzx7AopmeJyWDcedKN-MHwwDAYDVR0TAQH_BAIwADAOBgNVHQ8BAf8EBAMCB4AwHQYDVR0OBBYEFP-KvLgwPvqc9dhKAlI5XnIv1fCyMB8GA1UdIwQYMBaAFHJf34kPpUR74bAKWSfL72ju0qTnMBwGA1UdEQQVMBOgEQYKKwYBBAGDvzABB6ADDAH_MAUGAytlcANBAMcK-H1REnLjvV3PpQkhphxlLELgmjdkWT1tF31WynbSdN4TOw0EXLBNIbUv4PS4ZyyxUr-0ZEAM7-oW7-_a6As",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQB1qJtSxxZSAnv-0YEeOVs1-I4PWQU3oI9QDfYTEAu-56NjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFHJf34kPpUR74bAKWSfL72ju0qTnMB8GA1UdIwQYMBaAFHJf34kPpUR74bAKWSfL72ju0qTnMAUGAytlcANBADevvlKyuztTXcII6UIZLKszzo5R7_i6aDA4UXXnE2qbHqDrcPWNOekSfphBhrdLihCOOhORIlzsSwbX29BenAA"
+      ]
+    },
+    "output": {
+      "error": "DER UTF8String is not valid UTF-8."
+    }
+  },
+  {
+    "id": "san-othername-unsupported-ip-entry-still-fails",
+    "input": {
+      "did": "did:x509:0:sha256:wQlkwBG87oUDHIgy6LaQSMdvS4-ZEXjls8pEGdOFV7E::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+      "chain": [
+        "MIIBcjCCASSgAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQCqwrwnkTU--KKRlm_Wm604mLvta5uhyXXPPAl-uEhFJKOBlTCBkjAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQUtb1yMDOSFlzNajEzo3dgoac8YLgwHwYDVR0jBBgwFoAUuXdE400fJGrmoCB8EEQhL_N9crcwMgYDVR0RBCswKaAhBgorBgEEAYO_MAEHoBMMEWFsaWNlIWV4YW1wbGUuY29thwTAAAIBMAUGAytlcANBAPtU8GIh2BiGCsqvAAkGtyTz_8CBCli14WN7Jdnd2C5RbpVEQcx1U15pWy6mr0NAH5GYiRWsFIZ3R8iLpyYinAM",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQDYHL0mOSpQePDrKvf8mJIO_tygoTaaHn1xYlEOHIBe5KNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFLl3RONNHyRq5qAgfBBEIS_zfXK3MB8GA1UdIwQYMBaAFLl3RONNHyRq5qAgfBBEIS_zfXK3MAUGAytlcANBANubzelwHeAdgjvs5hD3iGsCOLtEUIzJELXi2TV1v3i1j7V4qgf5Lt1V4jXypxvuAbV5i9lb3CuX5Fl3iUkBFwo"
+      ]
+    },
+    "output": {
+      "error": "Certificate contains an unsupported SAN type."
+    }
+  },
+  {
+    "id": "san-othername-unknown-critical-extension-still-fails",
+    "input": {
+      "did": "did:x509:0:sha256:RjjOIe5CowKmMYnyUeqqMvrqcA7AxkGDLF_f7exBH6Q::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+      "chain": [
+        "MIIBnjCCAVCgAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQDXij9x1wZSdao3J6uoZWKqDmU5vymb0xyEj16Rk7rj_KOBwTCBvjAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQUHxj57p1vTZNH430Oa5l3kFrG5d4wHwYDVR0jBBgwFoAU7SM2wuenQnAIq7nRLPdnNE1jV34wLwYDVR0RAQH_BCUwI6AhBgorBgEEAYO_MAEHoBMMEWFsaWNlIWV4YW1wbGUuY29tMC0GCisGAQQBg78wAQgBAf8EHAwaaHR0cHM6Ly9pc3N1ZXIuZXhhbXBsZS5jb20wBQYDK2VwA0EAwC0Km1fgJ6eFLdqp6tLz6xl5qYyLaaGso6iG8dHButzyxo6cMqckZnydH_2k9Fwwdmf4qJPcA4fSnYTRx1YFCA",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQDGWasCCvAIyokXKf77uNUkKv6LBzVSwzvDyn__PNwGEKNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFO0jNsLnp0JwCKu50Sz3ZzRNY1d-MB8GA1UdIwQYMBaAFO0jNsLnp0JwCKu50Sz3ZzRNY1d-MAUGAytlcANBAMQxnIOgsNHCQ9ddPZImdmAlXSbuUfV_DKpvfON0NQyYtyw-iFt9JtPvw_hJR9YgFtdCIO9XDAg27s3YbfyT5wc"
+      ]
+    },
+    "output": {
+      "error": "Certificate chain verification failed: unhandled critical extension."
+    }
+  },
+  {
+    "id": "san-othername-dns-name-constraints-still-apply",
+    "input": {
+      "did": "did:x509:0:sha256:jFBz4lq4TawjkrZaSxDHdSzmnjF1jArMEiABqSE4i6Q::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+      "chain": [
+        "MIIBgjCCATSgAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQBmVNLfoCauAhT-f7b9nMJ-wHpgDd0Pe0sdMe_c-1xp4qOBpTCBojAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQU0vqBK5b-ZLAySzGT4wbja5d_B6swHwYDVR0jBBgwFoAUb5hUVr33AeYn7jGasDdVY1Px9f8wQgYDVR0RBDswOaAhBgorBgEEAYO_MAEHoBMMEWFsaWNlIWV4YW1wbGUuY29tghRob3N0LmludmFsaWQuZXhhbXBsZTAFBgMrZXADQQCWdNyuppjOrQn_7m5F0PXYkXrhd5PvDNThEHaRcduiz4o4FReATidtNMvTkIYYa9FX58xYPPd4bdXj3xXBNu4E",
+        "MIIBcDCCASKgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQCvi62re8oMbBtfzdpaFBspPsPOR3ifpg3Xtxvva4a7fqOBhDCBgTAPBgNVHRMBAf8EBTADAQH_MA4GA1UdDwEB_wQEAwIBBjAdBgNVHQ4EFgQUb5hUVr33AeYn7jGasDdVY1Px9f8wHwYDVR0jBBgwFoAUb5hUVr33AeYn7jGasDdVY1Px9f8wHgYDVR0eAQH_BBQwEqAQMA6CDC5leGFtcGxlLmNvbTAFBgMrZXADQQCePrryDjjFa9j0-x0Mrt3Jq8oEb-Re0MFwvNKHJ_8bfcYag4soEvlZgV6jNypI1FrtvTRo5sWw0Pe3zLu0BXoD"
+      ]
+    },
+    "output": {
+      "error": "Certificate chain verification failed: permitted subtree violation."
+    }
+  },
+  {
+    "id": "san-othername-unsupported-critical-name-constraints-still-fail",
+    "input": {
+      "did": "did:x509:0:sha256:iJISrt_zKm1f4tz_SRVp6nENZF_eGgurUGvyEWv9vJk::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+      "chain": [
+        "MIIBbDCCAR6gAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQDUOVT1so4K4gFkJRx-0KwCPLL70nDQNzdxWbHsBiBbX6OBjzCBjDAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQU1Zz-kjp-Hm64ctmItijTLRO6DQAwHwYDVR0jBBgwFoAUDuMnD2EhHbgAA3FPKRChLPZNwaowLAYDVR0RBCUwI6AhBgorBgEEAYO_MAEHoBMMEWFsaWNlIWV4YW1wbGUuY29tMAUGAytlcANBAPHJ-gM1ZEaGUV8IeeztThKX16ZWpW3JAt2z2ifY5ur2KDmqi0KXZPkKs7qrb4IoZnTWYn6D6PV2zsc9wov35gc",
+        "MIIBhTCCATegAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQCAD5Y6AXc9cn5-6hpRNqetEbqN_sgfEEkh-hLPj6L7d6OBmTCBljAPBgNVHRMBAf8EBTADAQH_MA4GA1UdDwEB_wQEAwIBBjAdBgNVHQ4EFgQUDuMnD2EhHbgAA3FPKRChLPZNwaowHwYDVR0jBBgwFoAUDuMnD2EhHbgAA3FPKRChLPZNwaowMwYDVR0eAQH_BCkwJ6AlMCOgIQYKKwYBBAGDvzABB6ATDBFhbGljZSFleGFtcGxlLmNvbTAFBgMrZXADQQApVCZ91RgU3U0EAnFDHQHmkfZbPbwNDgkwNwlNAlRQ0-7LtZEC-_aUipNcoHnJ971e4-VZAvFLsth7swHyc-sE"
+      ]
+    },
+    "output": {
+      "error": "Certificate chain verification failed: unsupported name constraint type."
+    }
+  },
+  {
+    "id": "san-othername-duplicate-san-extension-is-rejected",
+    "input": {
+      "did": "did:x509:0:sha256:EIvNLf8ueyyoub6fgj2mawTE86msl9-2ILLXudbKKo8::san:othername:1.3.6.1.4.1.57264.1.7:alice%21example.com",
+      "chain": [
+        "MIIBmjCCAUygAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQACDPkEv-YAa6Mn9Fw7D1ICdGtTX8mTGf_F3A-o2SMF6qOBvTCBujAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQUKLXFAmXjyI3R8ZNFGNvEHlJ6PgswHwYDVR0jBBgwFoAUXHRs7gvQEde3uOfLpJ8zJn1xH1owLAYDVR0RBCUwI6AhBgorBgEEAYO_MAEHoBMMEWFsaWNlIWV4YW1wbGUuY29tMCwGA1UdEQQlMCOgIQYKKwYBBAGDvzABB6ATDBFhbGljZSFleGFtcGxlLmNvbTAFBgMrZXADQQAJJGaHar1dJm_ftXC9N--6_pTFc1hm5-k2BDIrxbpG5T1808oeDorqbJHZ_Pg3VOkNGBE96OeH21lexuNAV8AO",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQA0UkrHPeSCnrXH-YTwS7QzurvJ3hQjb7VKt9-Zlt7ysaNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFFx0bO4L0BHXt7jny6SfMyZ9cR9aMB8GA1UdIwQYMBaAFFx0bO4L0BHXt7jny6SfMyZ9cR9aMAUGAytlcANBAM19OGYudBqD8islJR9jJYoXApg6CzL31AuNhV2wXDJnVMbPRUQGWSfjR0UGtIF6Qlguy6mI1GjrDpD2M3CbdgI"
+      ]
+    },
+    "output": {
+      "error": "Certificate chain verification failed: unable to get local issuer certificate."
+    }
   }
 ]
