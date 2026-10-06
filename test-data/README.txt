@@ -4,4 +4,3 @@ The test certificates in this folder are from public sources:
 - fulcio-*.pem are public certificates from the Fulcio CT log
 - fulcio-issuer-v2 contains public production and staging Fulcio certificate
   chains, with provenance and expected extension values in its manifest.json.
-  See fulcio-issuer-v2/README.txt for the fixture scope and time-validation policy.
