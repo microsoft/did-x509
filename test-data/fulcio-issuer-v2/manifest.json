@@ -20,12 +20,12 @@
   },
   "samples": [
     {
-      "id": "packaging-26.3",
-      "chain": "packaging-26.3.pem",
+      "id": "pydantic-ai-2.54.0",
+      "chain": "pydantic-ai-2.54.0.pem",
       "environment": "production",
       "sources": {
         "leaf": {
-          "url": "https://pypi.org/integrity/packaging/26.3/packaging-26.3-py3-none-any.whl/provenance",
+          "url": "https://pypi.org/integrity/pydantic-ai/2.54.0/pydantic_ai-2.54.0.tar.gz/provenance",
           "json_pointer": "/attestation_bundles/0/attestations/0/verification_material/certificate"
         },
         "issuers": {
@@ -34,45 +34,48 @@
         }
       },
       "certificate_sha256": [
-        "1e13d787ada211799ca902ec27a82e84867b26648a89790e76fce82bb582168d",
+        "218b33a4c2b8200d544ea4124f314bd2396e479ad7eaafa4ae285243d3d32299",
         "15d795348226b4649f750f5802592c393bee7cc53c3b86982175b7ad087efe47",
         "3ba7b6cc4e95469d4d334b49cb257ad8537076fa84b0ca87ff4ecfe6a54680c1"
       ],
-      "not_before": "2026-08-04T18:15:25+00:00",
-      "not_after": "2026-08-04T18:25:25+00:00",
+      "not_before": "2026-10-03T03:38:10+00:00",
+      "not_after": "2026-10-03T03:48:10+00:00",
       "san": [
         "uri",
-        "https://github.com/pypa/packaging/.github/workflows/publish.yml@refs/heads/main"
+        "https://github.com/pydantic/pydantic-ai/.github/workflows/ci.yml@refs/tags/v2.54.0"
       ],
       "fulcio_issuer": "https://token.actions.githubusercontent.com",
       "fulcio": {
         "issuer": "https://token.actions.githubusercontent.com",
-        "build-signer-uri": "https://github.com/pypa/packaging/.github/workflows/publish.yml@refs/heads/main",
-        "build-signer-digest": "3db4261366eebeb802574458dd037b3e13515e2e",
+        "build-signer-uri": "https://github.com/pydantic/pydantic-ai/.github/workflows/ci.yml@refs/tags/v2.54.0",
+        "build-signer-digest": "66951321b89587235f432281eba909a30a585ffd",
         "runner-environment": "github-hosted",
-        "source-repository-uri": "https://github.com/pypa/packaging",
-        "source-repository-digest": "3db4261366eebeb802574458dd037b3e13515e2e",
-        "source-repository-ref": "refs/heads/main",
-        "source-repository-identifier": "19837758",
-        "source-repository-owner-uri": "https://github.com/pypa",
-        "source-repository-owner-identifier": "647025",
-        "build-config-uri": "https://github.com/pypa/packaging/.github/workflows/publish.yml@refs/heads/main",
-        "build-config-digest": "3db4261366eebeb802574458dd037b3e13515e2e",
-        "build-trigger": "workflow_dispatch",
-        "run-invocation-uri": "https://github.com/pypa/packaging/actions/runs/30848061831/attempts/1",
+        "source-repository-uri": "https://github.com/pydantic/pydantic-ai",
+        "source-repository-digest": "66951321b89587235f432281eba909a30a585ffd",
+        "source-repository-ref": "refs/tags/v2.54.0",
+        "source-repository-identifier": "818331198",
+        "source-repository-owner-uri": "https://github.com/pydantic",
+        "source-repository-owner-identifier": "110818415",
+        "build-config-uri": "https://github.com/pydantic/pydantic-ai/.github/workflows/ci.yml@refs/tags/v2.54.0",
+        "build-config-digest": "66951321b89587235f432281eba909a30a585ffd",
+        "build-trigger": "push",
+        "run-invocation-uri": "https://github.com/pydantic/pydantic-ai/actions/runs/37092926449/attempts/1",
         "source-repository-visibility-at-signing": "public",
-        "deployment-environment": "pypi",
-        "token-subject": "repo:pypa/packaging:environment:pypi"
+        "deployment-environment": "release",
+        "token-subject": "repo:pydantic/pydantic-ai:environment:release"
       }
     },
     {
-      "id": "sigstore-js-2.0.0",
-      "chain": "sigstore-js-2.0.0.pem",
+      "id": "sigstore-js-2026-08-04",
+      "chain": "sigstore-js-2026-08-04.pem",
       "environment": "production",
       "sources": {
         "leaf": {
-          "url": "https://raw.githubusercontent.com/sigstore/sigstore-go/a061819fe7f864aa13c79377dbd01488b572b442/pkg/testing/data/bundles/sigstore.js%402.0.0-provenance.sigstore.json",
-          "json_pointer": "/verificationMaterial/x509CertificateChain/certificates/0/rawBytes"
+          "url": "https://rekor.sigstore.dev/api/v1/log/entries/108e9186e8c5677aa3266a9ba0b5c27d307da5a5c128a45c3d89f624b3e7bd32df3af81bb1ad604a",
+          "json_pointer": "/108e9186e8c5677aa3266a9ba0b5c27d307da5a5c128a45c3d89f624b3e7bd32df3af81bb1ad604a/body",
+          "body_encoding": "base64-json",
+          "body_json_pointer": "/spec/signatures/0/verifier",
+          "certificate_encoding": "base64-pem"
         },
         "issuers": {
           "url": "https://raw.githubusercontent.com/sigstore/sigstore-go/a061819fe7f864aa13c79377dbd01488b572b442/pkg/testing/data/trusted-roots/public-good.json",
@@ -80,12 +83,12 @@
         }
       },
       "certificate_sha256": [
-        "5e38b9a130e5bce07939025f51c1998f0bcbddd9368f35c7677bf6d94c25dc0e",
+        "bf2ce7c8939bda0ba002be10cd44fcc2f7d363be741a154387dbeaae2361abb9",
         "15d795348226b4649f750f5802592c393bee7cc53c3b86982175b7ad087efe47",
         "3ba7b6cc4e95469d4d334b49cb257ad8537076fa84b0ca87ff4ecfe6a54680c1"
       ],
-      "not_before": "2023-08-18T16:05:35+00:00",
-      "not_after": "2023-08-18T16:15:35+00:00",
+      "not_before": "2026-08-04T21:31:35+00:00",
+      "not_after": "2026-08-04T21:41:35+00:00",
       "san": [
         "uri",
         "https://github.com/sigstore/sigstore-js/.github/workflows/release.yml@refs/heads/main"
@@ -94,19 +97,20 @@
       "fulcio": {
         "issuer": "https://token.actions.githubusercontent.com",
         "build-signer-uri": "https://github.com/sigstore/sigstore-js/.github/workflows/release.yml@refs/heads/main",
-        "build-signer-digest": "f0b49a04e5a62250e0f60fb128004a73110fe311",
+        "build-signer-digest": "769a53d8713248a8bf49edfc2a5d1955b0dcc24d",
         "runner-environment": "github-hosted",
         "source-repository-uri": "https://github.com/sigstore/sigstore-js",
-        "source-repository-digest": "f0b49a04e5a62250e0f60fb128004a73110fe311",
+        "source-repository-digest": "769a53d8713248a8bf49edfc2a5d1955b0dcc24d",
         "source-repository-ref": "refs/heads/main",
         "source-repository-identifier": "495574555",
         "source-repository-owner-uri": "https://github.com/sigstore",
         "source-repository-owner-identifier": "71096353",
         "build-config-uri": "https://github.com/sigstore/sigstore-js/.github/workflows/release.yml@refs/heads/main",
-        "build-config-digest": "f0b49a04e5a62250e0f60fb128004a73110fe311",
+        "build-config-digest": "769a53d8713248a8bf49edfc2a5d1955b0dcc24d",
         "build-trigger": "push",
-        "run-invocation-uri": "https://github.com/sigstore/sigstore-js/actions/runs/5904696764/attempts/1",
-        "source-repository-visibility-at-signing": "public"
+        "run-invocation-uri": "https://github.com/sigstore/sigstore-js/actions/runs/30952660040/attempts/1",
+        "source-repository-visibility-at-signing": "public",
+        "token-subject": "repo:sigstore/sigstore-js:ref:refs/heads/main"
       }
     },
     {
