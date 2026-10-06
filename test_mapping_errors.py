@@ -5,60 +5,114 @@
 library-specific or unrelated exception types, even when RFC 5280 path
 validation accepts the chain."""
 
+from typing import Annotated
+
 import pytest
 from cryptography import x509
+from cryptography.hazmat import asn1
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ed25519
 
 from didx509.didx509 import check_did_x509, decode_certificate, resolve_did
-from test_san_othername import der_value, did_for, make_chain
+from test_san_othername import did_for, make_chain
 
 
-ED25519_ALGORITHM = bytes.fromhex("300506032b6570")
-FULCIO_ARC = bytes.fromhex("2b0601040183bf3001")
+# RFC 5280 section 4.1, with each CHOICE narrowed to the alternatives the test
+# chains use. cryptography's builder refuses duplicate extensions, so the
+# TBSCertificate is edited and re-signed through this model instead.
+@asn1.sequence
+class AlgorithmIdentifier:
+    algorithm: x509.ObjectIdentifier
+    parameters: x509.ObjectIdentifier | asn1.Null | None
 
 
-def read_tlv(data: bytes, offset: int = 0):
-    length = data[offset + 1]
-    offset += 2
-    if length & 0x80:
-        octets = length & 0x7F
-        length = int.from_bytes(data[offset : offset + octets], "big")
-        offset += octets
-    return data[offset : offset + length], offset + length
+@asn1.sequence
+class AttributeTypeAndValue:
+    type: x509.ObjectIdentifier
+    value: str | asn1.PrintableString | asn1.IA5String
 
 
-def split_tlvs(content: bytes):
-    tlvs, offset = [], 0
-    while offset < len(content):
-        _, end = read_tlv(content, offset)
-        tlvs.append(content[offset:end])
-        offset = end
-    return tlvs
+Name = list[asn1.SetOf[AttributeTypeAndValue]]
+Time = asn1.UTCTime | asn1.GeneralizedTime
 
 
-def fulcio_extension_der(suffix: int, value: bytes) -> bytes:
-    oid = der_value(0x06, FULCIO_ARC + bytes([suffix]))
-    return der_value(0x30, oid + der_value(0x04, der_value(0x0C, value)))
+@asn1.sequence
+class Validity:
+    not_before: Time
+    not_after: Time
 
 
-def append_extension(certificate, signing_key, extension_der: bytes):
-    """Re-sign a certificate with one more raw extension appended.
+@asn1.sequence
+class SubjectPublicKeyInfo:
+    algorithm: AlgorithmIdentifier
+    subject_public_key: asn1.BitString
 
-    cryptography's builder refuses duplicate extensions, so duplicates are
-    produced by editing the TBSCertificate directly.
-    """
-    certificate_body, _ = read_tlv(certificate.public_bytes(serialization.Encoding.DER))
-    tbs_body, _ = read_tlv(split_tlvs(certificate_body)[0])
-    elements = split_tlvs(tbs_body)
-    assert elements[-1][0] == 0xA3, "extensions must be the last TBS element"
-    extensions_body, _ = read_tlv(read_tlv(elements[-1])[0])
-    extensions = der_value(0xA3, der_value(0x30, extensions_body + extension_der))
-    tbs = der_value(0x30, b"".join(elements[:-1]) + extensions)
-    signature = der_value(0x03, b"\x00" + signing_key.sign(tbs))
-    return x509.load_der_x509_certificate(
-        der_value(0x30, tbs + ED25519_ALGORITHM + signature)
+
+@asn1.sequence
+class Extension:
+    extn_id: x509.ObjectIdentifier
+    critical: Annotated[bool, asn1.Default(False)] = False
+    extn_value: bytes
+
+
+@asn1.sequence
+class TBSCertificate:
+    version: Annotated[int, asn1.Explicit(0), asn1.Default(0)]
+    serial_number: int
+    signature: AlgorithmIdentifier
+    issuer: Name
+    validity: Validity
+    subject: Name
+    subject_public_key_info: SubjectPublicKeyInfo
+    issuer_unique_id: Annotated[asn1.BitString | None, asn1.Implicit(1)]
+    subject_unique_id: Annotated[asn1.BitString | None, asn1.Implicit(2)]
+    extensions: Annotated[list[Extension] | None, asn1.Explicit(3)]
+
+
+@asn1.sequence
+class Certificate:
+    tbs_certificate: TBSCertificate
+    signature_algorithm: AlgorithmIdentifier
+    signature_value: asn1.BitString
+
+
+# The two GeneralName alternatives cryptography does not support.
+@asn1.sequence
+class BuiltInStandardAttributes:
+    """Every component is OPTIONAL, so the empty SEQUENCE is a valid value."""
+
+
+@asn1.sequence
+class ORAddress:
+    built_in_standard_attributes: BuiltInStandardAttributes
+
+
+@asn1.sequence
+class EDIPartyName:
+    party_name: Annotated[str, asn1.Explicit(1)]
+
+
+@asn1.sequence
+class SubjectAltNameWithUnsupportedName:
+    """GeneralNames holding a dNSName and an unsupported name. A two-field
+    SEQUENCE encodes identically to the SEQUENCE OF, which the declarative API
+    cannot emit bare."""
+
+    dns_name: Annotated[asn1.IA5String, asn1.Implicit(2)]
+    unsupported: (
+        Annotated[ORAddress, asn1.Implicit(3)]
+        | Annotated[EDIPartyName, asn1.Implicit(5)]
     )
+
+
+def append_extension(certificate, signing_key, extension: Extension):
+    """Re-sign a certificate with one more extension appended."""
+    der = certificate.public_bytes(serialization.Encoding.DER)
+    decoded = asn1.decode_der(Certificate, der)
+    decoded.tbs_certificate.extensions.append(extension)
+    tbs = asn1.encode_der(decoded.tbs_certificate)
+    decoded.signature_value = asn1.BitString(data=signing_key.sign(tbs), padding_bits=0)
+    return x509.load_der_x509_certificate(asn1.encode_der(decoded))
 
 
 @pytest.fixture
@@ -68,25 +122,26 @@ def root_key():
 
 def test_appending_a_distinct_extension_keeps_the_chain_resolvable(root_key):
     issuer = x509.UnrecognizedExtension(
-        x509.ObjectIdentifier("1.3.6.1.4.1.57264.1.8"), der_value(0x0C, b"https://a")
+        x509.ObjectIdentifier("1.3.6.1.4.1.57264.1.8"), asn1.encode_der("https://a")
     )
     leaf, root = make_chain(extra_extensions=[(issuer, False)], root_key=root_key)
-    leaf = append_extension(leaf, root_key, fulcio_extension_der(24, b"alice"))
+    token_subject = Extension(
+        extn_id=x509.ObjectIdentifier("1.3.6.1.4.1.57264.1.24"),
+        extn_value=asn1.encode_der("alice"),
+    )
+    leaf = append_extension(leaf, root_key, token_subject)
     chain = [leaf, root]
     did = did_for(chain, "fulcio:issuer:https%3A%2F%2Fa::fulcio:token-subject:alice")
     assert resolve_did(did, chain)["id"] == did
 
 
-@pytest.mark.parametrize("suffix,value", [(1, b"https://a"), (8, b"https://a"), (24, b"alice")])
+@pytest.mark.parametrize("suffix,value", [(1, "https://a"), (8, "https://a"), (24, "alice")])
 def test_duplicate_extensions_fail_mapping_with_value_error(root_key, suffix, value):
     oid = f"1.3.6.1.4.1.57264.1.{suffix}"
-    payload = value if suffix == 1 else der_value(0x0C, value)
+    payload = value.encode() if suffix == 1 else asn1.encode_der(value)
     original = x509.UnrecognizedExtension(x509.ObjectIdentifier(oid), payload)
     leaf, root = make_chain(extra_extensions=[(original, False)], root_key=root_key)
-    duplicate = der_value(
-        0x30,
-        der_value(0x06, FULCIO_ARC + bytes([suffix])) + der_value(0x04, payload),
-    )
+    duplicate = Extension(extn_id=x509.ObjectIdentifier(oid), extn_value=payload)
     leaf = append_extension(leaf, root_key, duplicate)
     chain = [leaf, root]
     root.public_key().verify(leaf.signature, leaf.tbs_certificate_bytes)
@@ -106,14 +161,18 @@ def test_duplicate_extensions_fail_mapping_with_value_error(root_key, suffix, va
 
 
 @pytest.mark.parametrize("general_name", [
-    pytest.param(der_value(0xA3, der_value(0x30, b"")), id="x400Address"),
-    pytest.param(der_value(0xA5, der_value(0xA1, der_value(0x0C, b"party"))), id="ediPartyName"),
+    pytest.param(
+        ORAddress(built_in_standard_attributes=BuiltInStandardAttributes()), id="x400Address"
+    ),
+    pytest.param(EDIPartyName(party_name="party"), id="ediPartyName"),
 ])
 @pytest.mark.parametrize("critical", [False, True])
 def test_unsupported_general_name_types_fail_mapping_with_value_error(general_name, critical):
-    dns = der_value(0x82, b"example.com")
+    names = SubjectAltNameWithUnsupportedName(
+        dns_name=asn1.IA5String("example.com"), unsupported=general_name
+    )
     san = x509.UnrecognizedExtension(
-        x509.ExtensionOID.SUBJECT_ALTERNATIVE_NAME, der_value(0x30, dns + general_name)
+        x509.ExtensionOID.SUBJECT_ALTERNATIVE_NAME, asn1.encode_der(names)
     )
     chain = make_chain(extra_extensions=[(san, critical)])
     message = "Certificate contains an unsupported SAN type."

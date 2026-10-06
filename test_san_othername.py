@@ -4,9 +4,11 @@
 import ipaddress
 import json
 from datetime import datetime, timezone
+from typing import Annotated, Literal
 
 import pytest
 from cryptography import x509
+from cryptography.hazmat import asn1
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import ed25519
 
@@ -28,20 +30,8 @@ OTHERNAME_OID = "1.3.6.1.4.1.57264.1.7"
 IDENTITY = "alice!example.com"
 
 
-def der_value(tag: int, content: bytes) -> bytes:
-    length = len(content)
-    if length < 128:
-        encoded_length = bytes([length])
-    else:
-        octets = length.to_bytes((length.bit_length() + 7) // 8, "big")
-        encoded_length = bytes([0x80 | len(octets)]) + octets
-    return bytes([tag]) + encoded_length + content
-
-
 def othername(value: str, oid: str = OTHERNAME_OID) -> x509.OtherName:
-    return x509.OtherName(
-        x509.ObjectIdentifier(oid), der_value(0x0C, value.encode("utf-8"))
-    )
+    return x509.OtherName(x509.ObjectIdentifier(oid), asn1.encode_der(value))
 
 
 def san_extensions(names, critical=False):
@@ -188,7 +178,7 @@ INVALID_DER_PARAMS = [
          "byte-length-128"],
 )
 def test_der_utf8_string(value):
-    assert decode_der_utf8_string(der_value(0x0C, value.encode("utf-8"))) == value
+    assert decode_der_utf8_string(asn1.encode_der(value)) == value
 
 
 @pytest.mark.parametrize("encoded,message", INVALID_DER_PARAMS)
@@ -281,8 +271,8 @@ def test_registered_othername_resolves(critical, empty_subject):
 def test_othername_is_independent_of_standalone_fulcio_extensions(suffixes):
     values = {
         "1": b"https://issuer.example.com",
-        "8": der_value(0x0C, b"https://issuer.example.com"),
-        "24": der_value(0x0C, b"alice"),
+        "8": asn1.encode_der("https://issuer.example.com"),
+        "24": asn1.encode_der("alice"),
     }
     extensions = [
         (x509.UnrecognizedExtension(
@@ -305,7 +295,7 @@ def test_othername_is_independent_of_standalone_fulcio_extensions(suffixes):
 def test_standalone_extensions_cannot_supply_a_san_match(suffix, has_legacy_san):
     extension = x509.UnrecognizedExtension(
         x509.ObjectIdentifier(f"1.3.6.1.4.1.57264.1.{suffix}"),
-        der_value(0x0C, IDENTITY.encode()),
+        asn1.encode_der(IDENTITY),
     )
     chain = make_chain(
         [x509.DNSName("example.com")] if has_legacy_san else None,
@@ -407,16 +397,45 @@ def test_repeated_predicates_match_existentially_without_consuming_entries():
         check_did_x509(missing, chain)
 
 
-@pytest.mark.parametrize("bad_wrapper", [
-    der_value(0x0C, b"alice"),
-    der_value(0x80, der_value(0x0C, b"alice")),
-    der_value(0xA1, der_value(0x0C, b"alice")),
-    der_value(0xA0, der_value(0x0C, b"alice") + der_value(0x0C, b"bob")),
-])
-def test_cryptography_rejects_malformed_othername_explicit_wrappers(bad_wrapper):
+@asn1.sequence
+class TwoValues:
+    first: str
+    second: str
+
+
+@asn1.sequence
+class MalformedOtherName:
+    """OtherName whose value is not the single `[0] EXPLICIT` wrapper RFC 5280
+    requires; each CHOICE alternative is one way of getting the wrapper wrong."""
+
+    type_id: x509.ObjectIdentifier
+    value: (
+        asn1.Variant[str, Literal["no-wrapper"]]
+        | Annotated[asn1.Variant[str, Literal["implicit-wrapper"]], asn1.Implicit(0)]
+        | Annotated[asn1.Variant[str, Literal["wrong-tag-number"]], asn1.Explicit(1)]
+        | Annotated[asn1.Variant[TwoValues, Literal["two-values"]], asn1.Implicit(0)]
+    )
+
+
+@asn1.sequence
+class SubjectAltNameWithOtherName:
+    """GeneralNames holding a single otherName. A one-field SEQUENCE encodes
+    identically to the SEQUENCE OF, which the declarative API cannot emit bare."""
+
+    other_name: Annotated[MalformedOtherName, asn1.Implicit(0)]
+
+
+@pytest.mark.parametrize("value", [
+    asn1.Variant("alice", "no-wrapper"),
+    asn1.Variant("alice", "implicit-wrapper"),
+    asn1.Variant("alice", "wrong-tag-number"),
+    asn1.Variant(TwoValues(first="alice", second="bob"), "two-values"),
+], ids=lambda variant: variant.tag)
+def test_cryptography_rejects_malformed_othername_explicit_wrappers(value):
     # Raw SAN bytes keep malformed wrappers out of the typed builder's validation.
-    oid = b"\x06\x0a\x2b\x06\x01\x04\x01\x83\xbf\x30\x01\x07"
-    san = der_value(0x30, der_value(0xA0, oid + bad_wrapper))
+    san = asn1.encode_der(SubjectAltNameWithOtherName(
+        other_name=MalformedOtherName(type_id=x509.ObjectIdentifier(OTHERNAME_OID), value=value)
+    ))
     chain = make_chain(extra_extensions=[
         (x509.UnrecognizedExtension(x509.ExtensionOID.SUBJECT_ALTERNATIVE_NAME, san), False)
     ])
@@ -443,7 +462,7 @@ def test_duplicate_san_extensions_are_invalid_not_duplicate_entries():
 def test_othername_does_not_bypass_unknown_critical_extensions(suffix):
     extension = x509.UnrecognizedExtension(
         x509.ObjectIdentifier(f"1.3.6.1.4.1.57264.1.{suffix}"),
-        der_value(0x0C, b"issuer.example.com"),
+        asn1.encode_der("issuer.example.com"),
     )
     chain = make_chain([othername(IDENTITY)], critical=True, extra_extensions=[(extension, True)])
     did = did_for(chain, f"san:othername:{OTHERNAME_OID}:{pctencode(IDENTITY)}")
