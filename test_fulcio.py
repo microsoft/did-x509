@@ -6,6 +6,7 @@ from pathlib import Path
 
 import pytest
 from cryptography import x509
+from cryptography.hazmat import asn1
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import ed25519
 
@@ -25,7 +26,6 @@ from didx509.didx509 import (
 from test_san_othername import (
     INVALID_DER_PARAMS,
     OTHERNAME_OID,
-    der_value,
     did_for,
     make_chain,
     othername,
@@ -52,9 +52,7 @@ def raw_extension(oid, payload, critical=False):
 
 
 def fulcio_extension(field, value, critical=False):
-    return raw_extension(
-        FIELD_OIDS[field], der_value(0x0C, value.encode("utf-8")), critical
-    )
+    return raw_extension(FIELD_OIDS[field], asn1.encode_der(value), critical)
 
 
 def legacy_extension(value=LEGACY_ISSUER, critical=False):
@@ -310,7 +308,7 @@ def test_legacy_and_v2_are_independent_without_fallback_or_agreement(legacy, v2,
 
 
 def test_legacy_payload_remains_raw_utf8_not_der():
-    payload = der_value(0x0C, LEGACY_ISSUER.encode())
+    payload = asn1.encode_der(LEGACY_ISSUER)
     chain = make_chain(extra_extensions=[
         raw_extension(FULCIO_ISSUER_OID, payload), fulcio_extension("issuer", V2_ISSUER),
     ])
@@ -388,7 +386,7 @@ def test_strict_der_fails_eagerly_even_for_unselected_extensions(
 @pytest.mark.parametrize("field", FIELD_OIDS)
 def test_every_registered_extension_uses_the_strict_der_decoder(field):
     chain = make_chain(extra_extensions=[
-        raw_extension(FIELD_OIDS[field], der_value(0x16, b"opaque"))
+        raw_extension(FIELD_OIDS[field], asn1.encode_der(asn1.IA5String("opaque")))
     ])
     with pytest.raises(ValueError, match="not a primitive DER UTF8String"):
         decode_certificate(chain[0])
@@ -418,7 +416,7 @@ def test_empty_and_long_der_strings_are_preserved_without_wildcards(value):
 def test_every_critical_custom_extension_fails_mapping_and_path_validation(oid):
     payload = (
         LEGACY_ISSUER.encode() if oid == FULCIO_ISSUER_OID
-        else der_value(0x0C, b"opaque")
+        else asn1.encode_der("opaque")
     )
     chain = make_chain(extra_extensions=[raw_extension(oid, payload, True)])
     with pytest.raises(ValueError, match="Certificate contains a critical Fulcio extension"):
