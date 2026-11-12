@@ -4694,6 +4694,53 @@
     }
   },
   {
+    "id": "fulcio-selector-duplicate-legacy-issuer-selected",
+    "input": {
+      "did": "did:x509:0:sha256:mGtYWJJT3N3iKYz3OY-wvScd4WTtWXNL6nfi8rEQCsY::fulcio-issuer:legacy.example.com",
+      "chain": [
+        "MIIBkjCCAUSgAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQDz07-S0ntUW71r3a0W64CtB8BqDO0ZPDGO8qaN_MSiGqOBtTCBsjAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQUY6sbSIigUBfUzP-KXIYqSOnR9acwHwYDVR0jBBgwFoAUMLFE0EhkY9Utmy4giVDStR6gDQ0wKAYKKwYBBAGDvzABAQQaaHR0cHM6Ly9sZWdhY3kuZXhhbXBsZS5jb20wKAYKKwYBBAGDvzABAQQaaHR0cHM6Ly9sZWdhY3kuZXhhbXBsZS5jb20wBQYDK2VwA0EAGgjv_Facqlw-40oglQMZSSf2k5WmMGJdD9cRHa6rveuMpZtoV2hHKe5bdZuFNqkMsnkFCWzHRvzuy10Hjw4KCw",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQDpla7NHju18tKrsAWi8qJ4TE384J9NxguKOtmMU9e9X6NjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFDCxRNBIZGPVLZsuIIlQ0rUeoA0NMB8GA1UdIwQYMBaAFDCxRNBIZGPVLZsuIIlQ0rUeoA0NMAUGAytlcANBAG6HS-5xYhCVJBD2ZqXdCAE6suze4mz2QMEfXZ2ZDuYEzEjuQXwZciestojTfFyNxIpTW2QGpG45kOn5ts-qgwY"
+      ]
+    },
+    "output": {
+      "error": "Certificate contains a duplicate 1.3.6.1.4.1.57264.1.1 extension."
+    }
+  },
+  {
+    "id": "fulcio-selector-selected-field-malformed-on-root-is-ignored",
+    "input": {
+      "did": "did:x509:0:sha256:94-OIXq0Ahnna3tcVTD0VdLoIM-JxXq2ApGztFf3A7o::fulcio:issuer:https%3A%2F%2Fv2.example.com",
+      "chain": [
+        "MIIBZjCCARigAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQDvDD-Z0VbaLt49gSpvdona57xT0B0ES0XKEA_Fqy_TxqOBiTCBhjAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQUfQIRmcsiWkyU6Gmr3srI6to8Rr4wHwYDVR0jBBgwFoAUOglxd2gAi3VDoY8Vblx0FebRplMwJgYKKwYBBAGDvzABCAQYDBZodHRwczovL3YyLmV4YW1wbGUuY29tMAUGAytlcANBAJfha_Atzxlq7oQk6Um_j6cJ17JzBF1fr3fH0Stas98XkTAsepRC5V8ujB-bc_oyFklEgw4n5ZJQUH_AKds_SQg",
+        "MIIBYTCCAROgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQBxNSFhaxm-O9j8znVfm3b-kPRKrlxE70upJp3lpKy9HKN2MHQwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFDoJcXdoAIt1Q6GPFW5cdBXm0aZTMB8GA1UdIwQYMBaAFDoJcXdoAIt1Q6GPFW5cdBXm0aZTMBEGCisGAQQBg78wAQgEAwwB_zAFBgMrZXADQQAVewK_gp8mNN7_1s-HacCXTrRNeyuILucNL5cn5XQ8oFRtr66kjtRiJsnWe77lGSpaxl-Jrcybh2ujAFc2NaQN"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:94-OIXq0Ahnna3tcVTD0VdLoIM-JxXq2ApGztFf3A7o::fulcio:issuer:https%3A%2F%2Fv2.example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:94-OIXq0Ahnna3tcVTD0VdLoIM-JxXq2ApGztFf3A7o::fulcio:issuer:https%3A%2F%2Fv2.example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:94-OIXq0Ahnna3tcVTD0VdLoIM-JxXq2ApGztFf3A7o::fulcio:issuer:https%3A%2F%2Fv2.example.com",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "7ww_mdFW2i7ePYEqb3aJ2ue8U9AdBEtFyhAPxasv08Y"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:94-OIXq0Ahnna3tcVTD0VdLoIM-JxXq2ApGztFf3A7o::fulcio:issuer:https%3A%2F%2Fv2.example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:94-OIXq0Ahnna3tcVTD0VdLoIM-JxXq2ApGztFf3A7o::fulcio:issuer:https%3A%2F%2Fv2.example.com#0"
+        ]
+      }
+    }
+  },
+  {
     "id": "fulcio-selector-critical-issuer-selected",
     "input": {
       "did": "did:x509:0:sha256:IpJI3ics2hvya8E-I8pqhJM2MnsSHRW_2l9ckOb7kMs::fulcio:issuer:opaque",

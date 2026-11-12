@@ -386,7 +386,8 @@ Standalone Fulcio extensions MUST NOT be critical: the critical-extension check
 in step 2 of [DID Resolution](#did-resolution) rejects a critical one on any
 certificate of the chain, whether or not it is selected.
 
-Map present values to the corresponding keys in `extensions.fulcio`; do not
+Map selected values that are present to the corresponding keys in
+`extensions.fulcio`; do not
 require any other registry field to be present. Missing requested fields fail.
 An empty DER UTF8String is retained as an empty JSON string but cannot match a
 nonempty predicate, and neither empty nor absent values are wildcards. Do not
