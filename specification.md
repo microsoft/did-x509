@@ -295,7 +295,7 @@ fulcio-issuer      = 1*idchar
 leading `https://`, percent-encoded. Matching decodes the value once, prepends
 `https://`, and compares exactly. Issuer V2 (`.8`) never supplies this value.
 
-The `fulcio_issuer` extension MUST be present on `chain[0]` when this predicate is used; resolution fails if it is absent, if `chain[0]` contains it more than once, or if its payload is not valid UTF-8. The extension MUST NOT be marked critical. Without this predicate the extension is not decoded: see [Selection of standalone Fulcio extensions](#selection-of-standalone-fulcio-extensions).
+The `fulcio_issuer` extension MUST be present on `chain[0]` when this predicate is used; resolution fails if it is absent. The extension MUST NOT be marked critical.
 
 Example:
 
@@ -375,19 +375,20 @@ encoding, scalar DID encoding, and exact comparison:
 | `1.3.6.1.4.1.57264.1.24` | `token-subject` |
 
 Use the same strict DER UTF8String decoder as for the registered `.7` OtherName
-inner value, without sharing or expanding its OID registry. Decode a registered
-standalone extension only when a predicate selects it, and only on `chain[0]`
-(see [Selection of standalone Fulcio extensions](#selection-of-standalone-fulcio-extensions)).
-In a selected extension, wrong tags or classes, constructed strings, raw UTF-8
-instead of DER, indefinite or nonminimal lengths, truncated values, trailing
-bytes, and invalid UTF-8 cause mapping and resolution to fail. Do not replace
-invalid characters or accept historical malformed `.8` encodings.
-Standalone Fulcio extensions MUST NOT be critical: the critical-extension check
-in step 2 of [DID Resolution](#did-resolution) rejects a critical one on any
-certificate of the chain, whether or not it is selected.
+inner value, without sharing or expanding its OID registry. Decode a standalone
+Fulcio extension, `.1` included, only when a predicate selects it, and only on
+`chain[0]`: `fulcio-issuer` selects `.1`, and `fulcio:<field>` selects the
+extension registered for `<field>`. Resolution fails if a selected extension is
+absent, repeated, or malformed. Those not selected, and those of other
+certificates, MUST NOT cause resolution to fail because of their payload, and
+need not be checked for repeats. Wrong tags or classes, constructed strings,
+raw UTF-8 instead of DER, indefinite or nonminimal lengths, truncated values,
+trailing bytes, and invalid UTF-8 cause mapping and resolution to fail. Do not
+replace invalid characters or accept historical malformed `.8` encodings.
+Standalone Fulcio extensions MUST NOT be critical; both JSON conversion and
+resolution reject their critical forms, without bypassing path validation.
 
-Map selected values that are present to the corresponding keys in
-`extensions.fulcio`; do not
+Map decoded values to the corresponding keys in `extensions.fulcio`; do not
 require any other registry field to be present. Missing requested fields fail.
 An empty DER UTF8String is retained as an empty JSON string but cannot match a
 nonempty predicate, and neither empty nor absent values are wildcards. Do not
@@ -451,35 +452,6 @@ validate_predicate(name, value) := true if {
 }
 ```
 
-#### Selection of standalone Fulcio extensions
-
-A predicate selects at most one standalone Fulcio extension, and only on the
-leaf certificate `chain[0]`: `fulcio-issuer` selects `.1`, and `fulcio:<field>`
-selects the `.8`-`.24` extension registered for `<field>`. No other predicate
-selects a standalone Fulcio extension.
-
-For each selected extension, a resolver MUST fail if `chain[0]` does not contain
-it, contains it more than once, or contains it with a payload that is malformed
-according to the rules above.
-
-A standalone Fulcio extension that no predicate of the DID selects, and any
-standalone Fulcio extension of a certificate other than `chain[0]`, is not
-decoded. Its payload MUST NOT cause resolution to fail, however malformed. In
-particular, a DID with neither a `fulcio-issuer` nor a `fulcio` predicate is
-resolved without examining the payload of any standalone Fulcio extension. For
-path validation these are unrecognized extensions, which
-[RFC 5280 Section 4.2](https://www.rfc-editor.org/rfc/rfc5280#section-4.2)
-allows a certificate-using system to ignore when they are not critical. A
-critical one is still rejected, as described in step 2 of
-[DID Resolution](#did-resolution).
-
-RFC 5280 Section 4.2 also forbids a certificate from including more than one
-instance of an extension. A resolver is required to detect that only for a
-selected extension on `chain[0]`. It is not required to look for repeated
-standalone Fulcio extensions that are not selected, or on other certificates.
-Such a certificate is not valid X.509 and some X.509 libraries refuse to parse
-it, so this document does not specify whether its resolution succeeds.
-
 #### Explicit issuer migration
 
 `fulcio:issuer` selects only `.8` and compares its full decoded issuer string,
@@ -496,9 +468,7 @@ Migration explicitly changes the DID: replace
 identity. The DID Document uses the selected DID unchanged; it is not a
 canonicalized alias of the legacy DID. This is an additive method-version-`0`
 predicate; older resolvers MUST reject unsupported new predicates. Existing
-predicate meanings are unchanged: a DID that uses only existing predicates does
-not select any `.8`-`.24` extension, so those extensions do not affect its
-resolution unless they are critical.
+predicate meanings are unchanged.
 
 ## Verifiable Data Registry and Trust Model
 
@@ -529,8 +499,8 @@ Each certificate object can contain:
 | `subject` | X.509 subject name, represented as an object of name attributes. |
 | `extensions.eku` | Extended Key Usage OIDs from RFC 5280 Section 4.2.1.12. |
 | `extensions.san` | Subject Alternative Name entries from RFC 5280 Section 4.2.1.6. |
-| `extensions.fulcio_issuer` | The legacy `.1` standalone issuer, decoded as raw UTF-8, when selected. |
-| `extensions.fulcio` | Selected `.8`-`.24` standalone fields that are present, keyed by the registered literal names, decoded from strict DER UTF8Strings. |
+| `extensions.fulcio_issuer` | The legacy `.1` standalone issuer, decoded as raw UTF-8. |
+| `extensions.fulcio` | Present `.8`-`.24` standalone fields keyed by the registered literal names, decoded from strict DER UTF8Strings. |
 
 Name objects use the RFC 4514 labels `CN`, `L`, `ST`, `O`, `OU`, `C`, and `STREET` for common attributes. Other attributes use dotted OID strings as keys. Repeated attributes are not supported. Values are converted to UTF-8 strings.
 
@@ -548,14 +518,7 @@ Preserve every well-formed entry in order, including identical duplicates and di
 
 The `extensions.fulcio` group is additive. Keep `extensions.fulcio_issuer`
 separate and omit groups and fields that are absent; do not fill in default
-values. Standalone Fulcio fields are mapped on demand: for resolution, the model
-contains only the fields of `chain[0]` that a predicate of the DID
-[selects](#selection-of-standalone-fulcio-extensions). Fields that are not
-selected, and those of the other certificates, are omitted without being
-decoded; the Rego policy does not read them. A tool that maps a chain outside
-resolution has no DID to select fields. It can map every registered field of
-every certificate, as in the example below, and report the ones it cannot
-decode.
+values.
 
 Example certificate chain model:
 
@@ -710,10 +673,8 @@ list, even though they are represented in the JSON model. Fulcio does not mark
 them critical; for example, a [dump of a Fulcio-issued certificate shows the
 legacy issuer's `critical` field as `BOOL ABSENT`](https://github.com/sigstore/gitsign/blob/44f5e17fac6944fdde71c94d2e77ab075c9dca9f/docs/timestamp.md#L102-L107).
 Issuers MUST NOT mark them critical: they are unrecognized extensions for RFC
-5280 path validation. This step therefore rejects a critical standalone Fulcio
-extension on any certificate of the chain, whether or not a predicate selects
-it, and without decoding it. Those that are not critical are examined only in
-step 5, and only when selected.
+5280 path validation. JSON mapping also rejects critical standalone Fulcio
+extensions, even when their fields are not selected.
 
 Instead of using the current time as specified in [Section 6.1.3 of RFC 5280](https://www.rfc-editor.org/info/rfc5280/#section-6.1.3) when validating the chain, applications may choose a context-relevant point in time. For example, applications handling signed documents may choose to use the signing time instead, which might come from a CWT `iat` claim ([RFC 8392](https://www.rfc-editor.org/rfc/rfc8392)) or JWT `iat` claim ([RFC 7519](https://www.rfc-editor.org/rfc/rfc7519)). Such a claim is not trusted time by itself and needs to be integrity protected and accepted by application policy.
 
@@ -721,7 +682,7 @@ Instead of using the current time as specified in [Section 6.1.3 of RFC 5280](ht
 
 4. Apply any further application-specific checks, for example disallowing insecure certificate signature algorithms.
 
-5. Map the certificate chain to the JSON model. Decode only the standalone Fulcio extensions of the leaf certificate that the predicates of `<DID>` [select](#selection-of-standalone-fulcio-extensions).
+5. Map the certificate chain to the JSON model.
 
 6. Check whether the DID is valid against the certificate chain in the JSON model according to the Rego policy or equivalent rules defined in this document.
 
