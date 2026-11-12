@@ -379,12 +379,11 @@ inner value, without sharing or expanding its OID registry. Decode a standalone
 Fulcio extension, `.1` included, only when a predicate selects it, and only on
 `chain[0]`: `fulcio-issuer` selects `.1`, and `fulcio:<field>` selects the
 extension registered for `<field>`. Resolution fails if a selected extension is
-absent, repeated, or malformed. Those not selected, and those of other
-certificates, MUST NOT cause resolution to fail because of their payload, and
-need not be checked for repeats. Wrong tags or classes, constructed strings,
-raw UTF-8 instead of DER, indefinite or nonminimal lengths, truncated values,
-trailing bytes, and invalid UTF-8 cause mapping and resolution to fail. Do not
-replace invalid characters or accept historical malformed `.8` encodings.
+absent, repeated, or malformed. A DER UTF8String value is malformed if it has
+a wrong tag or class, is constructed, is raw UTF-8 instead of DER, has an
+indefinite or nonminimal length, is truncated, has trailing bytes, or contains
+invalid UTF-8. Do not replace invalid characters or accept historical malformed
+`.8` encodings.
 Standalone Fulcio extensions MUST NOT be critical; both JSON conversion and
 resolution reject their critical forms, without bypassing path validation.
 

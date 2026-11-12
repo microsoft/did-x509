@@ -85,10 +85,8 @@ so pair them with `fulcio:issuer` as above; the legacy `fulcio-issuer` selects
 Resolution decodes a standalone Fulcio extension only when a predicate selects
 it, and only on the leaf certificate: `fulcio-issuer` selects `.1` and
 `fulcio:<field>` selects the extension registered for that field. A selected
-extension that is malformed or repeated fails. Extensions that are not selected,
-and those of CA certificates, are not decoded, so a malformed one does not
-affect a DID that does not select it. Critical standalone Fulcio extensions fail
-on any certificate, selected or not.
+extension that is malformed or repeated fails. Critical standalone Fulcio
+extensions fail on any certificate, selected or not.
 
 `convert` has no DID, so it maps every present field of every certificate to
 `extensions.fulcio` and fails on a malformed one. The X.509 library used here
