@@ -500,7 +500,7 @@ Each certificate object can contain:
 | `extensions.eku` | Extended Key Usage OIDs from RFC 5280 Section 4.2.1.12. |
 | `extensions.san` | Subject Alternative Name entries from RFC 5280 Section 4.2.1.6. |
 | `extensions.fulcio_issuer` | The legacy `.1` standalone issuer, decoded as raw UTF-8. |
-| `extensions.fulcio` | Present `.8`-`.24` standalone fields keyed by the registered literal names, decoded from strict DER UTF8Strings. |
+| `extensions.fulcio` | Decoded `.8`-`.24` standalone fields keyed by the registered literal names, decoded from strict DER UTF8Strings. |
 
 Name objects use the RFC 4514 labels `CN`, `L`, `ST`, `O`, `OU`, `C`, and `STREET` for common attributes. Other attributes use dotted OID strings as keys. Repeated attributes are not supported. Values are converted to UTF-8 strings.
 
