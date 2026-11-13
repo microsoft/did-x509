@@ -150,6 +150,8 @@ def test_duplicate_extensions_fail_mapping_with_value_error(root_key, suffix, va
     with pytest.raises(ValueError) as error:
         decode_certificate(leaf)
     assert str(error.value) == message
+    # The specification requires this failure only for a selected extension.
+    # cryptography rejects a duplicate of any extension, so the others fail too.
     for predicate in ["subject:CN:Leaf", "fulcio-issuer:a", "fulcio:issuer:https%3A%2F%2Fa"]:
         with pytest.raises(ValueError) as error:
             check_did_x509(did_for(chain, predicate), chain)

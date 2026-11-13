@@ -375,16 +375,19 @@ encoding, scalar DID encoding, and exact comparison:
 | `1.3.6.1.4.1.57264.1.24` | `token-subject` |
 
 Use the same strict DER UTF8String decoder as for the registered `.7` OtherName
-inner value, without sharing or expanding its OID registry. Decode every
-registered standalone extension eagerly when present on any certificate in the
-chain, even when it is not selected. Wrong tags or classes, constructed strings,
-raw UTF-8 instead of DER, indefinite or nonminimal lengths, truncated values,
-trailing bytes, and invalid UTF-8 cause mapping and resolution to fail. Do not
-replace invalid characters or accept historical malformed `.8` encodings.
+inner value, without sharing or expanding its OID registry. Decode a standalone
+Fulcio extension, `.1` included, only when a predicate selects it, and only on
+`chain[0]`: `fulcio-issuer` selects `.1`, and `fulcio:<field>` selects the
+extension registered for `<field>`. Resolution fails if a selected extension is
+absent, repeated, or malformed. A DER UTF8String value is malformed if it has
+a wrong tag or class, is constructed, is raw UTF-8 instead of DER, has an
+indefinite or nonminimal length, is truncated, has trailing bytes, or contains
+invalid UTF-8. Do not replace invalid characters or accept historical malformed
+`.8` encodings.
 Standalone Fulcio extensions MUST NOT be critical; both JSON conversion and
 resolution reject their critical forms, without bypassing path validation.
 
-Map present values to the corresponding keys in `extensions.fulcio`; do not
+Map decoded values to the corresponding keys in `extensions.fulcio`; do not
 require any other registry field to be present. Missing requested fields fail.
 An empty DER UTF8String is retained as an empty JSON string but cannot match a
 nonempty predicate, and neither empty nor absent values are wildcards. Do not
@@ -464,8 +467,7 @@ Migration explicitly changes the DID: replace
 identity. The DID Document uses the selected DID unchanged; it is not a
 canonicalized alias of the legacy DID. This is an additive method-version-`0`
 predicate; older resolvers MUST reject unsupported new predicates. Existing
-predicate meanings are unchanged, but previously ignored malformed registered
-standalone extensions now fail eagerly, even for an existing predicate.
+predicate meanings are unchanged.
 
 ## Verifiable Data Registry and Trust Model
 
@@ -497,7 +499,7 @@ Each certificate object can contain:
 | `extensions.eku` | Extended Key Usage OIDs from RFC 5280 Section 4.2.1.12. |
 | `extensions.san` | Subject Alternative Name entries from RFC 5280 Section 4.2.1.6. |
 | `extensions.fulcio_issuer` | The legacy `.1` standalone issuer, decoded as raw UTF-8. |
-| `extensions.fulcio` | Present `.8`-`.24` standalone fields keyed by the registered literal names, decoded from strict DER UTF8Strings. |
+| `extensions.fulcio` | Selected `.8`-`.24` standalone fields keyed by the registered literal names, decoded from strict DER UTF8Strings. |
 
 Name objects use the RFC 4514 labels `CN`, `L`, `ST`, `O`, `OU`, `C`, and `STREET` for common attributes. Other attributes use dotted OID strings as keys. Repeated attributes are not supported. Values are converted to UTF-8 strings.
 
@@ -515,8 +517,7 @@ Preserve every well-formed entry in order, including identical duplicates and di
 
 The `extensions.fulcio` group is additive. Keep `extensions.fulcio_issuer`
 separate and omit groups and fields that are absent; do not fill in default
-values. All registered Fulcio fields are decoded eagerly as specified above.
-Duplicate standalone extensions remain invalid X.509.
+values.
 
 Example certificate chain model:
 

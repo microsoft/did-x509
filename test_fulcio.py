@@ -19,6 +19,7 @@ from didx509.didx509 import (
     cli_convert,
     cli_resolve,
     decode_certificate,
+    decode_chain,
     load_certificate_chain,
     pctencode,
     resolve_did,
@@ -321,14 +322,52 @@ def test_legacy_payload_remains_raw_utf8_not_der():
         resolve_did(did_for(chain, "fulcio-issuer:legacy.example.com"), chain)
 
 
-def test_legacy_invalid_utf8_still_fails_eagerly():
+def test_legacy_invalid_utf8_fails_only_when_selected():
     chain = make_chain(extra_extensions=[
         raw_extension(FULCIO_ISSUER_OID, b"\xff"), fulcio_extension("issuer", V2_ISSUER),
     ])
-    with pytest.raises(ValueError, match="utf-8"):
+    message = "Fulcio issuer extension is not valid UTF-8."
+    with pytest.raises(ValueError) as error:
         decode_certificate(chain[0])
-    with pytest.raises(ValueError, match="utf-8"):
-        resolve_did(did_for(chain, selector("issuer", V2_ISSUER)), chain)
+    assert str(error.value) == message
+    for predicate in [
+        "fulcio-issuer:legacy.example.com",
+        "subject:CN:Leaf::fulcio-issuer:legacy.example.com",
+        selector("issuer", V2_ISSUER) + "::fulcio-issuer:legacy.example.com",
+    ]:
+        with pytest.raises(ValueError) as error:
+            resolve_did(did_for(chain, predicate), chain)
+        assert str(error.value) == message
+    for predicate in ["subject:CN:Leaf", selector("issuer", V2_ISSUER)]:
+        did = did_for(chain, predicate)
+        assert resolve_did(did, chain)["id"] == did
+
+
+def test_resolution_maps_only_selected_fields_of_the_leaf():
+    fields = {"issuer": V2_ISSUER, "token-subject": "alice"}
+    extensions = [legacy_extension()] + [
+        fulcio_extension(field, value) for field, value in fields.items()
+    ]
+    chain = make_chain(extra_extensions=extensions, root_extensions=extensions)
+    full = {"fulcio_issuer": LEGACY_ISSUER, "fulcio": fields}
+    assert [
+        {key: cert["extensions"].get(key) for key in full}
+        for cert in decode_chain(chain)
+    ] == [full, full]
+    for predicate, expected in [
+        ("subject:CN:Leaf", {}),
+        ("fulcio-issuer:legacy.example.com", {"fulcio_issuer": LEGACY_ISSUER}),
+        (selector("issuer", V2_ISSUER), {"fulcio": {"issuer": V2_ISSUER}}),
+        (
+            "fulcio-issuer:legacy.example.com::fulcio:token-subject:alice",
+            {"fulcio_issuer": LEGACY_ISSUER, "fulcio": {"token-subject": "alice"}},
+        ),
+    ]:
+        leaf, root = decode_chain(chain, did_for(chain, predicate))
+        assert {
+            key: value for key, value in leaf["extensions"].items() if key in full
+        } == expected
+        assert not set(full) & set(root["extensions"])
 
 
 @pytest.mark.parametrize("reverse", [False, True])
@@ -358,29 +397,46 @@ def test_all_fields_mapping_and_matching_are_extension_order_independent(reverse
 @pytest.mark.parametrize("encoded,message", INVALID_DER_PARAMS)
 @pytest.mark.parametrize("field", ["issuer", "token-subject"])
 @pytest.mark.parametrize("location", ["leaf", "root"])
-def test_strict_der_fails_eagerly_even_for_unselected_extensions(
+def test_strict_der_fails_only_for_selected_leaf_extensions(
     encoded, message, field, location
 ):
     bad = raw_extension(FIELD_OIDS[field], encoded)
-    leaf_extensions = [
-        legacy_extension(), fulcio_extension("runner-environment", "opaque")
-    ]
+    # A malformed root extension leaves the same field usable on the leaf.
+    leaf_field = bad if location == "leaf" else fulcio_extension(field, "opaque")
     chain = make_chain(
         [othername("alice!example.com")],
-        extra_extensions=leaf_extensions + ([bad] if location == "leaf" else []),
+        extra_extensions=[
+            legacy_extension(),
+            fulcio_extension("runner-environment", "opaque"),
+            leaf_field,
+        ],
         root_extensions=[bad] if location == "root" else [],
     )
+    # Mapping without a DID decodes every registered extension.
     with pytest.raises(ValueError) as error:
         decode_certificate(chain[0] if location == "leaf" else chain[-1])
     assert str(error.value) == message
-    for predicate in [
-        selector(field, "opaque"), "subject:CN:Leaf",
-        "fulcio-issuer:legacy.example.com", "fulcio:runner-environment:opaque",
+
+    unselected = [
+        "subject:CN:Leaf", "fulcio-issuer:legacy.example.com",
+        "fulcio:runner-environment:opaque",
         f"san:othername:{OTHERNAME_OID}:alice%21example.com",
+    ]
+    for predicate in unselected + ["::".join(unselected)]:
+        did = did_for(chain, predicate)
+        assert resolve_did(did, chain)["id"] == did
+
+    for predicate in [
+        selector(field, "opaque"),
+        "::".join(unselected + [selector(field, "opaque")]),
     ]:
-        with pytest.raises(ValueError) as error:
-            resolve_did(did_for(chain, predicate), chain)
-        assert str(error.value) == message
+        did = did_for(chain, predicate)
+        if location == "root":
+            assert resolve_did(did, chain)["id"] == did
+        else:
+            with pytest.raises(ValueError) as error:
+                resolve_did(did, chain)
+            assert str(error.value) == message
 
 
 @pytest.mark.parametrize("field", FIELD_OIDS)
@@ -391,7 +447,9 @@ def test_every_registered_extension_uses_the_strict_der_decoder(field):
     with pytest.raises(ValueError, match="not a primitive DER UTF8String"):
         decode_certificate(chain[0])
     with pytest.raises(ValueError, match="not a primitive DER UTF8String"):
-        resolve_did(did_for(chain, "subject:CN:Leaf"), chain)
+        resolve_did(did_for(chain, selector(field, "opaque")), chain)
+    did = did_for(chain, "subject:CN:Leaf")
+    assert resolve_did(did, chain)["id"] == did
 
 
 @pytest.mark.parametrize("value", [

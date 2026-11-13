@@ -4144,7 +4144,28 @@
       ]
     },
     "output": {
-      "error": "Value is not a primitive DER UTF8String."
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:nKJ1g-SnMlz2xM8v_B3COKsyHGK5SswjWgBlymk4TgI::fulcio-issuer:legacy.example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:nKJ1g-SnMlz2xM8v_B3COKsyHGK5SswjWgBlymk4TgI::fulcio-issuer:legacy.example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:nKJ1g-SnMlz2xM8v_B3COKsyHGK5SswjWgBlymk4TgI::fulcio-issuer:legacy.example.com",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "LPdBTdM5Dl2VYv2zD7v_fsWjcT8aki94VKhqXptPiBI"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:nKJ1g-SnMlz2xM8v_B3COKsyHGK5SswjWgBlymk4TgI::fulcio-issuer:legacy.example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:nKJ1g-SnMlz2xM8v_B3COKsyHGK5SswjWgBlymk4TgI::fulcio-issuer:legacy.example.com#0"
+        ]
+      }
     }
   },
   {
@@ -4170,7 +4191,28 @@
       ]
     },
     "output": {
-      "error": "Value is not a primitive DER UTF8String."
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:pVa_3g-yUuu2BSGWM_UeuaJgl64aLRAJTzwY5feW1JQ::fulcio-issuer:legacy.example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:pVa_3g-yUuu2BSGWM_UeuaJgl64aLRAJTzwY5feW1JQ::fulcio-issuer:legacy.example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:pVa_3g-yUuu2BSGWM_UeuaJgl64aLRAJTzwY5feW1JQ::fulcio-issuer:legacy.example.com",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "L-SMDxlq9AHKOlJ3Oz0wafvqjuCJFj2gUQ-Nqvoh7gY"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:pVa_3g-yUuu2BSGWM_UeuaJgl64aLRAJTzwY5feW1JQ::fulcio-issuer:legacy.example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:pVa_3g-yUuu2BSGWM_UeuaJgl64aLRAJTzwY5feW1JQ::fulcio-issuer:legacy.example.com#0"
+        ]
+      }
     }
   },
   {
@@ -4196,7 +4238,28 @@
       ]
     },
     "output": {
-      "error": "Value is not a primitive DER UTF8String."
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:7KUnOfK0gOZBr1mqNviXsXeoc1Ltc155xP2uIVDYPAg::fulcio-issuer:legacy.example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:7KUnOfK0gOZBr1mqNviXsXeoc1Ltc155xP2uIVDYPAg::fulcio-issuer:legacy.example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:7KUnOfK0gOZBr1mqNviXsXeoc1Ltc155xP2uIVDYPAg::fulcio-issuer:legacy.example.com",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "o9I1Q_67en4kqsA2m-4CrQgCp0tyvH1xTOfKoQDSxuQ"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:7KUnOfK0gOZBr1mqNviXsXeoc1Ltc155xP2uIVDYPAg::fulcio-issuer:legacy.example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:7KUnOfK0gOZBr1mqNviXsXeoc1Ltc155xP2uIVDYPAg::fulcio-issuer:legacy.example.com#0"
+        ]
+      }
     }
   },
   {
@@ -4222,7 +4285,28 @@
       ]
     },
     "output": {
-      "error": "DER UTF8String length is not definite."
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:9k2ukp1Tw7aDQLYAfCC2Ajw4Omx8dQRA3Lckj3KjkvM::fulcio-issuer:legacy.example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:9k2ukp1Tw7aDQLYAfCC2Ajw4Omx8dQRA3Lckj3KjkvM::fulcio-issuer:legacy.example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:9k2ukp1Tw7aDQLYAfCC2Ajw4Omx8dQRA3Lckj3KjkvM::fulcio-issuer:legacy.example.com",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "JQ9r4cQt2qc_OwNBQ7udwOIwTTdf2PLquQizbSYw-hQ"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:9k2ukp1Tw7aDQLYAfCC2Ajw4Omx8dQRA3Lckj3KjkvM::fulcio-issuer:legacy.example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:9k2ukp1Tw7aDQLYAfCC2Ajw4Omx8dQRA3Lckj3KjkvM::fulcio-issuer:legacy.example.com#0"
+        ]
+      }
     }
   },
   {
@@ -4248,7 +4332,28 @@
       ]
     },
     "output": {
-      "error": "DER UTF8String length is not minimal."
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:8M4jNsbPJ2eXQHPjzQtZYEZPRMkfeFX7edzRV-zMrJY::fulcio-issuer:legacy.example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:8M4jNsbPJ2eXQHPjzQtZYEZPRMkfeFX7edzRV-zMrJY::fulcio-issuer:legacy.example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:8M4jNsbPJ2eXQHPjzQtZYEZPRMkfeFX7edzRV-zMrJY::fulcio-issuer:legacy.example.com",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "7vI6hChmhTo0o3t0eb3KNroimdOn0S0meAM0Yzd631k"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:8M4jNsbPJ2eXQHPjzQtZYEZPRMkfeFX7edzRV-zMrJY::fulcio-issuer:legacy.example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:8M4jNsbPJ2eXQHPjzQtZYEZPRMkfeFX7edzRV-zMrJY::fulcio-issuer:legacy.example.com#0"
+        ]
+      }
     }
   },
   {
@@ -4274,7 +4379,28 @@
       ]
     },
     "output": {
-      "error": "DER UTF8String must contain exactly one complete value."
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:VTyn2AMoFjUciNoz7Q_uVjX6ojdi0dTaxILV5VFl7qo::fulcio-issuer:legacy.example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:VTyn2AMoFjUciNoz7Q_uVjX6ojdi0dTaxILV5VFl7qo::fulcio-issuer:legacy.example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:VTyn2AMoFjUciNoz7Q_uVjX6ojdi0dTaxILV5VFl7qo::fulcio-issuer:legacy.example.com",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "aGSaEDbRcUILlsBrlOBYmwb0Enc66iwAWcYt416fQVg"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:VTyn2AMoFjUciNoz7Q_uVjX6ojdi0dTaxILV5VFl7qo::fulcio-issuer:legacy.example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:VTyn2AMoFjUciNoz7Q_uVjX6ojdi0dTaxILV5VFl7qo::fulcio-issuer:legacy.example.com#0"
+        ]
+      }
     }
   },
   {
@@ -4300,7 +4426,28 @@
       ]
     },
     "output": {
-      "error": "DER UTF8String must contain exactly one complete value."
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:gxC61mo8H15F11T8iCdNamOBN5wvwtbXt6_iEI0fpU0::fulcio-issuer:legacy.example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:gxC61mo8H15F11T8iCdNamOBN5wvwtbXt6_iEI0fpU0::fulcio-issuer:legacy.example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:gxC61mo8H15F11T8iCdNamOBN5wvwtbXt6_iEI0fpU0::fulcio-issuer:legacy.example.com",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "dhIQwThiiEXHPRisWUK3bHUKL03tJ3YAnzgxy90kQY4"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:gxC61mo8H15F11T8iCdNamOBN5wvwtbXt6_iEI0fpU0::fulcio-issuer:legacy.example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:gxC61mo8H15F11T8iCdNamOBN5wvwtbXt6_iEI0fpU0::fulcio-issuer:legacy.example.com#0"
+        ]
+      }
     }
   },
   {
@@ -4326,11 +4473,32 @@
       ]
     },
     "output": {
-      "error": "DER UTF8String is not valid UTF-8."
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:gVmrKNLN8Cv4K813tYIixacsZ-E3QVCzrhe0gMJRWcg::fulcio-issuer:legacy.example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:gVmrKNLN8Cv4K813tYIixacsZ-E3QVCzrhe0gMJRWcg::fulcio-issuer:legacy.example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:gVmrKNLN8Cv4K813tYIixacsZ-E3QVCzrhe0gMJRWcg::fulcio-issuer:legacy.example.com",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "9pE0sJ-nRY47qZt-IfkmMU91Lmbbq_V4FnszeeU0R6Y"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:gVmrKNLN8Cv4K813tYIixacsZ-E3QVCzrhe0gMJRWcg::fulcio-issuer:legacy.example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:gVmrKNLN8Cv4K813tYIixacsZ-E3QVCzrhe0gMJRWcg::fulcio-issuer:legacy.example.com#0"
+        ]
+      }
     }
   },
   {
-    "id": "fulcio-selector-unselected-token-subject-fails-eagerly",
+    "id": "fulcio-selector-unselected-malformed-token-subject-is-ignored",
     "input": {
       "did": "did:x509:0:sha256:rbKr0X-ANPsf13Y-KqFd0ZgIkShfPEhifSF34Yu4cdE::fulcio:issuer:https%3A%2F%2Fv2.example.com",
       "chain": [
@@ -4339,11 +4507,32 @@
       ]
     },
     "output": {
-      "error": "Value is not a primitive DER UTF8String."
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:rbKr0X-ANPsf13Y-KqFd0ZgIkShfPEhifSF34Yu4cdE::fulcio:issuer:https%3A%2F%2Fv2.example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:rbKr0X-ANPsf13Y-KqFd0ZgIkShfPEhifSF34Yu4cdE::fulcio:issuer:https%3A%2F%2Fv2.example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:rbKr0X-ANPsf13Y-KqFd0ZgIkShfPEhifSF34Yu4cdE::fulcio:issuer:https%3A%2F%2Fv2.example.com",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "f5i9sMr9XBwhk13ewu3AC-GZGjZampx-7ycw3RrLMxk"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:rbKr0X-ANPsf13Y-KqFd0ZgIkShfPEhifSF34Yu4cdE::fulcio:issuer:https%3A%2F%2Fv2.example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:rbKr0X-ANPsf13Y-KqFd0ZgIkShfPEhifSF34Yu4cdE::fulcio:issuer:https%3A%2F%2Fv2.example.com#0"
+        ]
+      }
     }
   },
   {
-    "id": "fulcio-selector-unselected-malformed-root-extension-fails",
+    "id": "fulcio-selector-unselected-malformed-root-extension-is-ignored",
     "input": {
       "did": "did:x509:0:sha256:QOYM6f5lhnKsLgU1pe5f8awBQsL6RGScDPnr-4brOTY::fulcio:issuer:https%3A%2F%2Fv2.example.com",
       "chain": [
@@ -4352,7 +4541,203 @@
       ]
     },
     "output": {
-      "error": "DER UTF8String is not valid UTF-8."
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:QOYM6f5lhnKsLgU1pe5f8awBQsL6RGScDPnr-4brOTY::fulcio:issuer:https%3A%2F%2Fv2.example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:QOYM6f5lhnKsLgU1pe5f8awBQsL6RGScDPnr-4brOTY::fulcio:issuer:https%3A%2F%2Fv2.example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:QOYM6f5lhnKsLgU1pe5f8awBQsL6RGScDPnr-4brOTY::fulcio:issuer:https%3A%2F%2Fv2.example.com",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "RRjF5Nrd9rMihPweBPamgOdAqGKPt-NKW_pHR8FiJh0"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:QOYM6f5lhnKsLgU1pe5f8awBQsL6RGScDPnr-4brOTY::fulcio:issuer:https%3A%2F%2Fv2.example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:QOYM6f5lhnKsLgU1pe5f8awBQsL6RGScDPnr-4brOTY::fulcio:issuer:https%3A%2F%2Fv2.example.com#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "fulcio-selector-malformed-leaf-extension-without-fulcio-predicate",
+    "input": {
+      "did": "did:x509:0:sha256:pVa_3g-yUuu2BSGWM_UeuaJgl64aLRAJTzwY5feW1JQ::subject:CN:Leaf",
+      "chain": [
+        "MIIBezCCAS2gAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQAv5IwPGWr0Aco6Unc7PTBp--qO4IkWPaBRD42q-iHuBqOBnjCBmzAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQU2s43goKliwErnteqLP2neVQhR44wHwYDVR0jBBgwFoAUr7JAc348UXBQSQKUKEYnF5Y-A4QwEQYKKwYBBAGDvzABCAQDFgFhMCgGCisGAQQBg78wAQEEGmh0dHBzOi8vbGVnYWN5LmV4YW1wbGUuY29tMAUGAytlcANBAE4U97X9aj0z8YFhoajsspNPG3PuUldtfCun6pbNz6sax9DKRDtVCnT5EXUhJ6VmmQCwyn_nstS377S-my--ywA",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQD-Jm7DX1xBMIhIip20yyyJCXqp52TrrFwNdpLXSJaUNqNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFK-yQHN-PFFwUEkClChGJxeWPgOEMB8GA1UdIwQYMBaAFK-yQHN-PFFwUEkClChGJxeWPgOEMAUGAytlcANBANkhcLNh6fpsVSpRJF42b13UvOrDBDMi1nLacIOQD24GRZal413gjEbQpQLHWxpO2UqzpAmtGpSMl02ME1hxqgc"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:pVa_3g-yUuu2BSGWM_UeuaJgl64aLRAJTzwY5feW1JQ::subject:CN:Leaf",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:pVa_3g-yUuu2BSGWM_UeuaJgl64aLRAJTzwY5feW1JQ::subject:CN:Leaf#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:pVa_3g-yUuu2BSGWM_UeuaJgl64aLRAJTzwY5feW1JQ::subject:CN:Leaf",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "L-SMDxlq9AHKOlJ3Oz0wafvqjuCJFj2gUQ-Nqvoh7gY"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:pVa_3g-yUuu2BSGWM_UeuaJgl64aLRAJTzwY5feW1JQ::subject:CN:Leaf#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:pVa_3g-yUuu2BSGWM_UeuaJgl64aLRAJTzwY5feW1JQ::subject:CN:Leaf#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "fulcio-selector-malformed-root-extension-without-fulcio-predicate",
+    "input": {
+      "did": "did:x509:0:sha256:QOYM6f5lhnKsLgU1pe5f8awBQsL6RGScDPnr-4brOTY::subject:CN:Leaf",
+      "chain": [
+        "MIIBZjCCARigAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQBFGMXk2t32syKE_B4E9qaA50CoYo-340pb-kdHwWImHaOBiTCBhjAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQUYPkJkCnUsR5vIHvlXuV1LeuEDngwHwYDVR0jBBgwFoAUn1GVAYMypvgtFXR2TTUbgXL7ZI4wJgYKKwYBBAGDvzABCAQYDBZodHRwczovL3YyLmV4YW1wbGUuY29tMAUGAytlcANBAB-IuYhNYNRwGpJeIDNjKBA7JNUV6zaRQMqwZrZ9kjJKpdE-b1JsWsbsCtRcYuf_mwG6Xuq0nljLAXadkOPWqAA",
+        "MIIBYTCCAROgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQAt_6FNw8JjACkCvYcrCYMbRBgj408OJsvprHnSRPS28qN2MHQwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFJ9RlQGDMqb4LRV0dk01G4Fy-2SOMB8GA1UdIwQYMBaAFJ9RlQGDMqb4LRV0dk01G4Fy-2SOMBEGCisGAQQBg78wARgEAwwB_zAFBgMrZXADQQDZysixYmiNUXR0NpuaEL7G0c-jRJ5Gl8jRBu5drIZpSS_S6QGlBzwffnCbfQiZCIS0GMiB52A1GY-RYELBTz8F"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:QOYM6f5lhnKsLgU1pe5f8awBQsL6RGScDPnr-4brOTY::subject:CN:Leaf",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:QOYM6f5lhnKsLgU1pe5f8awBQsL6RGScDPnr-4brOTY::subject:CN:Leaf#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:QOYM6f5lhnKsLgU1pe5f8awBQsL6RGScDPnr-4brOTY::subject:CN:Leaf",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "RRjF5Nrd9rMihPweBPamgOdAqGKPt-NKW_pHR8FiJh0"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:QOYM6f5lhnKsLgU1pe5f8awBQsL6RGScDPnr-4brOTY::subject:CN:Leaf#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:QOYM6f5lhnKsLgU1pe5f8awBQsL6RGScDPnr-4brOTY::subject:CN:Leaf#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "fulcio-selector-legacy-invalid-utf8-selected",
+    "input": {
+      "did": "did:x509:0:sha256:wJmFDOodxkVAvKp0DkXKC1lyRauQDuMa3lwx1KxiAR8::fulcio-issuer:legacy.example.com",
+      "chain": [
+        "MIIBdzCCASmgAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQBvXuuzUM9rrykFclCinQD01csxkeSPiZ5Ziq85YO2wVKOBmjCBlzAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQUAIYlYJvAW2UM7Y3Z8iFKhYKn6iswHwYDVR0jBBgwFoAUvOR-JBwPj2zGmp0_LtXaywAy1LQwDwYKKwYBBAGDvzABAQQB_zAmBgorBgEEAYO_MAEIBBgMFmh0dHBzOi8vdjIuZXhhbXBsZS5jb20wBQYDK2VwA0EAGQGCUq5IkuQjMga_2lJlj9QKFP1fSH_OS-vqvjfMIItEyLU9_pyF3Hhfso5NONgB6mIHOgLEI33ELXxsajgvCg",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQBPSQKk3qHxjF6pM3f804naW0U6_fsAFyVTbHH1FNKceaNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFLzkfiQcD49sxpqdPy7V2ssAMtS0MB8GA1UdIwQYMBaAFLzkfiQcD49sxpqdPy7V2ssAMtS0MAUGAytlcANBAAYJj8QPzs9RsxzPfCBe8YoBaXeOutXYddl3AZ_vMi240yW1sqMoEcoopma3ix1QzIlTbHi78Vx4t-DWedY4Hw0"
+      ]
+    },
+    "output": {
+      "error": "Fulcio issuer extension is not valid UTF-8."
+    }
+  },
+  {
+    "id": "fulcio-selector-legacy-invalid-utf8-unselected",
+    "input": {
+      "did": "did:x509:0:sha256:wJmFDOodxkVAvKp0DkXKC1lyRauQDuMa3lwx1KxiAR8::fulcio:issuer:https%3A%2F%2Fv2.example.com",
+      "chain": [
+        "MIIBdzCCASmgAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQBvXuuzUM9rrykFclCinQD01csxkeSPiZ5Ziq85YO2wVKOBmjCBlzAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQUAIYlYJvAW2UM7Y3Z8iFKhYKn6iswHwYDVR0jBBgwFoAUvOR-JBwPj2zGmp0_LtXaywAy1LQwDwYKKwYBBAGDvzABAQQB_zAmBgorBgEEAYO_MAEIBBgMFmh0dHBzOi8vdjIuZXhhbXBsZS5jb20wBQYDK2VwA0EAGQGCUq5IkuQjMga_2lJlj9QKFP1fSH_OS-vqvjfMIItEyLU9_pyF3Hhfso5NONgB6mIHOgLEI33ELXxsajgvCg",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQBPSQKk3qHxjF6pM3f804naW0U6_fsAFyVTbHH1FNKceaNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFLzkfiQcD49sxpqdPy7V2ssAMtS0MB8GA1UdIwQYMBaAFLzkfiQcD49sxpqdPy7V2ssAMtS0MAUGAytlcANBAAYJj8QPzs9RsxzPfCBe8YoBaXeOutXYddl3AZ_vMi240yW1sqMoEcoopma3ix1QzIlTbHi78Vx4t-DWedY4Hw0"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:wJmFDOodxkVAvKp0DkXKC1lyRauQDuMa3lwx1KxiAR8::fulcio:issuer:https%3A%2F%2Fv2.example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:wJmFDOodxkVAvKp0DkXKC1lyRauQDuMa3lwx1KxiAR8::fulcio:issuer:https%3A%2F%2Fv2.example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:wJmFDOodxkVAvKp0DkXKC1lyRauQDuMa3lwx1KxiAR8::fulcio:issuer:https%3A%2F%2Fv2.example.com",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "b17rs1DPa68pBXJQop0A9NXLMZHkj4meWYqvOWDtsFQ"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:wJmFDOodxkVAvKp0DkXKC1lyRauQDuMa3lwx1KxiAR8::fulcio:issuer:https%3A%2F%2Fv2.example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:wJmFDOodxkVAvKp0DkXKC1lyRauQDuMa3lwx1KxiAR8::fulcio:issuer:https%3A%2F%2Fv2.example.com#0"
+        ]
+      }
+    }
+  },
+  {
+    "id": "fulcio-selector-duplicate-issuer-selected",
+    "input": {
+      "did": "did:x509:0:sha256:5xtiLbsXobADbtqkARewh1w20mVNLZgkRm06OrXoklY::fulcio:issuer:https%3A%2F%2Fv2.example.com",
+      "chain": [
+        "MIIBjjCCAUCgAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQCo0To-J-g_LRuzp2JhopwrpumtffpDn3fQZ5WQRTRpcKOBsTCBrjAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQU4dQzBMsI7h_OaRQUpk4V-1cV4SUwHwYDVR0jBBgwFoAUCfIh70N1t9NurgOaVQZcCktFNVMwJgYKKwYBBAGDvzABCAQYDBZodHRwczovL3YyLmV4YW1wbGUuY29tMCYGCisGAQQBg78wAQgEGAwWaHR0cHM6Ly92Mi5leGFtcGxlLmNvbTAFBgMrZXADQQCKbpFvJBS717wqcGIBoPxamgC35VZp90vzfu6vl5wjaXqkiYWoS54ibzS9feV9nc5QxWPKIPBAZZX5R1yzc_wL",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQBRX0WBXgf7L8HohZ1dOsN6FWeFOaaRCfmbC7DbPX-KbqNjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFAnyIe9DdbfTbq4DmlUGXApLRTVTMB8GA1UdIwQYMBaAFAnyIe9DdbfTbq4DmlUGXApLRTVTMAUGAytlcANBACNV3ZxhP8E0LqMbb7HynFTchZI0xu8wWsalEgt5zYqxzudYDIrXEpEb0jyy4AVnWszT4Ls_DLqdQWO33iIm_Aw"
+      ]
+    },
+    "output": {
+      "error": "Certificate contains a duplicate 1.3.6.1.4.1.57264.1.8 extension."
+    }
+  },
+  {
+    "id": "fulcio-selector-duplicate-legacy-issuer-selected",
+    "input": {
+      "did": "did:x509:0:sha256:mGtYWJJT3N3iKYz3OY-wvScd4WTtWXNL6nfi8rEQCsY::fulcio-issuer:legacy.example.com",
+      "chain": [
+        "MIIBkjCCAUSgAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQDz07-S0ntUW71r3a0W64CtB8BqDO0ZPDGO8qaN_MSiGqOBtTCBsjAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQUY6sbSIigUBfUzP-KXIYqSOnR9acwHwYDVR0jBBgwFoAUMLFE0EhkY9Utmy4giVDStR6gDQ0wKAYKKwYBBAGDvzABAQQaaHR0cHM6Ly9sZWdhY3kuZXhhbXBsZS5jb20wKAYKKwYBBAGDvzABAQQaaHR0cHM6Ly9sZWdhY3kuZXhhbXBsZS5jb20wBQYDK2VwA0EAGgjv_Facqlw-40oglQMZSSf2k5WmMGJdD9cRHa6rveuMpZtoV2hHKe5bdZuFNqkMsnkFCWzHRvzuy10Hjw4KCw",
+        "MIIBTjCCAQCgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQDpla7NHju18tKrsAWi8qJ4TE384J9NxguKOtmMU9e9X6NjMGEwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFDCxRNBIZGPVLZsuIIlQ0rUeoA0NMB8GA1UdIwQYMBaAFDCxRNBIZGPVLZsuIIlQ0rUeoA0NMAUGAytlcANBAG6HS-5xYhCVJBD2ZqXdCAE6suze4mz2QMEfXZ2ZDuYEzEjuQXwZciestojTfFyNxIpTW2QGpG45kOn5ts-qgwY"
+      ]
+    },
+    "output": {
+      "error": "Certificate contains a duplicate 1.3.6.1.4.1.57264.1.1 extension."
+    }
+  },
+  {
+    "id": "fulcio-selector-selected-field-malformed-on-root-is-ignored",
+    "input": {
+      "did": "did:x509:0:sha256:94-OIXq0Ahnna3tcVTD0VdLoIM-JxXq2ApGztFf3A7o::fulcio:issuer:https%3A%2F%2Fv2.example.com",
+      "chain": [
+        "MIIBZjCCARigAwIBAgIBAjAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMA8xDTALBgNVBAMMBExlYWYwKjAFBgMrZXADIQDvDD-Z0VbaLt49gSpvdona57xT0B0ES0XKEA_Fqy_TxqOBiTCBhjAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB_wQEAwIHgDAdBgNVHQ4EFgQUfQIRmcsiWkyU6Gmr3srI6to8Rr4wHwYDVR0jBBgwFoAUOglxd2gAi3VDoY8Vblx0FebRplMwJgYKKwYBBAGDvzABCAQYDBZodHRwczovL3YyLmV4YW1wbGUuY29tMAUGAytlcANBAJfha_Atzxlq7oQk6Um_j6cJ17JzBF1fr3fH0Stas98XkTAsepRC5V8ujB-bc_oyFklEgw4n5ZJQUH_AKds_SQg",
+        "MIIBYTCCAROgAwIBAgIBATAFBgMrZXAwHjEcMBoGA1UEAwwTT3RoZXJOYW1lIFRlc3QgUm9vdDAeFw0yMDAxMDEwMDAwMDBaFw0yMTAxMDEwMDAwMDBaMB4xHDAaBgNVBAMME090aGVyTmFtZSBUZXN0IFJvb3QwKjAFBgMrZXADIQBxNSFhaxm-O9j8znVfm3b-kPRKrlxE70upJp3lpKy9HKN2MHQwDwYDVR0TAQH_BAUwAwEB_zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFDoJcXdoAIt1Q6GPFW5cdBXm0aZTMB8GA1UdIwQYMBaAFDoJcXdoAIt1Q6GPFW5cdBXm0aZTMBEGCisGAQQBg78wAQgEAwwB_zAFBgMrZXADQQAVewK_gp8mNN7_1s-HacCXTrRNeyuILucNL5cn5XQ8oFRtr66kjtRiJsnWe77lGSpaxl-Jrcybh2ujAFc2NaQN"
+      ]
+    },
+    "output": {
+      "document": {
+        "@context": "https://www.w3.org/ns/cid/v1",
+        "id": "did:x509:0:sha256:94-OIXq0Ahnna3tcVTD0VdLoIM-JxXq2ApGztFf3A7o::fulcio:issuer:https%3A%2F%2Fv2.example.com",
+        "verificationMethod": [
+          {
+            "id": "did:x509:0:sha256:94-OIXq0Ahnna3tcVTD0VdLoIM-JxXq2ApGztFf3A7o::fulcio:issuer:https%3A%2F%2Fv2.example.com#0",
+            "type": "JsonWebKey",
+            "controller": "did:x509:0:sha256:94-OIXq0Ahnna3tcVTD0VdLoIM-JxXq2ApGztFf3A7o::fulcio:issuer:https%3A%2F%2Fv2.example.com",
+            "publicKeyJwk": {
+              "kty": "OKP",
+              "crv": "Ed25519",
+              "x": "7ww_mdFW2i7ePYEqb3aJ2ue8U9AdBEtFyhAPxasv08Y"
+            }
+          }
+        ],
+        "authentication": [
+          "did:x509:0:sha256:94-OIXq0Ahnna3tcVTD0VdLoIM-JxXq2ApGztFf3A7o::fulcio:issuer:https%3A%2F%2Fv2.example.com#0"
+        ],
+        "assertionMethod": [
+          "did:x509:0:sha256:94-OIXq0Ahnna3tcVTD0VdLoIM-JxXq2ApGztFf3A7o::fulcio:issuer:https%3A%2F%2Fv2.example.com#0"
+        ]
+      }
     }
   },
   {

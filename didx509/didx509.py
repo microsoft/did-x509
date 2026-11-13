@@ -80,6 +80,8 @@ FULCIO_EXTENSION_FIELDS = {
     "1.3.6.1.4.1.57264.1.24": "token-subject",
 }
 
+STANDALONE_FULCIO_OIDS = frozenset({FULCIO_ISSUER_OID, *FULCIO_EXTENSION_FIELDS})
+
 SAN_OTHERNAME_DECODERS = {
     "1.3.6.1.4.1.57264.1.7": decode_der_utf8_string,
 }
@@ -97,7 +99,34 @@ PERMITTED_CRITICAL_EXTENSION_OIDS = {
 }
 
 
-def parse_extensions(exts: x509.Extensions):
+def selected_fulcio_oids(did: str) -> set:
+    """Return the OIDs of the standalone Fulcio extensions a DID selects.
+
+    fulcio-issuer selects .1 and fulcio:<field> selects the extension registered
+    for that field. The DID is not validated here: a predicate that turns out to
+    be invalid only causes an extension to be decoded before resolution fails.
+    """
+    oids = set()
+    for predicate in did.split("#", 1)[0].split("::")[1:]:
+        name, _, value = predicate.partition(":")
+        if name == "fulcio-issuer":
+            oids.add(FULCIO_ISSUER_OID)
+        elif name == "fulcio":
+            field = value.split(":", 1)[0]
+            oids.update(
+                oid
+                for oid, registered in FULCIO_EXTENSION_FIELDS.items()
+                if registered == field
+            )
+    return oids
+
+
+def parse_extensions(exts: x509.Extensions, fulcio_oids=STANDALONE_FULCIO_OIDS):
+    """Map extensions to the JSON model.
+
+    Only the standalone Fulcio extensions in fulcio_oids are decoded. The others
+    are not examined, apart from their critical flag.
+    """
     extensions = {}
     for ext in exts:
         oid = ext.oid.dotted_string
@@ -127,14 +156,21 @@ def parse_extensions(exts: x509.Extensions):
                     ext_value.append(["othername", type_oid, scalar])
                 else:
                     raise ValueError("Certificate contains an unsupported SAN type.")
-        elif oid == FULCIO_ISSUER_OID or oid in FULCIO_EXTENSION_FIELDS:
+        elif oid in STANDALONE_FULCIO_OIDS:
             if ext.critical:
                 raise ValueError("Certificate contains a critical Fulcio extension.")
+            if oid not in fulcio_oids:
+                continue
             if not isinstance(value, x509.UnrecognizedExtension):
                 raise ValueError("Certificate contains an invalid Fulcio extension.")
             if oid == FULCIO_ISSUER_OID:
                 ext_name = "fulcio_issuer"
-                ext_value = value.value.decode("utf-8")
+                try:
+                    ext_value = value.value.decode("utf-8")
+                except UnicodeDecodeError as e:
+                    raise ValueError(
+                        "Fulcio issuer extension is not valid UTF-8."
+                    ) from e
             else:
                 field = FULCIO_EXTENSION_FIELDS[oid]
                 extensions.setdefault("fulcio", {})[field] = decode_der_utf8_string(
@@ -151,13 +187,22 @@ def parse_extensions(exts: x509.Extensions):
     return extensions
 
 
-def decode_certificate(c: x509.Certificate) -> dict:
+def decode_certificate(
+    c: x509.Certificate, fulcio_oids=STANDALONE_FULCIO_OIDS
+) -> dict:
+    """Map a certificate to the JSON model.
+
+    By default every standalone Fulcio extension is decoded, so any malformed
+    one fails. Resolution passes only the OIDs that the DID selects.
+    """
     # Mapping failures are reported as ValueError. Accessing the parsed
     # extensions can raise cryptography-specific exceptions for duplicate
     # extensions and for x400Address/ediPartyName general names, which may
     # appear in any GeneralName-bearing extension, not only the SAN.
+    # cryptography rejects a duplicate of any extension, selected or not. The
+    # specification only requires that for a selected Fulcio extension.
     try:
-        exts = parse_extensions(c.extensions)
+        exts = parse_extensions(c.extensions, fulcio_oids)
     except x509.DuplicateExtension as e:
         raise ValueError(
             f"Certificate contains a duplicate {e.oid.dotted_string} extension."
@@ -176,6 +221,22 @@ def decode_certificate(c: x509.Certificate) -> dict:
         "subject": parse_name(c.subject),
         "extensions": exts,
     }
+
+
+def decode_chain(chain: List[x509.Certificate], did: str = None) -> List[dict]:
+    """Map a leaf-first chain to the JSON model.
+
+    With a DID, standalone Fulcio extensions are decoded only on the leaf, and
+    only those the DID selects. Without one, they are all decoded on every
+    certificate.
+    """
+    if did is None:
+        return [decode_certificate(cert) for cert in chain]
+    selected = selected_fulcio_oids(did)
+    return [
+        decode_certificate(cert, selected if index == 0 else ())
+        for index, cert in enumerate(chain)
+    ]
 
 
 def load_certificate(path) -> x509.Certificate:
@@ -213,8 +274,9 @@ def verify_certificate_chain(chain: List[x509.Certificate]) -> List[x509.Certifi
     Critical-extension processing is left to OpenSSL, which rejects any critical
     extension it does not recognize. Standalone Fulcio extensions are unrecognized
     and must not be marked critical. parse_extensions also rejects their critical
-    forms and permits the standard critical extensions the specification allows,
-    which OpenSSL recognizes and processes here.
+    forms, whether or not they are selected, and permits the standard critical
+    extensions the specification allows, which OpenSSL recognizes and processes
+    here.
     """
     if len(chain) < 2:
         raise ValueError("Certificate chain must contain at least two certificates.")
@@ -263,7 +325,7 @@ PREDICATE_VALUE_PATTERN = re.compile(rf"{IDCHARS}(?::{IDCHARS})*")
 
 
 def check_did_x509(did: str, chain: List[x509.Certificate]) -> str:
-    decoded = [decode_certificate(cert) for cert in chain]
+    decoded = decode_chain(chain, did)
 
     prefix = "did:x509:0:"
     did_document_id = did.split("#", 1)[0]
@@ -436,7 +498,7 @@ def cli_resolve(did: str, chain_path: str):
 
 def cli_convert(chain_path: str):
     chain = load_certificate_chain(chain_path)
-    decoded = [decode_certificate(cert) for cert in chain]
+    decoded = decode_chain(chain)
     print(json.dumps(decoded, indent=2))
 
 

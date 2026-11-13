@@ -73,16 +73,25 @@ python -m didx509 resolve did:x509:0:sha256:O6e2zE6VRp1NM0tJyyV62FNwdvqEsMqH_07P
 ```
 
 Each predicate requires one literal registered field and one nonempty
-percent-encoded scalar; multiple predicates are ANDed. `convert` maps present
-fields to `extensions.fulcio`, decoding strict DER UTF8Strings eagerly.
-Malformed registered values and critical standalone Fulcio extensions fail even
-when not selected. Missing fields fail; no fields are inferred or required
+percent-encoded scalar; multiple predicates are ANDed.
+Missing fields fail; no fields are inferred or required
 unless selected. Values are exact opaque strings, with no URI, digest, numeric,
 or provider-specific normalization. Encode a colon as `%3A` and a literal percent
 as `%25`; an existing URI escape `%2F` therefore becomes `%252F`. Fields other
 than `issuer` are only unique relative to the OIDC provider that asserted them,
 so pair them with `fulcio:issuer` as above; the legacy `fulcio-issuer` selects
 `.1`, which is independent of `.8`, and does not scope them.
+
+Resolution decodes a standalone Fulcio extension only when a predicate selects
+it, and only on the leaf certificate: `fulcio-issuer` selects `.1` and
+`fulcio:<field>` selects the extension registered for that field. A selected
+extension that is malformed or repeated fails. Critical standalone Fulcio
+extensions fail on any certificate, selected or not.
+
+`convert` has no DID, so it maps every present field of every certificate to
+`extensions.fulcio` and fails on a malformed one. The X.509 library used here
+also rejects a certificate that repeats any extension, selected or not; the
+specification requires that only for a selected extension.
 
 Issuer migration changes the DID explicitly. `::fulcio-issuer:issuer.example.com`
 still selects only raw UTF-8 `.1` in `extensions.fulcio_issuer`, using the existing

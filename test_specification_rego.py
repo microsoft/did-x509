@@ -10,7 +10,7 @@ from pathlib import Path
 
 import pytest
 
-from didx509.didx509 import check_did_x509, decode_certificate
+from didx509.didx509 import check_did_x509, decode_chain
 from test_vectors import TEST_VECTORS, load_vector_chain
 
 
@@ -91,12 +91,12 @@ def evaluate_policy(policy_file, policy_package, did, model):
 )
 def test_policy_matches_implementation(policy_file, policy_package, vector):
     chain = load_vector_chain(vector)
+    did = vector["input"]["did"]
     try:
-        model = [decode_certificate(certificate) for certificate in chain]
+        model = decode_chain(chain, did)
     except ValueError as e:
         pytest.skip(f"The chain cannot be mapped to the JSON model: {e}")
 
-    did = vector["input"]["did"]
     try:
         check_did_x509(did, chain)
         expected = True
